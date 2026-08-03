@@ -1,0 +1,122 @@
+# Layout Grammar
+
+## Grid System
+
+**Full viewport sections with left-aligned content.**
+
+Each section occupies a full viewport height (`min-h-[100dvh]`), creating the "cinematic frame" feeling. Content within each section is left-aligned with generous margins. The layout breathes — large empty space is intentional, creating the "dark room" atmosphere.
+
+```
+┌─────────────────────────────────────────┐
+│ [video background, full-bleed]           │
+│                                         │
+│  GIANT DISPLAY TEXT                      │
+│  (left-aligned, pull-up animation)       │
+│                                         │
+│  Body text (left, max-width 520px)       │
+│  [CTA]                                   │
+│                                         │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | Full viewport — `min-h-[100dvh]` |
+| Background | Video (dark, ambient, slow) with noise overlay |
+| Headline position | Left-aligned, vertically centered or bottom-aligned |
+| Headline size | `clamp(2rem, 5vw, 4rem)` — giant, cinematic |
+| Pull-up animation | Staggered, each line/word rises with 80ms delay |
+| Supporting text | Below headline, left-aligned, max-width 520px |
+| CTA | Below supporting text, left-aligned, warm amber or cream |
+
+**Never centered hero.** Left-aligned content on video background is the structural signature. The video provides atmosphere; the text provides narrative.
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(4rem, 12vh, 10rem);
+--component-gap: clamp(2rem, 4vw, 4rem);
+--content-max-width: min(1200px, calc(100vw - clamp(2rem, 8vw, 6rem)));
+--body-max-width: 520px;
+```
+
+**Spacing is very generous.** Cinematic pages have the most whitespace of any style in the system. Each section is a full viewport — the space between sections IS the breathing room.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Full Viewport Video Hero
+```
+┌─────────────────────────────────────────┐
+│ [dark ambient video, full-bleed]         │
+│                                         │
+│  GIANT TEXT                              │
+│  (pull-up, staggered)                    │
+│                                         │
+│  Body text                               │
+│  [CTA with arrow-in-circle]              │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 2: Centered Card on Dark
+```
+┌─────────────────────────────────────────┐
+│ [noise overlay on black]                 │
+│                                         │
+│         ┌─────────────────┐              │
+│         │  Centered card   │              │
+│         │  bg-[#101010]    │              │
+│         │                  │              │
+│         │  "I am Marcus,   │              │
+│         │  *a director.*"  │              │
+│         │  (italic serif)  │              │
+│         └─────────────────┘              │
+│                                         │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 3: 4-Column Card Grid
+```
+┌─────────────────────────────────────────┐
+│ [noise overlay on black]                 │
+│  ┌────┐ ┌────┐ ┌────┐ ┌────┐           │
+│  │card│ │card│ │card│ │card│           │
+│  │ 1  │ │ 2  │ │ 3  │ │ 4  │           │
+│  └────┘ └────┘ └────┘ └────┘           │
+│  (staggered entrance, scale+fade)        │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Full viewport sections, 4-column card grid, video backgrounds |
+| **Tablet (768px)** | Full viewport sections, 2-column cards, video simplified |
+| **Mobile (375px)** | Single column, 1-column cards, video may become static image |
+
+**Fluid typography via `clamp()`** keeps the cinematic scale at all sizes. Video backgrounds may degrade to static images on mobile for performance.
+
+---
+
+## Layout Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Centered hero layout | Left-aligned on video background |
+| Light backgrounds | Pure black #000000 (this is a dark style) |
+| Static image heroes | Video backgrounds with noise overlay |
+| Dense, packed sections | Full viewport sections with generous space |
+| Cold blue or gray text | Warm cream #DEDBC8 |
+| Sharp-cornered cards | Subtle rounded corners (4-8px) for cinematic softness |
+| No noise overlay | Noise overlay is mandatory — it adds film grain |
+| Sans-serif everything | Include serif italic accent phrases |

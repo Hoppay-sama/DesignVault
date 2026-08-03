@@ -1,0 +1,95 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Data-as-Texture is **ambient and perpetual**. Data clouds drift slowly across the sky like real atmospheric formations. Binary characters shimmer at varying opacities, creating the illusion of life within the data. The motion is not interactive — it exists to make the page feel alive, to make the data feel like it's flowing, not displayed. Everything moves with the patience of weather, not the urgency of UI.
+
+---
+
+## Ambient Animations
+
+| Element | Animation | Duration | Easing | Repeat |
+|---------|-----------|----------|--------|--------|
+| Binary cloud layers | Slow horizontal drift (translateX) | 30-60s | `linear` | Infinite |
+| Binary characters | Opacity shimmer (0.3→0.6→0.3) | 4-8s (random per char) | `ease-in-out` | Infinite |
+| Data stream lines | Vertical scroll (translateY) | 20-40s | `linear` | Infinite |
+| Noise overlay | Static (no animation) | — | — | — |
+
+**Key principle:** Ambient motion is perpetual and slow. The viewer should perceive life, not movement. If the motion is noticeable, it's too fast.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Sky ground | Opacity fade-in | 1500ms | `ease-out` | 0ms |
+| Binary cloud layers | Opacity fade-in (staggered by depth) | 2000ms | `ease-out` | 300ms + depth*200ms |
+| Display headline | Opacity + translateY(16px) → 0 | 1000ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 500ms |
+| Body text | Opacity fade-in | 800ms | `ease-out` | 700ms |
+| Mono labels | Opacity fade-in | 600ms | `ease-out` | 900ms |
+| CTA button | Opacity + glow fade-in | 800ms | `ease-out` | 1000ms |
+
+**Key easing:** `cubic-bezier(0.22, 1, 0.36, 1)` for text reveals. `ease-out` for atmospheric elements. `linear` for perpetual ambient motion.
+
+---
+
+## Scroll Behavior
+
+| Effect | Specification |
+|--------|--------------|
+| Parallax on cloud layers | Subtle — different layers move at different rates (5-15%) |
+| Text reveals | Opacity fade-in on scroll-into-view (800ms) |
+| Cloud density | Optional: clouds become denser as user scrolls deeper |
+| Section transitions | Crossfade with 300ms overlap |
+
+**Scroll-linked effects are subtle.** The ambient motion is the primary movement; scroll effects are secondary enhancements.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Navigation links | Opacity 1.0 → 0.7 (300ms) | — |
+| CTA buttons | Glow intensifies (box-shadow spread) + slight scale (1.02) | Scale 0.98 (tactile press) |
+| Cards/Panels | Subtle border brightening (teal → amber tint) | — |
+| Mono labels | No hover state — they're data, not interactive | — |
+| Binary clouds | No hover state — they're atmosphere, not interactive | — |
+
+**Hover states enhance the glow, not the color.** The golden accent glow intensifies on hover, creating a "brightening" effect that matches the ambient shimmer of the binary clouds.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- All ambient animations stop (clouds become static)
+- No binary shimmer
+- No parallax
+- Entrance animations collapse to instant opacity changes
+- Hover states use instant changes (no transition)
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| ❌ Never animate | Why |
+|-----------------|-----|
+| Bounce or spring easing | Too playful — this is cinematic, not bouncy |
+| Fast motion (under 1s for ambient) | Breaks the "weather" feeling — ambient motion must be slow |
+| Color transitions on text | Breaks the nocturnal discipline |
+| Rotation or skew | Too dynamic for atmospheric motion |
+| Aggressive scale transforms | The atmosphere should feel stable, not reactive |
+| Every element fading in on scroll | Motion must be purposeful — ambient drift is the primary motion |
+| Pulsing or flashing effects | Too aggressive — the shimmer is subtle, not strobing |

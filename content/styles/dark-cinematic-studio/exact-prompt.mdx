@@ -1,0 +1,215 @@
+# Exact Replica Prompt — Dark Cinematic Studio
+
+> Copy this entire prompt and paste it into your AI coding assistant (Cursor, Claude Code, v0.dev, etc.) to generate a Dark Cinematic Studio landing page.
+
+---
+
+```
+Build a dark cinematic studio landing page for "PRISMA" — a creative studio. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion + lucide-react. Page title: `Prisma — Join the Lab`.
+
+Vibe: A filmmaker's studio after midnight. Dark, moody, warm. Video backgrounds with film grain. Giant pull-up typography. Serif italic accents. Cinematic, intimate, creative.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (hard bans)
+
+- NO cold blue or gray text — use warm cream #DEDBC8
+- NO pure white (#FFFFFF) text — use warm cream
+- NO cold blue or purple accents — warm amber #C4A882 only
+- NO light backgrounds — pure black #000000 only
+- NO static image heroes — video backgrounds with noise overlay
+- NO missing noise overlay — opacity 0.5-0.7 is mandatory
+- NO sans-serif everything — serif italic accent phrases required
+- NO centered hero layout — left-aligned on video
+- NO bounce or spring easing — cubic-bezier(0.22, 1, 0.36, 1) only
+- NO fast, aggressive motion — cinematic motion is patient
+- NO bright, saturated colors — muted, warm, cinematic tones
+- NO glassmorphic surfaces — dark, grainy, matte surfaces
+- NO more than ONE accent color
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Instrument+Serif:ital@0;1&display=swap
+```
+
+Usage:
+- **Almarai** (300/400/700/800): Logo "PRISMA", main headlines, body text, UI
+- **Instrument Serif** (italic): Accent phrases within headlines — the one "creative" voice
+
+CSS utilities:
+- `.font-display { font-family: 'Almarai', sans-serif; }`
+- `.font-body { font-family: 'Almarai', sans-serif; }`
+- `.font-italic-accent { font-family: 'Instrument Serif', serif; font-style: italic; }`
+
+---
+
+## FLUID SIZE SYSTEM
+
+```css
+:root {
+  --pad-x: clamp(1.5rem, 5vw, 4rem);
+  --section-gap: clamp(4rem, 12vh, 10rem);
+  --logo: clamp(1.1rem, 1vw, 1.4rem);
+  --nav: clamp(0.7rem, 0.3vw + 0.5rem, 0.85rem);
+  --headline: clamp(2rem, 5vw, 4rem);
+  --subhead: clamp(1.33rem, 3.33vw, 2.67rem);
+  --body: clamp(0.85rem, 0.3vw + 0.75rem, 1rem);
+  --micro: clamp(0.65rem, 0.2vw + 0.55rem, 0.75rem);
+  --btn-px: clamp(1.5rem, 2vw, 2rem);
+  --btn-py: clamp(0.7rem, 0.8vh, 0.9rem);
+}
+```
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --ground: #000000;          /* Pure black — the ONE style that uses it */
+  --ground-elevated: #0A0A0A;
+  --ground-panel: #101010;
+  --text-primary: #DEDBC8;     /* Warm cream — NEVER white */
+  --text-secondary: #E1E0CC;
+  --text-muted: #8A8780;
+  --accent: #C4A882;           /* Warm amber — ONE accent */
+  --border: #1A1A1A;
+}
+```
+
+Body: `bg-[#000000] text-[#DEDBC8] antialiased font-body`.
+Selection: `selection:bg-[#C4A882] selection:text-[#000000]`.
+
+Noise overlay (mandatory, global):
+```css
+.noise-overlay {
+  position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+  opacity: 0.7; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' /></filter><rect width='100%' height='100%' filter='url(%23n)' /></svg>");
+}
+```
+
+---
+
+## PAGE STRUCTURE
+
+Root: `min-h-screen bg-[#000000] text-[#DEDBC8] font-body relative overflow-x-hidden`.
+
+### 1. Header
+Padding: `paddingInline: var(--pad-x)`, `paddingTop: clamp(1.2rem, 2vh, 2rem)`.
+Flex space-between, items center. Transparent over video.
+
+**Logo (left):** Almarai 800, tracking `0.15em`, size `var(--logo)`. Text: `PRISMA`. Uppercase. Color `#DEDBC8`.
+
+**Nav (right):** Almarai 500, uppercase, tracking `0.15em`, size `var(--nav)`, gap `clamp(1.5rem, 3vw, 2.5rem)`.
+Links: `WORK` | `STUDIO` | `PROCESS` | `CONTACT`
+Hover: color → `#C4A882` (300ms).
+
+### 2. Hero Section
+`min-h-[100dvh]`, flex column, justify-center.
+Padding: `paddingInline: var(--pad-x)`, `paddingBlock: var(--section-gap)`.
+
+**Background:** Dark ambient video (clouds drifting, smoke, or light patterns), underexposed, muted, seamless loop.
+**Video overlay:** Dark gradient (top 60% black, bottom 80% black) for text readability.
+
+**Content (left-aligned, max-width 60%, z-10):**
+1. Giant display text — Almarai 800, tracking `0.02em`, leading `0.95`, size `var(--headline)`:
+   `Prisma`
+   (Pull-up animation: translateY 100% → 0, 1200ms, cubic-bezier(0.22, 1, 0.36, 1), delay 300ms)
+2. Subtext — Almarai 400, size `var(--body)`, color `#E1E0CC`, max-width 480px, line-height 1.7:
+   `A creative studio for brands that want to feel something. We make films, sites, and experiences that linger.`
+   (Scroll-linked character opacity reveal: 0.2 → 1.0 based on scroll position)
+3. CTA — Circular button with arrow icon:
+   - `bg-[#C4A882] text-[#000000]`, rounded-full, size 56px
+   - lucide `ArrowUpRight` (size 24)
+   - Hover: warm glow (box-shadow: 0 0 40px rgba(196, 168, 130, 0.4)) + slight scale (1.05)
+   - Text label next to circle: Almarai 500, `var(--body)`, `#DEDBC8`, tracking 0.05em: `Join the lab`
+
+### 3. About Section
+`min-h-[100dvh]`, flex column, justify-center, items-center.
+Padding: `var(--section-gap)` vertical, `var(--pad-x)` horizontal.
+
+**Centered card:** `bg-[#101010]`, padding `clamp(2rem, 5vw, 4rem)`, max-width 640px, rounded-lg (8px).
+**Mixed-style heading:** Almarai 700 + Instrument Serif italic, size `clamp(1.5rem, 3vw, 2.5rem)`, leading 1.3, color `#DEDBC8`:
+`I am Marcus Chen, *a self-taught director.*`
+(The phrase "a self-taught director" is in Instrument Serif italic)
+**Body:** Almarai 400, `var(--body)`, `#E1E0CC`, line-height 1.7:
+`I started Prisma in 2019 with a camera and a conviction: that brands deserve better than templates. Six years later, we're a studio of twelve, making work for clients who refuse to blend in.`
+
+### 4. Features Section (4-column card grid)
+`min-h-[100dvh]`, padding `var(--section-gap)` vertical, `var(--pad-x)` horizontal.
+Background: noise overlay on black (no video).
+
+**4 cards in a row, staggered entrance (scale 0.95→1 + opacity, 800ms, delay 400ms + i*100ms):**
+
+Each card: `bg-[#101010]`, padding `1.5rem`, rounded-lg (8px), border `1px solid #1A1A1A`.
+
+**Card 1 — Film**
+- Almarai 700, `clamp(1rem, 2vw, 1.5rem)`: `Film`
+- Almarai 400, `var(--body)`, `#E1E0CC`: `Brand films, documentaries, and shorts that move people to move.`
+
+**Card 2 — Web**
+- Title: `Web`
+- Body: `Sites and experiences that feel like the future, not the template.`
+
+**Card 3 — Identity**
+- Title: `Identity`
+- Body: `Brand systems built to last — logos, type, voice, and the spaces between.`
+
+**Card 4 — Sound**
+- Title: `Sound`
+- Body: `Original scores and sound design that make your work feel as good as it looks.`
+
+### 5. Footer
+`paddingBlock: clamp(2rem, 5vh, 4rem)`, `paddingInline: var(--pad-x)`.
+- Footer row: flex space-between, Almarai 400, size `var(--micro)`, color `#8A8780`:
+  - Left: `PRISMA CREATIVE STUDIO`
+  - Center: `© 2026`
+  - Right: `JOIN THE LAB`
+
+---
+
+## VISUAL RULES
+
+- Pure black ground (#000000), warm cream text (#DEDBC8), warm amber accent (#C4A882) on CTA only
+- Video backgrounds: dark, ambient, slow, underexposed, muted, seamless loop
+- Noise overlay: mandatory, opacity 0.7, mix-blend-mode: overlay, position: fixed
+- Dark gradient overlay on video for text readability
+- Serif italic accent (Instrument Serif) on at least one headline
+- Pull-up text animation: staggered, cubic-bezier(0.22, 1, 0.36, 1), 1200ms
+- Scroll-linked character opacity reveals (0.2 → 1.0)
+- Card staggered entrance: scale+fade, 800ms, 100ms delay per card
+- Full viewport sections (min-h-[100dvh])
+- Generous spacing (cinematic breathing room)
+- Honor `prefers-reduced-motion: reduce`
+
+---
+
+## ANIMATIONS
+
+| Class | Keyframes | Duration | Easing | Delay |
+|-------|-----------|----------|--------|-------|
+| `anim-video-fade` | opacity 0→1 | 2000ms | `ease-out` | 0ms |
+| `anim-pull-up` | translateY(100%)→0, opacity 0→1 | 1200ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 300ms + i*80ms |
+| `anim-card-enter` | scale(0.95)→1, opacity 0→1 | 800ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 400ms + i*100ms |
+| `anim-cta` | opacity 0→1, scale(0.9)→1 | 600ms | `ease-out` | 800ms |
+
+Scroll-linked: framer-motion `useScroll` + `useTransform` for character opacity (0.2 → 1.0).
+
+`prefers-reduced-motion: reduce` → video pauses, all motion collapses to 0.01ms, text at full opacity.
+
+---
+
+## ICONS
+
+lucide-react: `ArrowUpRight` (CTA circle), `ArrowRight` (links).
+Custom: noise overlay SVG, video background component.
+
+---
+
+Recreate this page faithfully with the exact colors, fonts, fluid clamps, copy, layout structure, and animation timings above.
+```

@@ -1,0 +1,69 @@
+# Common Mistakes
+
+## Mistake 1: Using Cold Blue or Gray Text
+
+**What people do:** Set text color to `#FFFFFF` or a cold gray because "it's a dark background, white pops."
+
+**Why it fails:** Pure white and cold grays create a clinical, digital feeling — the opposite of cinematic. The warm cream (#DEDBC8) is what creates the "candlelit" intimacy that defines the style. Cold text on black feels like a terminal; warm cream on black feels like a film.
+
+**Fix:** Use `#DEDBC8` (warm cream) for primary text. The slight yellow undertone creates warmth that prevents the black from feeling cold. Use `#E1E0CC` for slightly lighter text and `#8A8780` for muted metadata.
+
+---
+
+## Mistake 2: Using Bright, Busy Video
+
+**What people do:** Use a bright, colorful, fast-moving video as the background because "it's cinematic."
+
+**Why it fails:** The video must be dark, ambient, and slow — barely visible, mostly texture. Bright, busy video competes with the text and destroys the cinematic mood. The video is atmosphere, not content. If the viewer is watching the video instead of reading the text, the video is too bright or too busy.
+
+**Fix:** Use underexposed, slow-moving video — clouds drifting, smoke rising, water rippling, light patterns shifting. The video should be mostly dark with subtle movement. Add a dark gradient overlay (top and bottom) to further darken it for text readability.
+
+---
+
+## Mistake 3: Omitting the Noise Overlay
+
+**What people do:** Skip the noise overlay because "it's just texture, it doesn't matter."
+
+**Why it fails:** The noise overlay is the film grain — it's what makes the page feel like film, not digital. Without it, the video background looks like a digital video playing on a website. With it, the entire page feels like it was shot on film. The noise overlay is mandatory, not optional.
+
+**Fix:** Add a global noise overlay (SVG feTurbulence, opacity 0.5-0.7, mix-blend-mode: overlay, position: fixed). This is higher opacity than other styles because the film grain needs to be visible — it's a defining texture, not a subtle enhancement.
+
+---
+
+## Mistake 4: Using Sans-Serif for Everything
+
+**What people do:** Use the same sans font for all text, including emphasis, because "it's cleaner."
+
+**Why it fails:** The serif italic accent is the one "creative" element in the typographic system. Without it, the page has clean sans type on dark video — which looks like a generic dark-mode SaaS page, not a creative studio. The serif italic provides the "this was written, not typed" quality that signals craft.
+
+**Fix:** Include at least one serif italic accent phrase per major section. "I am Marcus Chen, *a self-taught director.*" — the italic serif on "a self-taught director" creates the editorial punctuation that defines the style. Use Instrument Serif italic or Playfair Display italic.
+
+---
+
+## Mistake 5: Using Bounce or Spring Easing
+
+**What people do:** Add bounce easing to the pull-up animation or spring physics to card entrances because "it feels lively."
+
+**Why it fails:** Cinematic motion is patient and controlled — cubic-bezier easing, not bounce. Bounce feels playful and cheap; the opposite of cinematic. The pull-up animation should feel like film credits rolling — smooth, dramatic, unhurried. Bounce makes it feel like a web animation, not a film sequence.
+
+**Fix:** Use `cubic-bezier(0.22, 1, 0.36, 1)` for all dramatic motion. This easing creates smooth deceleration — the element arrives at its position with confidence, not with a bounce. Keep durations between 800-1200ms for dramatic motion.
+
+---
+
+## Mistake 6: No Scroll-Linked Character Reveals
+
+**What people do:** Use simple fade-in for text blocks because "scroll-linked reveals are too complex."
+
+**Why it fails:** The scroll-linked character opacity reveal is the signature scroll effect of the style. Without it, scrolling feels like navigating a web page, not watching a film. The character-by-character brightening creates the "moving light" effect that makes scrolling cinematic. Simple fade-in is generic; character reveal is specific.
+
+**Fix:** Implement scroll-linked character opacity reveals for body text sections. Each character's opacity is tied to scroll position, brightening from 0.2 to 1.0 as it enters the reveal zone (center 40% of viewport). Use framer-motion's `useScroll` and `useTransform` hooks for implementation.
+
+---
+
+## Mistake 7: Using Light or Cold Accents
+
+**What people do:** Use a bright blue or white accent for the CTA because "it needs to pop."
+
+**Why it fails:** The accent must stay within the warm palette. A bright blue CTA on a warm-dark page looks like a foreign element — it breaks the cinematic mood. The warm amber accent (#C4A882) pops through warmth, not through cold brightness. It glows like a candle, not like a neon sign.
+
+**Fix:** Use `#C4A882` (warm amber) for the CTA accent. If more subtlety is needed, use `#DEDBC8` (cream) — the CTA stands out through weight and shape, not color. Never use blue, purple, or neon colors.

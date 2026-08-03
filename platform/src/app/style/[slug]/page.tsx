@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getStyleBySlug, getAllStyleSlugs } from '@/lib/content';
 import { PromptPanel } from '@/components/PromptPanel';
@@ -24,6 +25,35 @@ export default function StylePage({ params }: StylePageProps) {
   return (
     <main className="min-h-screen pt-24 pb-20 px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
+        {/* Back Navigation */}
+        <div className="flex items-center justify-between mb-8">
+          <Link
+            href="/"
+            className="text-sm text-text-muted hover:text-text-secondary transition-colors flex items-center gap-1"
+          >
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+            Back to Gallery
+          </Link>
+          <Link
+            href="/vocabulary"
+            className="text-sm text-text-muted hover:text-text-secondary transition-colors"
+          >
+            Vocabulary Search
+          </Link>
+        </div>
+
         {/* Header */}
         <div className="mb-12">
           <div className="font-mono-label text-text-muted mb-4">{style.slug.toUpperCase()}</div>

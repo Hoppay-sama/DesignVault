@@ -1,0 +1,186 @@
+# Parameterized Template — Data-as-Texture
+
+> Use this template to generate a Data-as-Texture landing page for YOUR brand. Replace the bracketed placeholders with your details. The anti-slop constraints and style rules are locked — don't change them.
+
+---
+
+```
+Build a data-as-texture landing page for "[BRAND_NAME]" — [ONE-LINE PRODUCT DESCRIPTION, e.g., "a network monitoring platform"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + lucide-react. Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: A planetarium made of data. Dark teal sky with amber binary cloud formations. Data as material, not charts. Cinematic, nocturnal, warm-dark.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY — these ARE the style)
+
+- NO pure black (#000000) ground — use dark teal #0D2B3E or navy #0A1628
+- NO pure white (#FFFFFF) text — use warm off-white #E8E0D0
+- NO cold blue or purple accents
+- NO charts, graphs, or data tables
+- NO white or light backgrounds
+- NO centered hero layout
+- NO matrix-style falling characters (cloud formations, not streams)
+- NO neon or saturated colors
+- NO bounce or spring easing
+- NO fast animations (ambient motion must be 20s+)
+- NO static backgrounds (clouds must drift)
+- NO sans-serif data labels (monospace for all data)
+- NO more than ONE accent color
+
+---
+
+## FONTS
+
+Replace [DISPLAY_FONT] with a clean geometric sans. Good choices:
+- Space Grotesk (500/600/700) — mechanical, technical
+- Cabinet Grotesk (500/600) — modern, clean
+- General Sans (500/600) — neutral, confident
+
+Replace [BODY_FONT] with a neutral sans. Good choices:
+- Inter (400/500) — neutral, readable
+- IBM Plex Sans (400/500) — technical, clean
+
+Replace [MONO_FONT] with a monospace for data and binary clouds. Good choices:
+- JetBrains Mono — clean, technical
+- Space Mono — geometric, matches Space Grotesk
+
+Load via Google Fonts. Set CSS utilities:
+- `.font-display` → [DISPLAY_FONT]
+- `.font-body` → [BODY_FONT]
+- `.font-mono-label` → [MONO_FONT]
+
+---
+
+## FLUID SIZE SYSTEM
+
+```css
+:root {
+  --pad-x: clamp(1.5rem, 5vw, 4rem);
+  --section-gap: clamp(4rem, 10vh, 8rem);
+  --logo: clamp(1.1rem, 1vw, 1.4rem);
+  --nav: clamp(0.65rem, 0.3vw + 0.5rem, 0.8rem);
+  --headline: clamp(2rem, 5vw, 4rem);   /* Confident, not monumental */
+  --subhead: clamp(1.33rem, 3.33vw, 2.67rem);
+  --body: clamp(0.8rem, 0.3vw + 0.7rem, 0.9rem);  /* Small — atmosphere is the visual */
+  --micro: clamp(0.6rem, 0.2vw + 0.5rem, 0.7rem); /* TINY mono labels */
+  --btn-px: clamp(1.5rem, 2vw, 2rem);
+  --btn-py: clamp(0.7rem, 0.8vh, 0.9rem);
+}
+```
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --sky: #0D2B3E;           /* Dark teal — primary ground */
+  --ground: #0A1628;         /* Deep navy — alternative */
+  --ground-elevated: #102840; /* Slightly lighter for cards */
+  --text-primary: #E8E0D0;   /* Warm off-white — NEVER pure #FFF */
+  --text-secondary: #A8A098;
+  --text-muted: #6A6862;
+  --data: #D4A574;           /* Amber — binary cloud color */
+  --accent: [ACCENT_COLOR];  /* ONE golden accent — see guidance */
+  --border: rgba(212, 165, 116, 0.2);
+}
+```
+
+**Accent color guidance:** Choose ONE golden tone. Good options:
+- `#C4956A` (golden amber) — safest, most cinematic
+- `#D4A574` (lighter amber) — more subtle, matches data color
+- `#B8854A` (deeper gold) — more dramatic
+
+The accent appears ONLY on: primary CTA button (with glow), one data point per section, active nav state. Nowhere else.
+
+---
+
+## BINARY CLOUD TEXTURE
+
+The hero background is full-bleed dark teal with amber binary cloud formations.
+
+- 3 cloud layers at different depths (opacity: 0.15, 0.3, 0.5)
+- Each layer: 50-100 binary characters (0s and 1s) positioned absolutely
+- Characters: [MONO_FONT] 400, sizes 12-18px (varying for depth)
+- Color: #D4A574 at varying opacities per character (0.1-0.6)
+- Animation: slow horizontal drift, 30s/40s/50s per layer, linear infinite
+- Shimmer: subtle opacity oscillation per character (4-8s, random)
+
+---
+
+## PAGE STRUCTURE
+
+### Hero
+- `min-h-[100dvh]` (full viewport)
+- Full-bleed binary cloud texture background
+- Asymmetric: headline LEFT on darkest area, data callouts at edges
+- NEVER centered
+- Headline: [DISPLAY_FONT] 700, tracking 0.02em, leading 1.05, size `var(--headline)`
+- Headline text: [2-4 WORD HEADLINE, e.g., "Signals in the noise"]
+- Body: [BODY_FONT] 400, size `var(--body)`, color `--text-secondary`, max-width 480px
+- Body: [1-2 SENTENCE VALUE PROP — specific, data-forward]
+- CTA: golden accent button with radial glow, [CTA TEXT]
+- Edge data callouts: metrics in mono at corners
+
+### Feature Sections (2-4 sections)
+- 3 glass-like cards (semi-transparent teal, amber-tinted border, backdrop-blur)
+- Each card has: mono label, title, body text, data callout
+- Binary clouds continue subtly behind cards
+- Section padding: `var(--section-gap)` vertical
+
+### Data Strip
+- Full-width, slightly darker ground panel
+- Mono text with key metrics: `NODES: X | PACKETS: Y | LATENCY: Z | STATUS: ACTIVE`
+
+### Footer
+- Footer row: brand name, year, tagline — all in mono, muted color
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- Dark teal ground (#0D2B3E), warm off-white text (#E8E0D0), one golden accent
+- Binary cloud formations (amber at varying opacities) as atmospheric texture
+- No charts, graphs, or data tables — data as texture, not visualization
+- Glass-like cards (semi-transparent teal, amber-tinted border, subtle backdrop-blur)
+- Monospace data callouts on every section
+- Ambient drift animation on cloud layers (30-60s linear infinite)
+- Subtle noise overlay (opacity 0.03)
+- Golden CTA with radial glow
+- Honor `prefers-reduced-motion: reduce`
+
+---
+
+## ANIMATIONS
+
+| Element | Animation | Duration | Easing | Repeat |
+|---------|-----------|----------|--------|--------|
+| Cloud layers | Horizontal drift (translateX) | 30-60s | `linear` | Infinite |
+| Binary characters | Opacity shimmer | 4-8s (random) | `ease-in-out` | Infinite |
+| Data stream lines | Vertical scroll | 20-40s | `linear` | Infinite |
+| Headline | Opacity + translateY(16px)→0 | 1000ms | `cubic-bezier(0.22, 1, 0.36, 1)` | Once |
+| CTA | Opacity + glow fade-in | 800ms | `ease-out` | Once |
+
+`prefers-reduced-motion: reduce` → stop all ambient animations, collapse entrances to 0.01ms.
+
+---
+
+## ICONS
+
+lucide-react: `ArrowRight` (CTA), `Activity` (data callouts), `Shield` (security).
+Custom: binary cloud character system, data stream lines.
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines:** Be specific and data-forward. NOT "Build the future of monitoring." INSTEAD: "Signals in the noise" or "Data, not dashboards."
+
+**Body copy:** Short (max 40 words per block). Specific. Technical register. No filler words. Write like a product spec, not a marketing brochure.
+
+**Data callouts:** Use real or plausible numbers with units. `NODES: 12,847`, `PACKETS/SEC: 2.4M`, `LATENCY: 12ms`. Monospace font. These are the "technical anchors" in the atmosphere.
+
+---
+
+Replace all [BRACKETED] placeholders with your brand details, then paste the full prompt into your AI coding assistant.
+```

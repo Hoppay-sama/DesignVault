@@ -1,0 +1,123 @@
+# Texture & Surface
+
+## Primary Texture: Video Backgrounds with Noise Overlay
+
+**The defining element.** Dark, ambient, slow-moving video backgrounds create the "this was filmed" quality that defines the cinematic style. The video is always underexposed (dark), always slow (no fast cuts), always atmospheric (not content). A noise overlay adds the analog warmth of actual film grain.
+
+### Video Specifications
+
+| Property | Specification |
+|----------|--------------|
+| **Content** | Dark, ambient, slow-moving (clouds, smoke, water, light patterns) |
+| **Exposure** | Underexposed — video should be barely visible, mostly texture |
+| **Speed** | Slow (no fast motion, no rapid cuts) |
+| **Loop** | Seamless loop (no visible jump point) |
+| **Audio** | Muted (video is atmosphere, not content) |
+| **Overlay** | Dark gradient (top and bottom) for text readability |
+
+### Noise Overlay Implementation
+
+```css
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.7;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' /></filter><rect width='100%' height='100%' filter='url(%23n)' /></svg>");
+}
+```
+
+**Parameters:**
+- Opacity: 0.5-0.7 (higher than other styles — this is film grain, not subtle paper texture)
+- Blend mode: `overlay` (adds texture without darkening)
+- Position: `fixed` (covers entire viewport, doesn't scroll)
+- No animation — static noise for consistent film grain
+
+---
+
+## Secondary Texture: Dark Gradient Overlays
+
+```css
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.6) 0%,
+    transparent 30%,
+    transparent 70%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+}
+```
+
+**Purpose:** Darkens the top and bottom of video backgrounds for text readability. The gradient creates a "vignette" effect that focuses attention on the center while maintaining the dark cinematic atmosphere at the edges.
+
+---
+
+## Tertiary Texture: Film Grain on Cards
+
+Cards and panels have a subtle noise texture that matches the global noise overlay, creating continuity between the video background and the elevated surfaces.
+
+```css
+.cinematic-card {
+  background: #101010;
+  position: relative;
+}
+.cinematic-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.3;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,..."); /* Same noise as global */
+  pointer-events: none;
+}
+```
+
+---
+
+## Image Processing Rules
+
+**All imagery must feel cinematic — dark, grainy, atmospheric:**
+
+| Processing | Effect | When to Use |
+|-----------|--------|-------------|
+| Noise overlay | Film grain | All surfaces, video backgrounds |
+| Dark gradient | Vignette for readability | Over video backgrounds |
+| Underexposure | Dark, moody quality | Video and image content |
+| Warm tone | Cream/amber color cast | All imagery |
+| Desaturation | Muted, cinematic color | Colored imagery |
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Pure black (#000000) + video + noise overlay |
+| Cards/Panels | #101010 with subtle noise texture, 4-8px border-radius |
+| Buttons | Cream or warm amber, subtle rounded corners, warm glow on hover |
+| Navigation | Transparent, cream text, warm amber on hover/active |
+| Dividers | 1px hairline (#2A2A2A) or none (sections separated by space) |
+| Video overlays | Dark gradient (top and bottom) for text readability |
+
+**Surfaces feel like film — dark, grainy, warm.** The noise overlay is mandatory on all surfaces. Cards have subtle rounded corners (4-8px) for cinematic softness — the ONE style where rounded corners are appropriate.
+
+---
+
+## Texture Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Bright, busy video | Dark, ambient, slow video |
+| No noise overlay | Noise overlay is mandatory (opacity 0.5-0.7) |
+| Static image heroes | Video backgrounds (or static images with heavy grain) |
+| Cold blue tones | Warm cream and amber tones |
+| Sharp-cornered cards | Subtle rounded corners (4-8px) for softness |
+| Glossy or glassmorphic surfaces | Dark, grainy, matte surfaces |
+| Saturated, vibrant imagery | Underexposed, desaturated, cinematic |
+| No gradient overlay on video | Dark gradient for text readability |

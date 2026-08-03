@@ -1,0 +1,58 @@
+# Reference Gallery
+
+## Live Sites
+
+### Awwwards — Cinematic/Creative Studio Winners
+- **What works:** Dark video backgrounds, warm cream text, noise overlays, serif italic accents, pull-up animations, scroll-linked reveals
+- **Search:** Awwwards "cinematic" + "video" + "dark" filter, "creative studio" tag
+
+### Filmmaker & Photographer Portfolios
+- **What works:** Full viewport video sections, film grain textures, staggered text animations, intimate dark palettes
+- **Search:** Top filmmaker portfolio sites, production house websites
+
+### Creative Agency Sites
+- **What works:** Dark moody aesthetics, warm text on black, dramatic typography animations, atmospheric video
+- **Search:** Award-winning creative agency sites (Noomo, Active Theory, Resn)
+
+## Key Visual References
+
+### Video Background Treatment
+- **Content:** Dark, ambient, slow-moving (clouds, smoke, water, light)
+- **Exposure:** Underexposed — barely visible, mostly texture
+- **Overlay:** Dark gradient (top and bottom) + noise overlay (opacity 0.7)
+- **Loop:** Seamless, no visible jump
+
+### Pull-Up Text Animation
+- **Style:** Giant text rises from below (translateY 100% → 0)
+- **Stagger:** Each line/word delayed by 80ms
+- **Easing:** `cubic-bezier(0.22, 1, 0.36, 1)` — smooth deceleration
+- **Duration:** 1200ms per element
+
+### Scroll-Linked Character Reveal
+- **Effect:** Characters brighten (0.2 → 1.0) based on scroll position
+- **Reveal zone:** Center 40% of viewport
+- **Stagger:** 0.02 per character (subtle wave)
+- **Implementation:** framer-motion useScroll + useTransform
+
+### Serif Italic Accent
+- **Font:** Instrument Serif italic or Playfair Display italic
+- **Usage:** ONE phrase per headline, surgically placed
+- **Example:** "I am Marcus Chen, *a self-taught director.*"
+
+## Typography Reference
+- **Almarai 400/700/800** at `clamp(2rem, 5vw, 4rem)` — giant display
+- **Almarai 400** at 14-16px — body text
+- **Instrument Serif italic** — accent phrases
+- **Almarai 500** at 11-12px, tracking 0.15em, uppercase — micro labels
+
+## Screenshot Notes
+
+> When capturing references for this style, look for:
+> - The quality of the video background (dark, ambient, slow)
+> - The noise overlay visibility (film grain, opacity 0.5-0.7)
+> - The warmth of the cream text (not white, not cold)
+> - The pull-up animation timing (staggered, 80ms delay)
+> - The scroll-linked character reveal (brightening wave)
+> - The serif italic accent placement (one phrase per headline)
+> - The generous spacing (full viewport sections)
+> - The warm-dark palette (no cold blues or grays)

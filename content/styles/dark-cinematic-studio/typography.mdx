@@ -1,0 +1,84 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Clean sans — modern, confident, large-scale |
+| **Examples** | Almarai (300/400/700/800), Inter (400/700/800), Satoshi (400/700) |
+| **Weight** | 400-800 (range from regular to extra bold for dramatic scale) |
+| **Tracking** | -0.02em to 0.02em (tight to neutral) |
+| **Size** | `clamp(2rem, 5vw, 4rem)` — giant, cinematic |
+| **Transform** | Sentence case for headlines; mixed case for dramatic effect |
+
+**Why Almarai:** Almarai has a clean, geometric quality that works at giant scale. Its slightly warm character (compared to Inter's clinical precision) matches the cream-on-black palette. The weight range (300-800) allows for dramatic contrast within a single font family.
+
+---
+
+## Italic Accent Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Serif italic — editorial, ornate, the one "creative" element |
+| **Examples** | Instrument Serif (italic), Playfair Display (italic), Cormorant (italic) |
+| **Weight** | 400 italic (regular italic — the slant IS the emphasis) |
+| **Usage** | ONE phrase per headline or sentence, surgically placed |
+| **Purpose** | Vocal inflection — changes the cadence and emphasis of the line |
+
+**Example:** "I am Marcus Chen, *a self-taught director.*" — the italic serif on "a self-taught director" creates a pause and emphasis that regular sans cannot. The serif italic is the "creative voice" within the clean sans body.
+
+**Rule:** One italic phrase per sentence or headline. The contrast between sans and serif italic IS the technique — overusing it destroys the effect.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Clean sans — same family as display, lighter weight |
+| **Examples** | Almarai (400), Inter (400/500), Satoshi (400) |
+| **Weight** | 400-500 |
+| **Tracking** | 0 to 0.01em (normal) |
+| **Size** | 14-16px (medium — cinematic pages have readable body) |
+| **Line Height** | 1.6-1.7 (generous for readability on dark ground) |
+
+**Why same family:** Using the same sans for display and body creates typographic coherence. The italic serif is the only "different" voice — it stands out precisely because everything else is consistent.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same sans, uppercase, wide tracking |
+| **Examples** | Almarai (500), Inter (500) |
+| **Weight** | 500 |
+| **Tracking** | 0.15em-0.2em (wide, cinematic) |
+| **Size** | 11-12px (small but readable) |
+| **Transform** | UPPERCASE |
+
+**Usage:** Section labels, navigation, metadata, captions. These small uppercase labels provide structure without competing with the display type.
+
+---
+
+## Type Scale
+
+**Ratio:** 1.5x (golden ratio — cinematic, not technical)
+
+```
+Display:    clamp(2rem, 5vw, 4rem)     — 1.5x
+Headline:   clamp(1.33rem, 3.33vw, 2.67rem) — 1.5x
+Subhead:    clamp(1rem, 2vw, 1.5rem)    — 1.5x
+Body:       14-16px                      — baseline
+Micro:      11-12px                      — 0.75x
+```
+
+---
+
+## Font Pairing Logic
+
+**Display + Body:** Same sans family, different weights. This creates coherence — the display and body speak with the same voice, just at different volumes.
+
+**Display + Italic Accent:** Sans display + serif italic accent. This is the signature pairing. The sans speaks the message; the serif italic provides the "creative" inflection. The contrast between sans and serif IS the style.
+
+**Never mix:** Don't use more than 2 typeface families. Sans (display + body) + serif (italic accent only). The serif italic is a voice, not a third family.

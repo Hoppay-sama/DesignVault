@@ -1,0 +1,231 @@
+# Exact Replica Prompt — Data-as-Texture
+
+> Copy this entire prompt and paste it into your AI coding assistant (Cursor, Claude Code, v0.dev, etc.) to generate a Data-as-Texture landing page.
+
+---
+
+```
+Build a data-as-texture landing page for "NIGHTWATCH" — a network monitoring platform. Stack: React + Vite + TypeScript + Tailwind CSS v4 + lucide-react. Page title: `Nightwatch — Signals in the Noise`.
+
+Vibe: A planetarium made of data. Dark teal sky with amber binary cloud formations. Data as material, not charts. Cinematic, nocturnal, warm-dark.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (hard bans)
+
+- NO pure black (#000000) ground — use dark teal #0D2B3E
+- NO pure white (#FFFFFF) text — use warm off-white #E8E0D0
+- NO cold blue or purple accents
+- NO charts, graphs, or data tables
+- NO white or light backgrounds
+- NO centered hero layout
+- NO matrix-style falling characters (cloud formations, not streams)
+- NO neon or saturated colors
+- NO bounce or spring easing
+- NO fast animations (ambient motion must be 20s+)
+- NO static backgrounds (clouds must drift)
+- NO sans-serif data labels (monospace for all data)
+- NO more than ONE accent color
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap
+```
+
+Usage:
+- **Space Grotesk** (600/700): Logo "NIGHTWATCH", main headlines, section titles
+- **Inter** (400/500): Body text, descriptions, nav links (default page font)
+- **JetBrains Mono** (400/500): Data callouts, metrics, binary cloud characters, status indicators
+
+CSS utilities:
+- `.font-display { font-family: 'Space Grotesk', sans-serif; }`
+- `.font-body { font-family: 'Inter', sans-serif; }`
+- `.font-mono-label { font-family: 'JetBrains Mono', monospace; }`
+
+---
+
+## FLUID SIZE SYSTEM
+
+```css
+:root {
+  --pad-x: clamp(1.5rem, 5vw, 4rem);
+  --section-gap: clamp(4rem, 10vh, 8rem);
+  --logo: clamp(1.1rem, 1vw, 1.4rem);
+  --nav: clamp(0.65rem, 0.3vw + 0.5rem, 0.8rem);
+  --headline: clamp(2rem, 5vw, 4rem);
+  --subhead: clamp(1.33rem, 3.33vw, 2.67rem);
+  --body: clamp(0.8rem, 0.3vw + 0.7rem, 0.9rem);
+  --micro: clamp(0.6rem, 0.2vw + 0.5rem, 0.7rem);
+  --btn-px: clamp(1.5rem, 2vw, 2rem);
+  --btn-py: clamp(0.7rem, 0.8vh, 0.9rem);
+}
+```
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --sky: #0D2B3E;           /* Dark teal — primary ground */
+  --ground: #0A1628;         /* Deep navy — sections */
+  --ground-elevated: #102840; /* Slightly lighter teal for cards */
+  --text-primary: #E8E0D0;   /* Warm off-white */
+  --text-secondary: #A8A098;  /* Muted warm gray */
+  --text-muted: #6A6862;
+  --data: #D4A574;           /* Amber — binary cloud color */
+  --accent: #C4956A;         /* Golden — CTA accent */
+  --border: rgba(212, 165, 116, 0.2); /* Amber-tinted border */
+}
+```
+
+Body: `bg-[#0D2B3E] text-[#E8E0D0] antialiased font-body`.
+Selection: `selection:bg-[#C4956A] selection:text-[#0D2B3E]`.
+
+---
+
+## BINARY CLOUD TEXTURE
+
+The hero background is full-bleed dark teal with amber binary cloud formations.
+
+### Implementation
+- 3 cloud layers at different depths (opacity: 0.15, 0.3, 0.5)
+- Each layer contains 50-100 binary characters (0s and 1s) positioned absolutely
+- Characters: JetBrains Mono 400, sizes 12-18px (varying for depth)
+- Color: #D4A574 at varying opacities per character (0.1-0.6)
+- Animation: `drift` — slow horizontal translateX, 30s/40s/50s per layer, linear infinite
+- Shimmer: subtle opacity oscillation per character (4-8s ease-in-out, random delay)
+
+### Data Stream Lines (subtle background texture)
+- 5-8 vertical 1px lines, amber gradient (transparent → amber → transparent)
+- Animation: vertical scroll, 20-40s linear infinite
+- Opacity: 0.1-0.15
+
+### Noise Overlay
+```css
+.noise-overlay {
+  position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+  opacity: 0.03; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence baseFrequency='0.9' /></filter><rect width='100%' height='100%' filter='url(%23n)' /></svg>");
+}
+```
+
+---
+
+## PAGE STRUCTURE
+
+Root: `min-h-screen bg-[#0D2B3E] text-[#E8E0D0] font-body relative overflow-x-hidden`.
+
+### 1. Header
+Padding: `paddingInline: var(--pad-x)`, `paddingTop: clamp(1.2rem, 2vh, 2rem)`.
+Flex space-between, items center. Transparent background over cloud texture.
+
+**Logo (left):** Space Grotesk 700, tracking `0.15em`, size `var(--logo)`. Text: `NIGHTWATCH`. Uppercase. Color `#E8E0D0`.
+
+**Nav (right):** Inter 500, uppercase, tracking `0.15em`, size `var(--nav)`, gap `clamp(1.5rem, 3vw, 2.5rem)`.
+Links: `PLATFORM` | `MONITORING` | `PRICING` | `CONTACT`
+Hover: color → `#C4956A` (300ms).
+
+### 2. Hero Section
+`min-h-[100dvh]`, flex column, justify-center.
+Padding: `paddingInline: var(--pad-x)`, `paddingBlock: var(--section-gap)`.
+
+**Background:** Full-bleed binary cloud texture (3 layers, amber on dark teal).
+
+**Content (left-aligned, max-width 55%, z-10):**
+1. Micro label — JetBrains Mono 400, uppercase, tracking `0.15em`, size `var(--micro)`, color `#A8A098`:
+   `NETWORK MONITORING / v4.2`
+2. Headline — Space Grotesk 700, tracking `0.02em`, leading `1.05`, size `var(--headline)`:
+   `Signals in the *noise*`
+   (The word "noise" in italic — optional, or keep all regular weight)
+3. Body — Inter 400, size `var(--body)`, color `#A8A098`, max-width 480px, line-height 1.7:
+   `Nightwatch processes 2.4 million packets per second across your infrastructure. It finds the signal. You get the answer.`
+4. CTA button — `bg-[#C4956A] text-[#0D2B3E]`, rounded-md (4px), Inter 500, tracking `0.02em`, size `var(--body)`, padding `var(--btn-px)` / `var(--btn-py)`. Text: `Start Monitoring` + lucide `ArrowRight` (size 16). Box-shadow: `0 0 30px rgba(196, 149, 106, 0.3)` (golden glow). Hover: glow intensifies + slight scale (1.02). Transition 300ms.
+
+**Edge data callouts (absolute positioned, z-10):**
+- Top-right: `NODES ACTIVE: 12,847` (JetBrains Mono, `var(--micro)`, `#A8A098`)
+- Bottom-left: `PACKETS/SEC: 2.4M`
+- Bottom-right: `LATENCY: 12ms`
+
+### 3. Feature Sections (3 sections)
+
+Each section: padding `var(--section-gap)` vertical, `var(--pad-x)` horizontal.
+Background: binary clouds continue (subtle, lower opacity for readability).
+Layout: 3 glass-like cards in a row.
+
+**Card style:** `bg-[#102840]/60 backdrop-blur-sm border border-[rgba(212,165,116,0.2)] rounded-md p-6`
+
+**Section A — Real-Time Detection**
+- Mono label: `01 / CAPABILITY`
+- Title: Space Grotesk 600, `clamp(1.33rem, 3.33vw, 2.67rem)`: `Real-time detection`
+- Body: Inter 400, `var(--body)`, `#A8A098`: `Identify anomalies as they happen. Nightwatch processes every packet against baseline behavior in under 50ms.`
+- Data callout: `DETECTION TIME: 47ms`
+
+**Section B — Predictive Alerts**
+- Mono label: `02 / CAPABILITY`
+- Title: `Predictive alerts`
+- Body: `Get warned before failures occur. Our models learn your infrastructure's patterns and flag deviations hours before they become incidents.`
+- Data callout: `PREDICTION ACCURACY: 94.7%`
+
+**Section C — Silent Operation**
+- Mono label: `03 / CAPABILITY`
+- Title: `Silent operation`
+- Body: `No dashboard fatigue. Nightwatch delivers only when the signal is clear. You get one alert when it matters, not a thousand when it doesn't.`
+- Data callout: `FALSE POSITIVES: 0.3%`
+
+### 4. Data Strip
+Full-width, `bg-[#0A1628]`, padding `1rem var(--pad-x)`.
+JetBrains Mono 400, size `var(--micro)`, color `#A8A098`, tracking `0.1em`:
+`NODES: 12,847 | PACKETS/SEC: 2.4M | LATENCY: 12ms | UPTIME: 99.99% | STATUS: ACTIVE`
+
+### 5. Footer
+`paddingBlock: clamp(2rem, 5vh, 4rem)`, `paddingInline: var(--pad-x)`.
+- Footer row: flex space-between, JetBrains Mono 400, size `var(--micro)`, color `#6A6862`:
+  - Left: `NIGHTWATCH NETWORK MONITORING`
+  - Center: `© 2026`
+  - Right: `ALL SIGNALS PROCESSED`
+
+---
+
+## VISUAL RULES
+
+- Dark teal ground (#0D2B3E), warm off-white text (#E8E0D0), golden accent (#C4956A) on CTA only
+- Binary cloud formations (amber #D4A574 at varying opacities) as atmospheric texture
+- No charts, graphs, or data tables — data as texture, not visualization
+- Glass-like cards (semi-transparent teal, amber-tinted border, subtle backdrop-blur)
+- Monospace data callouts on every section
+- Ambient drift animation on cloud layers (30-60s linear infinite)
+- Subtle noise overlay (opacity 0.03)
+- Golden CTA with radial glow
+- Honor `prefers-reduced-motion: reduce`
+
+---
+
+## ANIMATIONS
+
+| Class | Keyframes | Duration | Easing | Delay |
+|-------|-----------|----------|--------|-------|
+| `anim-cloud-drift-1` | translateX(0) → (-50%) | 30s | `linear` | 0s, infinite |
+| `anim-cloud-drift-2` | translateX(0) → (-50%) | 40s | `linear` | -5s, infinite |
+| `anim-cloud-drift-3` | translateX(0) → (-50%) | 50s | `linear` | -10s, infinite |
+| `anim-shimmer` | opacity 0.3→0.6→0.3 | 4-8s (random) | `ease-in-out` | random, infinite |
+| `anim-headline` | opacity 0→1, translateY(16px)→0 | 1000ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 500ms |
+| `anim-cta` | opacity 0→1, glow fade-in | 800ms | `ease-out` | 1000ms |
+
+`prefers-reduced-motion: reduce` → stop all ambient animations, collapse entrances to 0.01ms.
+
+---
+
+## ICONS
+
+lucide-react: `ArrowRight` (CTA), `Activity` (data callouts), `Shield` (security).
+Custom: binary cloud character system, data stream lines.
+
+---
+
+Recreate this page faithfully with the exact colors, fonts, fluid clamps, copy, layout structure, and animation timings above.
+```

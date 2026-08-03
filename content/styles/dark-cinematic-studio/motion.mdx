@@ -1,0 +1,101 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Dark Cinematic Studio is **dramatic and choreographed**. Giant text pulls up from below like film credits. Characters brighten one by one as you scroll, as if being illuminated by a moving light. Cards fade and scale in with staggered timing. Everything moves with the patience and precision of a film title sequence — dramatic but controlled, never bouncy, never playful.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Video background | Opacity fade-in | 2000ms | `ease-out` | 0ms |
+| Giant display text | Pull-up (translateY 100% → 0) + opacity | 1200ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 300ms |
+| Display text (staggered) | Each line/word pulls up with 80ms delay | 1200ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 300ms + i*80ms |
+| Body text | Opacity fade-in | 800ms | `ease-out` | 600ms |
+| Cards | Scale (0.95 → 1) + opacity | 800ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 400ms + i*100ms |
+| CTA | Opacity + scale (0.9 → 1) | 600ms | `ease-out` | 800ms |
+
+**Key easing:** `cubic-bezier(0.22, 1, 0.36, 1)` — smooth deceleration, no bounce. This is the signature easing for all dramatic motion in the style.
+
+---
+
+## Scroll-Linked Animations
+
+| Effect | Specification |
+|--------|--------------|
+| Character opacity reveal | Text characters brighten (0.2 → 1.0) based on scroll position |
+| Card staggered entrance | Cards enter viewport with staggered scale+fade |
+| Video playback speed | Optional: video playback rate tied to scroll (subtle) |
+| Section transitions | Crossfade with 300ms overlap |
+
+### Character Opacity Reveal Implementation
+
+```jsx
+// Each character's opacity is tied to scroll position
+// Characters brighten as they enter the "reveal zone" (center of viewport)
+const charOpacity = (charIndex, scrollProgress) => {
+  const revealZone = 0.4; // 40% of viewport height
+  const charPosition = charIndex * 0.02; // stagger per character
+  const opacity = Math.max(0.2, Math.min(1, 
+    (scrollProgress - charPosition) / revealZone
+  ));
+  return opacity;
+};
+```
+
+**Parameters:**
+- Base opacity: 0.2 (dim but visible)
+- Full opacity: 1.0 (bright)
+- Reveal zone: 40% of viewport height
+- Stagger: 0.02 per character (subtle, creates wave effect)
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Navigation links | Cream → warm amber (300ms) | — |
+| CTA buttons | Slight scale (1.02) + warm glow | Scale 0.98 (tactile press) |
+| Cards | Subtle brightness increase (1.0 → 1.05) | — |
+| Video backgrounds | No hover state — they're atmosphere | — |
+| Links in body | Underline appears (200ms) | — |
+
+**Hover states are subtle and warm.** The warm amber glow on CTA hover matches the cinematic palette — it brightens like a candle, not like a neon light.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- All entrance animations collapse to instant opacity changes
+- No pull-up animation (text appears in place)
+- No scroll-linked character reveals (text at full opacity)
+- No card staggered entrance (all cards appear together)
+- Video backgrounds pause or become static images
+- Hover states use instant changes (no transition)
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| ❌ Never animate | Why |
+|-----------------|-----|
+| Bounce or spring easing | Too playful — this is cinematic, not bouncy |
+| Color transitions (except hover) | Breaks the warm-dark discipline |
+| Rotation or skew | Too dynamic for cinematic motion |
+| Fast, aggressive motion | Cinematic motion is patient and controlled |
+| Pulsing or flashing | Too aggressive — the motion is choreographed, not strobing |
+| Every element on the page | Motion must be purposeful — pull-up, scroll-reveal, stagger only |
+| Video scrubbing on scroll | Too gimmicky — video is atmosphere, not interaction |

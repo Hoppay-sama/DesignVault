@@ -33,7 +33,7 @@ export function VocabularySearch({ terms }: VocabularySearchProps) {
         .split(/[\s,;:()\-_/]+/)
         .filter((w) => w.length > 1);
 
-      const uniqueWords = new Set(words);
+      const uniqueWords = Array.from(new Set(words));
       for (const word of uniqueWords) {
         if (!termIndex.has(word)) {
           termIndex.set(word, []);
@@ -75,7 +75,8 @@ export function VocabularySearch({ terms }: VocabularySearchProps) {
 
     for (const qWord of queryWords) {
       // Exact prefix match
-      for (const [indexedWord, indices] of index) {
+      const indexEntries = Array.from(index.entries());
+      for (const [indexedWord, indices] of indexEntries) {
         if (indexedWord.startsWith(qWord) || indexedWord.includes(qWord)) {
           const isExact = indexedWord === qWord;
           const isPrefix = indexedWord.startsWith(qWord);

@@ -1,0 +1,148 @@
+# Texture & Surface
+
+## Primary Texture: Binary Cloud Formations
+
+**The defining element.** Binary characters (0s and 1s) arranged as cloud formations against the dark teal sky. The characters cluster and disperse to create the illusion of atmospheric depth — denser clusters feel closer, sparse characters feel distant. This is data as material, not data as information.
+
+### Implementation
+
+```jsx
+// Binary cloud layer component
+<div className="binary-clouds">
+  {cloudLayers.map((layer, depth) => (
+    <div
+      key={depth}
+      className="cloud-layer"
+      style={{
+        opacity: layer.opacity,  // 0.1 (far) to 0.6 (near)
+        animation: `drift ${30 + depth * 10}s linear infinite`,
+        animationDelay: `${depth * -5}s`,
+      }}
+    >
+      {layer.characters.map((char, i) => (
+        <span
+          key={i}
+          className="binary-char"
+          style={{
+            position: 'absolute',
+            left: `${char.x}%`,
+            top: `${char.y}%`,
+            fontSize: `${char.size}px`,  // 12-18px varying
+            color: '#D4A574',
+            opacity: char.opacity,
+          }}
+        >
+          {char.value}  {/* 0 or 1 */}
+        </span>
+      ))}
+    </div>
+  ))}
+</div>
+```
+
+**Parameters:**
+- Characters: 0 and 1 only
+- Font: JetBrains Mono 400
+- Color: Amber #D4A574 at varying opacities (10%-60%)
+- Size: 12-18px (varying for depth illusion)
+- Animation: Slow horizontal drift (30-60s linear infinite)
+- Shimmer: Subtle opacity oscillation per character (4-8s, random)
+
+---
+
+## Secondary Texture: Data Stream Lines
+
+```css
+.data-streams {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.15;
+}
+.data-stream {
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    #D4A574 20%,
+    #D4A574 80%,
+    transparent
+  );
+  animation: stream-fall 20s linear infinite;
+}
+```
+
+**Parameters:**
+- Width: 1px (hairline vertical lines)
+- Color: Amber gradient (transparent → amber → transparent)
+- Animation: Vertical scroll (20-40s linear infinite)
+- Density: 5-10 streams across the viewport
+- Opacity: 0.1-0.2 (very subtle — should be felt, not seen)
+
+---
+
+## Tertiary Texture: Noise Overlay
+
+```css
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,..."); /* feTurbulence noise */
+  mix-blend-mode: overlay;
+}
+```
+
+**Parameters:**
+- Opacity: 0.02-0.04 (very subtle)
+- Blend mode: `overlay` (adds texture without darkening)
+- Position: `fixed` (covers entire viewport, doesn't scroll)
+- No animation — static noise for film grain quality
+
+---
+
+## Image Processing Rules
+
+**NEVER use charts, graphs, or traditional data visualizations.** All data must be rendered as atmospheric texture:
+
+| Visual Type | Effect | When to Use |
+|-------------|--------|-------------|
+| Binary cloud formations | Data as atmosphere | Hero background, section backgrounds |
+| Data stream lines | Flowing data | Subtle background texture |
+| Mono data callouts | Anchored data points | Edge labels, metrics, status indicators |
+| Particle systems | Data particles | Optional enhancement for hero |
+| Noise overlay | Film grain | Global texture overlay |
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Dark teal (#0D2B3E) + binary clouds + noise overlay |
+| Cards/Panels | Glass-like: semi-transparent teal, 1px amber-tinted border, subtle backdrop-blur |
+| Buttons | Golden accent with radial glow, no border |
+| Navigation | Transparent, warm off-white text, golden on hover/active |
+| Dividers | 1px hairline (amber at 20% opacity) or data stream lines |
+| Data strips | Slightly elevated teal panel with mono text |
+
+**Glass-like cards are the ONE exception** to the no-glassmorphism rule in this style. The cards must be subtle — semi-transparent teal (not white), with amber-tinted borders, sitting over the binary cloud background. They should feel like they're made of the same atmosphere, just slightly more solid.
+
+---
+
+## Texture Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Charts, graphs, or data tables | Binary clouds as data texture |
+| White or light backgrounds | Dark teal ground throughout |
+| Opaque solid cards | Glass-like cards with subtle transparency |
+| Pure black ground | Dark teal #0D2B3E (has depth, not flat) |
+| Cold blue data colors | Amber #D4A574 (warm against teal) |
+| Matrix-style falling characters | Cloud formations (clustered, not streaming) |
+| Heavy noise or grain | Subtle noise overlay (opacity 0.03) |
+| Neon glowing effects | Subtle glow on CTA only |

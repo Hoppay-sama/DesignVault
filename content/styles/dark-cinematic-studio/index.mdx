@@ -2,10 +2,36 @@
 slug: dark-cinematic-studio
 title: Dark Cinematic Studio
 oneLineEssence: "Dark moody cinematic with warm cream palette, video backgrounds, serif italic accent, giant pull-up typography."
-axis: { color: 2, typography: 4, motion: 5, density: 2, texture: 4, layout: 3 }
-moodKeywords: [Moody, Warm, Cinematic, Creative, Intimate]
+axis:
+  color: 2
+  typography: 4
+  motion: 5
+  density: 2
+  texture: 4
+  layout: 3
+moodKeywords:
+  - Moody
+  - Warm
+  - Cinematic
+  - Creative
+  - Intimate
 difficulty: 4
-tags: [dark, cinematic, warm, cream, video, serif]
+tags:
+  - dark
+  - cinematic
+  - warm
+  - cream
+  - video
+  - serif
+  - creative
+  - studio
+thumbnail: /images/styles/dark-cinematic-studio/thumb.jpg
+heroImage: /images/styles/dark-cinematic-studio/hero.jpg
+testedWith:
+  - cursor
+  - claude-code
+publishDate: 2026-08-03
+lastUpdated: 2026-08-04
 status: draft
 ---
 
@@ -13,106 +39,29 @@ status: draft
 
 **Dark moody cinematic with warm cream palette, video backgrounds, serif italic accent, giant pull-up typography.**
 
+---
+
 ## Visual DNA
-Dark, moody, cinematic with warm cream (#DEDBC8, #E1E0CC) text on black. Video backgrounds with noise overlays. Serif italic accent text for editorial emphasis. Giant pull-up typography animations. Scroll-linked character opacity reveals. The aesthetic of a filmmaker's studio after midnight.
 
-## Design Principles
-1. **WARMTH IN DARKNESS** — Cream text on dark creates intimacy, not intimidation
-2. **SERIF ITALIC AS ACCENT** — Single italic serif phrase within clean sans creates editorial punctuation
-3. **SCROLL AS NARRATIVE** — Character-by-character opacity reveals tied to scroll create reading rhythm
+Dark, moody, cinematic — the aesthetic of a filmmaker's studio after midnight. Warm cream (#DEDBC8, #E1E0CC) text on pure black creates intimacy, not intimidation. Video backgrounds with noise overlays add the texture of film grain. Serif italic accent text provides editorial punctuation within clean sans body. Giant pull-up typography animations create drama. Scroll-linked character opacity reveals make reading a cinematic experience.
 
-## Typography
-- Display: Almarai or similar clean sans (400-700), clamp(2rem, 5vw, 4rem)
-- Italic accent: Instrument Serif italic for key phrases
-- Body: Almarai 400, 14-16px
+This is the ONE style that uses pure black (#000000) — because the video backgrounds need it. The pure black creates the "screen in a dark room" feeling that video backgrounds require. The warm cream text prevents the black from feeling cold. The noise overlay adds the analog warmth of actual film. Every element feels like it was shot on a camera, not designed in Figma.
 
-## Color
-- Ground: #000000 (pure black — the one style that uses it)
-- Text: #DEDBC8 (warm cream), #E1E0CC (slightly lighter cream)
-- Accent: warm amber or cream tones only
+## Axis Position
 
-## Motion
-- Pull-up text reveals (staggered 0.08s delay, y:20→0)
-- Scroll-linked character opacity (0.2→1 based on scroll position)
-- Card scale+fade entrances (cubic-bezier(0.22, 1, 0.36, 1))
-
-## Layout
-- Full viewport sections
-- Video backgrounds with noise overlay
-- Left-aligned content with generous margins
-- 4-column card grid for features
-
-## Texture
-- SVG noise overlay (feTurbulence, opacity 0.7, mix-blend-mode: overlay)
-- Video backgrounds (dark, ambient, slow)
-- Warm gradient overlays on video
-
-## Vocabulary
-**Primary:** `warm cream on black`, `serif italic accent`, `pull-up text animation`, `scroll-linked character reveal`, `noise overlay`
-**Banned:** `cold blue tones`, `bright colors`, `static images only`, `sans-serif everything`
-
-## Anti-Slop
-- [ ] Warm cream text (#DEDBC8), not white
-- [ ] Video background with noise overlay
-- [ ] Serif italic for accent phrases
-- [ ] Pull-up or staggered text animations
-- [ ] Scroll-linked character reveals
-- [ ] Dark ground throughout
-- [ ] No cold blue or purple tones
-
-## When to Use
-Creative studios, filmmaker portfolios, production houses, premium creative tools, agencies
-
-## Dual Prompts
-
-### Exact Replica
 ```
-Build a dark cinematic studio page for "PRISMA" — a creative studio. Stack: React + Vite + TS + Tailwind + framer-motion.
-
-## FONTS
-Almarai (300/400/700/800) + Instrument Serif (italic)
-
-## COLOR
---ground: #000000
---cream: #DEDBC8
---cream-light: #E1E0CC
-
-## STRUCTURE
-- Hero: video background with noise overlay, giant "Prisma" pull-up text (staggered 0.08s), cream description, "Join the lab" CTA with arrow-in-circle
-- About: centered card bg-[#101010], mixed-style heading "I am Marcus Chen, *a self-taught director.*" (italic serif on second phrase)
-- Features: 4-column card grid over noise background, each card staggered entrance
-
-## ANTI-SLOP
-- Warm cream text only
-- Video + noise on hero
-- Serif italic accent phrases
-- Pull-up staggered animations
-- No cold colors
+Color:       ●●○○○○  Warm-dark (pure black, cream text, warm accents)
+Typography:  ○●●●○○  Sans + Serif italic (high contrast)
+Motion:      ○○○○●○  High (pull-up, scroll-linked, staggered)
+Density:     ○○●○○○  Sparse (cinematic breathing room)
+Texture:     ○○○○●○  High (video, noise, film grain)
+Layout:      ○○●○○○  Full viewport sections, left-aligned
 ```
 
-### Parameterized Template
-```
-Build a dark cinematic page for "[STUDIO_NAME]". Stack: React + Vite + TS + Tailwind + framer-motion.
+## Mood Keywords
 
-## FONTS
-- Body: [CLEAN_SANS] — Almarai, Inter, or similar
-- Italic accent: [SERIF_ITALIC] — Instrument Serif, Playfair Display italic
+**Moody · Warm · Cinematic · Creative · Intimate**
 
-## COLORS
-- Ground: pure black #000
-- Text: warm cream #DEDBC8 or #E1E0CC
-- NO cold blues or purples
+## Difficulty
 
-## ELEMENTS
-- Video background with SVG noise overlay
-- Pull-up staggered text animations
-- Serif italic emphasis on key phrases
-- Scroll-linked character opacity reveals
-
-## ANTI-SLOP (LOCKED)
-- Warm cream text, not white
-- Video + noise required
-- Serif italic accent
-- Staggered animations
-- No cold color palette
-```
+★★★★☆ — Requires motion sensitivity. The pull-up animations and scroll-linked reveals must feel cinematic, not gimmicky. The serif italic accent must be placed surgically. The video backgrounds must be dark and ambient, not bright and distracting.

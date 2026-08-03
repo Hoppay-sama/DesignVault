@@ -1,0 +1,95 @@
+# Color Architecture
+
+## Ground
+
+```css
+--color-sky: #0D2B3E;       /* Dark teal — the primary ground */
+--color-ground: #0A1628;    /* Deep navy — alternative/sections */
+--color-ground-elevated: #102840; /* Slightly lighter teal for cards */
+```
+
+**Why dark teal:** Pure black is too flat and too generic. Dark teal (#0D2B3E) has the depth of deep ocean or midnight sky — it creates the "nocturnal" feeling that defines the style. The slight blue-green hue gives the amber binary characters somewhere to glow against, creating chromatic contrast that pure black cannot.
+
+---
+
+## Text
+
+```css
+--color-text-primary: #E8E0D0;   /* Warm off-white — matches amber palette */
+--color-text-secondary: #A8A098;  /* Muted warm gray */
+--color-text-muted: #6A6862;      /* For micro labels and metadata */
+```
+
+**Why warm off-white:** The text should feel like it belongs to the amber palette, not fight against it. Warm off-white (#E8E0D0) has a slight amber undertone that harmonizes with the binary clouds. Pure white would feel cold and clinical against the warm-dark palette.
+
+---
+
+## Data (Binary Clouds)
+
+```css
+--color-data: #D4A574;       /* Amber — the binary cloud color */
+--color-data-bright: #E8B888; /* Lighter amber for foreground clouds */
+--color-data-dim: #8A6D4A;   /* Dimmer amber for background clouds */
+```
+
+**Why amber:** Amber against dark teal creates maximum warm-cool contrast. The amber glows like bioluminescence or distant city lights against the nocturnal teal. The varying opacities (10%-60%) create the illusion of clouds at different altitudes — closer clouds are brighter, distant clouds are dimmer.
+
+---
+
+## Accent
+
+```css
+--color-accent: #C4956A;     /* Golden — the CTA accent */
+--color-accent-bright: #D4A574; /* Brighter golden for hover */
+```
+
+**Rule:** ONE accent maximum. The golden accent appears ONLY on:
+- Primary CTA buttons (filled or outlined with glow)
+- One key data point per section (a highlighted metric)
+- Active navigation state
+- Hover state on interactive elements
+
+**Why golden:** The golden accent (#C4956A) is a slightly more saturated version of the amber data color. It creates a visual relationship between the binary clouds (amber) and the CTA (golden) — the CTA feels like it's made of the same data, just concentrated and actionable.
+
+---
+
+## Semantic Colors
+
+```css
+--color-success: #5A8A6A; /* Muted teal-green */
+--color-error: #C46A5A;   /* Muted warm red */
+--color-warning: #D4A574; /* Amber (same as data color) */
+```
+
+**All semantic colors are muted and warm** to maintain the nocturnal palette. They communicate meaning through position and context, not saturation.
+
+---
+
+## The Color Rule
+
+> **The palette is nocturnal and warm.** Dark teal ground, amber data, golden accent. No cold blues, no purples, no pure black. The warmth is what separates this from generic dark mode.
+
+---
+
+## Gradient Policy
+
+**Gradients are allowed but only for atmospheric depth** — not for buttons or surfaces. Acceptable gradient uses:
+- Radial gradients to create cloud depth (brighter center, dimmer edges)
+- Subtle vertical gradients on the sky ground (slightly lighter at top)
+- Glow effects on the CTA (radial gradient behind the button)
+
+**No linear gradients on buttons, cards, or text.** The atmosphere comes from binary clouds and noise, not from color transitions.
+
+---
+
+## Color Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Pure black (#000000) ground | Dark teal #0D2B3E or deep navy #0A1628 |
+| Cold blue or purple accents | Golden amber #C4956A or #D4A574 |
+| Pure white (#FFFFFF) text | Warm off-white #E8E0D0 |
+| Multiple accent colors | ONE golden accent, used surgically |
+| Bright, saturated data colors | Amber at varying opacities (10%-60%) |
+| Neon or glowing text | Subtle glow on CTA only |
+| Chart/graph color palettes | Amber binary clouds as data texture |

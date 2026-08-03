@@ -37,6 +37,17 @@ const AXIS_KEYS: (keyof StyleAxis)[] = [
 
 const DEFAULT_RANGE: AxisRange = { min: 1, max: 5 };
 
+function createDefaultAxisFilters(): AxisFiltersState {
+  return {
+    color: { ...DEFAULT_RANGE },
+    typography: { ...DEFAULT_RANGE },
+    motion: { ...DEFAULT_RANGE },
+    density: { ...DEFAULT_RANGE },
+    texture: { ...DEFAULT_RANGE },
+    layout: { ...DEFAULT_RANGE },
+  };
+}
+
 interface StyleFiltersProps {
   styles: StyleEntry[];
   allTags: string[];
@@ -45,13 +56,7 @@ interface StyleFiltersProps {
 
 export function StyleFilters({ styles, allTags, onFilteredStyles }: StyleFiltersProps) {
   const [activeTag, setActiveTag] = useState<string | null>(null);
-  const [axisFilters, setAxisFilters] = useState<AxisFiltersState>(() => {
-    const initial: Record<string, AxisRange> = {};
-    for (const key of AXIS_KEYS) {
-      initial[key] = { ...DEFAULT_RANGE };
-    }
-    return initial as AxisFiltersState;
-  });
+  const [axisFilters, setAxisFilters] = useState<AxisFiltersState>(createDefaultAxisFilters);
   const [showAxisFilters, setShowAxisFilters] = useState(false);
 
   const applyFilters = useCallback(
@@ -100,11 +105,7 @@ export function StyleFilters({ styles, allTags, onFilteredStyles }: StyleFilters
   };
 
   const handleResetAxes = () => {
-    const reset: Record<string, AxisRange> = {};
-    for (const key of AXIS_KEYS) {
-      reset[key] = { ...DEFAULT_RANGE };
-    }
-    const newState = reset as AxisFiltersState;
+    const newState = createDefaultAxisFilters();
     setAxisFilters(newState);
     applyFilters(activeTag, newState);
   };

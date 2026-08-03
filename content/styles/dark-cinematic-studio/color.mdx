@@ -1,0 +1,83 @@
+# Color Architecture
+
+## Ground
+
+```css
+--color-ground: #000000;       /* Pure black — the ONE style that uses it */
+--color-ground-elevated: #0A0A0A; /* Slightly lighter for cards/panels */
+--color-ground-panel: #101010;  /* For elevated sections */
+```
+
+**Why pure black:** This is the ONE style that uses pure #000000 — because video backgrounds need it. The pure black creates the "screen in a dark room" feeling that video requires. The darkness is the canvas; the video and cream text are the content. Any other background color would fight with the video.
+
+**Why it works here:** The warm cream text and noise overlay prevent the pure black from feeling cold. The warmth comes from the text and texture, not the ground. This is the opposite of cold dark mode — it's warm dark mode.
+
+---
+
+## Text
+
+```css
+--color-text-primary: #DEDBC8;   /* Warm cream — the signature text color */
+--color-text-secondary: #E1E0CC;  /* Slightly lighter cream */
+--color-text-muted: #8A8780;      /* Muted warm gray for metadata */
+```
+
+**Why warm cream:** Pure white on pure black is clinical and exhausting. Warm cream (#DEDBC8) has a slight yellow undertone that creates intimacy — the feeling of candlelight, not fluorescent light. The cream prevents the black from feeling cold while maintaining high contrast and readability.
+
+---
+
+## Accent
+
+```css
+--color-accent: #DEDBC8;     /* Cream — accent matches text (subtle) */
+--color-accent-warm: #C4A882; /* Warm amber — for CTAs and highlights */
+```
+
+**Rule:** ONE accent maximum. The accent appears ONLY on:
+- Primary CTA buttons (cream or warm amber)
+- Active navigation state
+- One key phrase or element per section
+- Hover state on interactive elements
+
+**Why cream or warm amber:** The accent stays within the warm palette. Cream accent (#DEDBC8) is subtle — it matches the text color, creating emphasis through weight and shape rather than color. Warm amber (#C4A882) is for CTAs that need to stand out more — it's the one "bright" element in the warm-dark palette.
+
+---
+
+## Semantic Colors
+
+```css
+--color-success: #6A8A5A; /* Muted warm green */
+--color-error: #C46A5A;   /* Muted warm red */
+--color-warning: #C4A882; /* Warm amber */
+```
+
+**All semantic colors are warm and muted** to maintain the cinematic palette. They communicate meaning through position and context, not saturation.
+
+---
+
+## The Color Rule
+
+> **The palette is warm-dark.** Pure black ground, warm cream text, one warm accent. No cold blues, no purples, no neon. The warmth is what separates this from generic dark mode.
+
+---
+
+## Gradient Policy
+
+**Gradients are allowed for cinematic depth** — specifically for video overlays:
+- Dark gradient overlays on video (top and bottom darkening for text readability)
+- Subtle vignette effects (radial darkening at edges)
+- No gradient buttons, text, or surfaces
+
+---
+
+## Color Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Cold blue or gray text | Warm cream #DEDBC8 |
+| Pure white (#FFFFFF) text | Warm cream #DEDBC8 or #E1E0CC |
+| Cold blue or purple accents | Warm amber #C4A882 or cream |
+| Multiple accent colors | ONE warm accent, used surgically |
+| Neon or saturated colors | Muted, warm, cinematic tones |
+| Light backgrounds | Pure black #000000 (this is a dark style) |
+| Cold dark mode palette | Warm-dark — cream, amber, not blue, gray |
