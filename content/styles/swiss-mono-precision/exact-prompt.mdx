@@ -1,0 +1,76 @@
+# Dual Prompts — Swiss Mono Precision
+
+## Exact Replica
+
+```
+Build a Swiss-style landing page for "DIATYPE" — a type foundry. Stack: React + Vite + TS + Tailwind CSS v4.
+
+## FONTS
+Load: `https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap`
+- Display: Inter Tight 600/700, tracking -0.02em
+- Body: Inter Tight 400
+- Mono: JetBrains Mono (for specimen data)
+
+## GRID
+- 12-column CSS Grid, gap 0
+- 8px base spacing unit: all padding/margin are multiples of 8
+- Hairline borders: 1px solid #E5E5E5 (light) or rgba(255,255,255,0.1) (dark)
+
+## STRUCTURE
+- Header: grid row, logo left (Inter Tight 700, tracking 0.1em, uppercase), nav right (Inter Tight 400, tracking 0.05em, uppercase, 11px)
+- Hero: 12-col grid. Headline spans cols 1-8, Inter Tight 700, clamp(3rem, 8vw, 7rem), leading 0.95, tracking -0.03em. Subtext cols 9-12, Inter Tight 400, 14px, line-height 1.5
+- Type Specimen Grid: 12-col, each cell shows one font weight. Cell: border 1px solid #E5E5E5, padding 32px. Weight name (mono, 10px, uppercase, tracking 0.15em) + large specimen letter (Inter Tight [weight], 120px)
+- Foundry Info: 2-col split. Left (cols 1-6): heading + body. Right (cols 7-12): data table (mono, 11px, tabular figures)
+- Footer: full-width, border-top 1px solid #E5E5E5, flex space-between, mono 10px uppercase tracking 0.15em
+
+## TYPE SCALE (1.5x ratio)
+- Display: 112px (7rem)
+- Headline: 48px (3rem)
+- Subhead: 24px (1.5rem)
+- Body: 16px (1rem)
+- Small: 12px (0.75rem)
+- Micro: 10px (0.625rem)
+
+## COLOR
+- Light: white ground, near-black text (#111), hairline #E5E5E5
+- OR Dark: near-black ground (#0A0A0A), off-white text (#E8E8E8), hairline rgba(255,255,255,0.1)
+- ONE accent only: signal red (#FF3B30) or cobalt (#0047FF)
+
+## ANTI-SLOP
+- NO rounded corners above 2px
+- NO shadows
+- NO gradients
+- NO more than 2 colors + accent
+- NO decorative elements
+- ALL spacing in 8px multiples
+- Tabular figures for all numbers
+- Proper en-dashes and em-dashes
+```
+
+## Parameterized Template
+
+```
+Build a Swiss-style page for "[BRAND_NAME]". Stack: React + Vite + TS + Tailwind.
+
+## GRID
+- 12-column grid, 8px base unit
+- Hairline borders for all separation
+- All spacing = multiples of 8px
+
+## TYPE
+- Neo-grotesque: Inter Tight, ABC Diatype, or similar
+- Systematic scale (1.25x or 1.5x ratio)
+- Tabular figures for numbers
+- Proper micro-typography
+
+## COLOR
+- B&W + ONE muted accent (red, blue, or black)
+- No gradients, no shadows
+
+## ANTI-SLOP (LOCKED)
+- Mathematical grid required
+- Hairline rules for structure
+- Max 2-3 colors
+- No decorative elements
+- Proper typography (dashes, quotes, figures)
+```

@@ -1,0 +1,137 @@
+# Dual Prompts — Liquid Glass Noir
+
+## Exact Replica Prompt
+
+```
+Build a dark glassmorphic landing page for "AETHER" — a spatial computing platform. Stack: React + Vite + TypeScript + Tailwind CSS v4 + lucide-react + framer-motion. Page title: `Aether — Spatial Computing Platform`.
+
+Vibe: Frosted glass panels floating over dark ambient video. Liquid-glass edge refraction. Spring-physics hover. Premium, spatial, cinematic.
+
+## ANTI-SLOP CONSTRAINTS
+- NO opaque glass backgrounds
+- NO backdrop-blur > 40px
+- NO drop shadows on glass
+- NO colored glass tinting
+- NO more than ONE accent
+- NO busy video backgrounds
+
+## FONTS
+Load: Inter Tight (400/500/600) via Google Fonts.
+- `.font-display { font-family: 'Inter Tight'; font-weight: 600; letter-spacing: -0.02em; }`
+- `.font-body { font-family: 'Inter Tight'; font-weight: 400; }`
+
+## COLOR SYSTEM
+```css
+:root {
+  --ground: #050505;
+  --glass-bg: rgba(255,255,255,0.05);
+  --glass-border: rgba(255,255,255,0.1);
+  --text-primary: #FFFFFF;
+  --text-secondary: rgba(255,255,255,0.7);
+  --accent: rgba(100,180,255,0.8);
+}
+```
+
+## LIQUID GLASS CSS (place in global CSS)
+```css
+.liquid-glass {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.3) 0%,
+    rgba(255,255,255,0.05) 30%,
+    rgba(255,255,255,0) 50%,
+    rgba(255,255,255,0) 70%,
+    rgba(255,255,255,0.05) 90%,
+    rgba(255,255,255,0.3) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+```
+
+## PAGE STRUCTURE
+
+### Background Video
+- Full-bleed, absolute, z-0
+- URL: [dark ambient abstract video — slow, no text, no faces]
+- autoPlay loop muted playsInline
+- Overlay: `bg-gradient-to-b from-black/30 via-transparent to-black/60`
+
+### Floating Nav
+- `fixed top-6 left-1/2 -translate-x-1/2 z-50`
+- liquid-glass class, rounded-2xl, px-6 py-3
+- Flex gap-8: Logo "AETHER" + links (Product, Docs, Pricing) + CTA button
+- CTA: bg-white/10, rounded-lg, px-4 py-2, text-sm
+
+### Hero
+- `min-h-[100dvh] flex items-center justify-center`, relative, z-10
+- Glass card (liquid-glass): max-w-2xl, p-12, text-center
+- Headline: `.font-display`, `clamp(2rem, 5vw, 4rem)`: `Compute in` / `a new dimension`
+- Subtext: `.font-body`, `var(--body)`, `--text-secondary`: `Aether brings spatial computing to every device. Build immersive experiences without the complexity.`
+- CTA row: Primary (bg-white text-black rounded-lg px-8 py-3) + Secondary (liquid-glass, rounded-lg, px-8 py-3)
+
+### Feature Cards
+- Grid: `grid-cols-3 gap-4`, max-w-6xl, centered, padding `clamp(4rem, 10vh, 8rem)` vertical
+- Each card: liquid-glass, p-8
+- Icon (lucide, size 24, color white/80) + title + body text
+- Hover: translateY(-4px) + scale(1.01), spring 300ms
+
+### CTA Section
+- Centered glass card, similar to hero but smaller
+- Headline: `Ready to build spatially?`
+- CTA: `Get started`
+
+## ANIMATIONS
+- Glass panels: `initial={{ opacity: 0, y: 16, scale: 0.98 }}` → `animate={{ opacity: 1, y: 0, scale: 1 }}`, 800ms, ease [0.22, 1, 0.36, 1], stagger 0.08s
+- Hover: `whileHover={{ y: -4, scale: 1.01 }}`, transition: spring (stiffness: 300, damping: 25)
+- Video: fade-in 1500ms ease-out
+
+## ICONS
+lucide-react: `Box`, `Layers`, `Globe`, `ArrowRight`. Size 24, strokeWidth 1.5.
+
+Recreate with exact liquid-glass CSS, spring hover, and staggered glass panel entrances.
+```
+
+## Parameterized Template
+
+```
+Build a dark glassmorphic landing page for "[BRAND_NAME]" — [DESCRIPTION]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + lucide-react + framer-motion.
+
+## ANTI-SLOP (DO NOT MODIFY)
+- NO opaque glass, NO blur > 40px, NO shadows on glass, NO colored tinting
+
+## LIQUID GLASS CSS
+[Use the exact CSS from the exact prompt above — this is the style's signature]
+
+## STRUCTURE
+- Background: dark ambient video (slow, abstract)
+- Floating glass nav (detached from top, rounded-2xl)
+- Hero: centered glass card with headline + subtext + CTAs
+- Feature grid: 3-column glass cards with icons
+- CTA section: smaller glass card
+
+## MOTION
+- Glass panels: staggered fade-up + scale, 800ms
+- Hover: spring lift (y: -4, scale: 1.01), stiffness 300, damping 25
+
+## CONTENT
+- Headline: 2 lines max, specific not aspirational
+- Glass card text: white on frosted, test contrast
+- Video: find slow abstract dark footage (Pexels, Coverr)
+
+Replace [BRACKETED] placeholders and paste.
+```

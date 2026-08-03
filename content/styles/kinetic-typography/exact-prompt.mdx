@@ -1,0 +1,63 @@
+# Dual Prompts — Kinetic Typography
+
+## Exact Replica
+
+```
+Build a kinetic typography landing page for "MOVEMENT" — a motion design studio. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion + GSAP.
+
+## FONTS
+Load: `https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap`
+Use Space Grotesk variable font for all type. Weight animated via scroll.
+
+## STRUCTURE
+- Full viewport, near-black ground (#0A0A0A), white text
+- Hero: Giant "MOVEMENT" text at clamp(8rem, 20vw, 18rem), weight 300→700 mapped to scroll (0→500px)
+- Horizontal marquee strip below hero: "MOTION DESIGN — BRAND IDENTITY — DIRECTION —" repeating, 20s linear infinite
+- Section 2: Split-text reveal — each word of "We design motion that moves people" fades up with 0.08s stagger on scroll
+- Section 3: Giant number "2024" at clamp(6rem, 15vw, 14rem), weight 300, with horizontal scroll-hijack revealing project names
+- Footer: Giant "MOVEMENT" wordmark bleeding off bottom at 40vw
+
+## ANIMATION
+- Hero weight: useScroll + useTransform, scroll [0, 500] → weight [300, 700]
+- Marquee: CSS animation, translateX(0) → translateX(-50%), 20s linear infinite
+- Split-text: useInView, stagger children 0.08s, y: 20→0, opacity 0→1
+- Number scroll: horizontal scroll-hijack with GSAP ScrollTrigger
+
+## ANTI-SLOP
+- NO static headlines
+- NO small display type (min 8rem)
+- NO image-dominant layout (type IS the design)
+- NO bounce easing on text
+- NO more than 2 typeface families
+```
+
+## Parameterized Template
+
+```
+Build a kinetic typography page for "[BRAND_NAME]". Stack: React + Vite + TS + Tailwind + framer-motion + GSAP.
+
+## KEY ELEMENTS
+- Variable font with animated weight axis (map to scroll)
+- Giant display type (min 8rem, ideally 15vw+)
+- Horizontal marquee strip (continuous scroll)
+- Split-text reveal on scroll (staggered)
+- Type fills viewport — minimal imagery
+
+## FONTS
+Use a variable font. Good choices:
+- Space Grotesk (300-700) — geometric, great for animation
+- Inter (100-900) — versatile weight range
+- Recursive — has multiple animated axes
+
+## MOTION
+- Scroll-driven weight: useScroll + useTransform
+- Marquee: CSS animation, 15-25s linear infinite
+- Split-text: stagger 0.06-0.1s per element
+- Easing: cubic-bezier(0.22, 1, 0.36, 1)
+
+## ANTI-SLOP (LOCKED)
+- Type must be monumental (8rem+)
+- Motion must be scroll-driven, not time-based
+- No more than 2 typeface families
+- No bounce easing on text
+```

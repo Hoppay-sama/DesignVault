@@ -1,0 +1,78 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Dither Mono is **gravity, not elasticity**. Everything moves with weight and deliberation. No bounce, no spring, no playful overshoot. The style is authoritative — motion reinforces that authority through slow, controlled reveals.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Background dither layer | Opacity fade-in | 1200ms | `ease-out` | 0ms |
+| Display headline | Opacity + translateY(20px) → 0 | 1000ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 200ms |
+| Body text blocks | Opacity fade-in | 800ms | `ease-out` | 400ms |
+| Micro labels | Opacity fade-in | 600ms | `ease-out` | 600ms |
+| Wordmark | Scale 0.95 → 1 + opacity | 1400ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 300ms |
+| CTA button | Border draw-in (SVG stroke) | 800ms | `ease-in-out` | 800ms |
+
+**Key easing:** `cubic-bezier(0.22, 1, 0.36, 1)` — smooth deceleration, no bounce. This is the signature easing for the style.
+
+---
+
+## Scroll Behavior
+
+| Effect | Specification |
+|--------|--------------|
+| Parallax on images | Subtle — 10-20% of scroll distance |
+| Text reveals | Clip-path or mask reveal (not fade) |
+| Dither grain animation | Subtle shifting noise pattern (24fps jitter) |
+| Section transitions | Crossfade with 200ms overlap |
+
+**Scroll-linked effects are minimal.** The style doesn't need scroll choreography — the dithered imagery and monumental type carry the experience.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Navigation links | Opacity 1.0 → 0.6 (300ms) | — |
+| CTA buttons | Border color → accent color + slight scale (1.02) | Scale 0.98 (tactile press) |
+| Image cards | Subtle brightness increase (1.0 → 1.05) | — |
+| Wordmark | None — it's static and monumental | — |
+
+**No color changes on hover.** Opacity shifts only. Color changes would break the monochrome discipline.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- All entrance animations collapse to instant opacity changes
+- No parallax
+- No grain animation
+- Dither layers render static
+- Hover states use instant opacity change (no transition)
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| ❌ Never animate | Why |
+|-----------------|-----|
+| Bounce or spring easing | Feels cheap, breaks authority |
+| Color transitions | Breaks monochrome discipline |
+| Rotation or skew | Too playful for this style |
+| Every element fading in | Motion must be purposeful, not decorative |
+| Marquee text strips | Lazy filler — this style doesn't need movement for movement's sake |

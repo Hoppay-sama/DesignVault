@@ -1,0 +1,68 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Thin to light sans-serif — the opposite of monumental |
+| **Examples** | Aperçu Light, Söhne Light, Aktiv Grotesk Light, Inter Thin (100-300) |
+| **Weight** | 200-300 (thin, not bold) |
+| **Tracking** | 0.05em-0.15em (generous, breathable) |
+| **Size** | Small for this style — `clamp(1.2rem, 2vw, 2rem)` max |
+| **Transform** | Uppercase for labels, sentence case for headlines |
+
+**Why thin type:** The photography is heavy and monumental. Thin type provides contrast without competing. It whispers while the image speaks.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Clean, readable sans-serif |
+| **Examples** | Aperçu, Söhne, Inter (400), Satoshi |
+| **Weight** | 400-500 |
+| **Tracking** | 0.01em-0.02em (slightly open for readability) |
+| **Size** | Small — `clamp(0.75rem, 0.9vw, 0.9rem)` — max 14px |
+| **Line Height** | 1.6-1.7 (generous for slow reading) |
+
+**Why small body text:** This style doesn't have long-form content. Body text is caption-like — 1-3 sentences max. Small size keeps it secondary to the imagery.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same family as body, lighter weight |
+| **Examples** | Aperçu Light, Söhne Light |
+| **Weight** | 300-400 |
+| **Tracking** | 0.15em-0.25em (very wide, like film credits) |
+| **Size** | 10-12px |
+| **Transform** | UPPERCASE |
+
+**Usage:** Section labels, photo credits, location tags. These tiny labels feel like film credits rolling at the edge of the frame.
+
+---
+
+## Type Scale
+
+**Ratio:** Not applicable in the traditional sense. This style uses two sizes:
+
+```
+Display:  clamp(1.2rem, 2vw, 2rem)    — small by any other style's standard
+Body:     clamp(0.75rem, 0.9vw, 0.9rem) — caption size
+Micro:    10-12px                        — film credit size
+```
+
+The "scale" is the contrast between the vast image and the tiny type — not between type sizes.
+
+---
+
+## Font Pairing Logic
+
+**Single family approach:** Use one typeface family at multiple weights (Light for display, Regular for body, Light for micro). This creates visual harmony — the type feels like one voice at different volumes.
+
+**Alternative:** Pair a thin geometric sans (display) with a humanist sans (body) for subtle contrast. Example: Aktiv Grotesk Light + Söhne.
+
+**Never:** Bold display type. Heavy weights destroy the cinematic atmosphere.

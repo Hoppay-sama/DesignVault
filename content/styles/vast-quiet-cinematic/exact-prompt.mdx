@@ -1,0 +1,184 @@
+# Exact Replica Prompt — Vast Quiet Cinematic
+
+> Copy this entire prompt and paste it into your AI coding assistant.
+
+---
+
+```
+Build a cinematic minimal landing page for "MERIDIAN" — a luxury travel curator for remote destinations. Stack: React + Vite + TypeScript + Tailwind CSS v4 + lucide-react. Page title: `Meridian — Beyond the Map`.
+
+Vibe: The opening shot of an art-house film. Vast desaturated photography, mist atmosphere, tiny type at the edges, extreme whitespace. The user doesn't browse — they drift.
+
+---
+
+## ANTI-SLOP CONSTRAINTS
+
+- NO bold or heavy typeface weights (max 400 for display)
+- NO centered large headlines
+- NO card grids or feature rows
+- NO gradients
+- NO raw unprocessed photography
+- NO bright saturated accent colors
+- NO more than ONE accent color
+- NO bounce or spring easing
+- NO glassmorphism or drop shadows
+- NO pure #FFFFFF background
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap
+```
+
+Usage:
+- **Inter 200/300**: Display headlines, section labels (thin, cinematic)
+- **Inter 400**: Body text
+- **Inter 500**: Navigation links
+
+CSS utilities:
+- `.font-display { font-family: 'Inter', sans-serif; font-weight: 200; }`
+- `.font-body { font-family: 'Inter', sans-serif; font-weight: 400; }`
+
+---
+
+## FLUID SIZE SYSTEM
+
+```css
+:root {
+  --edge-margin: clamp(2rem, 5vw, 6rem);
+  --section-gap: clamp(6rem, 15vh, 12rem);
+  --logo: clamp(0.85rem, 0.8vw, 1.1rem);
+  --nav: clamp(0.6rem, 0.25vw + 0.5rem, 0.75rem);
+  --headline: clamp(1.2rem, 2vw, 2rem);
+  --body: clamp(0.7rem, 0.35vw + 0.55rem, 0.85rem);
+  --micro: clamp(0.55rem, 0.2vw + 0.45rem, 0.65rem);
+  --cta-px: clamp(1.5rem, 2vw, 2.5rem);
+  --cta-py: clamp(0.7rem, 0.8vh, 1rem);
+}
+```
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --fog-white: #F5F3F0;
+  --text-on-light: #1A1A1A;
+  --text-on-dark: #E8E6E3;
+  --text-muted: #888888;
+  --accent: #C4956A;  /* Dusty amber — light through fog */
+}
+```
+
+Body: `bg-[#0A0A0A] text-[#E8E6E3] antialiased font-body`.
+
+---
+
+## PAGE STRUCTURE
+
+### 1. Header
+`position: fixed; top: 0; left: 0; right: 0; z-index: 50;`
+Padding: `paddingInline: var(--edge-margin)`, `paddingTop: clamp(1.5rem, 3vh, 2.5rem)`.
+Flex space-between.
+
+**Logo (left):** Inter 300, tracking `0.2em`, size `var(--logo)`, uppercase, color `var(--text-on-dark)`. Text: `MERIDIAN`.
+
+**Nav (right):** Inter 400, tracking `0.12em`, size `var(--nav)`, gap `clamp(2rem, 4vw, 4rem)`.
+Links: `JOURNEYS` | `PHILOSOPHY` | `JOURNAL`
+Hover: opacity 0.5 (500ms transition).
+
+### 2. Hero Section
+`min-h-[100dvh]`, relative, overflow hidden.
+
+**Background:** Full-bleed desaturated photograph. Use this exact image:
+```
+https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80
+```
+Apply: desaturate 70%, reduce contrast (shadows +10, highlights -15), warm grade, film grain overlay at opacity 0.04, vignette.
+
+**Text (bottom-left, above fold):**
+- Micro label — Inter 300, uppercase, tracking `0.2em`, size `var(--micro)`, color `rgba(232,230,227,0.6)`:
+  `CURATED JOURNEYS / EST. 2019`
+- Headline — Inter 200, tracking `0.08em`, leading `1.1`, size `var(--headline)`, color `var(--text-on-dark)`:
+  `BEYOND`
+  `THE MAP`
+- Subtext — Inter 400, size `var(--body)`, color `rgba(232,230,227,0.7)`, max-width 360px, line-height 1.7:
+  `Remote destinations for those who seek silence over spectacle.`
+
+**CTA (below subtext):** Thin border `1px solid rgba(196,149,106,0.5)`, transparent bg, rounded-sm, uppercase `EXPLORE` + lucide `ArrowUpRight` (size 12). Tracking `0.15em`, size `var(--body)`, color `var(--accent)`. Padding `var(--cta-px)` / `var(--cta-py)`. Hover: border opacity 1.0.
+
+### 3. Scene Sections (3 sections)
+
+Each section: `min-h-[100dvh]`, padding `var(--section-gap)` vertical, `var(--edge-margin)` horizontal.
+
+**Scene A — Patagonia**
+Layout: split — fog-white left (50%), full-bleed photo right (50%).
+Photo: desaturated mountain landscape.
+Left content:
+- Micro: `01 / DESTINATION`
+- Headline: Inter 200, `var(--headline)`, uppercase, tracking `0.06em`: `PATAGONIA`
+- Body: Inter 400, `var(--body)`, `#666`, max-width 380px: `Where the earth ends and the wind begins. Seven days of silence across the Torres del Paine.`
+
+**Scene B — Svalbard**
+Layout: full-bleed photo with centered-tiny text overlay.
+Photo: desaturated arctic landscape, fog-white upper half.
+Text (centered, upper half on fog-white area):
+- Micro: `02 / DESTINATION`
+- Headline: `SVALBARD`
+- Body: `The northernmost inhabited place on Earth. Where polar night lasts four months.`
+
+**Scene C — Bhutan**
+Layout: split — photo left (50%), fog-white right (50%).
+Photo: desaturated monastery in mist.
+Right content:
+- Micro: `03 / DESTINATION`
+- Headline: `BHUTAN`
+- Body: `The last Himalayan kingdom. Gross national happiness over gross domestic product.`
+
+### 4. Footer
+Padding: `var(--section-gap)` vertical, `var(--edge-margin)` horizontal.
+Flex space-between.
+- Left: Inter 300, `var(--micro)`, tracking `0.15em`, color `#444`: `MERIDIAN TRAVEL CURATORS`
+- Center: `© 2026`
+- Right: `BEYOND THE MAP`
+
+---
+
+## VISUAL RULES
+
+- Fog-white (#F5F3F0) for text sections, near-black for photo sections
+- Dusty amber (#C4956A) accent ONLY on CTA
+- ALL photography must be desaturated (60-80%), contrast-reduced, warm-graded, with film grain and vignette
+- Thin type only (200-300 weight for display)
+- Extreme whitespace (section gap minimum 6rem)
+- No cards, no shadows, no borders (except CTA)
+- Motion: slow fades only (1000ms+), easing `ease-out`
+- Honor `prefers-reduced-motion: reduce`
+
+---
+
+## ANIMATIONS
+
+| Class | Keyframes | Duration | Easing | Delay |
+|-------|-----------|----------|--------|-------|
+| `anim-fade-slow` | opacity 0→1 | 2000ms | `ease-out` | 0ms |
+| `anim-fade-up` | opacity 0→1, translateY(12px)→0 | 1400ms | `cubic-bezier(0.25, 0.46, 0.45, 0.94)` | 600ms |
+| `anim-fade-in` | opacity 0→1 | 1000ms | `ease-out` | 1000ms |
+| `anim-cta` | border opacity 0.3→1.0 | 1200ms | `ease-in-out` | 1400ms |
+
+`prefers-reduced-motion: reduce` → collapse all to 0.01ms.
+
+---
+
+## ICONS
+
+lucide-react: `ArrowUpRight` only (CTA). Size 12, strokeWidth 1.5.
+
+---
+
+Recreate this page with the exact colors, fonts, fluid clamps, copy, layout, and slow animation timings above.
+```

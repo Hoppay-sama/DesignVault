@@ -1,0 +1,71 @@
+# Dual Prompts — Editorial Serif Narrative
+
+## Exact Replica
+
+```
+Build an editorial longform landing page for "CEREAL" — a quarterly journal of travel, style, and culture. Stack: React + Vite + TS + Tailwind CSS v4.
+
+## FONTS
+Load: `https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap`
+- Display: Playfair Display 400/700, italic for emphasis
+- Body: Inter 300/400
+
+## STRUCTURE
+- Single column, max-width 680px, centered
+- Padding: clamp(2rem, 8vw, 6rem) horizontal
+- Hero: Full-bleed editorial photo, overlay text bottom-left
+  - Folio: "ISSUE 07 / AUTUMN 2026" — mono, 10px, tracking 0.2em
+  - Headline: Playfair Display 700, clamp(2rem, 5vw, 4rem): "The Silent Architecture of Kyoto"
+  - Byline: "By Elena Vasquez — Photography by Tomoki Sato"
+- Opening paragraph: Drop cap (Playfair Display 700, 5rem, float left, margin-right 12px, line-height 0.8)
+- Body: Inter 400, 17px, line-height 1.7, color #333
+- Pull quote (mid-article): Playfair Display italic 400, clamp(1.5rem, 3vw, 2.5rem), centered, max-width 500px, color #1a1a1a, border-top + border-bottom 1px solid #ddd, padding 2rem 0
+- Section break: centered "✦" or "—" with generous whitespace
+- Full-bleed photo between sections with caption below (Inter 300, 13px, color #666, italic)
+- Footer: minimal, brand name + issue number
+
+## TYPOGRAPHY RULES
+- Drop cap on first paragraph of each major section
+- Pull quote every 400-600 words
+- Section breaks with decorative element
+- Captions on all images
+- No widows or orphans (use CSS orphans/widows properties)
+
+## ANTI-SLOP
+- NO sans-serif headlines
+- NO single-weight body text (use 300/400 variation)
+- NO images without captions
+- NO text wider than 75ch
+- NO drop cap missing from opening paragraphs
+```
+
+## Parameterized Template
+
+```
+Build an editorial longform page for "[PUBLICATION_NAME]". Stack: React + Vite + TS + Tailwind.
+
+## FONTS
+- Display: [SERIF_FONT] — good choices: Playfair Display, Cormorant Garamond, EB Garamond, Libre Baskerville
+- Body: [SANS_FONT] — good choices: Inter, Source Sans 3, Nunito Sans
+
+## STRUCTURE
+- Single column, max-width 680px
+- Drop cap on opening paragraphs
+- Pull quotes mid-article (2x body size, serif italic)
+- Full-bleed photos between sections with captions
+- Section breaks with decorative element
+- Folio/running head at top
+
+## TYPOGRAPHY
+- Body: 16-18px, line-height 1.6-1.7
+- Display: 2-4rem, serif
+- Measure: 60-75ch max
+- Drop cap: 4-6rem, float left
+
+## ANTI-SLOP (LOCKED)
+- Serif headlines required
+- Drop caps on opening paragraphs
+- Pull quotes for long sections
+- Captions on all images
+- Max 75ch body width
+```

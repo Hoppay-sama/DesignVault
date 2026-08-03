@@ -1,0 +1,44 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Clean geometric sans |
+| **Examples** | Inter Tight (500/600), Satoshi, SF Pro Display, Geist |
+| **Weight** | 500-600 (medium-semibold) |
+| **Tracking** | -0.02em to 0 (tight on headlines) |
+| **Size** | `clamp(2rem, 5vw, 4rem)` |
+
+**Why geometric:** Clean, modern, readable against frosted surfaces. The geometric quality complements the precision of the glass edges.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same family as display |
+| **Weight** | 400-500 |
+| **Size** | `clamp(0.8rem, 0.4vw + 0.65rem, 0.95rem)` |
+| **Line Height** | 1.5-1.6 |
+
+---
+
+## Glass Surface Text
+
+Text on glass panels must have sufficient contrast:
+- On frosted glass over dark video: use white (#FFFFFF) or near-white (#F0F0F0)
+- On frosted glass over light areas: use near-black (#1A1A1A)
+- Always test contrast — backdrop-blur can reduce readability
+
+---
+
+## Type Scale
+
+```
+Display:  clamp(2rem, 5vw, 4rem)    — hero headlines
+Headline: clamp(1.25rem, 2.5vw, 2rem) — section titles
+Body:     clamp(0.8rem, 0.4vw + 0.65rem, 0.95rem)
+Micro:    0.7rem — labels on glass panels
+```

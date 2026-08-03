@@ -1,0 +1,120 @@
+---
+slug: futuristic-fashion
+title: Futuristic Fashion
+oneLineEssence: "Pure white minimal futuristic fashion interface. Black text on white. Mouse-tracking spotlight reveal. Wireframe globe, checkerboard, L-corner brackets."
+axis: { color: 1, typography: 3, motion: 4, density: 2, texture: 2, layout: 2 }
+moodKeywords: [Futuristic, Clean, Interactive, Geometric, Precise]
+difficulty: 4
+tags: [fashion, white, interactive, geometric, spotlight, futuristic]
+status: draft
+---
+
+# Futuristic Fashion
+
+**Pure white minimal futuristic fashion interface. Black text on white. Mouse-tracking spotlight reveal. Wireframe globe, checkerboard, L-corner brackets.**
+
+## Visual DNA
+Pure white minimal futuristic fashion. Black text on white. Mouse-tracking spotlight reveals a second image inside a soft circular mask on the dark background image. Wireframe globe SVG, checkerboard accents, L-corner brackets frame the composition. Side drawers for shop/collections/journal. Technical precision meets fashion editorial.
+
+## Design Principles
+1. **WHITE AS CANVAS** — Not cream, not off-white — pure white (#FFFFFF). Black ink only
+2. **INTERACTIVE REVEAL** — Mouse spotlight (ease 0.1, radius clamp 160-420px) reveals hidden image layer
+3. **TECHNICAL FRAMING** — L-corner brackets, wireframe globes, checkerboard patterns signal precision
+
+## Typography
+- Display: Orbitron 600-900 (geometric, futuristic), clamp(2rem, 4.5vw, 5.25rem)
+- Body: Plus Jakarta Sans 400-700, clamp(0.7rem, 0.35vw + 0.55rem, 0.9rem)
+
+## Color
+- Ground: #FFFFFF (pure white)
+- Text: #000000 (pure black)
+- Accents: gray-200 through gray-600 only
+- Grid: slate #64748b at 10% opacity
+- NO purple, NO cream, NO color
+
+## Motion
+- Mouse-tracking spotlight (ease factor 0.1, radius clamp(160px, 16vw, 420px))
+- Parallax grid offset (ease factor 0.06)
+- Side drawer slide-in (cubic-bezier(0.76, 0, 0.24, 1))
+
+## Layout
+- Full viewport, overflow-hidden
+- Asymmetric: headline left, feature block right-bottom
+- L-corner brackets framing content
+- Side drawers (right slide-in) for navigation
+
+## Texture
+- Dual-image reveal background (base + spotlight-revealed layer)
+- Subtle SVG grid overlay (10% opacity)
+- Checkerboard pattern accent
+- Wireframe globe SVG
+
+## Vocabulary
+**Primary:** `pure white minimal`, `mouse spotlight reveal`, `wireframe globe`, `checkerboard accent`, `L-corner brackets`, `side drawer navigation`
+**Banned:** `cream backgrounds`, `purple accents`, `centered layouts`, `card-based design`, `colorful imagery`
+
+## Anti-Slop
+- [ ] Pure white (#FFFFFF) ground
+- [ ] Black text only
+- [ ] Gray accents only (no color)
+- [ ] Mouse-tracking spotlight reveal
+- [ ] Wireframe globe or technical SVG decoration
+- [ ] L-corner bracket framing
+- [ ] Side drawer navigation
+- [ ] Fluid clamp sizing throughout
+- [ ] No purple, cream, or colored accents
+
+## When to Use
+Fashion brands, luxury product launches, design studios, architectural firms, premium product pages
+
+## Dual Prompts
+
+### Exact Replica
+```
+Build a futuristic fashion page for "LGPSM". Stack: React + Vite + TS + Tailwind + lucide-react.
+
+## FONTS
+Orbitron (600-900) + Plus Jakarta Sans (400-700)
+
+## COLOR
+White ground, black text, gray accents only. NO purple, NO cream.
+
+## STRUCTURE
+- Root: min-h-screen bg-white text-black overflow-hidden
+- ImageRevealBackground: dual-image with mouse spotlight (ease 0.1, radius clamp(160,16vw,420)), SVG grid overlay
+- Header: Orbitron logo "LGPSM˚" + nav (SHOP|COLLECTIONS|JOURNAL|bag icon)
+- Hero: L-corner brackets + "FUTURE FORWARD FASHION" headline + checkerboard SVG + SHOP NOW CTA + wireframe globe tagline box
+- Side drawers: right slide-in for Shop/Collections/Journal/Cart
+
+## INTERACTION
+- Mouse spotlight: track mouseRef, ease smoothRef factor 0.1, radial gradient mask
+- Grid parallax: offset cx*16/cy*16, ease factor 0.06
+- Drawers: backdrop blur, slide from right
+
+## ANTI-SLOP
+- Pure white only
+- Black ink only
+- Gray accents only
+- No purple, cream, color
+- Technical framing (corners, globe, checker)
+```
+
+### Parameterized Template
+```
+Build a futuristic fashion page for "[BRAND_NAME]". Stack: React + Vite + TS + Tailwind.
+
+## STRUCTURE
+- Pure white ground, black text, gray accents only
+- Mouse-tracking spotlight reveal on background
+- Technical framing: corner brackets, wireframe SVG, checkerboard
+- Side drawer navigation
+- Fluid clamp sizing
+
+## ANTI-SLOP (LOCKED)
+- Pure white (#FFF) ground
+- Black text only
+- No purple, cream, or color
+- Mouse spotlight interaction
+- Technical decorative elements
+- Side drawer nav
+```

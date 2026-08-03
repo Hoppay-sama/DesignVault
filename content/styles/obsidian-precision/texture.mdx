@@ -1,0 +1,68 @@
+# Texture & Surface
+
+## Primary Texture: Radial Glow
+
+The ONLY texture in this style. A subtle radial gradient behind the hero creates atmospheric depth.
+
+```css
+.hero-glow {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(94, 106, 210, 0.15) 0%,  /* Accent-colored glow */
+    transparent 70%
+  );
+}
+```
+
+**Parameters:**
+- Width: 80vw, Height: 60vh
+- Position: top -20%, centered horizontally
+- Opacity: 0.10-0.20 (barely visible)
+- Color: matches brand accent
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Near-black #0A0A0A |
+| Cards/Panels | Elevated #111 with 1px border (white/6) |
+| Buttons (primary) | Filled accent color, inverse text |
+| Buttons (secondary) | Transparent, 1px border (white/10) |
+| Navigation | Transparent, hover → accent color |
+| Code blocks | Elevated background, mono font, subtle border |
+
+**No grain, no noise, no patterns.** The surface is clean — depth comes from the radial glow and hairline borders.
+
+---
+
+## Hairline Border System
+
+```css
+border: 1px solid rgba(255, 255, 255, 0.06);
+```
+
+Used for:
+- Card separation in bento grids
+- Button borders (secondary)
+- Section dividers
+- Input field borders
+
+**Hover state:**
+```css
+border-color: rgba(255, 255, 255, 0.12);
+```
+
+---
+
+## Texture Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Film grain or noise | Clean surfaces only |
+| Gradient backgrounds | Radial glow behind hero only |
+| Pattern overlays | Solid near-black |
+| Drop shadows | Hairline borders |
+| Glassmorphism | Solid elevated backgrounds |
+| Textured cards | Clean #111 with border |

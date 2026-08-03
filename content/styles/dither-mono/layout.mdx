@@ -1,0 +1,109 @@
+# Layout Grammar
+
+## Grid System
+
+**12-column grid with intentional asymmetry.**
+
+Content lives in columns 1-5 (left) or 8-12 (right). Columns 6-7 are **negative space** — the style breathes here. This asymmetric split is the signature layout move.
+
+```
+[1][2][3][4][5][6][7][8][9][10][11][12]
+ ██████████████          ████████████████
+   Content                  Content
+   (left)                   (right)
+                  ↑
+          Negative space
+          (columns 6-7)
+```
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | Full viewport — `min-h-[100dvh]` (NOT `h-screen`) |
+| Background | Dithered image, full-bleed |
+| Headline position | Left-aligned, vertically centered or bottom-aligned |
+| Headline size | `clamp(3rem, 12vw, 10rem)` — monumental |
+| Supporting text | Right-aligned, bottom-third of viewport |
+| CTA | Below headline, left-aligned |
+| Wordmark | Overlapping bottom edge, 30-50vw, bleeding off |
+
+**Never centered hero.** The asymmetric placement (headline left, supporting content right-low) is the style's structural signature.
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(4rem, 10vh, 8rem);
+--component-gap: clamp(2rem, 4vw, 4rem);
+--content-max-width: min(1200px, calc(100vw - clamp(2rem, 8vw, 6rem)));
+```
+
+**Macro whitespace is not empty — it's structural.** Large gaps between sections create the "monumental space" feeling. Don't compress.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Asymmetric Split
+```
+─────────────────────┬─────────────────┐
+│                     │                 │
+│  MONUMENTAL         │  Small mono     │
+│  HEADLINE           │  label + data   │
+│  (left, large)      │  (right, small) │
+│                     │                 │
+└─────────────────────┴─────────────────┘
+```
+
+### Pattern 2: Full-Bleed Image + Overlay Text
+```
+┌─────────────────────────────────────────┐
+│  [Dithered image, full-bleed]           │
+│                                         │
+│  HEADLINE (bottom-left, large)          │
+│  Subtext (bottom-left, small)           │
+│                              [CTA]      │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 3: Wordmark Bleed
+```
+┌─────────────────────────────────────────┐
+│  Content above...                       │
+│                                         │
+│                                         │
+│                              KESTREL    │
+└─────────────────────────────────────────┘
+                              ↑
+                    Overlaps bottom edge
+                    30-50vw, bleeds off right
+```
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Full asymmetric split, monumental type |
+| **Tablet (768px)** | Stacked vertically, type scales down via clamp |
+| **Mobile (375px)** | Single column, wordmark moves to center, type still large but viewport-relative |
+
+**Fluid typography via `clamp()` is essential.** The monumental scale must work on all viewports without hard breakpoints.
+
+---
+
+## Layout Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Centered hero layout | Asymmetric split — headline left or right |
+| Card-grid feature sections | Full-bleed sections with text overlay |
+| Zigzag image+text alternation | Vary the pattern — don't alternate predictably |
+| Equal 3-column grids | Asymmetric bento or split layouts |
+| Rounded corners on cards | Sharp corners (border-radius: 0-4px max) |
+| Floating badges over hero media | Text directly on dithered background |

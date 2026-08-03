@@ -1,0 +1,68 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Clean grotesk or geometric sans |
+| **Examples** | Space Grotesk (600/700/800), Chakra Petch (500/600/700), Orbitron (600-900), Cabinet Grotesk, Archivo Black |
+| **Weight** | 600-800 (bold, not black — let dither carry visual weight) |
+| **Tracking** | -0.02em to 0 (tight, confident; never loose) |
+| **Size** | Monumental — `clamp(3rem, 12vw, 10rem)` |
+| **Transform** | Uppercase for maximum impact |
+
+**Why these fonts:** Grotesk sans-serifs have a mechanical, industrial quality that complements the dithered imagery. They're clean enough to provide contrast against the textured chaos, but bold enough to hold their own at monumental scale.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Clean humanist sans or neutral grotesk |
+| **Examples** | Plus Jakarta Sans (400-700), Inter (400-500, body only), Satoshi |
+| **Weight** | 400-500 |
+| **Tracking** | 0 to 0.01em (normal to slightly open for readability) |
+| **Size** | Small — `clamp(0.75rem, 1vw, 0.9rem)` |
+| **Line Height** | 1.5-1.6 |
+
+**Why small body text:** The contrast between monumental display and small body creates the "type at extremes" principle. Large body text would compete with the display type and flatten the hierarchy.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Monospace |
+| **Examples** | JetBrains Mono, Space Mono, Fragment Mono |
+| **Weight** | 400-500 |
+| **Tracking** | 0.15em-0.2em (wide, technical) |
+| **Size** | Tiny — 10-11px |
+| **Transform** | UPPERCASE |
+
+**Usage:** Data callouts, coordinates, transaction IDs, timestamps, section numbers, film-strip ticks. These tiny mono labels create the "technical marginalia" that signals precision and craft.
+
+---
+
+## Type Scale
+
+**Ratio:** 1.5x or 1.618x (golden ratio)
+
+```
+Display:    clamp(3rem, 12vw, 10rem)    — 1.5x
+Headline:   clamp(1.5rem, 4vw, 3.5rem)  — 1.5x
+Subhead:    clamp(1rem, 2vw, 1.5rem)    — 1.5x
+Body:       clamp(0.75rem, 1vw, 0.9rem) — baseline
+Micro:      10-11px                      — 0.67x
+```
+
+---
+
+## Font Pairing Logic
+
+**Display + Body:** Grotesk display + humanist body creates tension between mechanical precision and human readability.
+
+**Display + Micro:** Grotesk display + monospace micro creates the "technical authority" pairing — the big type shouts the message, the small mono type provides the data.
+
+**Never mix:** Don't use more than 2 typeface families. Display + body is sufficient. Micro monospace is a system font, not a "third family."

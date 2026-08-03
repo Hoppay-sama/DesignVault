@@ -1,0 +1,28 @@
+# Anti-Slop Checklist
+
+Every Dither Mono page must pass ALL of these checks before shipping:
+
+- [ ] No pure #000000 background (use #0A0A0A to #111111)
+- [ ] No pure #FFFFFF text (use #E8E8E8 to #F5F5F5)
+- [ ] No purple, indigo, or blue accent colors
+- [ ] No centered hero layout (asymmetric only)
+- [ ] No card-grid feature sections (full-bleed or split only)
+- [ ] No gradient buttons or backgrounds
+- [ ] No glossy/glassmorphic surfaces
+- [ ] No raw unprocessed photography (all images must be dithered, halftoned, or grain-crushed)
+- [ ] No Inter as display font (only as body, and only if intentional)
+- [ ] No bounce or spring easing (use `cubic-bezier(0.22, 1, 0.36, 1)` or `ease-out`)
+- [ ] No rounded-everything (border-radius: 0-4px maximum)
+- [ ] No colorful icon grids
+- [ ] No generic 3D illustrations
+- [ ] No "Build the future" headlines
+- [ ] No scattered micro-interactions (motion must be purposeful)
+- [ ] No identical border-radius and padding on every component
+- [ ] No more than ONE accent color on the entire page
+- [ ] Headline is monumental scale (min 3rem, ideally 8vw+)
+- [ ] Body text is small (max 0.9rem)
+- [ ] Micro labels use monospace at 10-11px with wide tracking (0.15em+)
+- [ ] Wordmark or brand name is treated as a monumental element (not a tiny logo)
+- [ ] `prefers-reduced-motion` is honored (all motion collapses to instant)
+- [ ] Hero fits initial viewport (`min-h-[100dvh]`, not `h-screen`)
+- [ ] No more than 4 text elements in the hero stack

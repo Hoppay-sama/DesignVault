@@ -1,0 +1,195 @@
+# Exact Replica Prompt — Dither Mono
+
+> Copy this entire prompt and paste it into your AI coding assistant (Cursor, Claude Code, v0.dev, etc.) to generate a Dither Mono landing page.
+
+---
+
+```
+Build a brutalist-editorial B&W landing page for "KESTREL" — an AI analytics platform for small startups. Stack: React + Vite + TypeScript + Tailwind CSS v4 + lucide-react. Page title: `Kestrel — Intelligence, Uncompromised`.
+
+Vibe: A newspaper printed on obsidian paper. Informational, monumental, slightly dangerous. Everything is processed — nothing raw.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (hard bans)
+
+- NO Inter, Roboto, Arial as display fonts
+- NO purple, blue, or indigo anywhere
+- NO centered hero layout
+- NO rounded corners above 4px
+- NO gradients of any kind
+- NO glassmorphism or backdrop-blur
+- NO raw unprocessed photography
+- NO bounce or spring easing
+- NO generic 3D illustrations
+- NO "Build the future" or vague aspirational headlines
+- NO more than ONE accent color
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap
+```
+
+Usage:
+- **Space Grotesk** (600/700): Logo "KESTREL", main headlines, section titles
+- **Plus Jakarta Sans** (400/500/600): Body UI, nav links, descriptions (default page font)
+- **JetBrains Mono** (400/500): Micro labels, data callouts, coordinates, timestamps
+
+CSS utilities:
+- `.font-display { font-family: 'Space Grotesk', sans-serif; }`
+- `.font-body { font-family: 'Plus Jakarta Sans', sans-serif; }`
+- `.font-mono-label { font-family: 'JetBrains Mono', monospace; }`
+
+---
+
+## FLUID SIZE SYSTEM
+
+```css
+:root {
+  --pad-x: clamp(1.5rem, 5vw, 4rem);
+  --section-gap: clamp(4rem, 10vh, 8rem);
+  --logo: clamp(1.1rem, 1vw, 1.4rem);
+  --nav: clamp(0.6rem, 0.3vw + 0.45rem, 0.75rem);
+  --headline: clamp(3rem, 12vw, 10rem);
+  --subhead: clamp(1.2rem, 3vw, 2.5rem);
+  --body: clamp(0.7rem, 0.4vw + 0.55rem, 0.85rem);
+  --micro: clamp(0.55rem, 0.2vw + 0.45rem, 0.65rem);
+  --btn-px: clamp(1.2rem, 1.5vw, 1.75rem);
+  --btn-py: clamp(0.65rem, 0.8vh, 0.9rem);
+  --wordmark: clamp(4rem, 35vw, 30rem);
+  --border: 1px solid #222;
+}
+```
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --ground: #0A0A0A;
+  --ground-elevated: #111111;
+  --text-primary: #E8E8E8;
+  --text-secondary: #A0A0A0;
+  --text-muted: #666666;
+  --border: #222222;
+  --accent: #D4A574;  /* Warm amber — ONE accent only */
+}
+```
+
+Body: `bg-[#0A0A0A] text-[#E8E8E8] antialiased font-body`.
+Selection: `selection:bg-[#D4A574] selection:text-[#0A0A0A]`.
+
+---
+
+## PAGE STRUCTURE
+
+Root: `min-h-screen bg-[#0A0A0A] text-[#E8E8E8] font-body relative overflow-x-hidden`.
+
+### 1. Header
+Padding: `paddingInline: var(--pad-x)`, `paddingTop: clamp(1.2rem, 2vh, 2rem)`, `paddingBottom: clamp(0.8rem, 1.5vh, 1.5rem)`.
+Flex space-between, items center.
+
+**Logo (left):** Space Grotesk 700, tracking `0.2em`, size `var(--logo)`. Text: `KESTREL`. Uppercase. Color `#E8E8E8`.
+
+**Nav (right):** Plus Jakarta Sans 500, uppercase, tracking `0.18em`, size `var(--nav)`, gap `clamp(1.5rem, 3vw, 3rem)`.
+Links: `PLATFORM` | `INTELLIGENCE` | `PRICING` | `CONTACT`
+Hover: opacity 0.5 (300ms).
+
+### 2. Hero Section
+`min-h-[100dvh]`, flex column, justify-between.
+Padding: `paddingInline: var(--pad-x)`, `paddingBlock: var(--section-gap)`.
+
+**Left block** (vertically centered, max-width 60%):
+1. Micro label — JetBrains Mono 400, uppercase, tracking `0.2em`, size `var(--micro)`, color `#666`:
+   `INTELLIGENCE PLATFORM / v2.4`
+2. Headline — Space Grotesk 700, uppercase, tracking `0.04em`, leading `0.95`, size `var(--headline)`, two lines:
+   - `DATA`
+   - `WITHOUT`
+   - `COMPROMISE`
+3. Subtext — Plus Jakarta Sans 400, size `var(--body)`, color `#A0A0A0`, max-width 480px, line-height 1.6:
+   `Kestrel processes millions of signals into clear, actionable intelligence. No dashboards. No noise. Just the answer.`
+4. CTA button — border `1px solid #D4A574`, transparent bg, rounded-sm (2px), uppercase `REQUEST ACCESS` + lucide `ArrowUpRight` (size 14). Tracking `0.15em`, size `var(--body)`, padding `var(--btn-px)` / `var(--btn-py)`. Color `#D4A574`. Hover: fill `#D4A574`, text `#0A0A0A`. Transition 300ms.
+
+**Right block** (bottom-right, self-end):
+- Wireframe data visualization SVG (simple line chart with grid, stroke 0.5, color `#333`)
+- Micro label below: JetBrains Mono, tracking `0.15em`, size `var(--micro)`, color `#666`:
+  `SIGNAL PROCESSED: 2.4M/DAY`
+  `NOISE REDUCTION: 94.7%`
+
+### 3. Feature Sections (3 sections)
+
+Each section: padding `var(--section-gap)` vertical, `var(--pad-x)` horizontal.
+Layout: asymmetric split — content left (columns 1-5), data/visual right (columns 8-12).
+
+**Section A — Pattern Recognition**
+- Micro label: `01 / CAPABILITY`
+- Headline: Space Grotesk 700, `clamp(1.5rem, 4vw, 3rem)`, uppercase: `PATTERN RECOGNITION`
+- Body: Plus Jakarta Sans 400, `var(--body)`, `#A0A0A0`: `Identify signals buried in noise. Kestrel's neural engine processes unstructured data streams and surfaces what matters.`
+- Right side: Dithered abstract visualization (SVG or processed image), with mono data callout: `ACCURACY: 99.2%`
+
+**Section B — Predictive Modeling**
+- Micro label: `02 / CAPABILITY`
+- Headline: `PREDICTIVE MODELING`
+- Body: `Forecast outcomes with confidence. Our models learn from your data architecture and improve with every query.`
+- Right: Dithered chart/graph visualization, mono callout: `MODELS ACTIVE: 847`
+
+**Section C — Silent Operation**
+- Micro label: `03 / CAPABILITY`
+- Headline: `SILENT OPERATION`
+- Body: `No dashboards. No alerts. No noise. Kestrel works in the background and delivers only when the signal is clear.`
+- Right: Dithered terminal-like display, mono callout: `UPTIME: 99.99%`
+
+### 4. Wordmark Footer
+`paddingBlock: clamp(2rem, 5vh, 4rem)`, `paddingInline: var(--pad-x)`.
+- Giant wordmark: Space Grotesk 700, uppercase, tracking `0.08em`, size `var(--wordmark)`, color `#111` (barely visible against ground), `overflow-hidden`, `whitespace-nowrap`.
+- Text: `KESTREL`
+- Below wordmark, small footer row: flex space-between, JetBrains Mono 400, size `var(--micro)`, color `#444`:
+  - Left: `KESTREL INTELLIGENCE PLATFORM`
+  - Center: `© 2026`
+  - Right: `ALL SIGNALS PROCESSED`
+
+---
+
+## VISUAL RULES
+
+- Near-black ground (#0A0A0A), off-white text (#E8E8E8), gray accents only
+- Accent color (#D4A574) ONLY on CTA button and one data point per section
+- No purple, no cream, no glow, no gradients
+- All imagery must be dithered (Floyd-Steinberg or halftone) — NEVER raw photography
+- Sharp corners only (border-radius: 0-2px max)
+- Typography at extremes: monumental display or tiny mono, little middle
+- Asymmetric layout — never centered
+- Motion: slow orchestrated reveals only, easing `cubic-bezier(0.22, 1, 0.36, 1)`, no bounce
+- Honor `prefers-reduced-motion: reduce`
+
+---
+
+## ANIMATIONS
+
+Use CSS animations with `animation-fill-mode: both`.
+
+| Class | Keyframes | Duration | Easing | Delay |
+|-------|-----------|----------|--------|-------|
+| `anim-fade-in` | opacity 0→1 | 1200ms | `ease-out` | 0ms |
+| `anim-rise` | opacity 0→1, translateY(20px)→0 | 1000ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 200ms |
+| `anim-fade-up` | opacity 0→1, translateY(16px)→0 | 800ms | `ease-out` | 400ms |
+| `anim-wordmark` | scale(0.95)→1, opacity 0→1 | 1400ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 300ms |
+
+`prefers-reduced-motion: reduce` → collapse all to 0.01ms.
+
+---
+
+## ICONS
+
+lucide-react only: `ArrowUpRight`, `ChevronRight`.
+Custom SVGs for: wireframe data viz, L-corner brackets (paths: TL `M0 11.5V0.5H11.5`, TR `M0.5 0.5H11.5V11.5`, BL `M0 0.5V11.5H11.5`, BR `M0.5 11.5H11.5V0.5`, viewBox `0 0 12 12`).
+
+---
+
+Recreate this page faithfully with the exact colors, fonts, fluid clamps, copy, layout structure, and animation timings above.
+```

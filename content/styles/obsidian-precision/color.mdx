@@ -1,0 +1,82 @@
+# Color Architecture
+
+## Ground
+
+```css
+--color-ground: #0A0A0A;    /* Primary background */
+--color-ground-elevated: #111111; /* Cards, panels */
+--color-ground-overlay: #161616;  /* Hover states */
+```
+
+**Never pure #000.** The near-black creates depth for radial glows and hairline borders.
+
+---
+
+## Text
+
+```css
+--color-text-primary: #EDEDED;   /* Primary text */
+--color-text-secondary: #A0A0A0; /* Secondary, descriptions */
+--color-text-muted: #666666;     /* Labels, metadata */
+--color-text-inverse: #0A0A0A;   /* Text on accent buttons */
+```
+
+---
+
+## Accent
+
+```css
+--color-accent: #5E6AD2;  /* Linear violet — the signature */
+/* Alternatives: */
+--color-accent-amber: #F5A623;  /* Vercel/Raycast amber */
+--color-accent-white: #FFFFFF;  /* Pure white accent on dark */
+--color-accent-blue: #3B82F6;   /* Standard blue */
+```
+
+**Rule:** ONE accent. Used on:
+- Primary CTA buttons (filled)
+- Active navigation state
+- Status indicators (online, new, beta)
+- Links in body text
+- Icon accents
+
+---
+
+## Borders
+
+```css
+--color-border: rgba(255, 255, 255, 0.06);  /* Default hairline */
+--color-border-hover: rgba(255, 255, 255, 0.12); /* Hover state */
+--color-border-accent: rgba(94, 106, 210, 0.3);  /* Accent border */
+```
+
+**Hairline borders are structural.** They separate cards, define grid cells, and create visual hierarchy without adding weight.
+
+---
+
+## Radial Glow
+
+```css
+--color-glow: rgba(94, 106, 210, 0.15); /* Accent-colored radial glow */
+```
+
+Applied behind the hero as a large radial gradient. Creates atmospheric depth.
+
+---
+
+## The Color Rule
+
+> **Near-black ground, one accent color used surgically, hairline borders for structure, radial glow for depth. No gradients, no multiple accents, no pure black.**
+
+---
+
+## Color Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Pure #000000 background | #0A0A0A to #111111 |
+| Multiple accent colors | ONE accent, locked page-wide |
+| Gradient backgrounds | Radial glow only (behind hero) |
+| Purple-to-blue gradients | Solid accent color |
+| Bright neon accents | Desaturated, sophisticated tones |
+| White text on white accent | Use --text-inverse (#0A0A0A) |

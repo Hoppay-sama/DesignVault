@@ -1,0 +1,94 @@
+# Texture & Surface
+
+## Primary Texture: Photographic
+
+The texture IS the photography. Every image must be processed to feel cinematic:
+
+| Processing | Effect | Parameters |
+|-----------|--------|-----------|
+| **Desaturation** | Reduce color intensity | 60-80% saturation (not full B&W) |
+| **Contrast reduction** | Crush blacks, lift highlights | Shadows +10, Highlights -15 |
+| **Warm grade** | Shift shadows warm, highlights cool | Shadow tint: +5 orange, Highlight tint: +3 blue |
+| **Film grain** | Analog noise overlay | Opacity 0.03-0.05, overlay blend mode |
+| **Vignette** | Darken edges, draw focus | Radial gradient, 40% transparent center |
+
+---
+
+## Film Grain Overlay
+
+```css
+.film-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,..."); /* feTurbulence */
+  mix-blend-mode: overlay;
+}
+```
+
+**Parameters:**
+- Opacity: 0.03-0.05 (barely visible)
+- Position: fixed (covers viewport, doesn't scroll)
+- Blend mode: overlay or soft-light
+
+---
+
+## Vignette
+
+```css
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 50%,
+    rgba(0, 0, 0, 0.3) 100%
+  );
+}
+```
+
+**Purpose:** Darkens edges to draw the eye to the center of the photograph. Creates a "looking through a lens" feeling.
+
+---
+
+## Image Processing Rules
+
+**NEVER use raw, unprocessed photography.** Every image must pass through:
+
+1. Desaturate to 60-80%
+2. Reduce contrast (crush blacks, lift highlights)
+3. Add subtle warm grade
+4. Apply film grain
+5. Add vignette
+
+**The goal:** Every photo should look like a still from an art-house film, not a stock photo or Instagram post.
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | The photograph itself, or fog-white #F5F3F0 |
+| Text areas | Transparent over photo, or fog-white solid |
+| Buttons | Thin border (1px, 30% opacity), transparent bg |
+| Navigation | Transparent, thin text, opacity hover |
+| Dividers | None — whitespace separates sections |
+
+**No cards, no panels, no shadows, no borders (except CTA).** The style is defined by what's NOT there.
+
+---
+
+## Texture Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Raw, saturated photography | Desaturated, graded, film-like |
+| Heavy grain or noise | Subtle grain at 0.03-0.05 opacity |
+| Gradient overlays on photos | Vignette only (radial, subtle) |
+| Glassmorphic cards | Transparent or solid fog-white |
+| Drop shadows | No shadows — depth comes from the photo |
+| Patterned backgrounds | Solid fog-white or the photograph |

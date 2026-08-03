@@ -1,0 +1,39 @@
+# Design Principles
+
+## 1. DEPTH THROUGH LAYERING
+
+Not shadow, not color — Z-axis stacking of translucent surfaces creates depth. Each glass panel sits at a different Z-level, with backdrop-blur creating the sense of looking through frosted glass to the layer below.
+
+**What it prevents:** Using drop shadows or colored backgrounds for separation.
+
+---
+
+## 2. REFRACTION AT EDGES
+
+The 1px inner border gradient creates the illusion of light bending through glass. The gradient goes: white/30 at top → transparent in middle → white/30 at bottom. This is the "liquid-glass" effect — it makes flat surfaces feel like physical glass panes.
+
+**What it prevents:** Plain borders that look like UI chrome instead of glass.
+
+---
+
+## 3. VIDEO AS ATMOSPHERE
+
+Background video provides ambient motion. It's not content — it's atmosphere. The video should be slow, abstract, and dark. Glass surfaces float above it. The video is always playing, always moving, never demanding attention.
+
+**What it prevents:** Static dark backgrounds that feel flat and lifeless.
+
+---
+
+## 4. SPRING PHYSICS FOR FLOATING
+
+Glass panels respond to hover with spring-physics movement — gentle lift, subtle scale. The motion feels physical, like pushing a glass pane slightly. Not linear, not bouncy — spring with damping.
+
+**What it prevents:** Static cards that don't respond to interaction.
+
+---
+
+## 5. RESTRAINT IN GLASS
+
+Not every surface needs to be glass. Use glass for: navigation, feature cards, CTA panels, floating elements. Use solid near-black for: background, text areas, code blocks. The contrast between glass and solid creates hierarchy.
+
+**What it prevents:** Backdrop-blur on everything, which creates a washed-out, unfocused page.

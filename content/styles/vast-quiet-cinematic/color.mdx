@@ -1,0 +1,73 @@
+# Color Architecture
+
+## Ground
+
+The "ground" is the photograph itself. There is no solid background color — the image IS the background. However, for text areas and transitions:
+
+```css
+--color-ground: #F5F3F0; /* Fog-white — the color of mist and overcast sky */
+--color-ground-dark: #1A1A1A; /* For dark photo sections */
+```
+
+**Why fog-white:** Not pure white (#FFFFFF) — that's too harsh. Fog-white (#F5F3F0) has a slight warm gray undertone that feels like overcast sky or morning mist.
+
+---
+
+## Text
+
+```css
+--color-text-on-light: #1A1A1A; /* Near-black on fog-white */
+--color-text-on-dark: #E8E6E3;  /* Off-white on dark photos */
+--color-text-muted: #888888;     /* For micro labels and credits */
+```
+
+**On dark photography:** Text must be off-white (#E8E6E3), never pure white. Pure white on dark photography creates halation and feels digital.
+
+---
+
+## Accent
+
+```css
+--color-accent: #C4956A; /* Dusty amber — like light through fog */
+/* Alternatives: */
+--color-accent-rose: #C4956A; /* Dusty rose */
+--color-accent-sage: #8B9D83; /* Muted sage */
+```
+
+**Rule:** The accent appears on:
+- The quiet CTA border and text
+- One data point or label per section (e.g., a year, a location)
+- Active navigation state
+
+**Why dusty amber:** It's the color of golden hour light breaking through fog. It's warm but desaturated — it belongs in this world.
+
+---
+
+## The Color Rule
+
+> **Desaturate everything. The photograph provides all visual richness. Text is near-black or off-white. ONE warm accent, used like a single note in a quiet room.**
+
+---
+
+## Photography Color Treatment
+
+All photography must be processed:
+- **Desaturate** to 60-80% (not full B&W — keep a hint of color)
+- **Reduce contrast** slightly — crush the blacks, lift the highlights
+- **Add subtle warm grade** — shift shadows slightly warm, highlights slightly cool
+- **Film grain** at opacity 0.03-0.05
+
+**Never:** Fully saturated, high-contrast, HDR-processed, or neon-tinted photography.
+
+---
+
+## Color Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Pure #FFFFFF background | Fog-white #F5F3F0 or the photograph itself |
+| Pure #000000 text on dark photos | Off-white #E8E6E3 |
+| Bright, saturated accent colors | Dusty, desaturated warm tones |
+| Multiple accent colors | ONE accent, used sparingly |
+| Colorful photography | Desaturated, graded, film-like |
+| High-contrast imagery | Crushed blacks, lifted highlights |

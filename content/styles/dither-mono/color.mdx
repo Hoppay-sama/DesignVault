@@ -1,0 +1,81 @@
+# Color Architecture
+
+## Ground
+
+```css
+--color-ground: #0A0A0A; /* Near-black, never pure #000 */
+--color-ground-elevated: #111111; /* Slightly lighter for cards/panels */
+```
+
+**Why near-black:** Pure #000000 kills depth. The near-black (#0A0A0A to #111111) gives dithered textures somewhere to bleed into and creates subtle depth between layers.
+
+---
+
+## Text
+
+```css
+--color-text-primary: #E8E8E8; /* Off-white, never pure #FFF */
+--color-text-secondary: #A0A0A0; /* Muted gray for secondary content */
+--color-text-muted: #666666; /* For micro labels and metadata */
+```
+
+**Why off-white:** Pure #FFFFFF text on near-black is exhausting to read. #E8E8E8 maintains high contrast while reducing eye strain. The slight warmth of off-white also prevents the clinical feeling of pure white.
+
+---
+
+## Accent
+
+```css
+--color-accent: #D4A574; /* Warm amber — the signature Dither Mono accent */
+/* Alternatives: */
+--color-accent-rust: #B85C38;
+--color-accent-blood: #8B0000;
+```
+
+**Rule:** ONE accent maximum. The accent appears ONLY on:
+- Primary CTA buttons
+- Active navigation state
+- One key data point per section
+- Hover state on interactive elements
+
+**Why warm:** The warm accent against the cold B&W ground creates maximum chromatic contrast with minimum color. It draws the eye like a signal flare.
+
+---
+
+## Semantic Colors
+
+```css
+--color-success: #4A6741; /* Muted, desaturated green */
+--color-error: #8B3A3A;   /* Muted, desaturated red */
+--color-warning: #8B7340; /* Muted, desaturated amber */
+```
+
+**All semantic colors are desaturated** to maintain the monochrome feel. They communicate meaning through position and context, not saturation.
+
+---
+
+## The Color Rule
+
+> **If color appears, it must EARN its place.** One accent maximum. Accent appears ONLY on CTA, active state, or one data point. Everything else is tonal black-to-white.
+
+---
+
+## Gradient Policy
+
+**No gradients.** The style is built on tonal contrast, not color transitions. If depth is needed, it comes from:
+- Dither patterns (not gradients)
+- Layered transparency (opacity stacking)
+- Vignette effects (radial darkening)
+
+---
+
+## Color Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Pure #000000 background | #0A0A0A to #111111 |
+| Pure #FFFFFF text | #E8E8E8 to #F5F5F5 |
+| Purple, indigo, blue accents | Warm amber or rust |
+| Multiple accent colors | ONE accent, used surgically |
+| Gradient backgrounds | Dither or solid near-black |
+| Neon or saturated accents | Desaturated, warm tones |

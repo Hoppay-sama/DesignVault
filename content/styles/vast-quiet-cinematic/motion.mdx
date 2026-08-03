@@ -1,0 +1,77 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Vast Quiet Cinematic is **breathing, not performing**. Everything moves slowly, like clouds drifting or fog rolling. No snap, no bounce, no spring. The motion should feel inevitable — like the image was always going to reveal itself this way.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Hero photograph | Opacity 0→1 + subtle scale(1.02)→1 | 2000ms | `ease-out` | 0ms |
+| Display text | Opacity 0→1 + translateY(12px)→0 | 1400ms | `cubic-bezier(0.25, 0.46, 0.45, 0.94)` | 600ms |
+| Body text | Opacity 0→1 | 1000ms | `ease-out` | 1000ms |
+| CTA | Border draw-in (SVG stroke) | 1200ms | `ease-in-out` | 1400ms |
+| Section images | Opacity 0→1 + translateY(20px)→0 | 1600ms | `ease-out` | on scroll |
+
+**Key:** All durations are SLOW (1000ms+). This is the opposite of snappy UI motion.
+
+---
+
+## Scroll Behavior
+
+| Effect | Specification |
+|--------|--------------|
+| Parallax on hero image | Very subtle — 5-10% of scroll distance |
+| Section transitions | Crossfade with 400ms overlap |
+| Text reveals on scroll | Fade-in when entering viewport (IntersectionObserver) |
+| Image scale on scroll | Subtle scale(1.0)→scale(1.05) over section height |
+
+**The parallax should be barely perceptible.** If users notice the parallax, it's too much. It should feel like the image is just... there, slightly shifting.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Navigation links | Opacity 1.0 → 0.5 (500ms) | — |
+| CTA button | Border opacity 0.6 → 1.0, text opacity 0.7 → 1.0 | — |
+| Image links | Subtle brightness 1.0 → 1.03 (800ms) | — |
+
+**All hover transitions are slow (500ms+).** Quick hover states feel jarring in this atmospheric context.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- All entrance animations collapse to instant opacity
+- No parallax
+- No scroll-linked scale
+- Images render at full opacity immediately
+- Hover states use instant opacity change
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| ❌ Never animate | Why |
+|-----------------|-----|
+| Fast, snappy transitions | Breaks the cinematic atmosphere |
+| Bounce or spring | Feels playful, not contemplative |
+| Rotation or skew | Too dynamic for this style |
+| Every element staggering | Motion should be sparse, not choreographed |
+| Marquee text or auto-scrolling | The user controls the pace |
+| Particle effects or confetti | Completely wrong register |

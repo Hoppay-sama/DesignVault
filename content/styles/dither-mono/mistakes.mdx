@@ -1,0 +1,69 @@
+# Common Mistakes
+
+## Mistake 1: Using Pure Black and Pure White
+
+**What people do:** Set background to `#000000` and text to `#FFFFFF`.
+
+**Why it fails:** Maximum contrast is visually exhausting. Pure black kills all sense of depth — there's nowhere for shadows, grain, or dither patterns to exist. Pure white text on pure black causes halation (glowing edges) that makes text harder to read at scale.
+
+**Fix:** Use `#0A0A0A` to `#111111` for background. Use `#E8E8E8` to `#F5F5F5` for text. The slight reduction in contrast creates visual breathing room while maintaining the dramatic B&W feel.
+
+---
+
+## Mistake 2: Heavy Dither on Everything Including Text
+
+**What people do:** Apply dither filter to the entire page, including typography and UI elements.
+
+**Why it fails:** Dither is for imagery and surfaces. Text must stay clean for readability. The contrast between clean type and textured images IS the style — it's the "typographic extremes" principle in action. Dithered text is unreadable at any size.
+
+**Fix:** Apply dither ONLY to images and background surfaces. Keep typography clean. The visual tension between clean grotesk display type and dithered imagery is what makes this style work.
+
+---
+
+## Mistake 3: Adding a Second Accent Color
+
+**What people do:** Add a blue CTA and an orange data highlight, or use the warm accent everywhere.
+
+**Why it fails:** The power of monochrome is restraint. One accent (or zero) is the rule. Two accents breaks the tension and turns the page into a generic dark-mode site with color splashes.
+
+**Fix:** Pick ONE warm tone (amber `#D4A574`, rust `#B85C38`, or blood `#8B0000`). Use it on CTA only. If you need a second "color," use a different tonal value of the same hue (lighter amber, darker amber).
+
+---
+
+## Mistake 4: Using Rounded Cards and Friendly UI Patterns
+
+**What people do:** Add `border-radius: 12px` or `16px` to cards, buttons, and containers. Use soft shadows.
+
+**Why it fails:** Rounds = friendly. This style is authoritative. `border-radius: 12px` on a card makes it feel like a SaaS dashboard, not a brutalist editorial page. Soft shadows add depth that the near-black ground should provide through tonal contrast.
+
+**Fix:** `border-radius: 0` for cards and panels. `border-radius: 4px` maximum for buttons. No drop shadows — use hairline borders (`1px solid #222`) for separation instead.
+
+---
+
+## Mistake 5: Small, Centered Headlines
+
+**What people do:** Use a 48px centered headline that looks like a blog post title.
+
+**Why it fails:** This style demands monumental type. A 48px centered headline has no presence — it floats in the dark void without anchoring the composition. The "type at extremes" principle requires display type that dominates the viewport.
+
+**Fix:** `clamp(3rem, 12vw, 10rem)` for display headlines. Left-aligned or asymmetrically placed. The headline should feel like it was stamped onto the page, not typed into a text box.
+
+---
+
+## Mistake 6: Over-Animating
+
+**What people do:** Add bounce easing to buttons, spring physics to cards, and stagger every element with different timings.
+
+**Why it fails:** Motion in Dither Mono is gravity, not elasticity. Bounce and spring feel playful and cheap — the opposite of authoritative. Over-animation distracts from the dithered imagery which should be the visual focus.
+
+**Fix:** Use `cubic-bezier(0.22, 1, 0.36, 1)` (smooth deceleration) for all transitions. Keep animation minimal — opacity fades and subtle translateY. No bounce, no spring, no rotation.
+
+---
+
+## Mistake 7: Using Dither as a gimmick on one element
+
+**What people do:** Dither one hero image but leave everything else clean, treating dither as a decorative effect.
+
+**Why it fails:** Dither is the style's visual language, not a one-off effect. If only one image is dithered, it looks like a mistake or an unfinished filter. The style requires consistent texture treatment across all imagery.
+
+**Fix:** ALL photographs and imagery must be processed — dithered, halftoned, or grain-crushed. Consistency is what makes it a style rather than an effect.

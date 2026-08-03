@@ -1,0 +1,118 @@
+---
+slug: cinematic-scroll-story
+title: Cinematic Scroll Story
+oneLineEssence: "Multi-layer parallax, scroll-choreographed narrative, rich photography, transparent-edge PNG layers like theater flats."
+axis: { color: 3, typography: 5, motion: 6, density: 2, texture: 5, layout: 5 }
+moodKeywords: [Narrative, Immersive, Multi-Layer, Scroll-Driven, Epic]
+difficulty: 5
+tags: [cinematic, scroll, parallax, narrative, multi-layer, storytelling]
+status: draft
+---
+
+# Cinematic Scroll Story
+
+**Multi-layer parallax, scroll-choreographed narrative, rich photography, transparent-edge PNG layers like theater flats.**
+
+## Visual DNA
+A sticky viewport containing 7+ parallax layers that shift, scale, blur, and reveal as you scroll 3700px. Scene photographs with transparent edges stack like theater flats. A sight card slider flies in from 420vw on X. Story panels fade in at precise scroll positions. The page is a film you control with your scroll wheel.
+
+## Design Principles
+1. **SCROLL IS THE DIRECTOR** — Every pixel of scroll progress triggers precise layer transforms
+2. **LAYERS AS THEATER FLATS** — Transparent-edge PNGs stack at different Z-depths with independent parallax
+3. **SEGMENT-BASED CHOREOGRAPHY** — Each scroll range is a separate "scene" with its own animation logic
+
+## Typography
+- Display: Ogg Medium or editorial serif, clamp(4rem, 14vw, 14rem) for monumental titles
+- Body: Inter or clean sans, 16-18px, 1.5 line-height
+
+## Color
+- Varies by scene — sky blues, warm creams, deep teals
+- Shade gradients for transitions between scenes
+- Cream (#fdf1e1) text on dark, ink (#111411) on light
+
+## Motion
+- Scroll-driven parallax (lerp smoothing at 0.14)
+- segmentInOut transitions per scroll range
+- Blur/brightness/saturation shifts between scenes
+- Sight card slider fly-in from 420vw with power(1.55) easing
+- Infinite slider with 3-set clone + instant-jump normalization
+
+## Layout
+- Sticky stage: 100vh, overflow-hidden
+- Scroll container: 100vh + 3700px
+- 7+ absolute-positioned layers with independent transforms
+- Story panels at 45% vertical, centered
+
+## Texture
+- Transparent-edge PNG layers (sky, bridge, bazaar, splitframes)
+- Shade gradients for scene transitions
+- Blur transitions between scenes (14px max)
+- Film grain on photographic layers
+
+## Vocabulary
+**Primary:** `sticky viewport`, `parallax layers`, `transparent-edge PNG`, `scroll-driven choreography`, `segmentInOut`, `lerp smoothing`
+**Banned:** `static sections`, `simple fade transitions`, `single-layer photography`, `card-based layout`
+
+## Anti-Slop
+- [ ] Sticky viewport with scroll container
+- [ ] 7+ parallax layers with independent transforms
+- [ ] Segment-based scroll choreography
+- [ ] Transparent-edge PNG layering
+- [ ] Lerp smoothing (not raw scroll)
+- [ ] Infinite slider with clone+normalize
+- [ ] Reduced motion fallback
+- [ ] Precise easing (cubic-bezier(0.22, 1, 0.36, 1))
+
+## When to Use
+Travel/tourism, brand storytelling, documentary sites, cultural institutions, long-form narratives
+
+## Dual Prompts
+
+### Exact Replica
+```
+Build a cinematic scroll story for "Mostar city". Stack: vanilla HTML/CSS/JS (no frameworks).
+
+## STRUCTURE
+- cinema-scroll: height calc(100vh + 3700px)
+- stage: sticky, 100vh, overflow-hidden
+- 7+ layers: sky, back-four, bazaar, splitframe-L/R, bridge, frame-two — all absolute with CSS variable transforms
+- JS: lerp smoothing (0.14), segmentInOut for each scene, mouse parallax (0.12)
+
+## SCENES (scroll ranges)
+- 0-650px: Title rises -210px, fades out
+- 560-1620px: Bridge widens, splits, launches up. Blur ramps to 14px
+- 1760-2700px: Bazaar gains saturation, story panel fades in
+- 2760-3560px: Sights slider flies in from 420vw (power 1.55)
+- 3360-3660px: Nav buttons fade in, become clickable
+
+## ANTI-SLOP
+- All images from remote URLs (transparent-edge PNGs)
+- Lerp smoothing, not raw scroll
+- segmentInOut per scene
+- Infinite slider with 3-set clone
+- Reduced motion: snap values, disable transitions
+```
+
+### Parameterized Template
+```
+Build a cinematic scroll story for "[LOCATION/TOPIC]". Stack: vanilla HTML/CSS/JS or React + GSAP.
+
+## STRUCTURE
+- Sticky viewport + scroll container (100vh + [SCROLL_DEPTH]px)
+- 5-7 transparent-edge image layers at different Z-depths
+- Scroll-driven transforms with lerp smoothing (0.10-0.15)
+- Scene-based choreography (define scroll ranges)
+
+## TECHNIQUES
+- segmentInOut helper for enter/exit per scene
+- Mouse parallax (optional, 0.10-0.15 lerp)
+- Infinite slider with clone+normalize (if cards)
+- Blur/brightness transitions between scenes
+
+## ANTI-SLOP (LOCKED)
+- Lerp smoothing required
+- Segment-based choreography
+- Transparent-edge PNG layers
+- Reduced motion fallback
+- No simple fade-only transitions
+```

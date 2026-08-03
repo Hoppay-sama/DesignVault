@@ -1,0 +1,173 @@
+# Parameterized Template — Dither Mono
+
+> Use this template to generate a Dither Mono landing page for YOUR brand. Replace the bracketed placeholders with your details. The anti-slop constraints and style rules are locked — don't change them.
+
+---
+
+```
+Build a brutalist-editorial B&W landing page for "[BRAND_NAME]" — [ONE-LINE PRODUCT DESCRIPTION, e.g., "a developer tool for infrastructure teams"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + lucide-react. Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: A newspaper printed on obsidian paper. Informational, monumental, slightly dangerous. Everything is processed — nothing raw.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY — these ARE the style)
+
+- NO Inter, Roboto, Arial as display fonts
+- NO purple, blue, or indigo anywhere
+- NO centered hero layout
+- NO rounded corners above 4px
+- NO gradients of any kind
+- NO glassmorphism or backdrop-blur
+- NO raw unprocessed photography
+- NO bounce or spring easing
+- NO generic 3D illustrations
+- NO vague aspirational headlines ("Build the future", "Scale without limits")
+- NO more than ONE accent color
+
+---
+
+## FONTS
+
+Replace [DISPLAY_FONT] with a clean grotesk or geometric sans-serif. Good choices:
+- Space Grotesk (600/700) — mechanical, industrial
+- Chakra Petch (500/600/700) — angular, technical
+- Cabinet Grotesk — bold, authoritative
+- Archivo Black — maximum weight
+
+Replace [BODY_FONT] with a clean humanist or neutral sans-serif. Good choices:
+- Plus Jakarta Sans (400-700) — warm, readable
+- Satoshi — modern, clean
+- Inter (body ONLY, never display) — neutral
+
+Replace [MONO_FONT] with a monospace for data labels. Good choices:
+- JetBrains Mono — clean, technical
+- Space Mono — geometric, matches Space Grotesk
+- Fragment Mono — narrow, data-friendly
+
+Load via Google Fonts. Set CSS utilities:
+- `.font-display` → [DISPLAY_FONT]
+- `.font-body` → [BODY_FONT]
+- `.font-mono-label` → [MONO_FONT]
+
+---
+
+## FLUID SIZE SYSTEM
+
+Use `clamp()` for all sizes — no hard px breakpoints for type/spacing:
+
+```css
+:root {
+  --pad-x: clamp(1.5rem, 5vw, 4rem);
+  --section-gap: clamp(4rem, 10vh, 8rem);
+  --logo: clamp(1.1rem, 1vw, 1.4rem);
+  --nav: clamp(0.6rem, 0.3vw + 0.45rem, 0.75rem);
+  --headline: clamp(3rem, 12vw, 10rem);   /* MONUMENTAL — do not reduce */
+  --subhead: clamp(1.2rem, 3vw, 2.5rem);
+  --body: clamp(0.7rem, 0.4vw + 0.55rem, 0.85rem);  /* SMALL — do not enlarge */
+  --micro: clamp(0.55rem, 0.2vw + 0.45rem, 0.65rem); /* TINY mono labels */
+  --btn-px: clamp(1.2rem, 1.5vw, 1.75rem);
+  --btn-py: clamp(0.65rem, 0.8vh, 0.9rem);
+  --wordmark: clamp(4rem, 35vw, 30rem);  /* GIANT footer brand */
+  --border: 1px solid #222;
+}
+```
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --ground: #0A0A0A;           /* Near-black — NEVER pure #000 */
+  --ground-elevated: #111111;  /* Slightly lighter for cards */
+  --text-primary: #E8E8E8;     /* Off-white — NEVER pure #FFF */
+  --text-secondary: #A0A0A0;
+  --text-muted: #666666;
+  --border: #222222;
+  --accent: [ACCENT_COLOR];    /* ONE warm accent — see guidance below */
+}
+```
+
+**Accent color guidance:** Choose ONE warm tone. Good options:
+- `#D4A574` (warm amber) — safest, most versatile
+- `#B85C38` (rust) — more aggressive
+- `#8B0000` (blood red) — most dramatic
+- `#C4A265` (antique gold) — luxury feel
+
+The accent appears ONLY on: primary CTA button, one data point per section, active nav state. Nowhere else.
+
+---
+
+## PAGE STRUCTURE
+
+### Hero
+- `min-h-[100dvh]` (NOT `h-screen` — iOS Safari bug)
+- Asymmetric layout: headline LEFT, supporting content RIGHT-LOW
+- NEVER centered
+- Headline: [DISPLAY_FONT] 700, uppercase, tracking 0.04em, leading 0.95, size `var(--headline)`
+- Headline text: [2-3 WORD HEADLINE, e.g., "DATA WITHOUT COMPROMISE"] — max 3 lines
+- Subtext: [BODY_FONT] 400, size `var(--body)`, color `--text-secondary`, max-width 480px
+- Subtext: [1-2 SENTENCE VALUE PROP — specific, not aspirational]
+- CTA: border `1px solid var(--accent)`, transparent bg, uppercase [CTA TEXT, e.g., "REQUEST ACCESS"], tracking 0.15em
+- CTA hover: fill accent color, text becomes --ground
+
+### Feature Sections (2-4 sections)
+- Asymmetric split: text left (50-60%), visual/data right (40-50%)
+- Each section has: micro label (`[NUMBER] / [CATEGORY]` in mono), headline ([DISPLAY_FONT] 700, uppercase), body text, and a dithered/processed visual with mono data callout
+- Section padding: `var(--section-gap)` vertical
+
+### Wordmark Footer
+- Giant brand name at `var(--wordmark)` size, color `#111` (barely visible), bleeding off bottom or right edge
+- Small mono footer row below: brand name, year, tagline
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- Near-black ground (#0A0A0A), off-white text (#E8E8E8)
+- ONE accent color, used surgically
+- All imagery MUST be processed (dithered with Floyd-Steinberg, halftoned, or grain-crushed) — never raw photography
+- Sharp corners only (border-radius: 0-4px max)
+- Typography at extremes: monumental display or tiny mono, little middle
+- Asymmetric layout — never centered
+- Motion: slow orchestrated reveals, easing `cubic-bezier(0.22, 1, 0.36, 1)`, no bounce
+- Honor `prefers-reduced-motion: reduce`
+
+---
+
+## ANIMATIONS
+
+Use CSS animations with `animation-fill-mode: both`.
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Background | Opacity fade-in | 1200ms | `ease-out` | 0ms |
+| Headline | Opacity + translateY(20px)→0 | 1000ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 200ms |
+| Body text | Opacity fade-in | 800ms | `ease-out` | 400ms |
+| Wordmark | Scale(0.95)→1 + opacity | 1400ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 300ms |
+| CTA | Border draw-in | 800ms | `ease-in-out` | 800ms |
+
+`prefers-reduced-motion: reduce` → collapse all to 0.01ms.
+
+---
+
+## ICONS
+
+lucide-react: `ArrowUpRight` (CTA), `ChevronRight` (links).
+Custom SVGs: L-corner brackets for framing (viewBox `0 0 12 12`), wireframe data visualizations (simple line charts, grids).
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines:** Be specific and concrete. NOT "Build the future of analytics." INSTEAD: "Data Without Compromise" or "Signals, Not Noise."
+
+**Body copy:** Short (max 40 words per block). Specific. No filler words ("seamlessly", "leverage", "empower"). Write like a technical document, not a marketing brochure.
+
+**Data callouts:** Use real or plausible numbers. `ACCURACY: 99.2%`, `SIGNALS: 2.4M/DAY`. Monospace font. These are the "technical marginalia" that signal precision.
+
+---
+
+Replace all [BRACKETED] placeholders with your brand details, then paste the full prompt into your AI coding assistant.
+```

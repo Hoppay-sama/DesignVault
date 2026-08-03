@@ -1,0 +1,92 @@
+# Color Architecture
+
+## Ground
+
+```css
+--color-ground: #0A0A0A;  /* Behind the video */
+```
+
+The video provides the visual ground. The near-black is only visible at video edges or during loading.
+
+---
+
+## Glass Surfaces
+
+```css
+--glass-bg: rgba(255, 255, 255, 0.05);     /* Primary glass */
+--glass-bg-hover: rgba(255, 255, 255, 0.08); /* Hover state */
+--glass-border: rgba(255, 255, 255, 0.1);    /* Outer border */
+```
+
+**Key:** The glass background is nearly transparent (5% white). The blur does the visual work, not the background color.
+
+---
+
+## Text on Glass
+
+```css
+--glass-text: #FFFFFF;           /* Primary text on glass */
+--glass-text-secondary: rgba(255,255,255,0.7); /* Secondary */
+--glass-text-muted: rgba(255,255,255,0.5);     /* Labels */
+```
+
+---
+
+## Accent
+
+```css
+--color-accent: #FFFFFF;  /* White accent — the glass itself IS the accent */
+/* Or one subtle color: */
+--color-accent-blue: rgba(100, 180, 255, 0.8);
+```
+
+**Rule:** In Liquid Glass Noir, the glass IS the visual interest. Additional accent colors should be minimal — white or a subtle blue work best.
+
+---
+
+## The Liquid-Glass Border
+
+```css
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.3) 0%,
+    rgba(255,255,255,0.05) 30%,
+    rgba(255,255,255,0) 50%,
+    rgba(255,255,255,0) 70%,
+    rgba(255,255,255,0.05) 90%,
+    rgba(255,255,255,0.3) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+```
+
+**This is the signature effect.** The gradient border creates the illusion of light refracting through the edge of a glass pane.
+
+---
+
+## Color Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Pure black glass backgrounds | rgba(255,255,255,0.05) with blur |
+| Heavy backdrop-blur (>40px) | 12-24px blur for readability |
+| Multiple glass layers with same blur | Vary blur per Z-depth |
+| Colored glass tinting | Keep glass neutral/clear |
+| Opaque panels | Always translucent |

@@ -1,0 +1,68 @@
+# Motion, Layout, Texture, Vocabulary, Anti-Slop, When-to-Use, Mistakes & References
+
+> **Note:** This style's motion, layout, and texture sections are tightly coupled with the glass effect. Key specs below.
+
+## Motion
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Glass panels entrance | Opacity + translateY(16px)→0 + scale(0.98)→1 | 800ms | `cubic-bezier(0.22, 1, 0.36, 1)` |
+| Hover lift | translateY(-4px) + subtle scale(1.01) | 300ms | Spring (stiffness: 300, damping: 25) |
+| Video fade-in | Opacity 0→1 | 1500ms | `ease-out` |
+| Stagger between panels | — | — | 0.08s delay |
+
+**Spring physics for hover is essential.** Linear hover feels cheap on glass.
+
+## Layout
+
+- **Z-depth stacking:** Glass panels at different Z-levels create depth
+- **Floating navigation:** Nav bar floats with glass treatment, detached from top edge
+- **Card grid:** Bento-style with glass cells, 1px gap
+- **Hero:** Video full-bleed behind, glass panels floating above
+
+## Texture
+
+- **Backdrop-filter blur:** 12-24px on glass surfaces
+- **Edge refraction:** Liquid-glass border gradient (see Color section)
+- **Saturation boost:** `saturate(1.2)` in backdrop-filter for vibrancy through glass
+- **Video:** Slow, abstract, dark ambient footage
+
+## Vocabulary
+
+**Primary:** `backdrop-filter blur`, `frosted surface`, `edge refraction`, `liquid-glass border`, `Z-depth stacking`, `floating glass`
+**Secondary:** `glass pane layering`, `inner border highlight`, `spring physics hover`, `translucent panel`, `video atmosphere`, `saturation boost`
+**Banned:** `opaque panels`, `heavy shadows`, `solid backgrounds`, `multiple glass tints`, `pure black glass`
+
+## Anti-Slop
+
+- [ ] No opaque glass backgrounds (must be translucent)
+- [ ] No backdrop-blur > 40px (washes out content)
+- [ ] No drop shadows on glass (border does the work)
+- [ ] No more than 3 glass layers at same blur level
+- [ ] No colored glass tinting (keep neutral)
+- [ ] Video must be slow/abstract (not distracting)
+- [ ] Text on glass must pass WCAG contrast
+- [ ] Spring physics on hover (not linear)
+- [ ] Liquid-glass border gradient present
+- [ ] `prefers-reduced-motion` honored
+
+## When to Use
+
+**Perfect for:** Premium SaaS, AI/ML products, Apple-adjacent brands, luxury tech, fintech, spatial computing interfaces
+**Avoid when:** Content-heavy sites, editorial, accessibility-critical (glass reduces readability), low-performance targets (backdrop-filter is expensive)
+
+## Mistakes
+
+1. **Too much blur** → Content behind glass becomes unreadable. Fix: 12-24px max.
+2. **No edge refraction** → Glass looks like a flat translucent rectangle. Fix: liquid-glass border gradient.
+3. **Video too busy** → Distracts from content. Fix: slow, abstract, dark footage.
+4. **All surfaces glass** → No hierarchy. Fix: mix glass with solid near-black.
+5. **Poor text contrast** → White text on frosted glass over bright video areas fails. Fix: test contrast, add text shadow if needed.
+
+## References
+
+- VEX prompt (prompt 5) — liquid-glass CSS technique
+- Apple visionOS — spatial UI glass panels
+- Framer.com — glassmorphic cards over gradients
+- Arc Browser — floating glass navigation
+- Linear — subtle glass on dark

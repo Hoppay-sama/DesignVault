@@ -1,0 +1,256 @@
+# Exact Replica Prompt — Obsidian Precision
+
+> Copy this entire prompt and paste it into your AI coding assistant.
+
+---
+
+```
+Build a developer-focused landing page for "NEXUS" — an API orchestration platform for engineering teams. Stack: React + Vite + TypeScript + Tailwind CSS v4 + lucide-react + framer-motion. Page title: `Nexus — API Orchestration for Teams`.
+
+Vibe: Near-black developer aesthetic. Surgical precision. Hairline borders. Radial glow depth. One accent color used like a signal flare.
+
+---
+
+## ANTI-SLOP CONSTRAINTS
+
+- NO Inter as display font
+- NO purple-to-blue gradients
+- NO centered hero
+- NO card shadows
+- NO glassmorphism
+- NO more than ONE accent color
+- NO bounce easing
+- NO gradient text
+- NO equal 3-column feature grids
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap
+```
+
+Usage:
+- **Inter Tight** (500/600): Headlines, UI text (replaces Geist)
+- **Inter Tight** (400): Body text
+- **JetBrains Mono** (400): Code, data, technical labels
+
+CSS:
+- `.font-display { font-family: 'Inter Tight', sans-serif; font-weight: 600; letter-spacing: -0.02em; }`
+- `.font-body { font-family: 'Inter Tight', sans-serif; font-weight: 400; }`
+- `.font-mono { font-family: 'JetBrains Mono', monospace; }`
+
+---
+
+## FLUID SIZE SYSTEM
+
+```css
+:root {
+  --edge-pad: clamp(1.5rem, 5vw, 4rem);
+  --section-gap: clamp(4rem, 10vh, 8rem);
+  --logo: clamp(1rem, 0.9vw, 1.2rem);
+  --nav: clamp(0.7rem, 0.3vw + 0.55rem, 0.85rem);
+  --headline: clamp(2rem, 5vw, 4rem);
+  --subhead: clamp(1.1rem, 2vw, 1.5rem);
+  --body: clamp(0.8rem, 0.4vw + 0.65rem, 0.95rem);
+  --micro: 0.7rem;
+  --btn-px: clamp(1.2rem, 1.5vw, 1.75rem);
+  --btn-py: clamp(0.65rem, 0.8vh, 0.9rem);
+}
+```
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --ground: #0A0A0A;
+  --ground-elevated: #111111;
+  --text-primary: #EDEDED;
+  --text-secondary: #A0A0A0;
+  --text-muted: #666666;
+  --border: rgba(255, 255, 255, 0.06);
+  --border-hover: rgba(255, 255, 255, 0.12);
+  --accent: #5E6AD2;  /* Linear violet */
+  --accent-text: #0A0A0A;  /* Inverse text on accent */
+  --glow: rgba(94, 106, 210, 0.15);
+}
+```
+
+Body: `bg-[#0A0A0A] text-[#EDEDED] antialiased font-body`.
+
+---
+
+## PAGE STRUCTURE
+
+### 1. Header
+`fixed top-0 left-0 right-0 z-50`, backdrop-blur-sm, bg-[#0A0A0A]/80.
+Padding: `paddingInline: var(--edge-pad)`, `paddingTop: clamp(1rem, 2vh, 1.5rem)`, `paddingBottom: clamp(0.75rem, 1.5vh, 1rem)`.
+Flex space-between.
+
+**Logo:** Inter Tight 600, tracking `-0.02em`, size `var(--logo)`. Text: `NEXUS`. Color `var(--text-primary)`.
+
+**Nav:** Inter Tight 400, size `var(--nav)`, gap `clamp(1.5rem, 3vw, 2.5rem)`.
+Links: `Product` | `Docs` | `Pricing` | `Blog`
+Hover: color `var(--accent)` (200ms).
+
+**CTA (right):** `var(--accent)` bg, `var(--accent-text)` text, rounded-md (6px), size `var(--nav)`, padding `0.5rem 1rem`. Text: `Get Started`.
+
+### 2. Hero
+`relative min-h-[100dvh] flex items-center`, padding `var(--edge-pad)`.
+
+**Radial Glow:**
+```css
+position: absolute;
+top: -20%; left: 50%; transform: translateX(-50%);
+width: 80vw; height: 60vh;
+background: radial-gradient(ellipse at center, var(--glow) 0%, transparent 70%);
+pointer-events: none; z-index: 0;
+```
+
+**Content (z-10, relative, max-w-[640px]):**
+- Badge — inline-flex, items-center, gap 8px, border `var(--border)`, rounded-full, padding `4px 12px 4px 4px`, size `var(--micro)`, color `var(--text-secondary)`:
+  - Green dot (8px circle, bg-green-500) + `v2.4 now available`
+- Headline — `.font-display`, size `var(--headline)`, leading `1.1`, tracking `-0.03em`, color `var(--text-primary)`:
+  `API orchestration`
+  `for engineering teams`
+- Subtext — `.font-body`, size `var(--body)`, color `var(--text-secondary)`, max-w-[540px], line-height 1.6:
+  `Nexus connects your services, handles retries, and gives your team a single source of truth for every API call. No more duct tape.`
+- CTA row — flex, gap 12px, margin-top 32px:
+  - Primary: bg `var(--accent)`, text `var(--accent-text)`, rounded-md, padding `var(--btn-px)`/`var(--btn-py)`, font-medium. Text: `Start building` + lucide ArrowRight (size 14). Hover: scale(1.02) 200ms.
+  - Secondary: transparent, border `var(--border)`, rounded-md, same padding. Text: `View docs`. Hover: border `var(--border-hover)`.
+
+### 3. Logo Bar
+Padding: `clamp(2rem, 5vh, 4rem)` vertical, `var(--edge-pad)` horizontal.
+Centered. Text: `Trusted by engineering teams at` — `.font-body`, size `var(--micro)`, color `var(--text-muted)`, uppercase, tracking `0.1em`.
+Below: flex row, justify-center, gap `clamp(2rem, 4vw, 4rem)`, opacity 0.4.
+Company names (text, not images): `Vercel` `Linear` `Raycast` `Supabase` `Resend` — `.font-display`, size `var(--nav)`, color `var(--text-secondary)`.
+
+### 4. Bento Feature Grid
+Padding: `var(--section-gap)` vertical, `var(--edge-pad)` horizontal.
+Max-width 1200px, centered.
+
+Section label: `.font-mono`, size `var(--micro)`, color `var(--text-muted)`, uppercase, tracking `0.1em`: `CAPABILITIES`
+Section headline: `.font-display`, size `var(--subhead)`, color `var(--text-primary)`, margin-bottom `clamp(2rem, 4vh, 3rem)`: `Everything you need. Nothing you don't.`
+
+Grid: `display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;`
+
+**Cell 1 (wide — col span 2):**
+- bg `var(--ground-elevated)`, padding `clamp(1.5rem, 3vw, 2.5rem)`
+- Icon: lucide Zap (size 20, color `var(--accent)`)
+- Title: `.font-display`, size `clamp(1rem, 1.5vw, 1.25rem)`: `Real-time Orchestration`
+- Body: `.font-body`, size `var(--body)`, color `var(--text-secondary)`: `Route, transform, and retry API calls across your entire stack. One config file, zero duct tape.`
+
+**Cell 2:**
+- Same structure
+- Icon: lucide Shield
+- Title: `Built-in Observability`
+- Body: `Every request traced. Every error categorized. Dashboards that engineers actually want to look at.`
+
+**Cell 3:**
+- Icon: lucide GitBranch
+- Title: `Version Control`
+- Body: `Your API config lives in Git. Review changes, roll back deploys, sleep well.`
+
+**Cell 4 (wide — col span 2):**
+- Icon: lucide Terminal
+- Title: `CLI-First Workflow`
+- Body: `npx nexus init. That's it. Your project is configured, connected, and ready to deploy.`
+
+**Cell 5:**
+- Icon: lucide Users
+- Title: `Team Permissions`
+- Body: `RBAC built in. Audit logs for everything.`
+
+### 5. Code Preview Section
+Padding: `var(--section-gap)` vertical, `var(--edge-pad)` horizontal.
+Max-width 900px, centered.
+
+Two-column: left = text, right = code block.
+
+**Left:**
+- Label: `.font-mono`, `var(--micro)`, `var(--text-muted)`, uppercase: `DEVELOPER EXPERIENCE`
+- Headline: `.font-display`, `var(--subhead)`: `Config that reads like code`
+- Body: `.font-body`, `var(--body)`, `var(--text-secondary)`: `YAML-free. TypeScript-native. Your API routes are just functions with decorators.`
+
+**Right — Code Block:**
+```css
+bg: var(--ground-elevated);
+border: 1px solid var(--border);
+border-radius: 12px;
+padding: clamp(1rem, 2vw, 1.5rem);
+font-family: 'JetBrains Mono', monospace;
+font-size: 0.8rem;
+line-height: 1.7;
+color: var(--text-secondary);
+overflow-x: auto;
+```
+
+Content:
+```typescript
+import { route, retry } from '@nexus/sdk';
+
+@route('/payments/charge')
+@retry({ attempts: 3, backoff: 'exponential' })
+async function chargePayment(req: Request) {
+  const result = await stripe.charges.create({
+    amount: req.body.amount,
+    currency: 'usd',
+  });
+  return { status: 'ok', id: result.id };
+}
+```
+
+### 6. CTA Section
+Padding: `var(--section-gap)` vertical, `var(--edge-pad)` horizontal.
+Centered, max-width 600px.
+
+Headline: `.font-display`, `clamp(1.5rem, 3vw, 2.5rem)`, centered: `Start building in minutes`
+Body: `.font-body`, `var(--body)`, `var(--text-secondary)`, centered, max-width 440px: `Free for small teams. No credit card required.`
+CTA: same as hero primary. Text: `Get started free`.
+
+### 7. Footer
+Padding: `clamp(2rem, 4vh, 3rem)` vertical, `var(--edge-pad)` horizontal.
+Border-top: `1px solid var(--border)`.
+Flex space-between.
+- Left: `.font-body`, `var(--micro)`, `var(--text-muted)`: `© 2026 Nexus, Inc.`
+- Right: flex gap `clamp(1rem, 2vw, 2rem)`: `Twitter` `GitHub` `Discord` — `.font-body`, `var(--micro)`, `var(--text-muted)`, hover `var(--text-secondary)`.
+
+---
+
+## VISUAL RULES
+
+- Near-black ground (#0A0A0A), elevated cards (#111)
+- Accent (#5E6AD2) ONLY on primary CTA, active nav, badge dot, icons
+- Hairline borders (rgba(255,255,255,0.06)) for all separation
+- Radial glow behind hero (accent-colored, 15% opacity)
+- Left-aligned everything
+- Bento grid with asymmetric cells (span 2 for wide)
+- Mono font for code and technical labels
+- No shadows, no gradients, no glassmorphism
+
+---
+
+## ANIMATIONS (framer-motion)
+
+Hero elements: `initial={{ opacity: 0, y: 8 }}` → `animate={{ opacity: 1, y: 0 }}`, transition: `{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }`, stagger children by 0.1s.
+
+Bento cells: `initial={{ opacity: 0, scale: 0.97 }}` → `animate={{ opacity: 1, scale: 1 }}`, transition: `{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }`, stagger 0.06s.
+
+Buttons: hover `scale: 1.02`, active `scale: 0.98`, transition 200ms.
+
+`prefers-reduced-motion: reduce` → disable all animations.
+
+---
+
+## ICONS
+
+lucide-react: `ArrowRight`, `Zap`, `Shield`, `GitBranch`, `Terminal`, `Users`. Size 20, strokeWidth 1.5.
+
+---
+
+Recreate this page faithfully with the exact colors, fonts, fluid clamps, layout, and animation timings above.
+```

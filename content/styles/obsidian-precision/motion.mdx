@@ -1,0 +1,72 @@
+# Motion Principles
+
+## Philosophy
+
+Motion is **precise and purposeful**. Spring physics for interactions, staggered fade-up for entrances. Nothing decorative — every animation communicates hierarchy or feedback.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Hero headline | Opacity + translateY(8px)→0 | 600ms | `cubic-bezier(0.16, 1, 0.3, 1)` | 0ms |
+| Hero subtext | Opacity + translateY(8px)→0 | 600ms | `cubic-bezier(0.16, 1, 0.3, 1)` | 100ms |
+| CTA buttons | Opacity + translateY(8px)→0 | 600ms | `cubic-bezier(0.16, 1, 0.3, 1)` | 200ms |
+| Feature cards | Opacity + scale(0.97)→1 | 500ms | `cubic-bezier(0.22, 1, 0.36, 1)` | stagger 0.06s |
+| Bento cells | Opacity + translateY(12px)→0 | 500ms | `cubic-bezier(0.22, 1, 0.36, 1)` | stagger 0.08s |
+
+**Key easing:** `cubic-bezier(0.16, 1, 0.3, 1)` — snappy but smooth. Faster than cinematic styles, slower than generic UI.
+
+---
+
+## Scroll Behavior
+
+| Effect | Specification |
+|--------|--------------|
+| Fade-up on scroll | Elements fade up with translateY(12px)→0 on viewport entry |
+| Stagger | 0.06-0.08s delay between sibling elements |
+| Once | `viewport={{ once: true }}` — animate only on first entry |
+| Parallax | None — this style doesn't use parallax |
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Nav links | Color → accent (200ms) | — |
+| Primary CTA | Slight scale (1.02) + brightness increase | Scale 0.98 (tactile press) |
+| Secondary CTA | Border opacity increase | — |
+| Cards | Border color → border-hover (200ms) | — |
+| Icons | Subtle scale (1.05) | Scale 0.95 |
+
+**Spring physics for interactive elements:**
+```css
+transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
+```
+
+---
+
+## Reduced Motion
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| ❌ Never | Why |
+|----------|-----|
+| Parallax scrolling | Too cinematic for this precise style |
+| Marquee text | Lazy filler |
+| Bounce easing | Feels playful, not professional |
+| Rotating elements | Distracting from content |
+| Auto-playing animations | User should control pacing |

@@ -1,0 +1,63 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Custom geometric sans (brand-specific) |
+| **Examples** | Geist (Vercel), Linear Custom, Inter Tight, Satoshi, Cabinet Grotesk |
+| **Weight** | 500-600 (medium-semibold, not bold) |
+| **Tracking** | -0.02em to -0.04em (tight, confident) |
+| **Size** | `clamp(2rem, 5vw, 4rem)` — large but not monumental |
+| **Transform** | Sentence case or title case (not all-caps) |
+
+**Why custom:** The font is part of the brand identity. Geist, Linear Custom — these ARE the brands. When unavailable, Inter Tight or Satoshi are the closest alternatives.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same family as display (or Inter as fallback) |
+| **Examples** | Geist, Inter (400-500), Satoshi |
+| **Weight** | 400-500 |
+| **Tracking** | 0 to -0.01em |
+| **Size** | `clamp(0.8rem, 0.4vw + 0.65rem, 0.95rem)` |
+| **Line Height** | 1.5-1.6 |
+
+---
+
+## Monospace / Data Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Monospace |
+| **Examples** | JetBrains Mono, Geist Mono, Fragment Mono |
+| **Weight** | 400 |
+| **Tracking** | 0 |
+| **Size** | Same as body or 1px smaller |
+| **Usage** | Code snippets, numbers, technical labels, version tags |
+
+---
+
+## Type Scale
+
+```
+Display:  clamp(2rem, 5vw, 4rem)    — hero headline
+Headline: clamp(1.5rem, 3vw, 2.5rem) — section titles
+Subhead:  clamp(1rem, 1.5vw, 1.25rem) — card titles
+Body:     clamp(0.8rem, 0.4vw + 0.65rem, 0.95rem)
+Mono:     same as body or -1px
+Micro:    0.7rem — tags, labels, version numbers
+```
+
+---
+
+## Font Pairing Logic
+
+**Display + Body:** Same family at different weights. Geist 500 + Geist 400. This creates visual harmony.
+
+**Display + Mono:** Geometric sans + technical mono. The mono signals "this is data/code" while the sans handles everything else.
+
+**Never:** Mix more than 2 families. Sans + mono is sufficient.

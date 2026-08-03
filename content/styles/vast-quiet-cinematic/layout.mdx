@@ -1,0 +1,106 @@
+# Layout Grammar
+
+## Grid System
+
+**No visible grid.** The layout is defined by the photograph's composition and the placement of text at the edges. However, internally:
+
+- Full-bleed sections: 100vw width, 100dvh min-height
+- Text containers: max-width 480px (narrow, like a poem)
+- Edge placement: text sits 5-10vw from the viewport edge
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | Full viewport — `min-h-[100dvh]` |
+| Background | Full-bleed desaturated photograph |
+| Text position | Top-left OR bottom-right OR centered-but-tiny |
+| Headline size | `clamp(1.2rem, 2vw, 2rem)` — SMALL |
+| Headline weight | 200-300 (thin) |
+| Headline tracking | 0.1em-0.15em (wide) |
+| Subtext | 1-2 sentences max, below or beside headline |
+| CTA | Thin border, small text, generous padding |
+
+**The hero is the photograph.** Text is a caption, not a headline.
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(6rem, 15vh, 12rem); /* MASSIVE whitespace */
+--content-max-width: 480px; /* Narrow text column */
+--edge-margin: clamp(2rem, 5vw, 6rem); /* Text distance from edge */
+```
+
+**The whitespace between sections should feel uncomfortable to a designer trained to fill space.** That discomfort means you're doing it right.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Full-Bleed Photo + Edge Text
+```
+┌─────────────────────────────────────────┐
+│                                         │
+│  [Desaturated photograph fills all]     │
+│                                         │
+│  tiny label                             │
+│  HEADLINE                               │
+│  One sentence of body text.             │
+│                              [Explore]  │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 2: Split — Fog White + Photo
+```
+────────────────────┬────────────────────┐
+│                    │                    │
+│  Fog-white ground  │  Desaturated photo │
+│                    │  (full-bleed right)│
+│  tiny label        │                    │
+│  HEADLINE          │                    │
+│  Body text...      │                    │
+│                    │                    │
+└────────────────────┴────────────────────┘
+```
+
+### Pattern 3: Photo with Centered Tiny Text
+```
+┌─────────────────────────────────────────┐
+│                                         │
+│  [Desaturated photograph]               │
+│                                         │
+│              tiny label                 │
+│              HEADLINE                   │
+│              [ Explore ]                │
+│                                         │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Full asymmetric or centered-tiny, massive whitespace |
+| **Tablet (768px)** | Text moves to bottom-left of photo, whitespace reduces slightly |
+| **Mobile (375px)** | Photo stacks above text, text full-width with edge margins |
+
+**On mobile, the photograph should still dominate.** Don't shrink it to make room for text. Stack vertically.
+
+---
+
+## Layout Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Centered large headlines | Edge-aligned or centered-but-tiny |
+| Card grids or feature rows | Full-bleed sections with single images |
+| Multi-column text | Single narrow column (max 480px) |
+| Filling whitespace with content | Let the space breathe |
+| Multiple images per section | One image per section, full-bleed |
+| Busy navigation with many links | 3-4 links max, thin text |

@@ -1,0 +1,69 @@
+# Common Mistakes
+
+## Mistake 1: Using Pure Black
+
+**What people do:** Set background to #000000.
+
+**Why it fails:** Pure black kills the radial glow. There's nowhere for the gradient to bleed into. The page looks flat and terminal-like instead of atmospheric.
+
+**Fix:** Use #0A0A0A to #111111. The near-black gives the glow room to exist.
+
+---
+
+## Mistake 2: Using Inter as Display Font
+
+**What people do:** Use Inter 400/600 for headlines because it's the default.
+
+**Why it fails:** Inter is the #1 AI slop font. Every AI-generated site uses it. Using Inter makes your site look like every other AI output.
+
+**Fix:** Use Geist, Satoshi, Inter Tight, Cabinet Grotesk, or a custom font. If you must use Inter, use Inter Tight (not regular Inter).
+
+---
+
+## Mistake 3: Adding Drop Shadows to Cards
+
+**What people do:** Add `box-shadow: 0 4px 12px rgba(0,0,0,0.3)` to cards.
+
+**Why it fails:** Shadows add visual weight and feel like a generic SaaS template. This style uses hairline borders for separation — it's lighter, more precise.
+
+**Fix:** `border: 1px solid rgba(255,255,255,0.06)` instead of shadows. The border creates structure without weight.
+
+---
+
+## Mistake 4: Centering the Hero
+
+**What people do:** Center the headline, subtext, and CTAs.
+
+**Why it fails:** Centered heroes are the AI default. Left-aligned creates a technical, developer-focused feel that's distinctive.
+
+**Fix:** Left-align everything. Max-width 540px for subtext. CTAs in a horizontal row below.
+
+---
+
+## Mistake 5: Multiple Accent Colors
+
+**What people do:** Use violet for CTAs, green for success, red for errors, blue for links.
+
+**Why it fails:** The style's power comes from restraint. One accent (violet, amber, or white) used surgically. Multiple colors create visual noise.
+
+**Fix:** One accent color. Use it on CTAs, active states, and one data point per section. For success/error, use muted desaturated versions.
+
+---
+
+## Mistake 6: Equal-Column Grids
+
+**What people do:** Use `grid-cols-3` with equal cells for features.
+
+**Why it fails:** Equal grids look like a template. Asymmetric bento grids with varied cell sizes feel intentional and premium.
+
+**Fix:** Use `grid-column: span 2` for wide cells, `grid-row: span 2` for tall cells. Mix sizes intentionally.
+
+---
+
+## Mistake 7: Forgetting the Radial Glow
+
+**What people do:** Use a flat near-black background with no atmospheric depth.
+
+**Why it fails:** The radial glow IS the atmosphere. Without it, the page feels like a terminal — flat and lifeless. The glow creates the "infinite canvas" feeling.
+
+**Fix:** Add a radial gradient behind the hero: `radial-gradient(ellipse at center, rgba(accent, 0.15) 0%, transparent 70%)`. Width 80vw, height 60vh, positioned above the content.

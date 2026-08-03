@@ -1,0 +1,126 @@
+# Layout Grammar
+
+## Grid System
+
+**Left-aligned heroes, bento grids for features.**
+
+Content is left-aligned, not centered. This creates a technical, developer-focused feel. The bento grid uses asymmetric cell sizes for visual interest.
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | `min-h-[100dvh]` or auto with generous padding |
+| Background | Near-black with radial glow behind content |
+| Headline position | Left-aligned |
+| Headline size | `clamp(2rem, 5vw, 4rem)` |
+| Subtext | Below headline, max-width 540px |
+| CTAs | Below subtext, horizontal row |
+| Glow | Radial gradient centered behind headline area |
+
+**Radial glow implementation:**
+```css
+.hero-glow {
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80vw;
+  height: 60vh;
+  background: radial-gradient(
+    ellipse at center,
+    var(--color-glow) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+```
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(4rem, 10vh, 8rem);
+--content-max-width: 1200px;
+--edge-padding: clamp(1.5rem, 5vw, 4rem);
+```
+
+---
+
+## Bento Grid
+
+```css
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px; /* Hairline gap */
+  background: var(--color-border); /* Creates border effect */
+}
+
+.bento-cell {
+  background: var(--color-ground-elevated);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+/* Asymmetric cells */
+.bento-cell-wide {
+  grid-column: span 2;
+}
+
+.bento-cell-tall {
+  grid-row: span 2;
+}
+```
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Left-Aligned Hero with Glow
+```
+         [Radial glow behind]
+┌─────────────────────────────────────┐
+│                                     │
+│  HEADLINE (left-aligned, large)     │
+│  Subtext below (max 540px)          │
+│  [CTA Primary] [CTA Secondary]      │
+│                                     │
+└─────────────────────────────────────┘
+```
+
+### Pattern 2: Bento Feature Grid
+```
+┌──────────┬──────────┬──────────┐
+│  Card 1  │  Card 2  │  Card 3  │
+│  (wide)  │          │          │
+├──────────┴──────────┼──────────┤
+│  Card 4             │  Card 5  │
+│                     │  (tall)  │
+└─────────────────────┴──────────┘
+```
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | 3-col bento, left-aligned hero, radial glow |
+| **Tablet (768px)** | 2-col bento, reduced glow |
+| **Mobile (375px)** | 1-col stacked, no glow |
+
+---
+
+## Layout Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Centered hero | Left-aligned |
+| Equal 3-column grids | Asymmetric bento |
+| Card shadows | Hairline borders only |
+| Full-width colored sections | Near-black with subtle elevation |
+| Zigzag layouts | Consistent left-aligned rhythm |

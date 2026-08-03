@@ -1,0 +1,144 @@
+# Parameterized Template — Obsidian Precision
+
+> Use this template for YOUR developer-focused product.
+
+---
+
+```
+Build a developer-focused landing page for "[BRAND_NAME]" — [ONE-LINE DESCRIPTION, e.g., "a CLI tool for database migrations"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + lucide-react + framer-motion. Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: Near-black developer aesthetic. Surgical precision. Hairline borders. Radial glow depth. One accent color.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY)
+
+- NO Inter as display font
+- NO purple-to-blue gradients
+- NO centered hero
+- NO card shadows
+- NO glassmorphism
+- NO more than ONE accent color
+- NO bounce easing
+- NO gradient text
+
+---
+
+## FONTS
+
+Replace [DISPLAY_FONT] with a geometric sans. Good choices:
+- Inter Tight (500/600) — closest to Geist, available on Google Fonts
+- Satoshi — premium geometric
+- Cabinet Grotesk — bold, distinctive
+- Space Grotesk — angular, technical
+
+Replace [MONO_FONT] with a monospace. Good choices:
+- JetBrains Mono — clean, popular
+- Geist Mono — matches Geist
+- Fragment Mono — narrow
+
+Load via Google Fonts.
+
+---
+
+## FLUID SIZE SYSTEM
+
+```css
+:root {
+  --edge-pad: clamp(1.5rem, 5vw, 4rem);
+  --section-gap: clamp(4rem, 10vh, 8rem);
+  --headline: clamp(2rem, 5vw, 4rem);  /* Large but not monumental */
+  --body: clamp(0.8rem, 0.4vw + 0.65rem, 0.95rem);
+}
+```
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --ground: #0A0A0A;          /* Near-black — never #000 */
+  --ground-elevated: #111111;  /* Cards */
+  --text-primary: #EDEDED;
+  --text-secondary: #A0A0A0;
+  --border: rgba(255, 255, 255, 0.06);  /* Hairline */
+  --accent: [ACCENT_COLOR];   /* ONE accent */
+  --glow: rgba([ACCENT_RGB], 0.15);  /* Radial glow */
+}
+```
+
+**Accent guidance:** Choose one sophisticated color:
+- `#5E6AD2` (violet) — Linear-style
+- `#F5A623` (amber) — Vercel/Raycast-style
+- `#3B82F6` (blue) — standard
+- `#10B981` (emerald) — success-oriented
+
+---
+
+## PAGE STRUCTURE
+
+### Hero
+- `min-h-[100dvh]`, left-aligned content (max-width 640px)
+- Radial glow behind content (accent-colored, 15% opacity, 80vw × 60vh)
+- Badge: small pill with status dot + text (optional)
+- Headline: [DISPLAY_FONT] 600, tracking -0.02em, 2 lines max
+- Subtext: 1-2 sentences, max-width 540px, color --text-secondary
+- CTAs: Primary (filled accent) + Secondary (border only)
+
+### Logo Bar (optional)
+- "Trusted by teams at" + company names/text logos
+- Low opacity (0.4), small size
+
+### Bento Feature Grid (3-5 cells)
+- `grid-cols-3`, 1px gap with border-colored background
+- Asymmetric: some cells span 2 columns
+- Each cell: icon + title + 1-2 sentence body
+- Hairline borders, no shadows
+
+### Code/Technical Preview (optional)
+- Two-column: text left, code block right
+- Code block: elevated bg, mono font, subtle border
+- Shows real or realistic code snippet
+
+### CTA Section
+- Centered, max-width 600px
+- Headline + subtext + primary CTA
+
+### Footer
+- Border-top hairline
+- Copyright + social links
+- Small, muted text
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- Near-black ground, one accent, hairline borders
+- Radial glow behind hero
+- Left-aligned layout
+- No shadows, no gradients, no glassmorphism
+- Motion: staggered fade-up, cubic-bezier(0.16, 1, 0.3, 1)
+
+---
+
+## ANIMATIONS
+
+Hero: staggered fade-up (y:8→0), 0.6s, ease [0.16, 1, 0.3, 1], children stagger 0.1s.
+Cards: fade + scale(0.97→1), 0.5s, stagger 0.06s.
+Buttons: hover scale(1.02), active scale(0.98), 200ms.
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines:** Specific and technical. "API orchestration for engineering teams" not "Build the future of APIs."
+
+**Body text:** Short (1-2 sentences per cell). Write like a developer talking to developers. No marketing fluff.
+
+**Code snippets:** Show real or realistic code. Use the product's actual syntax if possible.
+
+---
+
+Replace all [BRACKETED] placeholders and paste into your AI coding assistant.
+```

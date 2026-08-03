@@ -1,0 +1,119 @@
+# Texture & Surface
+
+## Primary Texture: Bitmap Dither
+
+**The defining element.** Images are rendered through bitmap dithering — converting continuous-tone photographs into patterns of dots that simulate tonal range using only black and white (or limited colors).
+
+### Dither Methods
+
+| Method | Visual Character | Usage |
+|--------|-----------------|-------|
+| **Floyd-Steinberg** | Organic, error-diffusion pattern | Primary method — most natural look |
+| **Ordered (Bayer matrix)** | Regular, grid-like dot pattern | For technical/data imagery |
+| **Halftone** | Varying-size dots, print-like | For editorial/illustration feel |
+| **1-bit threshold** | Pure black/white, no gray | Maximum contrast, most aggressive |
+
+### Implementation
+
+```css
+/* SVG filter for dither effect */
+<svg style="position: absolute; width: 0; height: 0;">
+  <filter id="dither">
+    <feColorMatrix type="saturate" values="0"/>
+    <feComponentTransfer>
+      <feFuncR type="discrete" tableValues="0 1"/>
+      <feFuncG type="discrete" tableValues="0 1"/>
+      <feFuncB type="discrete" tableValues="0 1"/>
+    </feComponentTransfer>
+  </filter>
+</svg>
+
+/* Apply to images */
+.dithered-image {
+  filter: url(#dither);
+}
+```
+
+**Alternative:** Pre-process images with dithering tools (Ditherlicious, Photoshop's bitmap mode, custom scripts) and serve as static assets for better performance.
+
+---
+
+## Secondary Texture: Film Grain
+
+```css
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,..."); /* feTurbulence noise */
+  mix-blend-mode: overlay;
+}
+```
+
+**Parameters:**
+- Opacity: 0.03-0.06 (subtle — should be felt, not seen)
+- Blend mode: `overlay` or `soft-light`
+- Position: `fixed` (covers entire viewport, doesn't scroll)
+- Animation: Optional subtle jitter at 24fps for "film" feel
+
+---
+
+## Tertiary Texture: Vignette
+
+```css
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+}
+```
+
+**Purpose:** Darkens edges to draw focus to the center and enhance the "emerging from darkness" feeling.
+
+---
+
+## Image Processing Rules
+
+**NEVER use raw, unprocessed photography.** Every image must pass through at least one processing step:
+
+| Processing | Effect | When to Use |
+|-----------|--------|-------------|
+| Dither (Floyd-Steinberg) | Dot-pattern tonal simulation | Primary images, portraits |
+| Halftone | Print-style dot pattern | Editorial illustrations |
+| Heavy grain + desaturation | Aged film look | Background textures |
+| 1-bit threshold | Pure B&W, high contrast | Icons, small graphics |
+| ASCII rendering | Character-based image | Technical/data decoration |
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Near-black (#0A0A0A) + optional grain overlay |
+| Cards/Panels | Near-black-elevated (#111) with 1px border (#222) |
+| Buttons | Transparent with 1px border, fill on hover |
+| Navigation | Transparent, opacity-based hover |
+| Dividers | 1px hairline (#222 or #333) |
+
+**No glossy, no glassmorphism, no gradients.** Surfaces feel like paper, film, or concrete — never digital-smooth.
+
+---
+
+## Texture Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Raw stock photography | Process every image (dither, grain, halftone) |
+| Gradient backgrounds | Dither patterns or solid near-black |
+| Glassmorphic cards | Flat surfaces with hairline borders |
+| Smooth 3D renders | Dithered or grain-processed imagery |
+| Colorful overlays | Monochrome processing only |
+| Heavy drop shadows | Subtle vignette or no shadow at all |
