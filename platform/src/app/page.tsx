@@ -1,15 +1,21 @@
+import Link from 'next/link';
+import { getAllStyles } from '@/lib/content';
+import { StyleEntry } from '@/lib/types';
+
 export default function Home() {
+  const styles: StyleEntry[] = getAllStyles();
+
   return (
     <main className="min-h-screen">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm bg-ground/80 border-b border-border">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <div className="font-display text-lg tracking-tight">
+            <Link href="/" className="font-display text-lg tracking-tight">
               Design<span className="text-text-secondary">Vault</span>
-            </div>
+            </Link>
             <nav className="flex items-center gap-8">
-              <a href="#" className="text-sm text-text-primary hover:text-accent transition-colors">
+              <a href="#gallery" className="text-sm text-text-primary hover:text-accent transition-colors">
                 Gallery
               </a>
               <a href="#" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
@@ -30,7 +36,7 @@ export default function Home() {
       <section className="pt-32 pb-20 px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="font-display text-5xl md:text-7xl leading-[0.95] tracking-tight mb-6">
-            30+ Design Aesthetics.
+            {styles.length}+ Design Aesthetics.
             <br />
             <span className="text-text-secondary">Copy the prompt. Ship the page.</span>
           </h1>
@@ -39,9 +45,12 @@ export default function Home() {
             vocabulary, anti-patterns — and ready-to-use AI prompts for each style.
           </p>
           <div className="flex items-center justify-center gap-4">
-            <button className="bg-accent text-accent-text px-8 py-3 rounded-lg font-medium hover:scale-105 transition-transform">
+            <a
+              href="#gallery"
+              className="bg-accent text-accent-text px-8 py-3 rounded-lg font-medium hover:scale-105 transition-transform"
+            >
               Browse Styles
-            </button>
+            </a>
             <button className="border border-border hover:border-border-hover px-8 py-3 rounded-lg font-medium transition-colors">
               Search Vocabulary
             </button>
@@ -54,7 +63,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-wrap items-center justify-center gap-2">
             <span className="bg-ground-elevated border border-border px-4 py-2 rounded-full text-sm text-text-primary">
-              All Styles
+              All Styles ({styles.length})
             </span>
             <span className="bg-ground-elevated border border-border px-4 py-2 rounded-full text-sm text-text-secondary hover:text-text-primary hover:border-border-hover transition-colors cursor-pointer">
               Monochrome
@@ -79,43 +88,55 @@ export default function Home() {
       </section>
 
       {/* Style Grid */}
-      <section className="px-6 lg:px-8 pb-20">
+      <section id="gallery" className="px-6 lg:px-8 pb-20">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { name: "Dither Mono", essence: "Brutalist B&W editorial where bitmap texture replaces color.", tags: ["monochrome", "brutalist", "editorial"] },
-              { name: "Vast Quiet Cinematic", essence: "Editorial minimalism meets cinematic scale — vast B&W photography, mist atmosphere.", tags: ["cinematic", "minimal", "editorial"] },
-              { name: "Obsidian Precision", essence: "Near-black developer aesthetic with custom geometric sans, hairline borders, radial glow.", tags: ["developer", "dark-mode", "precision"] },
-              { name: "Liquid Glass Noir", essence: "Frosted translucent panels over dark video with liquid-glass edge refraction.", tags: ["glassmorphism", "dark", "spatial"] },
-              { name: "Kinetic Typography", essence: "Type IS the design — monumental display faces that animate, split, morph.", tags: ["kinetic", "typography", "animation"] },
-              { name: "Editorial Serif Narrative", essence: "Magazine-quality layout with serif headlines, drop caps, pull quotes.", tags: ["editorial", "serif", "narrative"] },
-            ].map((style) => (
-              <div
-                key={style.name}
+            {styles.map((style) => (
+              <Link
+                key={style.slug}
+                href={`/style/${style.slug}`}
                 className="bg-ground-elevated border border-border rounded-xl overflow-hidden hover:border-border-hover transition-colors group"
               >
                 <div className="h-48 bg-gradient-to-br from-ground to-ground-elevated relative">
                   <div className="absolute bottom-3 left-3 font-mono-label text-text-muted">
-                    {style.name.toUpperCase()}
+                    {style.title.toUpperCase()}
                   </div>
-                </div>
-                <div className="p-5">
-                  <h3 className="font-display text-lg mb-2 group-hover:text-accent transition-colors">
-                    {style.name}
-                  </h3>
-                  <p className="text-sm text-text-secondary line-clamp-2 mb-4">{style.essence}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {style.tags.map((tag) => (
+                  <div className="absolute top-3 right-3 flex gap-1">
+                    {style.tags.slice(0, 2).map((tag) => (
                       <span
                         key={tag}
-                        className="bg-ground border border-border px-2 py-1 rounded text-xs text-text-muted"
+                        className="bg-ground/80 border border-border px-2 py-1 rounded text-xs text-text-muted backdrop-blur-sm"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
                 </div>
-              </div>
+                <div className="p-5">
+                  <h3 className="font-display text-lg mb-2 group-hover:text-accent transition-colors">
+                    {style.title}
+                  </h3>
+                  <p className="text-sm text-text-secondary line-clamp-2 mb-4">
+                    {style.oneLineEssence}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex flex-wrap gap-2">
+                      {style.tags.slice(0, 3).map((tag) => (
+                        <span
+                          key={tag}
+                          className="bg-ground border border-border px-2 py-1 rounded text-xs text-text-muted"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="flex items-center gap-1 text-text-muted">
+                      <span className="text-xs">Difficulty</span>
+                      <span className="text-accent">{'★'.repeat(style.difficulty)}</span>
+                    </div>
+                  </div>
+                </div>
+              </Link>
             ))}
           </div>
         </div>

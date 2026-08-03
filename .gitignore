@@ -58,6 +58,7 @@ storybook-static/
 .turbo
 *.tgz
 .yarn-integrity
+AGENTS.MD
 
 # Superpowers / Brainstorming
 .superpowers/
