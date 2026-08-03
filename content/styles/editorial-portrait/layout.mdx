@@ -1,0 +1,135 @@
+# Layout Grammar
+
+## Grid System
+
+**No grid. Single layered composition.**
+
+This style has no grid system. The entire hero is one composition — elements are positioned absolutely, layered by z-index, and sized relative to the viewport. There are no columns, no rows, no gutters. The layout is a magazine cover, not a web page.
+
+```
+┌─────────────────────────────────────────┐
+│ [background photo, full viewport]        │
+│                                         │
+│  [giant marquee name, scrolling]         │
+│  ← MARCUS — BENNET — MARCUS — BENNET ←   │
+│                                         │
+│         [portrait cutout, centered]       │
+│                                         │
+│  Brand          Nav    Social            │
+│  ─────────────────────────────────       │
+│  Footer blurb left    Footer blurb right │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## Z-Index Stack
+
+The layering is critical — each element must be in the correct z-index position:
+
+| Layer | Z-Index | Element |
+|------|---------|---------|
+| 1 | default (0) | Background photo |
+| 2 | z-10 | Giant marquee name (scrolling) |
+| 3 | z-10 | Cream rule line (horizontal divider) |
+| 4 | z-10 | Footer blurb |
+| 5 | z-20 | Portrait cutout (overlaps marquee) |
+| 6 | z-30 | Header (brand name, nav, social) |
+| 7 | z-40 | Mobile drawer (when open) |
+| 8 | z-50 | Hamburger icon (mobile) |
+
+**The portrait cutout (z-20) overlaps the marquee (z-10).** This is the critical layering — the name reads through the portrait. The marquee letters are visible behind the cutout, creating the layered depth that defines the composition.
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | Full viewport — `h-[100dvh]` (NOT `min-h` — exactly one viewport) |
+| Overflow | `overflow-hidden` (marquee extends beyond viewport) |
+| Background | Full-viewport photograph (dark, portrait or scene) |
+| Marquee | Horizontal, centered vertically, `16vh` size (desktop) / `26vh` (mobile) |
+| Portrait cutout | Centered, overlapping marquee, transparent PNG |
+| Header | Top: brand left, nav+social right (desktop) or hamburger (mobile) |
+| Footer | Bottom: blurb left, blurb right, cream rule line above |
+
+**Never scrollable hero.** The hero is exactly one viewport — `h-[100dvh]` with `overflow-hidden`. The marquee extends beyond the viewport edges but is clipped. Scrolling moves past the hero to additional content.
+
+---
+
+## Section Spacing
+
+```css
+/* Hero has no spacing — it's a single composition */
+--content-below-padding: clamp(4rem, 10vh, 8rem);
+--content-max-width: min(1100px, calc(100vw - clamp(2rem, 8vw, 6rem)));
+```
+
+**Content below the hero** (if any) uses standard editorial spacing. But the hero itself has no spacing — it's a full-viewport composition.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Single Composition Hero (THE pattern)
+```
+┌─────────────────────────────────────────┐
+│ [BG photo]                               │
+│  Brand                    Nav  Social     │
+│                                         │
+│  ← MARCUS — BENNET — MARCUS — BENNET ←   │
+│         [portrait cutout]                 │
+│                                         │
+│  ──────────────────────────────────────  │
+│  Visuals Composer       Digital Crafter │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 2: Mobile Drawer
+```
+┌─────────────────────────────────────────┐
+│ [BG photo]                    [hamburger]│
+│                                         │
+│  ← MARCUS — BENNET — MARCUS — BENNET ←   │
+│         [portrait cutout]                 │
+│                                         │
+│  Visuals Composer       Digital Crafter │
+└─────────────────────────────────────────┘
+         ↓ (hamburger tap)
+┌─────────────────────────────────────────┐
+│                            ┌────────────┐│
+│                            │ Work       ││
+│                            │ About      ││
+│                            │ Contact    ││
+│                            │ Instagram  ││
+│                            │ Twitter    ││
+│                            └────────────┘│
+└─────────────────────────────────────────┘
+```
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (768px+)** | Full composition: brand+nav+social top, marquee+portrait center, footer bottom |
+| **Mobile (375px)** | Hamburger replaces nav+social, marquee size increases to `26vh`, portrait scales proportionally |
+
+**Fluid marquee sizing:** The marquee uses `vh` units — `16vh` on desktop, `26vh` on mobile. The larger mobile size compensates for the smaller viewport, ensuring the name fills the screen vertically on all devices.
+
+---
+
+## Layout Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Scrollable hero | Single composition, `h-[100dvh]`, `overflow-hidden` |
+| Multiple sections in hero | One composition — everything in one viewport |
+| Card layouts | No cards — portrait + marquee only |
+| Centered text blocks | Layered composition — text is part of the image |
+| Grid systems | No grid — absolute positioning, z-index layering |
+| Floating UI elements | Minimal chrome at edges only |
+| Pills, badges, or buttons | No UI elements — this is a portrait, not a dashboard |
+| Separate text and image zones | Portrait overlaps marquee — they're one composition |

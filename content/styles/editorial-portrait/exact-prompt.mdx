@@ -1,0 +1,220 @@
+# Exact Replica Prompt — Editorial Portrait
+
+> Copy this entire prompt and paste it into your AI coding assistant (Cursor, Claude Code, v0.dev, etc.) to generate an Editorial Portrait landing page.
+
+---
+
+```
+Build an editorial portrait landing page for "Marcus Bennet" — a visual composer and digital crafter. Stack: React + Vite + TypeScript + Tailwind CSS v4 + lucide-react + framer-motion. Page title: `Marcus Bennet — Visuals Composer / Digital Crafter`.
+
+Vibe: A magazine cover come to life. One composition: portrait, giant scrolling name, minimal chrome. Cream on dark. No cards, no pills, no glow. Personal, editorial, dramatic.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (hard bans)
+
+- NO pure white (#FFFFFF) text — use cream #efeee9
+- NO accent colors — cream only
+- NO scrollable hero — single composition, h-[100dvh], overflow-hidden
+- NO multiple sections in hero — one composition, one viewport
+- NO card layouts — portrait + marquee only
+- NO pills, badges, or prominent CTA buttons
+- NO glow or neon effects
+- NO gradient backgrounds — photographic background only
+- NO grid system — absolute positioning, z-index layering
+- NO bounce or spring easing — cubic-bezier(0.22, 1, 0.36, 1) only
+- NO feature grids or content sections in hero
+- NO glassmorphic surfaces
+- NO grain or noise overlay — the photo IS the texture
+
+---
+
+## FONTS
+
+Load via OnlineWebFonts or Google Fonts:
+```
+Helvetica Neue ME — used for ALL text (marquee, body, UI, chrome)
+```
+
+If Helvetica Neue ME is unavailable, use:
+- **Ogg Medium** — warm, humanist, editorial
+- **Fraunces** (display weight) — modern serif with editorial weight
+- **Inter** (800 for marquee, 400 for body) — clean, neutral
+
+CSS utilities:
+- `.font-all { font-family: 'Helvetica Neue ME', sans-serif; }`
+
+---
+
+## FLUID SIZE SYSTEM
+
+```css
+:root {
+  --pad-x: clamp(1.5rem, 5vw, 4rem);
+  --marquee-size: 16vh;  /* Desktop — viewport-height-based */
+  --marquee-size-mobile: 26vh;  /* Mobile — larger relative to viewport */
+  --body: clamp(0.85rem, 0.3vw + 0.75rem, 1rem);
+  --micro: clamp(0.7rem, 0.2vw + 0.6rem, 0.8rem);
+  --logo: clamp(1rem, 1vw, 1.25rem);
+  --nav: clamp(0.7rem, 0.3vw + 0.5rem, 0.85rem);
+}
+```
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --cream: #efeee9;       /* The ONLY text color */
+  --cream-bright: #f5f4f0; /* Slightly brighter for hover */
+  --cream-muted: #8a8985;  /* Muted cream for chrome */
+  --bg: #1a1a1a;           /* Dark photographic background */
+}
+```
+
+Body: `bg-[#1a1a1a] text-[#efeee9] antialiased font-all`.
+Selection: `selection:bg-[#efeee9] selection:text-[#1a1a1a]`.
+
+---
+
+## PAGE STRUCTURE
+
+Root: `relative h-[100dvh] overflow-hidden bg-[#1a1a1a] text-[#efeee9] font-all`.
+
+### Z-Index Stack (CRITICAL)
+1. **Background photo** (z-0): Full viewport, dark photographic background
+2. **Marquee** (z-10): Giant scrolling name, centered vertically
+3. **Cream rule line** (z-10): 1px hairline above footer
+4. **Footer** (z-10): Blurb left and right
+5. **Portrait cutout** (z-20): Transparent PNG, centered, overlapping marquee
+6. **Header** (z-30): Brand name, nav, social (desktop) or hamburger (mobile)
+7. **Mobile footer** (z-30): Simplified footer for mobile
+8. **Mobile drawer** (z-40): Right slide-in panel (when open)
+9. **Hamburger** (z-50): Mobile menu trigger
+
+### 1. Background Photo
+- Full viewport (`absolute inset-0`)
+- Dark photographic background (portrait scene or environment)
+- `object-cover` to fill viewport
+- Entrance: opacity fade-in, 1200ms, ease-out, delay 0ms
+
+### 2. Giant Marquee
+- Position: `absolute inset-0 flex items-center justify-center z-10`
+- Content: "Marcus — Bennet" duplicated twice (for seamless loop)
+- Font: Helvetica Neue ME, weight 500-600
+- Size: `16vh` (desktop) / `26vh` (mobile)
+- Color: `#efeee9`
+- Tracking: `-0.02em`
+- Whitespace: `nowrap`
+- Animation: `marquee-scroll 30s linear infinite`
+- `translateX(0) → (-50%)` — scrolls left infinitely
+
+```css
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+```
+
+### 3. Portrait Cutout
+- Position: `absolute inset-0 z-20 pointer-events-none`
+- Content: Transparent PNG of Marcus Bennet (clean cutout, no background)
+- `object-contain` centered
+- Entrance: rise-in (translateY 20px → 0) + opacity, 1400ms, cubic-bezier(0.22, 1, 0.36, 1), delay 300ms
+
+### 4. Header (Desktop)
+- Position: `absolute top-0 left-0 right-0 z-30 flex justify-between items-center`
+- Padding: `paddingInline: var(--pad-x)`, `paddingTop: clamp(1.5rem, 3vh, 2.5rem)`
+- **Brand (left):** Helvetica Neue ME 500, size `var(--logo)`, color `#efeee9`: `Marcus`
+- **Nav (right):** Helvetica Neue ME 400, size `var(--nav)`, tracking `0.05em`, gap `clamp(1.5rem, 3vw, 2.5rem)`
+  Links: `Work` | `About` | `Contact`
+  Hover: color → `#f5f4f0` (300ms)
+- **Social (right of nav):** Helvetica Neue ME 400, size `var(--nav)`, gap `1rem`
+  Links: `Instagram` | `Twitter`
+  Hover: color → `#f5f4f0` (300ms)
+- Entrance: fade-up (translateY 8px → 0) + opacity, 900ms, cubic-bezier(0.22, 1, 0.36, 1)
+  - Brand: delay 800ms
+  - Nav links: delay 1000ms + i*80ms
+  - Social links: delay 1000ms + i*80ms
+
+### 5. Mobile Header
+- **Hamburger (right):** `z-50`, lucide `Menu` icon, size 24, color `#efeee9`
+- Position: `absolute top-6 right-6`
+- Entrance: fade-in, 900ms, delay 800ms
+
+### 6. Mobile Drawer
+- Trigger: hamburger tap
+- Background: `fixed inset-0 bg-black/90 z-40`
+- Panel: `absolute right-0 top-0 h-full w-64 bg-[#0a0a0a]`
+- Links: Helvetica Neue ME 400, size `1rem`, color `#efeee9`, stacked, gap `1.5rem`, padding `2rem`
+  Links: `Work` | `About` | `Contact` | `Instagram` | `Twitter`
+- Animation: slide-in from right (translateX 100% → 0), 400ms, cubic-bezier(0.22, 1, 0.36, 1)
+- Link reveals: fade-up, staggered, 600ms, delay 200ms + i*60ms
+
+### 7. Cream Rule Line
+- Position: `absolute bottom-[15%] left-0 right-0 z-10`
+- Height: `1px`, background `#efeee9`, opacity 0.6
+- Transform origin: left
+- Entrance: scaleX(0 → 1), 1100ms, cubic-bezier(0.22, 1, 0.36, 1), delay 1200ms
+
+### 8. Footer (Desktop)
+- Position: `absolute bottom-0 left-0 right-0 z-10 flex justify-between items-center`
+- Padding: `paddingInline: var(--pad-x)`, `paddingBottom: clamp(1.5rem, 3vh, 2.5rem)`
+- **Left:** Helvetica Neue ME 400, size `var(--micro)`, color `#8a8985`: `Visuals Composer`
+- **Right:** Helvetica Neue ME 400, size `var(--micro)`, color `#8a8985`: `A homage to Marcus Holloway`
+- Entrance: fade-up, 900ms, delay 1400ms
+
+### 9. Mobile Footer
+- Position: `absolute bottom-0 left-0 right-0 z-30 flex justify-between items-center`
+- Padding: `paddingInline: 1.5rem`, `paddingBottom: 1.5rem`
+- **Left:** `Visuals Composer`
+- **Right:** `Digital Crafter`
+- Size: `var(--micro)`, color `#8a8985`
+
+---
+
+## VISUAL RULES
+
+- Cream text (#efeee9) on dark photographic background — NO accent colors
+- Single composition: h-[100dvh], overflow-hidden — NO scroll in hero
+- Giant marquee name scrolling infinitely (30s linear) at 16vh/26vh
+- Portrait cutout (transparent PNG) overlapping marquee at z-20
+- Minimal chrome: nav and social at edges, small and unobtrusive
+- Z-index stack: photo → marquee → cutout → chrome (CRITICAL)
+- No cards, no pills, no buttons, no glow
+- Staggered entrance animations (cubic-bezier(0.22, 1, 0.36, 1))
+- Cream rule line (1px hairline) above footer
+- Mobile drawer with staggered link reveals
+- Honor `prefers-reduced-motion: reduce`
+
+---
+
+## ANIMATIONS
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Background photo | Opacity fade-in | 1200ms | `ease-out` | 0ms |
+| Portrait cutout | Rise-in (translateY 20px→0) + opacity | 1400ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 300ms |
+| Marquee | Starts scrolling immediately | 30s | `linear` | 0ms (infinite) |
+| Brand name | Fade-up (translateY 8px→0) + opacity | 900ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 800ms |
+| Nav links | Fade-up, staggered | 900ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 1000ms + i*80ms |
+| Social links | Fade-up, staggered | 900ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 1000ms + i*80ms |
+| Footer | Fade-up | 900ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 1400ms |
+| Cream rule | scaleX(0→1) | 1100ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 1200ms |
+| Mobile drawer | Slide-in from right | 400ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 0ms |
+| Drawer links | Fade-up, staggered | 600ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 200ms + i*60ms |
+
+`prefers-reduced-motion: reduce` → marquee stops, all entrances instant, drawer instant.
+
+---
+
+## ICONS
+
+lucide-react: `Menu` (hamburger), `X` (close drawer).
+Custom: portrait cutout PNG, background photo.
+
+---
+
+Recreate this page faithfully with the exact colors, fonts, fluid clamps, copy, layout structure, z-index stack, and animation timings above.
+```

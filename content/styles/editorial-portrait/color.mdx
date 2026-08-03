@@ -1,0 +1,73 @@
+# Color Architecture
+
+## Ground
+
+```css
+--color-ground: #1a1a1a;      /* Dark photographic background (or the photo itself) */
+--color-ground-deep: #0a0a0a;  /* Deeper dark for edges */
+```
+
+**Why dark photographic:** The background is typically a dark photograph — a portrait, a scene, an environment. The ground color is the darkest tone of that photo, not a separate background color. The photo IS the ground.
+
+---
+
+## Text
+
+```css
+--color-text-primary: #efeee9;   /* Cream — the signature text color */
+--color-text-secondary: #c4c3be; /* Slightly darker cream for secondary */
+--color-text-muted: #8a8985;     /* Muted cream for chrome */
+```
+
+**Why cream #efeee9:** This specific cream feels like magazine print on dark stock — warm enough to feel printed, bright enough to be readable on dark photography. It's not white (too clinical), not amber (too warm), not gray (too cold). It's the color of editorial cream — the paper stock of art magazines.
+
+---
+
+## Accent
+
+```css
+/* This style typically has NO accent color */
+/* The cream text on dark photo IS the contrast */
+```
+
+**Rule:** This style typically uses NO accent color. The cream-on-dark contrast is sufficient. If an accent is absolutely necessary, use a slightly brighter cream (#f5f4f0) for hover states — never a different hue.
+
+**Why no accent:** The single composition is about restraint. Adding an accent color would make it feel like a designed page, not a magazine cover. The cream text, the dark photo, and the marquee are enough. An accent would be clutter.
+
+---
+
+## Semantic Colors
+
+```css
+/* Minimal semantic colors — this style avoids UI-heavy elements */
+--color-success: #6a8a5a; /* Muted green (rarely used) */
+--color-error: #c46a5a;   /* Muted red (rarely used) */
+```
+
+**This style minimizes semantic colors** because it minimizes UI. There are no form fields, no status badges, no data tables. The page is a portrait, a name, and minimal chrome.
+
+---
+
+## The Color Rule
+
+> **Cream on dark. That's it.** #efeee9 text on dark photographic background. No accent color, no gradients, no multiple hues. The restraint IS the style.
+
+---
+
+## Gradient Policy
+
+**No gradients.** The background is a photograph, not a gradient. The text is cream, not gradient. The only "gradient" is the natural tonal variation of the photograph itself.
+
+---
+
+## Color Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Pure white (#FFFFFF) text | Cream #efeee9 |
+| Accent colors (blue, amber, etc.) | No accent — cream only |
+| Light backgrounds | Dark photographic background |
+| Multiple text colors | Cream primary, slightly darker cream secondary |
+| Gradient backgrounds | Photographic background |
+| Neon or saturated colors | Muted, editorial cream |
+| Color-coded UI elements | Minimal UI — no color coding needed |

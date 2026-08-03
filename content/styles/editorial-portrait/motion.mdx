@@ -1,0 +1,123 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Editorial Portrait is **layered and staggered**. The marquee scrolls infinitely — constant, perpetual motion that gives the composition life. Entrance animations are staggered — each element fades or rises into place with a slight delay from the previous one, creating a "reveal" sequence like a magazine cover being assembled. The motion is editorial — dramatic but controlled, never bouncy, never playful.
+
+---
+
+## Ambient Animation: Infinite Marquee
+
+| Property | Specification |
+|----------|--------------|
+| **Element** | Giant name text, duplicated for seamless loop |
+| **Animation** | `translateX(0) → (-50%)` — scrolls left infinitely |
+| **Duration** | 30s |
+| **Easing** | `linear` (constant speed — marquee must be smooth, not eased) |
+| **Repeat** | `infinite` |
+| **Size** | `16vh` (desktop) / `26vh` (mobile) |
+
+**Implementation:**
+```css
+.marquee {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee-scroll 30s linear infinite;
+}
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+```
+
+The marquee content is duplicated (the name appears twice) so that when the first copy scrolls off-screen left, the second copy is in position, creating a seamless infinite loop.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Background photo | Opacity fade-in | 1200ms | `ease-out` | 0ms |
+| Portrait cutout | Rise-in (translateY 20px → 0) + opacity | 1400ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 300ms |
+| Marquee | Starts scrolling immediately (no entrance) | — | — | 0ms |
+| Brand name (header) | Fade-up (translateY 8px → 0) + opacity | 900ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 800ms |
+| Nav links | Fade-up, staggered | 900ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 1000ms + i*80ms |
+| Social links | Fade-up, staggered | 900ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 1000ms + i*80ms |
+| Footer blurb | Fade-up | 900ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 1400ms |
+| Cream rule line | scaleX(0 → 1) | 1100ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 1200ms |
+
+**Key easing:** `cubic-bezier(0.22, 1, 0.36, 1)` for all entrance animations. Smooth deceleration, no bounce.
+
+**Staggered principle:** Elements don't all appear at once. They reveal in sequence: background → portrait → chrome (brand, nav, social, footer). This creates the "magazine cover being assembled" feeling.
+
+---
+
+## Scroll Behavior
+
+| Effect | Specification |
+|--------|--------------|
+| Hero scroll | **None.** The hero is a single composition — no scrolling within it. |
+| Page scroll | The hero fills the viewport; scrolling reveals additional content below (if any) |
+| Parallax | **None.** The composition is static; only the marquee moves. |
+
+**The hero does not respond to scroll.** It exists as a complete composition. Scrolling moves past it to additional content, but the composition itself doesn't change based on scroll position.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Navigation links | Cream → slightly brighter cream (#f5f4f0) (300ms) | — |
+| Social links | Cream → slightly brighter cream (300ms) | — |
+| Portrait cutout | No hover state — it's a composition element | — |
+| Marquee | No hover state — it's perpetual motion | — |
+| Footer blurb | No hover state — it's static text | — |
+
+**Hover states are minimal.** Only interactive chrome (nav, social) responds. The composition elements (portrait, marquee) are static — they're the design, not the UI.
+
+---
+
+## Mobile Drawer Animation
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Drawer background | Opacity fade-in | 300ms | `ease-out` | 0ms |
+| Drawer panel | Slide-in from right (translateX 100% → 0) | 400ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 0ms |
+| Drawer links | Fade-up, staggered | 600ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 200ms + i*60ms |
+
+**Mobile drawer:** On mobile, the nav becomes a hamburger that opens a right-slide-in drawer. The drawer links reveal with staggered fade-up, maintaining the editorial staggered entrance principle.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- Marquee stops scrolling (becomes static text)
+- All entrance animations collapse to instant opacity changes
+- No staggered reveals (all elements appear together)
+- Mobile drawer uses instant slide (no transition)
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| ❌ Never animate | Why |
+|-----------------|-----|
+| Bounce or spring easing | Too playful — this is editorial, not bouncy |
+| Color transitions | Cream is cream — no color changes |
+| Scale transforms on portrait | The composition is static — only the marquee moves |
+| Parallax on background | The composition is a single image, not layers responding to scroll |
+| Pulsing or flashing | Too aggressive — the marquee is the only motion |
+| Multiple elements moving simultaneously | Staggered reveals only — one at a time |

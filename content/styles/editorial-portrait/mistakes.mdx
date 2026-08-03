@@ -1,0 +1,69 @@
+# Common Mistakes
+
+## Mistake 1: Making the Hero Scrollable
+
+**What people do:** Add multiple sections to the hero — a portrait section, a bio section, a work section — because "one viewport isn't enough content."
+
+**Why it fails:** The entire principle of this style is the single composition. The hero is one viewport — a magazine cover, not a landing page. Adding sections destroys the composition. The viewer should see everything at once: portrait, name, chrome. Scrolling should move past the hero, not within it.
+
+**Fix:** Use `h-[100dvh]` (not `min-h`) with `overflow-hidden`. Everything exists in one viewport. If you need additional content (bio, work, contact), it goes below the hero, not within it. The hero is the cover; everything else is the inside of the magazine.
+
+---
+
+## Mistake 2: Using White Instead of Cream
+
+**What people do:** Set text color to `#FFFFFF` because "it's a dark background, white pops."
+
+**Why it fails:** Pure white feels digital and clinical. Cream (#efeee9) feels printed and editorial — like magazine text on dark stock. The specific cream is what creates the "magazine cover" quality. White makes it look like a generic dark-mode page; cream makes it look like a magazine.
+
+**Fix:** Use `#efeee9` for all text. The slight warmth (a touch of yellow/gray) is what separates this from generic dark mode. Use `#c4c3be` for secondary text and `#8a8985` for muted chrome.
+
+---
+
+## Mistake 3: Adding Accent Colors
+
+**What people do:** Add a blue or amber accent for the CTA or nav hover because "it needs to pop."
+
+**Why it fails:** This style has NO accent color. The cream-on-dark contrast is the only color relationship. Adding an accent makes it feel like a designed page, not a magazine cover. The restraint IS the style — the absence of color is what creates the editorial quality.
+
+**Fix:** Remove all accent colors. Use cream (#efeee9) for everything. If you need hover state differentiation, use a slightly brighter cream (#f5f4f0) — never a different hue. The page should be cream on dark, period.
+
+---
+
+## Mistake 4: Using Cards or Panels
+
+**What people do:** Add card containers for the footer blurb or navigation because "text on photo is hard to read."
+
+**Why it fails:** Cards destroy the single composition. The text should sit directly on the photograph — that's what makes it a magazine cover, not a dashboard. If the text is hard to read, the photo is too bright or the text is in the wrong position. The solution is a darker photo or repositioned text, not a card.
+
+**Fix:** Position text in the darker areas of the photograph. If necessary, darken the photo slightly (underexpose). Never add cards, panels, or text backgrounds. The only "surface" is the mobile drawer, which is a semi-transparent dark panel that slides in from the right.
+
+---
+
+## Mistake 5: Jagged Portrait Cutout
+
+**What people do:** Use a quickly-masked portrait with jagged edges or residual background because "it's good enough."
+
+**Why it fails:** The portrait cutout is the central visual element. Jagged edges or residual background destroy the editorial quality instantly. The cutout must look like it was professionally masked — clean edges, no halos, no residual pixels. This is the difference between a magazine cover and a collage.
+
+**Fix:** Use professional masking tools (Photoshop Select Subject with manual cleanup, remove.bg with edge refinement). The cutout should have pixel-perfect edges. If the subject has hair, use edge refinement to handle fine details. The cutout is worth the time — it's the most important visual element.
+
+---
+
+## Mistake 6: Stopping the Marquee
+
+**What people do:** Make the marquee scroll only once, or pause it on hover, because "infinite scrolling is distracting."
+
+**Why it fails:** The infinite marquee IS the brand presence. It never stops — that's the point. The name is always moving, always present, always becoming. Stopping the marquee makes it feel like a static logo that happened to move once. The perpetual motion is what creates the "alive" quality.
+
+**Fix:** The marquee scrolls infinitely (30s linear infinite). It does not pause on hover. It does not stop after one loop. It is perpetual motion — the name is always scrolling, always present. If the motion is distracting, reduce the marquee size or speed, but don't stop it.
+
+---
+
+## Mistake 7: Adding Too Much Chrome
+
+**What people do:** Add a prominent CTA button, social proof badges, a newsletter signup, and multiple nav levels because "the page needs to convert."
+
+**Why it fails:** This style is about presence, not conversion. The chrome should be minimal — small nav links, small social links, a small footer blurb. Adding prominent CTAs, badges, and signups turns the magazine cover into a landing page, destroying the editorial quality.
+
+**Fix:** Limit chrome to: brand name (top-left), nav links (top-right, small), social links (top-right, small), footer blurb (bottom, small). No prominent CTAs. No badges. No signups. If conversion is needed, it happens on a different page — the portrait page is about presence.

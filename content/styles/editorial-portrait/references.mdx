@@ -1,0 +1,60 @@
+# Reference Gallery
+
+## Live Sites
+
+### Awwwards — Personal Portfolio Winners
+- **What works:** Single composition heroes, giant marquee names, portrait cutouts, cream on dark, minimal chrome
+- **Search:** Awwwards "portfolio" + "personal" filter, "editorial" tag
+
+### Photographer & Creative Director Portfolios
+- **What works:** Full-viewport portraits, layered text over image, minimal navigation, magazine-cover layouts
+- **Search:** Top photographer portfolio sites, creative director personal sites
+
+### Magazine Cover Design
+- **What works:** Single composition, one image + one name + minimal text, layered depth
+- **Search:** Magazine cover design archives (Vogue, Vanity Fair, Time)
+
+## Key Visual References
+
+### Giant Marquee Name
+- **Font:** Helvetica Neue ME, Ogg Medium, or distinctive editorial serif
+- **Size:** 16vh (desktop) / 26vh (mobile) — viewport-height-based
+- **Animation:** Infinite horizontal scroll, 30s linear
+- **Content:** Name duplicated for seamless loop ("MARCUS — BENNET — MARCUS — BENNET")
+
+### Portrait Cutout
+- **Format:** Transparent PNG with clean edges
+- **Position:** Centered, overlapping marquee (z-20)
+- **Quality:** Professional masking — no jagged edges, no residual background
+- **Pointer events:** None (doesn't block marquee or chrome)
+
+### Z-Index Stack
+- **Layer 1 (z-0):** Background photo (full viewport)
+- **Layer 2 (z-10):** Giant marquee name (scrolling)
+- **Layer 3 (z-10):** Cream rule line + footer blurb
+- **Layer 4 (z-20):** Portrait cutout (overlaps marquee)
+- **Layer 5 (z-30):** Header (brand, nav, social)
+- **Layer 6 (z-40):** Mobile drawer (when open)
+- **Layer 7 (z-50):** Hamburger icon (mobile)
+
+### Cream Rule Line
+- **Style:** 1px hairline, cream (#efeee9)
+- **Position:** Above footer blurb, full width
+- **Animation:** scaleX(0 → 1), 1100ms, delay 1200ms
+
+## Typography Reference
+- **Helvetica Neue ME** or **Ogg Medium** at 16vh/26vh — giant marquee
+- **Same family** at 14-16px — body and UI text
+- **Same family** at 11-12px, tracking 0.1em — micro labels
+
+## Screenshot Notes
+
+> When capturing references for this style, look for:
+> - The quality of the portrait cutout (clean edges, no residual background)
+> - The marquee size relative to viewport (should fill vertically)
+> - The cream text color (not white, not amber — specific editorial cream)
+> - The minimal chrome (nav and social at edges, not prominent)
+> - The z-index layering (portrait over marquee, chrome over all)
+> - The single composition (everything in one viewport, no scroll)
+> - The cream rule line (the one graphic element)
+> - The mobile drawer (right slide-in with staggered links)

@@ -1,0 +1,173 @@
+# Parameterized Template — Dark Cinematic Studio
+
+> Use this template to generate a Dark Cinematic Studio landing page for YOUR brand. Replace the bracketed placeholders with your details. The anti-slop constraints and style rules are locked — don't change them.
+
+---
+
+```
+Build a dark cinematic studio landing page for "[BRAND_NAME]" — [ONE-LINE PRODUCT DESCRIPTION, e.g., "a creative studio"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion + lucide-react. Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: A filmmaker's studio after midnight. Dark, moody, warm. Video backgrounds with film grain. Giant pull-up typography. Serif italic accents. Cinematic, intimate, creative.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY — these ARE the style)
+
+- NO cold blue or gray text — use warm cream #DEDBC8
+- NO pure white (#FFFFFF) text — use warm cream
+- NO cold blue or purple accents — warm amber #C4A882 only
+- NO light backgrounds — pure black #000000 only
+- NO static image heroes — video backgrounds with noise overlay
+- NO missing noise overlay — opacity 0.5-0.7 is mandatory
+- NO sans-serif everything — serif italic accent phrases required
+- NO centered hero layout — left-aligned on video
+- NO bounce or spring easing — cubic-bezier(0.22, 1, 0.36, 1) only
+- NO fast, aggressive motion — cinematic motion is patient
+- NO bright, saturated colors — muted, warm, cinematic tones
+- NO glassmorphic surfaces — dark, grainy, matte surfaces
+- NO more than ONE accent color
+
+---
+
+## FONTS
+
+Replace [DISPLAY_FONT] with a clean sans that works at giant scale. Good choices:
+- Almarai (300/400/700/800) — warm, geometric, dramatic range
+- Inter (400/700/800) — neutral, clean, confident
+- Satoshi (400/700) — modern, warm
+
+Replace [ITALIC_ACCENT_FONT] with a serif italic for accent phrases. Good choices:
+- Instrument Serif (italic) — elegant, editorial
+- Playfair Display (italic) — dramatic, high-contrast
+- Cormorant (italic) — refined, warm
+
+Load via Google Fonts. Set CSS utilities:
+- `.font-display` → [DISPLAY_FONT]
+- `.font-body` → [DISPLAY_FONT] (same family, lighter weight)
+- `.font-italic-accent` → [ITALIC_ACCENT_FONT]
+
+---
+
+## FLUID SIZE SYSTEM
+
+```css
+:root {
+  --pad-x: clamp(1.5rem, 5vw, 4rem);
+  --section-gap: clamp(4rem, 12vh, 10rem);  /* Very generous — cinematic */
+  --logo: clamp(1.1rem, 1vw, 1.4rem);
+  --nav: clamp(0.7rem, 0.3vw + 0.5rem, 0.85rem);
+  --headline: clamp(2rem, 5vw, 4rem);   /* Giant, cinematic */
+  --subhead: clamp(1.33rem, 3.33vw, 2.67rem);
+  --body: clamp(0.85rem, 0.3vw + 0.75rem, 1rem);
+  --micro: clamp(0.65rem, 0.2vw + 0.55rem, 0.75rem);
+  --btn-px: clamp(1.5rem, 2vw, 2rem);
+  --btn-py: clamp(0.7rem, 0.8vh, 0.9rem);
+}
+```
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --ground: #000000;          /* Pure black — the ONE style that uses it */
+  --ground-elevated: #0A0A0A;
+  --ground-panel: #101010;
+  --text-primary: #DEDBC8;     /* Warm cream — NEVER white */
+  --text-secondary: #E1E0CC;
+  --text-muted: #8A8780;
+  --accent: [ACCENT_COLOR];    /* ONE warm accent — see guidance */
+  --border: #1A1A1A;
+}
+```
+
+**Accent color guidance:** Choose ONE warm tone. Good options:
+- `#C4A882` (warm amber) — safest, most cinematic
+- `#DEDBC8` (cream, same as text) — subtle, emphasis through weight
+- `#B8956A` (deeper amber) — more dramatic
+
+The accent appears ONLY on: primary CTA, active nav state, one element per section. Nowhere else.
+
+---
+
+## PAGE STRUCTURE
+
+### Hero
+- `min-h-[100dvh]` (full viewport)
+- Video background: dark, ambient, slow, underexposed, seamless loop
+- Dark gradient overlay (top and bottom) for text readability
+- Noise overlay (mandatory, opacity 0.7, mix-blend-mode: overlay)
+- Left-aligned content, NEVER centered
+- Giant display text: [DISPLAY_FONT] 800, tracking 0.02em, leading 0.95, size `var(--headline)`
+- Pull-up animation: staggered, 1200ms, cubic-bezier(0.22, 1, 0.36, 1)
+- Body: [DISPLAY_FONT] 400, size `var(--body)`, color `--text-secondary`, max-width 480px
+- Scroll-linked character opacity reveal (0.2 → 1.0)
+- CTA: circular button with arrow icon, warm amber, glow on hover
+
+### About Section
+- `min-h-[100dvh]`, centered card on black
+- Card: `bg-[#101010]`, padding generous, rounded-lg (8px), max-width 640px
+- Mixed-style heading: sans + serif italic on one phrase
+- Example: "I am [NAME], *[ROLE].*" (italic serif on role)
+
+### Feature Sections (3-5 cards)
+- 4-column card grid (or 3-column for fewer features)
+- Cards: `bg-[#101010]`, rounded-lg (8px), border `1px solid #1A1A1A`
+- Staggered entrance: scale+fade, 800ms, 100ms delay per card
+- Each card: title ([DISPLAY_FONT] 700), body text ([DISPLAY_FONT] 400)
+
+### Footer
+- Footer row: brand name, year, tagline — all in [DISPLAY_FONT] 400, muted color
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- Pure black ground (#000000), warm cream text (#DEDBC8), one warm amber accent
+- Video backgrounds: dark, ambient, slow, underexposed, muted, seamless loop
+- Noise overlay: mandatory, opacity 0.7, mix-blend-mode: overlay, position: fixed
+- Dark gradient overlay on video for text readability
+- Serif italic accent ([ITALIC_ACCENT_FONT]) on at least one headline
+- Pull-up text animation: staggered, cubic-bezier(0.22, 1, 0.36, 1), 1200ms
+- Scroll-linked character opacity reveals (0.2 → 1.0)
+- Card staggered entrance: scale+fade, 800ms, 100ms delay per card
+- Full viewport sections (min-h-[100dvh])
+- Generous spacing (cinematic breathing room)
+- Honor `prefers-reduced-motion: reduce`
+
+---
+
+## ANIMATIONS
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Video background | Opacity fade-in | 2000ms | `ease-out` | 0ms |
+| Giant display text | Pull-up (translateY 100%→0) + opacity | 1200ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 300ms + i*80ms |
+| Body text | Scroll-linked character opacity (0.2→1.0) | Tied to scroll | — | — |
+| Cards | Scale(0.95)→1 + opacity | 800ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 400ms + i*100ms |
+| CTA | Opacity + scale(0.9)→1 | 600ms | `ease-out` | 800ms |
+
+`prefers-reduced-motion: reduce` → video pauses, all motion collapses to 0.01ms, text at full opacity.
+
+---
+
+## ICONS
+
+lucide-react: `ArrowUpRight` (CTA circle), `ArrowRight` (links).
+Custom: noise overlay SVG, video background component.
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines:** Be personal and creative. NOT "Build the future of creative." INSTEAD: "Join the lab" or "I am [NAME], *[ROLE].*"
+
+**Body copy:** Personal, intimate, first-person. Write like a filmmaker talking about their craft, not a marketer describing a product.
+
+**Serif italic accent:** Choose the phrase that carries the emotional weight. One per headline. "I am Marcus Chen, *a self-taught director.*" — the italic makes "a self-taught director" the emotional point.
+
+---
+
+Replace all [BRACKETED] placeholders with your brand details, then paste the full prompt into your AI coding assistant.
+```

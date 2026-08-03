@@ -1,0 +1,91 @@
+# Texture & Surface
+
+## Primary Texture: Photographic Background
+
+**The defining element.** A full-viewport photograph — typically a portrait, scene, or environment — serves as both the background and the primary visual content. The photo is dark enough to support cream text but detailed enough to provide visual interest.
+
+### Photo Specifications
+
+| Property | Specification |
+|----------|--------------|
+| **Content** | Portrait, scene, or environment relevant to the brand |
+| **Exposure** | Dark — underexposed enough for cream text readability |
+| **Composition** | Central subject with darker areas at edges for text placement |
+| **Resolution** | High — full viewport at retina density |
+| **Position** | Full-bleed, covers entire viewport |
+
+---
+
+## Secondary Texture: Portrait Cutout
+
+A clean transparent PNG of the subject (person, object) that overlaps the marquee. The cutout has no background — it's a silhouette that sits on top of the marquee, creating the layered depth.
+
+### Cutout Specifications
+
+| Property | Specification |
+|----------|--------------|
+| **Format** | Transparent PNG (alpha channel) |
+| **Quality** | Clean edges — no jagged pixels, no residual background |
+| **Position** | Centered, overlapping the marquee vertically |
+| **Z-index** | z-20 (above marquee, below chrome) |
+| **Pointer events** | `pointer-events: none` (doesn't block marquee or chrome) |
+
+**The cutout must be clean.** Jagged edges or residual background destroy the editorial quality. Use professional masking tools (Photoshop Select Subject, remove.bg with manual cleanup) to ensure pixel-perfect edges.
+
+---
+
+## Tertiary Texture: Cream Rule Line
+
+A thin horizontal line in cream (#efeee9) that separates the footer blurb from the main composition. This is the only "graphic" element — a single hairline that provides structure without decoration.
+
+```css
+.cream-rule {
+  height: 1px;
+  background: #efeee9;
+  transform-origin: left;
+  /* Entrance animation: scaleX(0 → 1), 1100ms, delay 1200ms */
+}
+```
+
+---
+
+## Image Processing Rules
+
+**Minimal processing.** The photo should look like a real photograph, not a processed image:
+
+| Processing | Effect | When to Use |
+|-----------|--------|-------------|
+| Darkening | Underexpose for text readability | If photo is too bright |
+| Slight desaturation | Muted, editorial quality | Optional, for mood |
+| No grain overlay | The photo IS the texture | Never add grain — it's already photographic |
+| No dither or halftone | This is not Dither Mono | Clean photography only |
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Full-viewport photograph (dark) |
+| Portrait cutout | Transparent PNG, no background |
+| Text | Cream (#efeee9) directly on photo — no text backgrounds, no cards |
+| Chrome (nav, social) | Transparent, cream text, directly on photo |
+| Cream rule line | 1px hairline, cream color |
+| Mobile drawer | Semi-transparent dark panel (rgba(0,0,0,0.9)) |
+
+**No cards, no panels, no surfaces.** Everything sits directly on the photograph. The only "surface" is the mobile drawer, which is a semi-transparent dark panel that slides in from the right.
+
+---
+
+## Texture Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Grain or noise overlay | The photo IS the texture — no overlay needed |
+| Dither or halftone processing | Clean photography — this is not Dither Mono |
+| Cards or panels on the photo | Text directly on photo — no intermediate surfaces |
+| Glassmorphic elements | Transparent text on photo — no frosted glass |
+| Gradient overlays | The photo's natural tonal variation is sufficient |
+| Multiple photographs | One photo — the single composition principle |
+| Bright, saturated photos | Dark, underexposed, editorial quality |
+| Stock photo aesthetics | Professional photography — this is a portrait, not a stock image |

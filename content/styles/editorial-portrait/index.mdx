@@ -2,10 +2,35 @@
 slug: editorial-portrait
 title: Editorial Portrait
 oneLineEssence: "Mono with cutout portrait, giant marquee name, editorial serif, cream on dark, single composition, no scroll on hero."
-axis: { color: 2, typography: 5, motion: 4, density: 2, texture: 2, layout: 3 }
-moodKeywords: [Personal, Editorial, Dramatic, Marquee, Intimate]
+axis:
+  color: 2
+  typography: 5
+  motion: 4
+  density: 2
+  texture: 2
+  layout: 3
+moodKeywords:
+  - Personal
+  - Editorial
+  - Dramatic
+  - Marquee
+  - Intimate
 difficulty: 3
-tags: [portrait, editorial, marquee, personal, cream, cutout]
+tags:
+  - portrait
+  - editorial
+  - marquee
+  - personal
+  - cream
+  - cutout
+  - magazine
+thumbnail: /images/styles/editorial-portrait/thumb.jpg
+heroImage: /images/styles/editorial-portrait/hero.jpg
+testedWith:
+  - cursor
+  - claude-code
+publishDate: 2026-08-03
+lastUpdated: 2026-08-04
 status: draft
 ---
 
@@ -13,109 +38,29 @@ status: draft
 
 **Mono with cutout portrait, giant marquee name, editorial serif, cream on dark, single composition, no scroll on hero.**
 
+---
+
 ## Visual DNA
-A single composition: brand name, giant scrolling marquee name, one portrait stack (background photo + cutout overlay), minimal chrome (nav/social), footer blurb. The portrait sits on top of the giant name so letters read through the cutout. Cream (#efeee9) on dark/photo. No cards, no pills, no glow. A magazine cover come to life.
 
-## Design Principles
-1. **ONE COMPOSITION** — Entire hero is a single layered image. No scrolling. Everything in one viewport
-2. **PORTRAIT OVER TYPE** — Cutout portrait overlaps giant marquee, creating depth through layering
-3. **MARQUEE AS IDENTITY** — Scrolling name IS the brand presence. Never stops.
+A single composition: brand name, giant scrolling marquee name, one portrait stack (background photo + cutout overlay), minimal chrome (nav/social), footer blurb. The portrait sits on top of the giant marquee so letters read through the cutout. Cream (#efeee9) on dark/photo. No cards, no pills, no glow. A magazine cover come to life.
 
-## Typography
-- Display: Helvetica Neue ME or Ogg Medium, giant marquee scale (16-26vh)
-- Body/UI: Same family or clean sans, 14-16px
+The entire hero is one layered image — no scrolling, no sections, no grid. The marquee name scrolls infinitely behind the portrait, creating constant motion within a static composition. The portrait cutout overlaps the marquee, creating depth through layering. This is what a magazine cover would do if it were a website — one image, one name, one composition, infinite presence.
 
-## Color
-- Background: dark photo or near-black
-- Text: cream #efeee9
-- No purple, no cards, no glow
+## Axis Position
 
-## Motion
-- Infinite horizontal marquee (30s linear infinite)
-- Staggered entrance animations (fade-up, cubic-bezier(0.22, 1, 0.36, 1))
-- Mobile drawer with staggered reveals
-
-## Layout
-- Full viewport hero, overflow-hidden
-- Layered: BG photo → marquee → portrait cutout → chrome
-- Desktop footer with cream rule line
-- Mobile hamburger → drawer
-
-## Texture
-- Photographic background
-- Clean portrait cutout (transparent PNG)
-- Subtle entrance animations only
-
-## Vocabulary
-**Primary:** `giant marquee name`, `portrait cutout overlay`, `editorial portrait`, `cream on dark`, `single composition`
-**Banned:** `scrolling hero`, `card layouts`, `purple accents`, `multiple sections in hero`
-
-## Anti-Slop
-- [ ] Single composition hero (no scroll)
-- [ ] Cream (#efeee9) text, not white
-- [ ] Portrait cutout layered over marquee
-- [ ] Infinite marquee (30s linear)
-- [ ] No cards, pills, or glow
-- [ ] Editorial serif display font
-- [ ] Staggered entrance animations
-
-## When to Use
-Personal portfolios, photographer sites, creative directors, editorial features, artist websites
-
-## Dual Prompts
-
-### Exact Replica
 ```
-Build an editorial portrait page for "Marcus Bennet". Stack: React + Vite + TS + Tailwind + lucide-react.
-
-## FONTS
-Helvetica Neue ME (via OnlineWebFonts) — used for all text
-
-## COLOR
---cream: #efeee9
---bg: dark photographic background
-
-## STRUCTURE
-- Root: relative h-[100dvh] overflow-hidden
-- Layers (z-index): BG photo (default) → marquee (z-10) → cream rule (z-10) → footer (z-10) → portrait cutout (z-20) → header+mobile footer (z-30) → mobile drawer (z-40) → hamburger (z-50)
-- Marquee: "Marcus — Bennet" duplicated twice, translateX(0)→(-50%), 30s linear infinite, at 16vh/sm:14vh, size 16vh/sm:26vh
-- Portrait cutout: absolute inset-0, pointer-events-none, z-20
-- Header: brand "Marcus" top-left, nav+social top-right (desktop), hamburger (mobile)
-- Footer: "Visuals Composer / Digital Crafter" left, "A homage to Marcus Holloway" right
-- Mobile drawer: right slide-in, staggered link reveals
-
-## ANIMATIONS
-- BG: fade-in 1.2s ease-out
-- Portrait: rise-in 1.4s cubic-bezier(0.22,1,0.36,1), delay 300ms
-- UI chrome: fade-up 0.9s, staggered delays (brand 800ms, nav 1000+i*80ms, footer 1400ms)
-- Cream rule: scaleX 0→1, 1.1s, delay 1200ms
-
-## ANTI-SLOP
-- Cream #efeee9 only
-- Single composition, no hero scroll
-- Portrait over marquee layering
-- No cards, pills, glow, purple
+Color:       ●●○○○○  Cream on dark (minimal palette)
+Typography:  ○○○○●●  Editorial serif (marquee-scale type)
+Motion:      ○○○●●○  Marquee scroll + staggered entrance
+Density:     ○●○○○○  Sparse (single composition, minimal chrome)
+Texture:     ○○●○○○  Photographic + cutout
+Layout:      ○○●○○○  Layered single composition
 ```
 
-### Parameterized Template
-```
-Build an editorial portrait page for "[FULL_NAME]". Stack: React + Vite + TS + Tailwind.
+## Mood Keywords
 
-## STRUCTURE
-- Full viewport hero (100dvh, overflow-hidden)
-- BG photo → giant marquee name → portrait cutout → minimal chrome
-- Marquee: name duplicated, 30s linear infinite, 16-26vh size
-- Cream text on dark/photo background
+**Personal · Editorial · Dramatic · Marquee · Intimate**
 
-## ANIMATIONS
-- Staggered fade-up entrances
-- Infinite marquee scroll
-- Mobile drawer with stagger
+## Difficulty
 
-## ANTI-SLOP (LOCKED)
-- Single composition (no scroll on hero)
-- Cream text (#efeee9)
-- Portrait cutout over marquee
-- No cards, pills, glow
-- Editorial serif display font
-```
+★★★☆☆ — Accessible but requires precise layering. The z-index stack must be exact: background photo → marquee → portrait cutout → chrome. The marquee must scroll seamlessly. The portrait cutout must be a clean transparent PNG.

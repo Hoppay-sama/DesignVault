@@ -1,0 +1,69 @@
+# Typography System
+
+## Display / Marquee Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Editorial serif or distinctive sans — the voice of identity |
+| **Examples** | Helvetica Neue ME, Ogg Medium, Editorial New, Fraunces (display), Playfair Display |
+| **Weight** | 400-600 (medium — the scale carries weight, not the weight) |
+| **Tracking** | -0.02em to 0 (tight — marquee text must read as a unit) |
+| **Size** | Giant marquee scale — `16vh` to `26vh` (viewport-height-based) |
+| **Transform** | Uppercase for marquee; sentence case for other display |
+
+**Why these fonts:** The marquee name must be distinctive enough to function as identity, not just text. Helvetica Neue ME has the editorial weight of magazine mastheads. Ogg Medium has a warm, humanist quality. The font choice IS the brand — it's the most prominent element on the page.
+
+**Marquee size:** The marquee is sized in viewport height units (`vh`), not `rem` or `px`. This ensures the name fills the viewport vertically regardless of screen size. `16vh` on desktop, `26vh` on mobile (larger relative to smaller viewport).
+
+---
+
+## Body / UI Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same family as display or clean sans — coherent voice |
+| **Examples** | Helvetica Neue ME, Inter (400/500), Söhne (if licensed) |
+| **Weight** | 400-500 |
+| **Tracking** | 0 to 0.02em (normal to slightly open) |
+| **Size** | 14-16px (medium — readable but not competing with marquee) |
+| **Line Height** | 1.5-1.6 (normal) |
+
+**Why same family:** Using the same font for marquee and UI creates coherence — the entire page speaks with one voice. The marquee is just the same font at giant scale. This coherence is what makes the single composition feel unified, not collaged.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same family, lighter weight, wider tracking |
+| **Examples** | Helvetica Neue ME (300/400), Inter (400) |
+| **Weight** | 300-400 |
+| **Tracking** | 0.1em-0.15em (wide, editorial) |
+| **Size** | 11-12px (small — chrome should be minimal) |
+| **Transform** | UPPERCASE for labels; sentence case for footer blurb |
+
+**Usage:** Navigation links, social links, footer blurb, section labels. These small text elements provide function without competing with the marquee composition.
+
+---
+
+## Type Scale
+
+**Ratio:** Marquee is outside the normal scale (viewport-based). Other type follows 1.4x:
+
+```
+Marquee:    16vh (desktop) / 26vh (mobile)  — viewport-based
+Display:    clamp(1.5rem, 3vw, 2.5rem)       — 1.4x
+Body:       14-16px                          — baseline
+Micro:      11-12px                          — 0.75x
+```
+
+---
+
+## Font Pairing Logic
+
+**Single family:** This style typically uses ONE font family for everything — marquee, body, and micro. The variation comes from size, weight, and tracking, not from mixing families. This creates the unified voice that makes the single composition feel coherent.
+
+**Optional second family:** If a second font is needed for contrast, use a serif italic for the footer blurb or a specific accent phrase. But the default is single-family coherence.
+
+**Never mix:** Don't use more than 2 typeface families. The single composition requires typographic unity — multiple fonts make it feel like a collage, not a composition.
