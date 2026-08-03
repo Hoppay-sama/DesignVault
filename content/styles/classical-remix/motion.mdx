@@ -1,0 +1,80 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Classical Remix is **gentle and deliberate**. Illustrations fade in like they're being revealed on a page. Orbit lines draw on like a scientific diagram being constructed. Nothing bounces, nothing springs, nothing rushes. The motion has the patience of a scholar turning a page — unhurried, considered, precise.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Classical illustrations | Opacity fade-in + slight scale (0.98 → 1) | 1000ms | `ease-out` | 200ms |
+| Orbit lines | SVG stroke draw-in (stroke-dasharray) | 1500ms | `ease-in-out` | 300ms |
+| Display headline | Opacity + translateY(12px) → 0 | 800ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 100ms |
+| Body text | Opacity fade-in | 600ms | `ease-out` | 400ms |
+| Trust logo row | Opacity fade-in (staggered) | 500ms per logo | `ease-out` | 600ms + i*100ms |
+| CTA pill | Opacity + slight scale (0.95 → 1) | 600ms | `ease-out` | 700ms |
+
+**Key easing:** `cubic-bezier(0.22, 1, 0.36, 1)` — smooth deceleration for text. `ease-out` for illustrations. No bounce, no spring.
+
+---
+
+## Scroll Behavior
+
+| Effect | Specification |
+|--------|--------------|
+| Parallax on illustrations | Subtle — 5-10% of scroll distance (very gentle) |
+| Orbit line draw-in | On scroll-into-view, stroke-dasharray animation (once) |
+| Text reveals | Opacity fade-in on scroll-into-view (600ms) |
+| Section transitions | Crossfade with 200ms overlap |
+
+**Scroll-linked effects are gentle.** The style doesn't need dramatic scroll choreography — the classical illustrations and serif type carry the experience.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Navigation links | Ink color → accent color (300ms) | — |
+| CTA pill | Slight scale (1.02) + shadow (300ms) | Scale 0.98 (tactile press) |
+| Classical illustrations | Slight brightness increase (1.0 → 1.02) | — |
+| Trust logos | Opacity 0.6 → 1.0 (200ms) | — |
+| Links in body | Underline appears (200ms) | — |
+| Orbit lines | No hover state — they're decorative | — |
+
+**Hover states are gentle.** Only interactive elements respond. Illustrations and orbit lines are static — they're page elements, not UI.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- All entrance animations collapse to instant opacity changes
+- No parallax
+- No orbit line draw-in (lines appear fully drawn)
+- Hover states use instant changes (no transition)
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| ❌ Never animate | Why |
+|-----------------|-----|
+| Bounce or spring easing | Too playful — this is scholarly, not bouncy |
+| Color transitions on text | Breaks the editorial register |
+| Rotation or skew | Too dynamic for classical illustrations |
+| Aggressive scale transforms | Illustrations should feel stable, not reactive |
+| Marquee text | Too modern/digital for this style |
+| Every element fading in | Motion must be purposeful — illustrations and orbit lines only |

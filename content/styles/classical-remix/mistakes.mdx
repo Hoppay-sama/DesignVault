@@ -1,0 +1,69 @@
+# Common Mistakes
+
+## Mistake 1: Using Sans-Serif Headlines
+
+**What people do:** Use Inter or Helvetica for headlines because "it's cleaner and more modern."
+
+**Why it fails:** The serif display font IS the style. Without it, you have a generic white SaaS page with classical illustrations pasted on — a mismatch. The serif provides the editorial voice that makes the classical illustrations feel native rather than decorative.
+
+**Fix:** Use Cormorant Garamond (400/600) or Playfair Display for all headlines. The high-contrast strokes of these serifs create the "Renaissance manuscript" quality. Pair with Inter for body text — the contrast between serif display and sans body IS the style.
+
+---
+
+## Mistake 2: Overusing Italic Emphasis
+
+**What people do:** Italicize multiple phrases in a headline, or italicize entire sentences.
+
+**Why it fails:** The italic emphasis technique works because it's rare — ONE phrase per headline. When everything is italic, nothing is emphasized. The italic becomes decorative rather than meaningful. "Wisdom, *systematized*, for *everyone*, *everywhere*" has no emphasis — it's just a styled sentence.
+
+**Fix:** One italic phrase per headline. Choose the word that matters most — the one that changes the meaning if removed. "Wisdom, *systematized*" — "systematized" is the emphasis because it's the claim. The rest is context.
+
+---
+
+## Mistake 3: Using Modern Photography
+
+**What people do:** Drop in a hero photo of a modern office or a person using a laptop.
+
+**Why it fails:** Modern photography breaks the classical register instantly. A photo of a person in a modern office next to a Renaissance illustration creates a jarring collage, not a coherent style. The classical illustrations are the visual language — they provide the "scholarly tradition" that modern photos cannot.
+
+**Fix:** Use classical illustrations only — robed scholars, anatomical drawings, celestial maps, herbarium specimens. Process them with grain and desaturation to look aged. These can be sourced from public domain archives (Wikimedia Commons, Smithsonian Open Access).
+
+---
+
+## Mistake 4: Omitting Orbit Lines
+
+**What people do:** Skip the orbit lines because "they're too subtle to matter."
+
+**Why it fails:** The orbit lines are the page's connective tissue. Without them, the layout is a grid of separate elements — a headline here, an illustration there, a CTA below. With orbit lines, the page becomes a scientific diagram where everything is connected. The subtlety IS the point — they're felt, not seen, but their absence is noticeable.
+
+**Fix:** Add thin orbit lines (0.5px stroke, accent color at 8-15% opacity) behind text columns. They should connect elements — a headline to an illustration, a CTA to a trust logo. Use SVG circles and ellipses positioned to imply orbital relationships.
+
+---
+
+## Mistake 5: Using Pure White Background
+
+**What people do:** Set the background to `#FFFFFF` because "it's a clean, editorial white."
+
+**Why it fails:** Pure white is too clinical, too digital. The warm white (#FAFAF8) mimics high-quality paper stock — the kind used in art books and museum catalogs. Pure white makes the page feel like a web app; warm white makes it feel like a printed publication.
+
+**Fix:** Use `#FAFAF8` for the ground. The slight warmth (a touch of yellow/gray) is what separates this from a generic light-mode SaaS page. Add a very subtle paper grain (opacity 0.03) to reinforce the printed quality.
+
+---
+
+## Mistake 6: Missing Trust Logo Row
+
+**What people do:** Omit the trust logo row or hide it at the bottom of the page.
+
+**Why it fails:** The trust logo row is a structural element in this style, not an afterthought. It bridges the hero (value proposition) and the features (product details). The institutions named carry the same classical authority as the illustrations. Without the trust row, the hero feels disconnected from the rest of the page.
+
+**Fix:** Place a trust logo row directly below the hero: "TRUSTED BY RESEARCHERS AT" followed by university or institution logos in grayscale. This row should appear before any feature sections.
+
+---
+
+## Mistake 7: Using Sharp Corners on Everything
+
+**What people do:** Apply `border-radius: 0` to all elements including the CTA button.
+
+**Why it fails:** The blue pill CTA (fully rounded) is the one modern element in an otherwise classical palette. It's the bridge between Renaissance scholarship and modern SaaS. Making it sharp-cornered removes that bridge and makes the page feel like a museum exhibit rather than a product page.
+
+**Fix:** The CTA button should be a pill (fully rounded, `border-radius: 999px`). This is the ONLY rounded element on the page. Everything else — cards, panels, illustrations — uses sharp corners or no visible border. The pill is the modern accent in the classical world.

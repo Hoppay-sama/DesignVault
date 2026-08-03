@@ -2,10 +2,36 @@
 slug: print-tech-paper
 title: Print Tech Paper
 oneLineEssence: "Pale sage ground, topographic contour lines, mono data callouts, transaction-ID chips. A field manual for a future that already happened."
-axis: { color: 2, typography: 3, motion: 1, density: 3, texture: 4, layout: 1 }
-moodKeywords: [Technical, Precise, Data-Forward, Sage, Methodical]
+axis:
+  color: 2
+  typography: 3
+  motion: 1
+  density: 3
+  texture: 4
+  layout: 1
+moodKeywords:
+  - Technical
+  - Precise
+  - Data-Forward
+  - Sage
+  - Methodical
 difficulty: 3
-tags: [print, technical, data, sage, topographic, mono]
+tags:
+  - print
+  - technical
+  - data
+  - sage
+  - topographic
+  - mono
+  - field-manual
+  - paper
+thumbnail: /images/styles/print-tech-paper/thumb.jpg
+heroImage: /images/styles/print-tech-paper/hero.jpg
+testedWith:
+  - cursor
+  - claude-code
+publishDate: 2026-08-03
+lastUpdated: 2026-08-04
 status: draft
 ---
 
@@ -13,108 +39,29 @@ status: draft
 
 **Pale sage ground, topographic contour lines, mono data callouts, transaction-ID chips. A field manual for a future that already happened.**
 
+---
+
 ## Visual DNA
-Pale sage (#C8D5C0) or cream (#F5F0E8) ground resembling uncoated stock paper. Topographic contour lines and technical diagrams serve as illustration. Monospace data callouts and transaction-ID chips create a feel of printed technical documentation. Grotesk display type provides authority. Everything feels like a field manual for a future that already happened.
 
-## Design Principles
-1. **DATA AS DECORATION** — Coordinates, IDs, ruler ticks aren't metadata — they're design elements
-2. **PALE GROUND, DARK INK** — The paper color is the canvas. Dark ink (#2A2A2A, not pure black) is the content
-3. **TECHNICAL MARGINALIA** — Every element has a label, a number, a reference
+A world built from pale sage (#C8D5C0) or cream (#F5F0E8) ground that resembles uncoated stock paper — the kind you'd find in a geological survey field manual or a NASA technical report from 1974. Topographic contour lines wind through the layout as both illustration and infrastructure. Monospace data callouts and transaction-ID chips populate every margin, creating the feel of printed technical documentation where every element has a reference number, a coordinate, a timestamp. Grotesk display type provides quiet authority without shouting.
 
-## Typography
-- Display: Grotesk (Space Grotesk 600/700), clamp(2rem, 4vw, 3.5rem)
-- Body: Clean sans (Inter 400), 14-15px
-- Mono labels: JetBrains Mono 400, 10-11px, tracking 0.15em, uppercase
+The aesthetic is deliberately anachronistic — a future that already happened. The page feels like it was printed, annotated, and filed in a cabinet of important documents. Nothing is glossy. Nothing is digital-smooth. The paper grain is visible. The contour lines have the slight wobble of hand-drawn cartography. The mono labels read like they were stamped by a labeling machine. This is information design as craft, not as decoration.
 
-## Color
-- Ground: #C8D5C0 (pale sage) or #F5F0E8 (cream)
-- Ink: #2A2A2A (dark, not pure black)
-- Accent: #3D6B4F (forest green) or #8B6F47 (antique brown)
+## Axis Position
 
-## Motion
-Minimal to none. This is a printed page — static by nature. Subtle fade-ins only (600ms ease-out).
-
-## Layout
-- Strict grid, technical margins
-- Data callouts positioned at corners/edges
-- Topographic illustrations as section backgrounds
-- Ruler ticks and coordinate labels throughout
-
-## Texture
-- Paper grain (SVG feTurbulence, opacity 0.06)
-- Topographic contour line illustrations
-- Film-strip ticks along edges
-- Halftone dot patterns on data visualizations
-
-## Vocabulary
-**Primary:** `topographic contour`, `mono data callouts`, `transaction-ID chips`, `pale sage ground`, `technical marginalia`
-**Banned:** `gradient backgrounds`, `bold colorful accents`, `photographic imagery`, `glassmorphism`
-
-## Anti-Slop
-- [ ] Pale paper ground (sage or cream, never white)
-- [ ] Dark ink not pure black (#2A2A2A)
-- [ ] Monospace labels on all data elements
-- [ ] Topographic or technical illustration
-- [ ] Transaction-ID or coordinate chips
-- [ ] Paper grain texture
-- [ ] No gradients, no photos, no glass
-
-## When to Use
-Technical products, data platforms, scientific tools, documentation sites, architecture firms
-
-## Common Mistakes
-1. Using pure white instead of sage/cream → Fix: #C8D5C0 or #F5F0E8
-2. Adding photographic imagery → Fix: topographic line illustrations only
-3. Using colorful accents → Fix: forest green or antique brown only
-4. Making it too clean → Fix: add paper grain and technical marginalia
-
-## Dual Prompts
-
-### Exact Replica
 ```
-Build a print-tech landing page for "TERRAFORM" — a geological survey platform. Stack: React + Vite + TS + Tailwind.
-
-## FONTS
-Space Grotesk (600/700) + Inter (400) + JetBrains Mono (400)
-
-## COLOR
---ground: #C8D5C0 (pale sage)
---ink: #2A2A2A
---accent: #3D6B4F (forest green)
-
-## STRUCTURE
-- Header: mono label "TERRAFORM / GEOLOGICAL SURVEY UNIT 7", grotesk display
-- Hero: topographic contour SVG background, headline "MAPPING THE UNSEEN", mono data callouts at corners: "LAT: 47.6062° N", "LONG: 122.3321° W", "DEPTH: 2.4km"
-- Feature sections: 3-column grid, each cell has mono ID chip ("SECTOR 04-A"), grotesk title, body text, contour line decoration
-- Data strip: full-width mono row with transaction-style IDs: "TXN-2026-0847 | SEISMIC READ: 4.2M | LAST UPDATE: 03:42 UTC"
-- Footer: giant "TERRAFORM" wordmark with ruler tick marks
-
-## ANTI-SLOP
-- Pale sage ground only
-- No photographs
-- Mono labels on all data
-- Topographic illustrations only
-- Paper grain overlay
+Color:       ●●○○○○  Muted (sage/cream, one accent)
+Typography:  ○●●○○○  Grotesk + Mono
+Motion:      ●○○○○○  Minimal (static page feel)
+Density:     ○●●○○○  Balanced (technical density, breathing room)
+Texture:     ○●●●○○  Paper grain + line illustration
+Layout:      ●○○○○○  Strict grid (technical margins)
 ```
 
-### Parameterized Template
-```
-Build a print-tech page for "[BRAND_NAME]" — [technical product]. Stack: React + Vite + TS + Tailwind.
+## Mood Keywords
 
-## COLORS
-- Ground: pale sage #C8D5C0 or cream #F5F0E8
-- Ink: #2A2A2A (dark, not pure black)
-- Accent: one muted technical color
+**Technical · Precise · Data-Forward · Sage · Methodical**
 
-## ELEMENTS
-- Topographic/technical illustrations (not photos)
-- Monospace data callouts everywhere
-- Transaction-ID chips
-- Paper grain texture
-- Ruler ticks, coordinate labels
+## Difficulty
 
-## ANTI-SLOP (LOCKED)
-- No white ground, no photos, no gradients
-- All data in monospace
-- Technical marginalia throughout
-```
+★★★☆☆ — Accessible but requires discipline. The temptation is to add color and photography. The skill is in restraint — letting the paper, the contour lines, and the mono labels do the work.

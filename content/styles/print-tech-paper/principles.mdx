@@ -1,0 +1,39 @@
+# Design Principles
+
+## 1. DATA AS DECORATION
+
+Coordinates, transaction IDs, ruler ticks, and reference numbers are not metadata — they are the design. Every section has a sector code. Every data point has a coordinate. Every illustration has a scale reference. The technical marginalia IS the visual texture. When you remove the labels, the page should look naked.
+
+**What it prevents:** The default of treating data labels as afterthoughts tucked into corners. In this style, the labels are structural — they anchor the composition and provide the "field manual" feel.
+
+---
+
+## 2. PALE GROUND, DARK INK
+
+The paper color is the canvas. Dark ink (#2A2A2A, never pure black) is the content. The relationship between pale sage or cream ground and dark ink mimics uncoated paper stock — slightly absorbent, never high-contrast. This is the opposite of a dark-mode dashboard. The page should feel like it was printed, not displayed.
+
+**What it prevents:** The default of white (#FFFFFF) backgrounds with pure black (#000000) text that makes every page look like a generic web app. The sage/cream ground immediately signals "this is a document, not a dashboard."
+
+---
+
+## 3. TECHNICAL MARGINALIA
+
+Every element has a label, a number, a reference. Section headers carry sector codes (`SECTOR 04-A`). Data points carry coordinates (`LAT: 47.6062° N`). Illustrations carry scale bars. The footer carries a transaction-style ID strip. This density of labeling creates the "field manual" aesthetic — a document where precision is non-negotiable and every piece of information is cataloged.
+
+**What it prevents:** The default of clean, label-free sections that look like marketing pages. The marginalia forces a technical reading register — the viewer expects data, not slogans.
+
+---
+
+## 4. LINE AS ILLUSTRATION
+
+Photography is banned. Illustration is line-based only — topographic contour lines, technical diagrams, cross-sections, schematics, wireframes. These illustrations serve double duty: they're decorative AND informational. A contour line pattern in the background isn't just texture — it implies terrain, measurement, survey. The line work has the slight imprecision of pen plotting, not the smoothness of vector graphics.
+
+**What it prevents:** The default of dropping in stock photography or 3D renders. Line illustration forces a technical, documentary register that matches the paper aesthetic.
+
+---
+
+## 5. STATIC BY NATURE
+
+This is a printed page — motion is minimal to nonexistent. Subtle fade-ins on scroll (600ms ease-out) are the maximum. No parallax, no scroll-linked animations, no hover scale transforms. The page should feel like it was already there when you arrived, like a document that exists independent of your viewing. Motion would break the print illusion.
+
+**What it prevents:** The default of animating everything on scroll. A printed field manual doesn't move — and neither should this page. Motion undermines the "already existed" quality.

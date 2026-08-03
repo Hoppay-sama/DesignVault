@@ -1,0 +1,115 @@
+# Layout Grammar
+
+## Grid System
+
+**Strict 12-column grid with technical margins.**
+
+This is the most rigid grid system in the style library. Content aligns to a 12-column grid with consistent gutters. The grid is visible — not as decoration, but as infrastructure. Ruler ticks and coordinate labels mark the grid edges, making the structure part of the design.
+
+```
+[1][2][3][4][5][6][7][8][9][10][11][12]
+ ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+   Content aligned to grid
+   with technical margins on all sides
+ ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+ [ruler ticks along edges]
+```
+
+**Technical margins:** The page has consistent outer margins (clamp(1.5rem, 4vw, 3rem)) that contain ruler tick marks and coordinate labels. These margins are structural — they're where the technical marginalia lives.
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | `min-h-[80dvh]` (not full viewport — this is a document, not a splash) |
+| Background | Pale sage ground with topographic contour SVG illustration |
+| Headline position | Left-aligned, vertically centered |
+| Headline size | `clamp(2rem, 4vw, 3.5rem)` — confident, not monumental |
+| Data callouts | Positioned at corners: top-left coordinate, top-right timestamp, bottom-left sector code |
+| CTA | Below headline, left-aligned, outlined with accent color |
+| Topographic illustration | Full-bleed background or right-side panel |
+
+**Never centered hero.** Left-aligned content with data callouts at corners is the structural signature. The corners are where the technical marginalia lives.
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(3rem, 8vh, 6rem);
+--component-gap: clamp(1.5rem, 3vw, 3rem);
+--content-max-width: min(1100px, calc(100vw - clamp(2rem, 6vw, 4rem)));
+--body-max-width: 680px;
+```
+
+**Spacing is moderate.** Not as monumental as Dither Mono, but generous enough to feel like a printed document. Sections are separated by hairline rules (1px solid, darker sage) and whitespace.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Technical 3-Column Grid
+```
+┌──────────┬──────────┬──────────┐
+│ SECTOR   │ SECTOR   │ SECTOR   │
+│ 04-A     │ 04-B     │ 04-C     │
+│          │          │          │
+│ Title    │ Title    │ Title    │
+│ Body     │ Body     │ Body     │
+│ Data     │ Data     │ Data     │
+└──────────┴──────────┴──────────┘
+```
+
+### Pattern 2: Asymmetric Split with Contour Illustration
+```
+┌─────────────────────┬──────────┐
+│ Headline            │ [contour  │
+│ Body text           │  line     │
+│ Data callout        │  illus.]  │
+│ CTA                 │           │
+└─────────────────────┴──────────┘
+```
+
+### Pattern 3: Full-Width Data Strip
+```
+┌─────────────────────────────────────────┐
+│ TXN-2026-0847 | SEISMIC READ: 4.2M      │
+│ | LAST UPDATE: 03:42 UTC | SECTOR 04-A  │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 4: Document Footer with Ruler Ticks
+```
+┌─────────────────────────────────────────┐
+│ |||  ||||  |||||  ||||  |||  ||  |  ||| │
+│ TERRAFORM          © 2026          v2.4 │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Full 12-column grid, 3-column feature sections, corner data callouts |
+| **Tablet (768px)** | 6-column grid, 2-column features, data callouts stack |
+| **Mobile (375px)** | Single column, data callouts inline, ruler ticks simplified |
+
+**Fluid typography via `clamp()`** keeps the technical document feel at all sizes. The grid simplifies on mobile but never disappears — the structure is the style.
+
+---
+
+## Layout Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Centered hero layout | Left-aligned with corner data callouts |
+| Card-grid with rounded corners | Sharp-cornered panels with hairline borders |
+| Full-bleed photography | Topographic line illustrations only |
+| Floating elements over images | Grid-aligned content on sage ground |
+| Asymmetric/experimental layouts | Strict grid — this is a technical document |
+| Rounded corners (border-radius > 2px) | Sharp corners (0-2px max) — printed pages don't round |
+| Whitespace without marginalia | Fill margins with ruler ticks, coordinates, sector codes |

@@ -1,0 +1,114 @@
+# Texture & Surface
+
+## Primary Texture: Paper Grain
+
+**The defining element.** The ground must look like uncoated paper stock — slightly textured, slightly absorbent. A subtle SVG noise overlay creates the paper grain that separates this from a flat digital background.
+
+### Implementation
+
+```css
+.paper-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,..."); /* feTurbulence noise */
+  mix-blend-mode: multiply;
+}
+```
+
+**Parameters:**
+- Opacity: 0.05-0.08 (subtle — should be felt, not seen)
+- Blend mode: `multiply` (darkens the sage ground slightly)
+- Position: `fixed` (covers entire viewport, doesn't scroll)
+- No animation — paper grain is static
+
+---
+
+## Secondary Texture: Topographic Contour Lines
+
+Line-based illustrations that serve as both decoration and information. Topographic contour lines, technical diagrams, cross-sections, schematics. These are the ONLY form of illustration — photography is banned.
+
+### Contour Line Implementation
+
+```jsx
+<svg viewBox="0 0 800 600" className="contour-illustration">
+  {/* Contour paths with slight wobble */}
+  <path d="M 0 300 Q 200 280 400 310 T 800 290"
+        stroke="#3D6B4F" strokeWidth="0.5" fill="none" opacity="0.3" />
+  <path d="M 0 320 Q 200 300 400 330 T 800 310"
+        stroke="#3D6B4F" strokeWidth="0.5" fill="none" opacity="0.25" />
+  {/* Repeat with varying offsets */}
+</svg>
+```
+
+**Parameters:**
+- Stroke: 0.5px (hairline — technical, not decorative)
+- Color: Accent color at 20-35% opacity
+- Wobble: Slight irregularity in paths (not perfectly smooth — mimics pen plotting)
+- Density: 8-15 contour lines per illustration area
+
+---
+
+## Tertiary Texture: Ruler Ticks and Coordinate Marks
+
+```css
+.ruler-ticks {
+  /* Repeating linear gradient for tick marks */
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent 19px,
+    #555 19px,
+    #555 20px  /* 1px tick every 20px */
+  );
+  height: 8px;
+  opacity: 0.4;
+}
+```
+
+**Usage:** Along section edges, as section dividers, in margins. Ruler ticks create the "measured document" feel — every space is quantified.
+
+---
+
+## Image Processing Rules
+
+**NEVER use photography.** All visual elements must be line-based:
+
+| Visual Type | Effect | When to Use |
+|-------------|--------|-------------|
+| Topographic contour lines | Terrain/measurement illustration | Hero backgrounds, section dividers |
+| Technical diagrams | Schematic/cross-section | Feature illustrations |
+| Wireframe/schematic | Structural diagram | Data visualizations |
+| Halftone dot patterns | Tonal texture on data viz | Background fills, chart areas |
+| Coordinate grids | Reference grid | Behind illustrations, in margins |
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Pale sage (#C8D5C0) + paper grain overlay |
+| Cards/Panels | Slightly darker sage (#B8C5B0) with 1px border (#A8B5A0) |
+| Buttons | Outlined with accent color, fill on hover |
+| Navigation | Transparent, ink color text, accent on hover/active |
+| Dividers | 1px hairline (#A8B5A0) or ruler tick pattern |
+| Data strips | Slightly darker sage panel with mono text |
+
+**No glossy, no glassmorphism, no shadows.** Surfaces feel like printed paper — flat, matte, slightly textured. Elevation comes from slightly darker sage, not from drop shadows.
+
+---
+
+## Texture Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Raw stock photography | Topographic line illustrations only |
+| Gradient backgrounds | Flat sage ground + paper grain |
+| Glassmorphic cards | Flat sage panels with hairline borders |
+| 3D renders or illustrations | 2D line drawings, schematics, wireframes |
+| Drop shadows | Hairline borders for separation |
+| Smooth vector graphics | Slightly wobbly, pen-plotted line quality |
+| Colorful data visualizations | Halftone or contour-line data viz in accent color |

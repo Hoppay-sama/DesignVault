@@ -1,0 +1,69 @@
+# Common Mistakes
+
+## Mistake 1: Using Pure White Background
+
+**What people do:** Set the background to `#FFFFFF` because "it's a paper aesthetic, paper is white."
+
+**Why it fails:** Pure white is the default screen background. It immediately signals "web app" not "printed document." The sage (#C8D5C0) or cream (#F5F0E8) ground is what creates the uncoated-stock illusion. Pure white also creates harsh contrast with the dark ink that feels digital, not printed.
+
+**Fix:** Use `#C8D5C0` (pale sage) as the primary ground or `#F5F0E8` (cream) as a warmer alternative. The slight color in the ground is what separates this style from a generic light-mode SaaS page.
+
+---
+
+## Mistake 2: Adding Photography
+
+**What people do:** Drop in a hero photo or product image because "it needs visual interest."
+
+**Why it fails:** Photography breaks the print illusion instantly. A photo on a sage background looks like a collage, not a field manual. The style's visual language is line-based — contour lines, schematics, wireframes. Photography belongs to a different visual register entirely.
+
+**Fix:** Replace all photography with topographic contour line illustrations, technical diagrams, or wireframe schematics. These can be generated as SVG and styled with the accent color at low opacity.
+
+---
+
+## Mistake 3: Using Bright, Saturated Accents
+
+**What people do:** Add a bright blue CTA or a vibrant orange data highlight because "it needs to pop."
+
+**Why it fails:** Bright colors look digital, not printed. The accent colors in this style (forest green #3D6B4F, antique brown #8B6F47) are the colors of field equipment — surveyor's flags, leather notebook covers, brass instruments. They feel earned and earthy. Bright blue or orange looks like a web app, not a field manual.
+
+**Fix:** Use forest green (#3D6B4F) or antique brown (#8B6F47) as the single accent. If you need a data highlight color, use survey orange (#A0563A) at reduced opacity. Never use blue, purple, or neon colors.
+
+---
+
+## Mistake 4: Making It Too Clean
+
+**What people do:** Remove the paper grain, the ruler ticks, and the coordinate labels because "they're clutter."
+
+**Why it fails:** The technical marginalia IS the style. Without the paper grain, the sage ground looks like a flat digital color. Without the ruler ticks and coordinate labels, the layout looks like a generic grid. The "clutter" is what creates the "field manual" feel — a document where every element is measured and referenced.
+
+**Fix:** Add paper grain (SVG noise, opacity 0.06). Add ruler ticks along section edges. Add coordinate labels at section corners. Add sector codes to every section header. The marginalia should be dense enough to feel like a real technical document.
+
+---
+
+## Mistake 5: Using Pure Black for Ink
+
+**What people do:** Set text color to `#000000` for maximum contrast.
+
+**Why it fails:** Pure black on sage creates harsh, digital contrast. Real printed ink on uncoated stock is slightly absorbed by the paper, creating a softer dark — closer to #2A2A2A. Pure black looks like a screen, not a printed page.
+
+**Fix:** Use `#2A2A2A` for primary ink and `#555555` for secondary text. The slightly softer dark maintains readability while preserving the printed-document illusion.
+
+---
+
+## Mistake 6: Adding Too Much Motion
+
+**What people do:** Add scroll-linked animations, parallax on contour illustrations, staggered reveals on data callouts.
+
+**Why it fails:** This is a printed page — static by nature. Motion breaks the print illusion immediately. A field manual doesn't animate when you turn the page. The style's power comes from feeling like it "already existed" before you arrived.
+
+**Fix:** Remove all scroll-linked animations. Limit motion to optional 600ms fade-ins on section entry. No parallax, no staggered reveals, no hover scale transforms. The page should feel static and permanent.
+
+---
+
+## Mistake 7: Using Serif Fonts
+
+**What people do:** Add a serif display font because "it feels editorial and authoritative."
+
+**Why it fails:** This is a sans + mono system. Serif fonts belong to Classical Remix and Editorial Serif Narrative — different styles with different registers. Serif on a sage ground with contour lines looks like a mismatched collage, not a coherent document.
+
+**Fix:** Use Space Grotesk (600/700) for display and Inter (400/500) for body. Add JetBrains Mono for data labels. This sans + mono system is the technical document's voice — engineered, not editorial.

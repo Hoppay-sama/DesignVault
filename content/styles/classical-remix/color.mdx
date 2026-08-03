@@ -1,0 +1,84 @@
+# Color Architecture
+
+## Ground
+
+```css
+--color-ground: #FAFAF8;       /* Warm white — never pure #FFF */
+--color-ground-elevated: #F5F4F0; /* Slightly warmer for cards/panels */
+```
+
+**Why warm white:** Pure white (#FFFFFF) is too clinical, too digital. The warm white (#FAFAF8) mimics high-quality paper stock — the kind used in art books and museum catalogs. The slight warmth (a touch of yellow/gray) makes the page feel printed, not displayed.
+
+---
+
+## Ink
+
+```css
+--color-ink-primary: #1A1A1A;   /* Near-black — warm, not cold */
+--color-ink-secondary: #4A4A4A; /* Muted gray for secondary content */
+--color-ink-muted: #888888;     /* For micro labels and metadata */
+```
+
+**Why #1A1A1A:** Slightly warmer than pure black. On warm white ground, pure black would feel harsh. The near-black maintains editorial contrast while preserving the "printed on fine paper" quality.
+
+---
+
+## Accent
+
+```css
+--color-accent: #2563EB;        /* Blue pill CTA — the signature accent */
+--color-accent-alt: #8B6914;    /* Antique gold — alternative */
+--color-accent-ink: #1E3A5F;   /* Deep navy ink — for emphasis */
+```
+
+**Rule:** ONE accent maximum. The accent appears ONLY on:
+- Primary CTA button (filled pill shape)
+- Active navigation state
+- One key data point or link per section
+- Hover state on interactive elements
+
+**Why blue pill:** The blue CTA (#2563EB) is the one modern element in an otherwise classical palette. It's the bridge between Renaissance scholarship and modern SaaS. The pill shape (fully rounded) contrasts with the sharp serifs — it's the only rounded element on the page.
+
+**Alternative — antique gold:** For brands that want to lean fully classical, #8B6914 (antique gold) replaces the blue. This creates a more museum-like, less SaaS-like feel.
+
+---
+
+## Semantic Colors
+
+```css
+--color-success: #4A6741; /* Muted forest green */
+--color-error: #8B3A3A;   /* Muted brick red */
+--color-warning: #8B6914; /* Antique gold/amber */
+```
+
+**All semantic colors are muted** to maintain the editorial feel. They communicate meaning through position and context, not saturation.
+
+---
+
+## The Color Rule
+
+> **Color is rare and meaningful.** One accent maximum. The accent appears ONLY on CTA, active state, or one emphasized element. Everything else is warm white ground + dark ink.
+
+---
+
+## Gradient Policy
+
+**No gradients on backgrounds or surfaces.** The style is built on flat paper surfaces. If depth is needed, it comes from:
+- Paper grain texture (SVG noise overlay, very subtle)
+- Hairline borders (1px solid, light gray)
+- Layered panels (slightly warmer white for elevation)
+- Orbit lines (0.5px stroke, accent at low opacity)
+
+---
+
+## Color Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Pure white (#FFFFFF) ground | Warm white #FAFAF8 |
+| Pure black (#000000) ink | Near-black #1A1A1A |
+| Multiple accent colors | ONE accent (blue pill or antique gold) |
+| Gradient backgrounds | Flat warm white or orbit line patterns |
+| Neon or saturated accents | Muted blue (#2563EB) or antique gold (#8B6914) |
+| Dark mode | This is a light, editorial style |
+| Purple or pink accents | Blue or gold only |

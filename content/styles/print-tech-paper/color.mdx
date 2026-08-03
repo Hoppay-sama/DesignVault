@@ -1,0 +1,82 @@
+# Color Architecture
+
+## Ground
+
+```css
+--color-ground: #C8D5C0;       /* Pale sage — primary ground */
+--color-ground-alt: #F5F0E8;   /* Cream — alternative ground */
+--color-ground-elevated: #B8C5B0; /* Slightly darker sage for cards/panels */
+```
+
+**Why pale sage or cream:** These colors mimic uncoated paper stock — the kind used in field manuals, geological surveys, and technical reports. Pure white (#FFFFFF) is too digital, too screen-like. The sage/cream immediately signals "this is a printed document." Sage (#C8D5C0) is the primary; cream (#F5F0E8) is the alternative for warmer brands.
+
+---
+
+## Ink
+
+```css
+--color-ink-primary: #2A2A2A;   /* Dark ink — never pure black */
+--color-ink-secondary: #555555; /* Muted gray for secondary content */
+--color-ink-muted: #888888;     /* For micro labels and metadata */
+```
+
+**Why #2A2A2A not #000000:** Pure black on sage creates harsh contrast that feels digital. Dark ink (#2A2A2A) mimics printed ink on uncoated stock — slightly absorbed, slightly soft. This is the ink color of a real field manual, not a screen.
+
+---
+
+## Accent
+
+```css
+--color-accent: #3D6B4F;        /* Forest green — primary accent */
+--color-accent-alt: #8B6F47;    /* Antique brown — alternative */
+--color-accent-rust: #A0563A;   /* Survey orange — for data highlights */
+```
+
+**Rule:** ONE accent maximum per page. The accent appears ONLY on:
+- Primary CTA buttons (filled or outlined)
+- Active navigation state
+- One key data point per section (a highlighted coordinate, a flagged measurement)
+- Hover state on interactive elements
+
+**Why these colors:** Forest green and antique brown are the colors of field equipment — surveyor's flags, leather notebook covers, brass instruments. They feel earned, not designed. Survey orange (#A0563A) is for data highlights only — it's the color of a flagged measurement on a contour map.
+
+---
+
+## Semantic Colors
+
+```css
+--color-success: #4A6741; /* Muted forest green */
+--color-error: #8B3A3A;   /* Muted brick red */
+--color-warning: #8B7340; /* Muted amber */
+```
+
+**All semantic colors are desaturated** to maintain the printed-document feel. They communicate meaning through position and context, not saturation.
+
+---
+
+## The Color Rule
+
+> **If color appears, it must look like it was printed, not displayed.** One accent maximum. Accent appears ONLY on CTA, active state, or one data point. Everything else is sage ground + dark ink.
+
+---
+
+## Gradient Policy
+
+**No gradients.** The style is built on flat paper surfaces. If depth is needed, it comes from:
+- Paper grain texture (SVG noise overlay)
+- Hairline borders (1px solid, darker sage)
+- Layered panels (slightly darker sage for elevation)
+
+---
+
+## Color Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Pure white (#FFFFFF) ground | Pale sage #C8D5C0 or cream #F5F0E8 |
+| Pure black (#000000) ink | Dark ink #2A2A2A |
+| Bright, saturated accents | Forest green #3D6B4F or antique brown #8B6F47 |
+| Multiple accent colors | ONE accent, used surgically |
+| Gradient backgrounds | Flat sage/cream or contour line patterns |
+| Neon or vibrant data colors | Desaturated, earthy tones |
+| Blue/purple SaaS palette | Earth tones only — green, brown, rust |

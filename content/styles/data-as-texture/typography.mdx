@@ -1,0 +1,85 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Clean geometric sans — modern, technical, confident |
+| **Examples** | Space Grotesk (500/600/700), Cabinet Grotesk (500/600), General Sans (500/600) |
+| **Weight** | 500-700 (medium to bold — not black; the atmosphere carries visual weight) |
+| **Tracking** | -0.01em to 0.02em (tight to neutral) |
+| **Size** | `clamp(2rem, 5vw, 4rem)` — confident, not monumental |
+| **Transform** | Sentence case for headlines; uppercase for section labels |
+
+**Why geometric sans:** The clean, engineered quality of geometric sans-serifs matches the "data product" register. They're modern enough to feel technical but not so cold as to clash with the warm amber palette. Space Grotesk's slightly technical character is ideal.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Neutral sans — readable, invisible, functional |
+| **Examples** | Inter (400/500), IBM Plex Sans (400/500), Söhne (if licensed) |
+| **Weight** | 400-500 |
+| **Tracking** | 0 to 0.01em (normal) |
+| **Size** | 14-15px (small — the atmosphere is the visual, not the text) |
+| **Line Height** | 1.6-1.7 (generous for readability on dark ground) |
+
+**Why small body:** The binary cloud texture is the primary visual. Large body text would compete with the atmosphere. Small, clean body text provides information without disrupting the cinematic mood.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Monospace — the voice of data, coordinates, metrics |
+| **Examples** | JetBrains Mono (400/500), Space Mono (400/700), IBM Plex Mono (400/500) |
+| **Weight** | 400-500 |
+| **Tracking** | 0.12em-0.18em (wide, technical) |
+| **Size** | 10-11px (tiny — these are data stamps, not text) |
+| **Transform** | UPPERCASE |
+
+**Usage:** Data callouts (`NODES ACTIVE: 12,847`), metrics (`PACKETS/SEC: 2.4M`), status indicators (`LATENCY: 12ms`), section labels. These tiny mono labels are the "technical anchors" that ground the atmospheric visuals in data reality.
+
+---
+
+## Binary Cloud Type
+
+| Property | Specification |
+|----------|--------------|
+| **Font** | JetBrains Mono or Space Mono (400) |
+| **Characters** | 0 and 1 only (binary) |
+| **Size** | 12-18px (varying sizes for cloud depth) |
+| **Color** | Amber #D4A574 at varying opacities (10%-60%) |
+| **Animation** | Slow drift (30s linear infinite) + subtle opacity shimmer |
+
+**Usage:** The binary characters are arranged as cloud formations — clustering and dispersing to create the illusion of atmospheric depth. They are NOT readable data; they are texture. The viewer should perceive clouds, not a matrix.
+
+---
+
+## Type Scale
+
+**Ratio:** 1.5x (golden ratio)
+
+```
+Display:    clamp(2rem, 5vw, 4rem)     — 1.5x
+Headline:   clamp(1.33rem, 3.33vw, 2.67rem) — 1.5x
+Subhead:    clamp(1rem, 2vw, 1.5rem)    — 1.5x
+Body:       14-15px                      — baseline
+Micro:      10-11px                      — 0.7x
+Binary:     12-18px (varying)            — texture, not scale
+```
+
+---
+
+## Font Pairing Logic
+
+**Display + Body:** Geometric sans display + neutral sans body. The display provides modern confidence; the body provides readability. Both are sans — this is not a serif style.
+
+**Display + Micro:** Geometric sans display + monospace micro. The display speaks the message; the mono provides the data. The contrast between proportional and monospaced type creates the "technical product" feel.
+
+**Binary clouds:** The binary characters use the same mono font as the micro labels, creating visual continuity between the atmospheric texture and the technical anchors.
+
+**Never mix:** Don't use serif fonts. Don't use more than 2 typeface families. The binary clouds are a use of the mono font, not a third family.

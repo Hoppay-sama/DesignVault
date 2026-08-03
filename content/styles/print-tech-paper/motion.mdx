@@ -1,0 +1,78 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Print Tech Paper is **absent by design**. This is a printed page — static by nature. The page should feel like it was already there when you arrived, like a document that exists independent of your viewing. Any motion undermines the print illusion. When motion is absolutely necessary (entrance reveals), it is minimal, slow, and invisible — the viewer should not notice it happened.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Page background | Instant (no animation) | 0ms | — | 0ms |
+| Section content | Opacity fade-in | 600ms | `ease-out` | On scroll-into-view |
+| Contour line illustrations | SVG stroke draw-in (optional) | 1200ms | `ease-in-out` | 200ms after section visible |
+| Mono labels | Instant (no animation) | 0ms | — | 0ms |
+| CTA button | Instant (no animation) | 0ms | — | 0ms |
+
+**Key principle:** Entrance animations are optional and minimal. If in doubt, omit them. A static page is more faithful to the style than an animated one.
+
+---
+
+## Scroll Behavior
+
+| Effect | Specification |
+|--------|--------------|
+| Parallax | **None.** Printed pages don't have parallax. |
+| Text reveals | **None.** Text is just there. |
+| Illustration reveals | Optional stroke draw-in on contour lines (1200ms, once, on first view) |
+| Section transitions | **None.** Sections are separated by whitespace and hairline rules. |
+
+**Scroll-linked effects are banned.** The page should not respond to scroll position with visual changes. This is the most static style in the system.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Navigation links | Ink color → accent color (200ms) | — |
+| CTA buttons | Border → accent color, slight ink shift | Scale 0.98 (tactile press) |
+| Data callouts | No hover state — they're labels, not interactive | — |
+| Cards/Panels | No hover state — they're document elements | — |
+| Links in body | Underline appears (instant) | — |
+
+**Hover states are minimal.** Only interactive elements (nav, CTA, links) respond. Data callouts, labels, and illustrations are static — they're document content, not UI.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- All entrance animations collapse to instant (0ms)
+- No stroke draw-in on illustrations
+- Hover states use instant color change (no transition)
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| ❌ Never animate | Why |
+|-----------------|-----|
+| Parallax on scroll | Printed pages don't move |
+| Staggered element reveals | Too dynamic — breaks the static document feel |
+| Bounce or spring easing | Playful — wrong register entirely |
+| Color transitions on hover (except nav/CTA) | Document elements don't change color |
+| Marquee or scrolling text | This is a static page, not a display |
+| Scale transforms on cards | Cards are document panels, not interactive tiles |
+| Any motion on data labels | Labels are stamped, not animated |

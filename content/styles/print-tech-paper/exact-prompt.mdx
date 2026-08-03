@@ -1,0 +1,205 @@
+# Exact Replica Prompt — Print Tech Paper
+
+> Copy this entire prompt and paste it into your AI coding assistant (Cursor, Claude Code, v0.dev, etc.) to generate a Print Tech Paper landing page.
+
+---
+
+```
+Build a print-tech-paper landing page for "TERRAFORM" — a geological survey platform. Stack: React + Vite + TypeScript + Tailwind CSS v4 + lucide-react. Page title: `Terraform — Mapping the Unseen`.
+
+Vibe: A field manual for a future that already happened. Pale sage paper, topographic contour lines, monospace data callouts, transaction-ID chips. Everything feels printed, referenced, and cataloged.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (hard bans)
+
+- NO pure white (#FFFFFF) background — use sage #C8D5C0
+- NO pure black (#000000) ink — use #2A2A2A
+- NO photography of any kind — line illustrations only
+- NO gradients of any kind
+- NO glassmorphism or backdrop-blur
+- NO 3D renders or illustrations
+- NO purple, blue, or neon accent colors
+- NO centered hero layout
+- NO rounded corners above 2px
+- NO bounce or spring easing
+- NO parallax or scroll-linked animations
+- NO serif fonts (sans + mono system only)
+- NO Inter as display font
+- NO more than ONE accent color
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap
+```
+
+Usage:
+- **Space Grotesk** (600/700): Logo "TERRAFORM", main headlines, section titles
+- **Inter** (400/500): Body text, descriptions, nav links (default page font)
+- **JetBrains Mono** (400/500): Data callouts, coordinates, transaction IDs, sector codes, timestamps
+
+CSS utilities:
+- `.font-display { font-family: 'Space Grotesk', sans-serif; }`
+- `.font-body { font-family: 'Inter', sans-serif; }`
+- `.font-mono-label { font-family: 'JetBrains Mono', monospace; }`
+
+---
+
+## FLUID SIZE SYSTEM
+
+```css
+:root {
+  --pad-x: clamp(1.5rem, 4vw, 3rem);
+  --section-gap: clamp(3rem, 8vh, 6rem);
+  --logo: clamp(1rem, 1vw, 1.25rem);
+  --nav: clamp(0.65rem, 0.3vw + 0.5rem, 0.8rem);
+  --headline: clamp(2rem, 4vw, 3.5rem);
+  --subhead: clamp(1.25rem, 2.5vw, 2rem);
+  --body: 14px;
+  --micro: 10px;
+  --border: 1px solid #A8B5A0;
+}
+```
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --ground: #C8D5C0;          /* Pale sage — NEVER white */
+  --ground-elevated: #B8C5B0;  /* Slightly darker for panels */
+  --ink: #2A2A2A;              /* Dark ink — NEVER pure black */
+  --ink-secondary: #555555;
+  --ink-muted: #888888;
+  --border: #A8B5A0;
+  --accent: #3D6B4F;           /* Forest green — ONE accent only */
+}
+```
+
+Body: `bg-[#C8D5C0] text-[#2A2A2A] antialiased font-body`.
+Selection: `selection:bg-[#3D6B4F] selection:text-[#C8D5C0]`.
+
+Paper grain overlay (fixed, covers viewport):
+```css
+.paper-grain {
+  position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+  opacity: 0.06; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence baseFrequency='0.9' /></filter><rect width='100%' height='100%' filter='url(%23n)' /></svg>");
+}
+```
+
+---
+
+## PAGE STRUCTURE
+
+Root: `min-h-screen bg-[#C8D5C0] text-[#2A2A2A] font-body relative`.
+
+### 1. Header
+Padding: `paddingInline: var(--pad-x)`, `paddingTop: clamp(1rem, 2vh, 1.5rem)`, `paddingBottom: clamp(0.75rem, 1.5vh, 1.25rem)`.
+Flex space-between, items center.
+
+**Logo (left):** Space Grotesk 700, tracking `0.15em`, size `var(--logo)`. Text: `TERRAFORM`. Uppercase. Color `#2A2A2A`.
+
+**Nav (right):** Inter 500, uppercase, tracking `0.15em`, size `var(--nav)`, gap `clamp(1.5rem, 3vw, 2.5rem)`.
+Links: `PLATFORM` | `SURVEYS` | `DATA` | `CONTACT`
+Hover: color → `#3D6B4F` (200ms).
+
+### 2. Hero Section
+`min-h-[80dvh]`, flex column, justify-center.
+Padding: `paddingInline: var(--pad-x)`, `paddingBlock: var(--section-gap)`.
+
+**Background:** Topographic contour line SVG illustration, full-bleed, stroke `#3D6B4F` at 25% opacity, 0.5px stroke, 10-15 contour paths with slight wobble.
+
+**Content (left-aligned, max-width 60%):**
+1. Mono label — JetBrains Mono 400, uppercase, tracking `0.15em`, size `var(--micro)`, color `#555`:
+   `GEOLOGICAL SURVEY UNIT 7 / v2.4`
+2. Headline — Space Grotesk 700, tracking `0.02em`, leading `1.05`, size `var(--headline)`:
+   `MAPPING THE UNSEEN`
+3. Body — Inter 400, size `var(--body)`, color `#555`, max-width 480px, line-height 1.7:
+   `Terraform processes seismic, gravitational, and magnetic data into precise subsurface maps. For teams who need to know what's below.`
+4. CTA button — border `1px solid #3D6B4F`, transparent bg, rounded-sm (2px), uppercase `START SURVEY` + lucide `ArrowRight` (size 14). Tracking `0.12em`, size `var(--body)`, padding `0.75rem 1.5rem`. Color `#3D6B4F`. Hover: fill `#3D6B4F`, text `#C8D5C0`. Transition 200ms.
+
+**Corner data callouts (absolute positioned):**
+- Top-left: `LAT: 47.6062° N` (JetBrains Mono, `var(--micro)`, `#888`)
+- Top-right: `LONG: 122.3321° W`
+- Bottom-left: `SECTOR 04-A`
+- Bottom-right: `03:42 UTC`
+
+### 3. Feature Sections (3 sections)
+
+Each section: padding `var(--section-gap)` vertical, `var(--pad-x)` horizontal.
+Layout: 3-column grid, each cell has mono sector code, grotesk title, body text, contour line decoration.
+
+**Section A — Seismic Analysis**
+- Sector code: `SECTOR 04-A` (mono, `var(--micro)`, `#888`)
+- Title: Space Grotesk 700, `clamp(1.25rem, 2.5vw, 2rem)`: `SEISMIC ANALYSIS`
+- Body: Inter 400, `var(--body)`, `#555`: `Process raw seismic data into 3D subsurface models. Our engine handles noise reduction, migration, and inversion in a single pass.`
+- Data callout: `DEPTH: 2.4km | RESOLUTION: 12m`
+
+**Section B — Gravitational Mapping**
+- Sector code: `SECTOR 04-B`
+- Title: `GRAVITATIONAL MAPPING`
+- Body: `Detect density variations in the Earth's crust with milligal precision. Map geological structures invisible to seismic methods.`
+- Data callout: `PRECISION: 0.1 mGal | COVERAGE: 100%`
+
+**Section C — Magnetic Survey**
+- Sector code: `SECTOR 04-C`
+- Title: `MAGNETIC SURVEY`
+- Body: `Identify mineral deposits and geological boundaries through magnetic anomaly detection. Calibrated for both airborne and ground surveys.`
+- Data callout: `SENSITIVITY: 0.01 nT | RANGE: 50km`
+
+### 4. Data Strip
+Full-width, `bg-[#B8C5B0]`, padding `1rem var(--pad-x)`.
+JetBrains Mono 400, size `var(--micro)`, color `#555`, tracking `0.1em`:
+`TXN-2026-0847 | SEISMIC READ: 4.2M | LAST UPDATE: 03:42 UTC | SECTOR 04-A | STATUS: ACTIVE`
+
+### 5. Footer
+`paddingBlock: clamp(2rem, 4vh, 3rem)`, `paddingInline: var(--pad-x)`.
+- Ruler tick pattern along top edge (1px ticks every 20px, `#888` at 40% opacity)
+- Footer row: flex space-between, JetBrains Mono 400, size `var(--micro)`, color `#888`:
+  - Left: `TERRAFORM GEOLOGICAL SURVEY`
+  - Center: `© 2026`
+  - Right: `v2.4 / ALL SYSTEMS ACTIVE`
+
+---
+
+## VISUAL RULES
+
+- Pale sage ground (#C8D5C0), dark ink (#2A2A2A), forest green accent (#3D6B4F) on CTA only
+- No photography — topographic contour line illustrations only (SVG, 0.5px stroke, accent at 25% opacity)
+- Paper grain overlay (opacity 0.06, mix-blend-mode: multiply)
+- Sharp corners only (border-radius: 0-2px max)
+- Monospace data callouts on every section (coordinates, sector codes, timestamps)
+- Transaction-ID chips throughout
+- Ruler ticks along section edges and dividers
+- Strict 12-column grid with technical margins
+- Motion: minimal — 600ms fade-in on section entry, nothing else
+- Honor `prefers-reduced-motion: reduce`
+
+---
+
+## ANIMATIONS
+
+| Class | Keyframes | Duration | Easing | Delay |
+|-------|-----------|----------|--------|-------|
+| `anim-fade-in` | opacity 0→1 | 600ms | `ease-out` | On scroll-into-view |
+| `anim-stroke-draw` | stroke-dashoffset 100%→0 | 1200ms | `ease-in-out` | 200ms after section visible |
+
+`prefers-reduced-motion: reduce` → collapse all to 0.01ms.
+
+---
+
+## ICONS
+
+lucide-react: `ArrowRight` (CTA), `ChevronRight` (links).
+Custom SVGs: topographic contour lines, ruler tick patterns, coordinate grids, L-corner brackets.
+
+---
+
+Recreate this page faithfully with the exact colors, fonts, fluid clamps, copy, layout structure, and animation timings above.
+```

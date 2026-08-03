@@ -1,0 +1,214 @@
+# Exact Replica Prompt — Classical Remix
+
+> Copy this entire prompt and paste it into your AI coding assistant (Cursor, Claude Code, v0.dev, etc.) to generate a Classical Remix landing page.
+
+---
+
+```
+Build a classical-remix landing page for "ATHENA" — a research intelligence platform. Stack: React + Vite + TypeScript + Tailwind CSS v4 + lucide-react. Page title: `Athena — Wisdom, Systematized`.
+
+Vibe: Renaissance manuscript meets modern SaaS. Warm white paper, grainy classical illustrations, serif italic emphasis, thin orbit lines. Scholarly, refined, timeless.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (hard bans)
+
+- NO pure white (#FFFFFF) background — use warm white #FAFAF8
+- NO pure black (#000000) ink — use #1A1A1A
+- NO modern photography — classical illustrations only
+- NO sans-serif display fonts — serif for headlines
+- NO uppercase headlines — serifs use sentence case
+- NO more than ONE italic phrase per headline
+- NO gradients of any kind
+- NO glassmorphism or backdrop-blur
+- NO 3D renders or illustrations
+- NO purple, pink, or neon accents
+- NO centered hero layout
+- NO bounce or spring easing
+- NO brutalist or raw aesthetics
+- NO more than ONE accent color
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap
+```
+
+Usage:
+- **Cormorant Garamond** (400/600, regular + italic): Logo "ATHENA", main headlines, italic emphasis phrases
+- **Inter** (400/500/600): Body text, nav links, descriptions (default page font)
+- **JetBrains Mono** (400/500): Micro labels, trust row label, metadata
+
+CSS utilities:
+- `.font-display { font-family: 'Cormorant Garamond', serif; }`
+- `.font-body { font-family: 'Inter', sans-serif; }`
+- `.font-mono-label { font-family: 'JetBrains Mono', monospace; }`
+
+---
+
+## FLUID SIZE SYSTEM
+
+```css
+:root {
+  --pad-x: clamp(1.5rem, 5vw, 4rem);
+  --section-gap: clamp(4rem, 10vh, 8rem);
+  --logo: clamp(1.25rem, 1.5vw, 1.75rem);
+  --nav: clamp(0.7rem, 0.3vw + 0.5rem, 0.85rem);
+  --headline: clamp(2rem, 4vw, 3.5rem);
+  --subhead: clamp(1.33rem, 2.67vw, 2.33rem);
+  --body: clamp(0.9rem, 0.3vw + 0.8rem, 1rem);
+  --micro: clamp(0.65rem, 0.2vw + 0.55rem, 0.75rem);
+  --btn-px: clamp(1.5rem, 2vw, 2rem);
+  --btn-py: clamp(0.7rem, 0.8vh, 0.9rem);
+  --border: 1px solid #E0DFDB;
+}
+```
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --ground: #FAFAF8;          /* Warm white — NEVER pure #FFF */
+  --ground-elevated: #F5F4F0; /* Slightly warmer for panels */
+  --ink: #1A1A1A;             /* Near-black — warm */
+  --ink-secondary: #4A4A4A;
+  --ink-muted: #888888;
+  --border: #E0DFDB;
+  --accent: #2563EB;          /* Blue pill — ONE accent only */
+}
+```
+
+Body: `bg-[#FAFAF8] text-[#1A1A1A] antialiased font-body`.
+Selection: `selection:bg-[#2563EB] selection:text-[#FAFAF8]`.
+
+Paper grain overlay (fixed, very subtle):
+```css
+.paper-grain {
+  position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+  opacity: 0.03; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence baseFrequency='0.9' /></filter><rect width='100%' height='100%' filter='url(%23n)' /></svg>");
+}
+```
+
+---
+
+## PAGE STRUCTURE
+
+Root: `min-h-screen bg-[#FAFAF8] text-[#1A1A1A] font-body relative overflow-x-hidden`.
+
+### 1. Header
+Padding: `paddingInline: var(--pad-x)`, `paddingTop: clamp(1.2rem, 2vh, 2rem)`, `paddingBottom: clamp(0.8rem, 1.5vh, 1.5rem)`.
+Flex space-between, items center.
+
+**Logo (left):** Cormorant Garamond 600, tracking `0.05em`, size `var(--logo)`. Text: `Athena`. Sentence case. Color `#1A1A1A`.
+
+**Nav (right):** Inter 500, tracking `0.05em`, size `var(--nav)`, gap `clamp(1.5rem, 3vw, 2.5rem)`.
+Links: `Platform` | `Research` | `Pricing` | `Contact`
+Hover: color → `#2563EB` (300ms).
+
+### 2. Hero Section
+`min-h-[90dvh]`, flex column, justify-center.
+Padding: `paddingInline: var(--pad-x)`, `paddingBlock: var(--section-gap)`.
+
+**Orbit lines (background, absolute, z-0):**
+SVG with circles and ellipses, stroke `#2563EB` at 10% opacity, 0.5px stroke. Positioned to connect headline area to illustration area.
+
+**Left block (z-10, max-width 55%):**
+1. Micro label — JetBrains Mono 400, uppercase, tracking `0.15em`, size `var(--micro)`, color `#888`:
+   `RESEARCH INTELLIGENCE / v3.1`
+2. Headline — Cormorant Garamond 600, tracking `0.01em`, leading `1.1`, size `var(--headline)`:
+   `Wisdom, *systematized*`
+   (The word "systematized" is in italic Cormorant Garamond 400)
+3. Body — Inter 400, size `var(--body)`, color `#4A4A4A`, max-width 480px, line-height 1.7:
+   `Athena synthesizes millions of research papers into connected knowledge graphs. For teams who need to understand, not just search.`
+4. CTA pill — `bg-[#2563EB] text-[#FAFAF8]`, rounded-full, Inter 500, tracking `0.02em`, size `var(--body)`, padding `var(--btn-px)` / `var(--btn-py)`. Text: `Begin Research` + lucide `ArrowRight` (size 16). Hover: slight scale (1.02) + shadow. Transition 300ms.
+
+**Right block (z-10, self-end):**
+- Grainy classical illustration of a scholar studying celestial charts (robed figure, astronomical instruments)
+- Processed with grain overlay (opacity 0.1), desaturated, edges fading into ground
+- Size: approximately 40% of viewport width
+
+### 3. Trust Logo Row
+`paddingBlock: clamp(2rem, 4vh, 3rem)`, `paddingInline: var(--pad-x)`.
+Centered, flex column, gap `1.5rem`.
+- Label: JetBrains Mono 400, uppercase, tracking `0.15em`, size `var(--micro)`, color `#888`:
+  `TRUSTED BY RESEARCHERS AT`
+- Logos: 4-5 university/institution logos in grayscale, opacity 0.6, gap `clamp(2rem, 4vw, 3.5rem)`
+  (Harvard, Oxford, MIT, Stanford, Cambridge — placeholder SVGs or text)
+
+### 4. Feature Sections (3 sections)
+
+Each section: padding `var(--section-gap)` vertical, `var(--pad-x)` horizontal.
+Layout: 3-column grid, each cell has small classical icon + serif title + body.
+
+**Section A — Knowledge Graphs**
+- Icon: Small classical illustration (anatomical drawing or celestial map), 48px, grainy
+- Title: Cormorant Garamond 600, `clamp(1.33rem, 2.67vw, 2.33rem)`: `Connected *knowledge*`
+  (italic on "knowledge")
+- Body: Inter 400, `var(--body)`, `#4A4A4A`: `Map relationships across millions of papers. Find the connection between an obscure 1962 study and last week's preprint.`
+
+**Section B — Citation Analysis**
+- Icon: Classical illustration of a scholar with books
+- Title: `Citation *intelligence*`
+- Body: `Understand influence beyond citation count. Our engine weighs context, methodology, and replication to surface research that actually matters.`
+
+**Section C — Trend Detection**
+- Icon: Celestial map illustration
+- Title: `Emerging *frontiers*`
+- Body: `Identify research areas before they trend. Athena detects signal in the noise of preprints, grants, and conference proceedings.`
+
+### 5. Footer
+`paddingBlock: clamp(2rem, 5vh, 4rem)`, `paddingInline: var(--pad-x)`.
+- Orbit line decoration (subtle, 0.5px, accent at 8% opacity)
+- Footer row: flex space-between, Inter 400, size `var(--micro)`, color `#888`:
+  - Left: `Athena Research Intelligence`
+  - Center: `© 2026`
+  - Right: `Wisdom, systematized`
+
+---
+
+## VISUAL RULES
+
+- Warm white ground (#FAFAF8), near-black ink (#1A1A1A), blue pill accent (#2563EB) on CTA only
+- No modern photography — classical illustrations only (scholars, anatomy, celestial maps, herbarium)
+- All illustrations processed with grain (opacity 0.08-0.12), desaturated, edges fading
+- Orbit lines (0.5px stroke, accent at 8-15% opacity) connecting elements
+- Paper grain overlay (opacity 0.03, mix-blend-mode: multiply)
+- Serif display (Cormorant Garamond) with ONE italic emphasis phrase per headline
+- Sans body (Inter) for readability — contrast with serif display
+- Blue pill CTA (fully rounded) — the one modern element
+- Trust logo row below hero — structural, not optional
+- Motion: gentle — illustration fades (1000ms), orbit lines draw in (1500ms)
+- Honor `prefers-reduced-motion: reduce`
+
+---
+
+## ANIMATIONS
+
+| Class | Keyframes | Duration | Easing | Delay |
+|-------|-----------|----------|--------|-------|
+| `anim-illustration` | opacity 0→1, scale 0.98→1 | 1000ms | `ease-out` | 200ms |
+| `anim-orbit-draw` | stroke-dashoffset 100%→0 | 1500ms | `ease-in-out` | 300ms |
+| `anim-headline` | opacity 0→1, translateY(12px)→0 | 800ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 100ms |
+| `anim-body` | opacity 0→1 | 600ms | `ease-out` | 400ms |
+| `anim-trust` | opacity 0→1 (staggered) | 500ms per logo | `ease-out` | 600ms + i*100ms |
+| `anim-cta` | opacity 0→1, scale 0.95→1 | 600ms | `ease-out` | 700ms |
+
+`prefers-reduced-motion: reduce` → collapse all to 0.01ms.
+
+---
+
+## ICONS
+
+lucide-react: `ArrowRight` (CTA).
+Custom SVGs: classical illustrations (scholars, anatomy, celestial maps), orbit lines (circles, ellipses), trust logos (university crests in grayscale).
+
+---
+
+Recreate this page faithfully with the exact colors, fonts, fluid clamps, copy, layout structure, and animation timings above.
+```

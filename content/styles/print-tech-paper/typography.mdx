@@ -1,0 +1,68 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Clean grotesk — mechanical, technical, authoritative |
+| **Examples** | Space Grotesk (600/700), Archivo (500/600/700), Cabinet Grotesk (500/600), Suisse Int'l (if licensed) |
+| **Weight** | 600-700 (bold enough to anchor, not so heavy it dominates) |
+| **Tracking** | -0.01em to 0.02em (tight to neutral — technical, not loose) |
+| **Size** | `clamp(2rem, 4vw, 3.5rem)` — confident but not monumental |
+| **Transform** | Uppercase for section titles; sentence case for hero headlines |
+
+**Why grotesk:** The mechanical, engineered quality of grotesk sans-serifs matches the "field manual" register. They feel like they were specified by a draftsman, not designed by a marketer. Space Grotesk's slightly technical character is ideal.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Neutral sans — readable, invisible, functional |
+| **Examples** | Inter (400/500), IBM Plex Sans (400/500), Söhne (if licensed) |
+| **Weight** | 400-500 |
+| **Tracking** | 0 to 0.01em (normal) |
+| **Size** | 14-15px (small — this is a technical document, not a blog) |
+| **Line Height** | 1.6-1.7 (generous for readability on textured ground) |
+
+**Why small body:** Technical documents use small body text. The 14-15px range signals "this is reference material" not "this is a marketing page." The slightly smaller size also creates contrast with the mono labels.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Monospace — the voice of data, coordinates, IDs |
+| **Examples** | JetBrains Mono (400/500), Space Mono (400/700), IBM Plex Mono (400/500) |
+| **Weight** | 400-500 |
+| **Tracking** | 0.12em-0.18em (wide, technical) |
+| **Size** | 10-11px (tiny — these are stamps, not text) |
+| **Transform** | UPPERCASE |
+
+**Usage:** Sector codes (`SECTOR 04-A`), coordinates (`LAT: 47.6062° N`), transaction IDs (`TXN-2026-0847`), timestamps (`03:42 UTC`), scale references, ruler ticks. These tiny mono labels are the "technical marginalia" that defines the style.
+
+---
+
+## Type Scale
+
+**Ratio:** 1.4x (technical, not golden — engineered, not organic)
+
+```
+Display:    clamp(2rem, 4vw, 3.5rem)    — 1.4x
+Headline:   clamp(1.25rem, 2.5vw, 2rem) — 1.4x
+Subhead:    clamp(0.95rem, 1.5vw, 1.25rem) — 1.4x
+Body:       14-15px                      — baseline
+Micro:      10-11px                       — 0.7x
+```
+
+---
+
+## Font Pairing Logic
+
+**Display + Body:** Grotesk display + neutral sans body. The display provides authority; the body provides readability. Both are sans — this is not a serif style.
+
+**Display + Micro:** Grotesk display + monospace micro. This is the signature pairing. The grotesk speaks the message; the mono provides the data. The contrast between proportional and monospaced type creates the "technical document" feel.
+
+**Never mix:** Don't use serif fonts anywhere. This is a sans + mono system. Adding serif breaks the technical register immediately.

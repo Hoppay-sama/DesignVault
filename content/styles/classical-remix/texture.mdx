@@ -1,0 +1,108 @@
+# Texture & Surface
+
+## Primary Texture: Grainy Classical Illustrations
+
+**The defining element.** Classical illustrations — robed scholars, anatomical drawings, celestial maps, herbarium specimens — processed to look aged. The grain isn't decoration; it's what makes the illustrations feel like they come from a Renaissance manuscript rather than a stock image library.
+
+### Illustration Types
+
+| Type | Visual Character | Usage |
+|------|-----------------|-------|
+| **Scholarly figures** | Robed scholars, philosophers, astronomers | Hero illustration, about section |
+| **Anatomical drawings** | Muscle studies, organ diagrams, skeleton | Feature sections, product metaphors |
+| **Celestial maps** | Star charts, orbital diagrams, astronomical instruments | Background decoration, orbit lines |
+| **Herbarium specimens** | Botanical illustrations, plant studies | Section dividers, decorative elements |
+| **Architectural plans** | Building cross-sections, classical columns | Feature illustrations |
+
+### Processing
+
+All illustrations must be processed to look aged:
+- **Grain overlay:** SVG feTurbulence noise, opacity 0.08-0.12, mix-blend-mode: multiply
+- **Desaturation:** Remove some color — illustrations should look slightly faded
+- **Edge softening:** Illustration edges fade into the background (mask or gradient fade)
+- **Paper texture:** Illustrations sit on the warm white ground as if printed on the same page
+
+---
+
+## Secondary Texture: Orbit Lines
+
+Thin lines (0.5px stroke) that continue behind text columns like astronomical diagrams. They connect elements — a headline to an illustration, a CTA to a trust logo — implying that everything on the page is part of a larger system.
+
+### Implementation
+
+```jsx
+<svg className="orbit-lines" viewBox="0 0 1200 800">
+  <circle cx="600" cy="400" r="300" stroke="#2563EB" strokeWidth="0.5" fill="none" opacity="0.15" />
+  <circle cx="600" cy="400" r="200" stroke="#2563EB" strokeWidth="0.5" fill="none" opacity="0.1" />
+  <ellipse cx="600" cy="400" rx="400" ry="200" stroke="#8B6914" strokeWidth="0.5" fill="none" opacity="0.08" />
+</svg>
+```
+
+**Parameters:**
+- Stroke: 0.5px (hairline — barely visible)
+- Color: Accent color at 8-15% opacity
+- Position: Behind text columns, connecting elements
+- Animation: Optional stroke draw-in on load (1500ms)
+
+---
+
+## Tertiary Texture: Paper Grain
+
+```css
+.paper-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,..."); /* feTurbulence noise */
+  mix-blend-mode: multiply;
+}
+```
+
+**Parameters:**
+- Opacity: 0.02-0.04 (very subtle — should be felt, not seen)
+- Blend mode: `multiply` (slightly darkens the warm white)
+- Position: `fixed` (covers entire viewport, doesn't scroll)
+
+---
+
+## Image Processing Rules
+
+**NEVER use modern photography.** All visual elements must be classical illustrations, processed:
+
+| Processing | Effect | When to Use |
+|-----------|--------|-------------|
+| Grain overlay | Aged manuscript feel | All illustrations |
+| Desaturation | Faded, archival quality | Colored illustrations |
+| Edge fade | Illustration merges with ground | Hero illustrations |
+| Sepia/duotone | Antique tone | Optional, for warmer brands |
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Warm white (#FAFAF8) + paper grain overlay |
+| Cards/Panels | Slightly warmer white (#F5F4F0) with 1px border (#E0DFDB) |
+| Buttons | Blue pill (fully rounded) or gold pill — the only rounded element |
+| Navigation | Transparent, ink color text, accent on hover/active |
+| Dividers | 1px hairline (#E0DFDB) or orbit line |
+| Trust logos | Grayscale, opacity 0.6, full opacity on hover |
+
+**No glossy, no glassmorphism, no heavy shadows.** Surfaces feel like fine paper — matte, warm, slightly textured. The blue pill CTA is the one exception to the flat-surface rule.
+
+---
+
+## Texture Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Modern stock photography | Classical illustrations with grain |
+| Gradient backgrounds | Flat warm white + orbit lines |
+| Glassmorphic cards | Flat warm white panels with hairline borders |
+| 3D renders | 2D classical illustrations only |
+| Heavy drop shadows | Subtle paper texture or no shadow |
+| Sharp illustration edges | Faded edges that merge with ground |
+| Saturated, vibrant illustrations | Desaturated, aged, archival quality |

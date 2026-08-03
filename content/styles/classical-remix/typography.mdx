@@ -1,0 +1,83 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Classical serif — editorial, scholarly, refined |
+| **Examples** | Cormorant Garamond (400/600/italic), Playfair Display (400/700/italic), EB Garamond (400/600/italic), Fraunces (400/600/italic) |
+| **Weight** | 400-600 (regular to semibold — never bold; serifs carry weight through stroke contrast, not weight) |
+| **Tracking** | -0.01em to 0.01em (tight to neutral — editorial, not loose) |
+| **Size** | `clamp(2rem, 4vw, 3.5rem)` — confident, not monumental |
+| **Transform** | Sentence case (never uppercase — serifs are designed for lowercase) |
+
+**Why these fonts:** Cormorant Garamond has the elegant high-contrast strokes of Renaissance typefaces. Playfair Display is slightly more dramatic. Both carry italic variants that are essential for the emphasis technique. The serifs signal "editorial" and "scholarly" — the opposite of a SaaS sans-serif.
+
+---
+
+## Italic Emphasis
+
+| Property | Specification |
+|----------|--------------|
+| **Font** | Same family as display, italic variant |
+| **Usage** | ONE phrase per headline, surgically placed |
+| **Weight** | 400 italic (lighter than the surrounding regular/semibold) |
+| **Purpose** | Vocal inflection — changes the cadence of the line |
+
+**Example:** "Wisdom, *systematized*" — the italic on "systematized" creates a pause and emphasis that regular weight cannot. The italic is the editorial equivalent of a raised eyebrow.
+
+**Rule:** One italic phrase per headline. Never two. Never italicize a full sentence. The italic is a scalpel, not a paintbrush.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Clean humanist sans — readable, modern, invisible |
+| **Examples** | Inter (400/500), Söhne (if licensed), Plus Jakarta Sans (400/500) |
+| **Weight** | 400-500 |
+| **Tracking** | 0 to 0.01em (normal) |
+| **Size** | 15-16px (slightly larger than technical styles — this is editorial, readable) |
+| **Line Height** | 1.7-1.8 (generous — editorial pages breathe) |
+
+**Why sans body with serif display:** The contrast between serif display and sans body creates the "Renaissance meets modern" tension. The serif speaks the headline; the sans speaks the body. This is the opposite of most SaaS pages (sans display + sans body) and signals editorial intent.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Monospace or small caps sans |
+| **Examples** | JetBrains Mono (400), Inter (500 uppercase) |
+| **Weight** | 400-500 |
+| **Tracking** | 0.1em-0.15em (wide, technical) |
+| **Size** | 11-12px (small but readable) |
+| **Transform** | UPPERCASE |
+
+**Usage:** Section labels, trust row labels ("TRUSTED BY RESEARCHERS AT"), metadata, captions. These small labels provide structure without competing with the serif display.
+
+---
+
+## Type Scale
+
+**Ratio:** 1.5x (golden ratio — editorial, not technical)
+
+```
+Display:    clamp(2rem, 4vw, 3.5rem)    — 1.5x
+Headline:   clamp(1.33rem, 2.67vw, 2.33rem) — 1.5x
+Subhead:    clamp(1rem, 2vw, 1.5rem)     — 1.5x
+Body:       15-16px                       — baseline
+Micro:      11-12px                       — 0.75x
+```
+
+---
+
+## Font Pairing Logic
+
+**Display + Body:** Serif display + sans body. This is the signature pairing. The serif provides editorial authority; the sans provides modern readability. The contrast IS the style.
+
+**Display + Italic:** Same serif family, regular + italic. The italic is not a different font — it's the same family in a different voice. This creates the emphasis technique.
+
+**Never mix:** Don't use more than 2 typeface families. Serif display + sans body is sufficient. The italic is a variant, not a third family.

@@ -1,0 +1,122 @@
+# Layout Grammar
+
+## Grid System
+
+**Asymmetric split with generous margins.**
+
+Content lives in an asymmetric split — text on the left (50-60%), classical illustration on the right (40-50%). The split is not rigid; orbit lines connect the two sides, implying they're part of the same system. Body text is constrained to a max-width of 680px for readability.
+
+```
+┌──────────────────────┬──────────────────┐
+│                      │                  │
+│  Headline            │  [Classical      │
+│  Body text           │   illustration   │
+│  CTA pill            │   with grain]    │
+│                      │                  │
+│   ← orbit lines continue behind →       │
+│                      │                  │
+└──────────────────────┴──────────────────┘
+```
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | `min-h-[90dvh]` (nearly full viewport — editorial pages have generous heroes) |
+| Background | Warm white (#FAFAF8) with subtle paper grain |
+| Headline position | Left-aligned, vertically centered |
+| Headline size | `clamp(2rem, 4vw, 3.5rem)` — confident serif |
+| Italic emphasis | ONE phrase in italic within the headline |
+| Supporting text | Below headline, left-aligned, max-width 480px |
+| CTA | Blue pill below supporting text, left-aligned |
+| Classical illustration | Right side, grainy, faded edges |
+| Orbit lines | Continuing behind text column, 0.5px stroke |
+
+**Never centered hero.** The asymmetric split (text left, illustration right) is the structural signature.
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(4rem, 10vh, 8rem);
+--component-gap: clamp(2rem, 4vw, 4rem);
+--content-max-width: min(1100px, calc(100vw - clamp(2rem, 8vw, 6rem)));
+--body-max-width: 680px;
+```
+
+**Spacing is generous.** Editorial pages breathe. Large gaps between sections create the "scholarly publication" feeling. Don't compress.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Asymmetric Split (Hero)
+```
+┌─────────────────────┬──────────────────┐
+│ Headline            │ [Grainy classical │
+│ with *italic*       │  illustration     │
+│ emphasis            │  of scholar]      │
+│                     │                  │
+│ Body text           │  ← orbit lines   │
+│ Blue pill CTA       │  continue behind │
+└─────────────────────┴──────────────────┘
+```
+
+### Pattern 2: Trust Logo Row
+```
+┌─────────────────────────────────────────┐
+│   TRUSTED BY RESEARCHERS AT             │
+│   [Harvard] [Oxford] [MIT] [Stanford]   │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 3: 3-Column Feature Grid
+```
+┌──────────┬──────────┬──────────┐
+│ [icon]   │ [icon]   │ [icon]   │
+│ Title    │ Title    │ Title    │
+│ Body     │ Body     │ Body     │
+└──────────┴──────────┴──────────┘
+```
+
+### Pattern 4: Editorial Single Column
+```
+┌─────────────────────────────────────────┐
+│         ← orbit lines behind →           │
+│                                         │
+│         Headline with *italic*           │
+│         Body text, generous line height  │
+│         max-width 680px, centered        │
+│                                         │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Full asymmetric split, illustration right |
+| **Tablet (768px)** | Stacked vertically, illustration below text |
+| **Mobile (375px)** | Single column, illustration full-width, orbit lines simplified |
+
+**Fluid typography via `clamp()`** keeps the editorial feel at all sizes. The asymmetric split stacks on mobile but never centers.
+
+---
+
+## Layout Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Centered hero layout | Asymmetric split — text left, illustration right |
+| Card-grid with sharp corners | Soft panels with hairline borders |
+| Full-bleed photography | Classical illustrations with grain |
+| Dense, packed layouts | Generous margins, breathing room |
+| Zigzag image+text alternation | Vary the pattern — don't alternate predictably |
+| Equal 3-column grids for hero | Asymmetric split for hero, 3-column for features only |
+| No orbit lines | Orbit lines are structural — they connect elements |
+| Missing trust logo row | Trust row is a structural element, not optional |

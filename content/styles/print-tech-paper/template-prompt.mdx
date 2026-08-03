@@ -1,0 +1,181 @@
+# Parameterized Template — Print Tech Paper
+
+> Use this template to generate a Print Tech Paper landing page for YOUR brand. Replace the bracketed placeholders with your details. The anti-slop constraints and style rules are locked — don't change them.
+
+---
+
+```
+Build a print-tech-paper landing page for "[BRAND_NAME]" — [ONE-LINE PRODUCT DESCRIPTION, e.g., "a developer tool for infrastructure teams"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + lucide-react. Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: A field manual for a future that already happened. Pale sage paper, topographic contour lines, monospace data callouts, transaction-ID chips. Everything feels printed, referenced, and cataloged.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY — these ARE the style)
+
+- NO pure white (#FFFFFF) background — use sage #C8D5C0 or cream #F5F0E8
+- NO pure black (#000000) ink — use #2A2A2A
+- NO photography of any kind — line illustrations only
+- NO gradients of any kind
+- NO glassmorphism or backdrop-blur
+- NO 3D renders or illustrations
+- NO purple, blue, or neon accent colors
+- NO centered hero layout
+- NO rounded corners above 2px
+- NO bounce or spring easing
+- NO parallax or scroll-linked animations
+- NO serif fonts (sans + mono system only)
+- NO Inter as display font
+- NO more than ONE accent color
+
+---
+
+## FONTS
+
+Replace [DISPLAY_FONT] with a clean grotesk. Good choices:
+- Space Grotesk (600/700) — mechanical, technical
+- Archivo (500/600/700) — engineered, authoritative
+- Cabinet Grotesk (500/600) — modern grotesk
+
+Replace [BODY_FONT] with a neutral sans-serif. Good choices:
+- Inter (400/500) — neutral, readable
+- IBM Plex Sans (400/500) — technical, clean
+
+Replace [MONO_FONT] with a monospace for data labels. Good choices:
+- JetBrains Mono — clean, technical
+- Space Mono — geometric, matches Space Grotesk
+- IBM Plex Mono — engineered, matches IBM Plex Sans
+
+Load via Google Fonts. Set CSS utilities:
+- `.font-display` → [DISPLAY_FONT]
+- `.font-body` → [BODY_FONT]
+- `.font-mono-label` → [MONO_FONT]
+
+---
+
+## FLUID SIZE SYSTEM
+
+Use `clamp()` for all sizes — no hard px breakpoints for type/spacing:
+
+```css
+:root {
+  --pad-x: clamp(1.5rem, 4vw, 3rem);
+  --section-gap: clamp(3rem, 8vh, 6rem);
+  --logo: clamp(1rem, 1vw, 1.25rem);
+  --nav: clamp(0.65rem, 0.3vw + 0.5rem, 0.8rem);
+  --headline: clamp(2rem, 4vw, 3.5rem);   /* Confident, not monumental */
+  --subhead: clamp(1.25rem, 2.5vw, 2rem);
+  --body: 14px;                            /* SMALL — technical document */
+  --micro: 10px;                           /* TINY mono labels */
+  --border: 1px solid #A8B5A0;
+}
+```
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --ground: [GROUND_COLOR];          /* Pale sage #C8D5C0 or cream #F5F0E8 */
+  --ground-elevated: [GROUND_DARKER]; /* Slightly darker for panels */
+  --ink: #2A2A2A;                    /* Dark ink — NEVER pure black */
+  --ink-secondary: #555555;
+  --ink-muted: #888888;
+  --border: #A8B5A0;
+  --accent: [ACCENT_COLOR];          /* ONE earth-tone accent — see guidance */
+}
+```
+
+**Ground color guidance:**
+- `#C8D5C0` (pale sage) — primary, most versatile
+- `#F5F0E8` (cream) — warmer, for heritage brands
+
+**Accent color guidance:** Choose ONE earth tone. Good options:
+- `#3D6B4F` (forest green) — safest, most technical
+- `#8B6F47` (antique brown) — warmer, heritage feel
+- `#A0563A` (survey orange) — for data highlights only
+
+The accent appears ONLY on: primary CTA button, one data point per section, active nav state. Nowhere else.
+
+---
+
+## PAGE STRUCTURE
+
+### Hero
+- `min-h-[80dvh]` (NOT full viewport — this is a document, not a splash)
+- Left-aligned content with corner data callouts
+- NEVER centered
+- Background: topographic contour line SVG illustration (0.5px stroke, accent at 25% opacity)
+- Headline: [DISPLAY_FONT] 700, tracking 0.02em, leading 1.05, size `var(--headline)`
+- Headline text: [2-4 WORD HEADLINE, e.g., "MAPPING THE UNSEEN"]
+- Body: [BODY_FONT] 400, size `var(--body)`, color `--ink-secondary`, max-width 480px
+- Body: [1-2 SENTENCE VALUE PROP — specific, technical, not aspirational]
+- CTA: border `1px solid var(--accent)`, transparent bg, uppercase [CTA TEXT], tracking 0.12em
+- CTA hover: fill accent color, text becomes --ground
+- Corner data callouts: coordinates, sector codes, timestamps in mono
+
+### Feature Sections (2-4 sections)
+- 3-column grid or asymmetric split with contour illustration
+- Each section has: sector code (`SECTOR 04-A` in mono), title ([DISPLAY_FONT] 700), body text, data callout
+- Section padding: `var(--section-gap)` vertical
+- Topographic or technical line illustration as decoration
+
+### Data Strip
+- Full-width, slightly darker ground panel
+- Mono text with transaction-style IDs and data readings
+- Format: `TXN-2026-0847 | [DATA POINT] | [TIMESTAMP] | [SECTOR] | STATUS: ACTIVE`
+
+### Footer
+- Ruler tick pattern along top edge
+- Footer row: brand name, year, version/status — all in mono
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- Pale sage/cream ground, dark ink (#2A2A2A), one earth-tone accent
+- No photography — topographic contour line illustrations only (SVG, 0.5px stroke)
+- Paper grain overlay (SVG feTurbulence, opacity 0.06, mix-blend-mode: multiply)
+- Sharp corners only (border-radius: 0-2px max)
+- Monospace data callouts on every section (coordinates, sector codes, timestamps)
+- Transaction-ID chips throughout
+- Ruler ticks along section edges and dividers
+- Strict 12-column grid with technical margins
+- Motion: minimal — 600ms fade-in on section entry, nothing else
+- Honor `prefers-reduced-motion: reduce`
+
+---
+
+## ANIMATIONS
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Section content | Opacity fade-in | 600ms | `ease-out` | On scroll-into-view |
+| Contour illustrations | SVG stroke draw-in (optional) | 1200ms | `ease-in-out` | 200ms after section visible |
+
+`prefers-reduced-motion: reduce` → collapse all to 0.01ms.
+
+---
+
+## ICONS
+
+lucide-react: `ArrowRight` (CTA), `ChevronRight` (links).
+Custom SVGs: topographic contour lines, ruler tick patterns, coordinate grids, L-corner brackets, scale bars.
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines:** Be specific and technical. NOT "Build the future of analytics." INSTEAD: "Mapping the Unseen" or "Signals, Not Noise."
+
+**Body copy:** Short (max 40 words per block). Specific. Technical register. No filler words ("seamlessly", "leverage", "empower"). Write like a technical document, not a marketing brochure.
+
+**Data callouts:** Use real or plausible numbers with units. `DEPTH: 2.4km`, `PRECISION: 0.1 mGal`, `SENSITIVITY: 0.01 nT`. Monospace font. These are the "technical marginalia" that signal precision.
+
+**Sector codes:** Every section has one. `SECTOR 04-A`, `SECTOR 04-B`, `SECTOR 04-C`. Sequential, referenced, cataloged.
+
+---
+
+Replace all [BRACKETED] placeholders with your brand details, then paste the full prompt into your AI coding assistant.
+```
