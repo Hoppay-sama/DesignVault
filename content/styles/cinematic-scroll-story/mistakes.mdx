@@ -1,0 +1,69 @@
+# Common Mistakes
+
+## Mistake 1: Using Raw Scroll Without Lerp Smoothing
+
+**What people do:** Map `scrollTop` directly to layer transforms — `layer.style.transform = translateY(scrollTop * depth)`.
+
+**Why it fails:** Raw scroll linking feels mechanical and jittery. Every scroll wheel notch produces a visible jump. The motion has no weight — it feels like a broken video player, not a film.
+
+**Fix:** Use lerp smoothing: `current += (target - current) * 0.14`. The layers "follow" the scroll with a slight lag, creating cinematic weight. The 0.14 factor is the sweet spot — lower feels sluggish, higher feels mechanical.
+
+---
+
+## Mistake 2: Single-Layer Photography
+
+**What people do:** Use one full-bleed image as the background and animate it with simple parallax.
+
+**Why it fails:** One layer can't create depth. The parallax effect requires multiple layers at different Z-depths moving at different rates. A single image with parallax looks like a zooming photo, not a 3D scene.
+
+**Fix:** Stack 7+ transparent-edge PNG layers. Each layer has its own depth factor (0.3 for sky, 1.0 for foreground). The differential movement between layers creates the illusion of depth.
+
+---
+
+## Mistake 3: Rectangular Images With Hard Edges
+
+**What people do:** Use standard rectangular images (JPGs or PNGs without alpha channels) as parallax layers.
+
+**Why it fails:** Hard rectangular edges break the theater flat metaphor. The layers look like stacked cards, not a continuous 3D scene. The boundaries between layers are visible and distracting.
+
+**Fix:** Use transparent-edge PNGs with feathered alpha channels. The edges of each layer should blend into the layers behind them. This requires image editing — remove backgrounds, feather edges, export as PNG with alpha.
+
+---
+
+## Mistake 4: Timer-Based Auto-Scroll
+
+**What people do:** Add an auto-scroll feature that advances the story on a timer, "so users don't have to scroll."
+
+**Why it fails:** The entire premise of this style is that the user is the director. Auto-scroll removes user agency and turns the experience into a video, not an interactive story. Users who want to linger on a scene can't.
+
+**Fix:** Never auto-scroll. The user controls the pace. If you want to guide users, use visual cues (a scroll indicator, subtle arrow) — but never take control of the scroll.
+
+---
+
+## Mistake 5: Uniform Fade Transitions Between Scenes
+
+**What people do:** Fade all layers in and out with the same opacity transition between scenes.
+
+**Why it fails:** Uniform fades feel like a slideshow, not a film. Cinema uses focus pulls, brightness shifts, and color transitions — not uniform fades.
+
+**Fix:** Use blur ramps (0px → 14px on exiting layers), brightness shifts (1.0 → 0.85), and saturation changes (60% → 100%). Each scene transition should have its own unique combination of effects.
+
+---
+
+## Mistake 6: Visible Carousel Rewind
+
+**What people do:** Implement the sight card slider as a standard carousel that visibly rewinds when it reaches the end.
+
+**Why it fails:** The visible "jump back" breaks the cinematic illusion. The user is reminded they're looking at a web component, not a film.
+
+**Fix:** Use the 3-set clone technique: triplicate the card array, and when the scroll offset passes the end of the first set, instant-jump to the equivalent position in the second set. The reset happens in a single frame — invisible to the user.
+
+---
+
+## Mistake 7: Too Many Text Elements
+
+**What people do:** Add headlines, subheadlines, body text, captions, and labels to every scene.
+
+**Why it fails:** This is a visual story, not a text article. The photographic layers carry the narrative. Text should be sparse — a title, a story panel, and nav buttons. More text competes with the imagery and breaks the cinematic atmosphere.
+
+**Fix:** Limit text to: one monumental title (scene 1), one story panel per scene (2-4 sentences), and nav buttons (end). Everything else is visual. If you need more text, the story isn't visual enough — reconsider the content.

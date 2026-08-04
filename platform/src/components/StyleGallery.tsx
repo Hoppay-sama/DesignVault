@@ -7,10 +7,9 @@ import { StyleCard } from './StyleGrid';
 
 interface StyleGalleryProps {
   styles: StyleEntry[];
-  allTags: string[];
 }
 
-export function StyleGallery({ styles, allTags }: StyleGalleryProps) {
+export function StyleGallery({ styles }: StyleGalleryProps) {
   const [filteredStyles, setFilteredStyles] = useState<StyleEntry[]>(styles);
 
   const handleFilteredStyles = useCallback((filtered: StyleEntry[]) => {
@@ -24,7 +23,6 @@ export function StyleGallery({ styles, allTags }: StyleGalleryProps) {
         <div className="max-w-7xl mx-auto">
           <StyleFilters
             styles={styles}
-            allTags={allTags}
             onFilteredStyles={handleFilteredStyles}
           />
         </div>

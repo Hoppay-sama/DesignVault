@@ -1,0 +1,92 @@
+# Color Architecture
+
+## Ground
+
+The ground varies by scene — this is a narrative style, not a single-palette style. Each scene has its own color world:
+
+```css
+/* Scene 1 — Sky / Title */
+--ground-sky: #B8D4E3;        /* Soft atmospheric blue */
+--ground-sky-deep: #5B8BA6;   /* Deeper sky for gradient */
+
+/* Scene 2 — Bridge / Architecture */
+--ground-bridge: #8B7355;     /* Warm stone, aged architecture */
+--ground-bridge-dark: #3D3328; /* Deep shadow under bridge */
+
+/* Scene 3 — Bazaar / Warmth */
+--ground-bazaar: #D4956A;     /* Warm amber, market lanterns */
+--ground-bazaar-glow: #F5C99B; /* Lantern glow */
+
+/* Scene 4 — Sights / Cards */
+--ground-sights: #1A1A2E;     /* Deep night, card showcase */
+--ground-sights-card: #FDF1E1; /* Cream card background */
+```
+
+**Why scene-based color:** A film doesn't use one color grade. Each scene has its own palette that transitions via blur and brightness shifts. The color IS the narrative.
+
+---
+
+## Text
+
+```css
+--text-on-light: #111411;     /* Ink on cream/light scenes */
+--text-on-dark: #FDF1E1;      /* Cream on dark/night scenes */
+--text-muted: rgba(253, 241, 225, 0.6); /* Muted cream for subtext */
+--text-story: #1A1A1A;        /* Story panel text on cream cards */
+```
+
+**On dark scenes:** Text is cream (#FDF1E1), never pure white. Pure white on dark photography creates halation and feels digital.
+
+**On light scenes:** Text is ink (#111411), never pure black. Pure black on warm backgrounds feels harsh.
+
+---
+
+## Accent
+
+```css
+--accent-warm: #C4956A;       /* Dusty amber — lantern light */
+--accent-cool: #5B8BA6;       /* Muted blue — sky reflection */
+--accent-gold: #C4A265;       /* Gold — for sight card highlights */
+```
+
+**Rule:** The accent shifts with the scene. The warm amber belongs to the bazaar; the cool blue belongs to the sky. Don't mix scene accents — each scene has ONE accent that matches its palette.
+
+---
+
+## Shade Gradients (Scene Transitions)
+
+```css
+/* Transition gradient between scenes */
+--transition-shade: linear-gradient(
+  180deg,
+  rgba(0, 0, 0, 0) 0%,
+  rgba(0, 0, 0, 0.3) 50%,
+  rgba(0, 0, 0, 0) 100%
+);
+```
+
+**Purpose:** Between scenes, a shade gradient overlay creates a brief darkening — like a film's scene transition. This is applied via opacity that ramps with scroll progress at scene boundaries.
+
+---
+
+## Color Treatment Per Scene
+
+| Scene | Dominant Color | Mood | Treatment |
+|-------|---------------|------|-----------|
+| 1 — Sky/Title | Soft blue #B8D4E3 | Open, expansive | Bright, slight desaturation |
+| 2 — Bridge | Warm stone #8B7355 | Architectural, grounded | Contrast ramp, blur to 14px at exit |
+| 3 — Bazaar | Warm amber #D4956A | Alive, warm | Saturation ramp from 60% to 100% |
+| 4 — Sights | Deep night #1A1A2E | Showcase, focused | Dark, cards glow with cream |
+
+---
+
+## Color Don'ts
+
+| Don't | Do Instead |
+|----------|--------------|
+| One static palette for all scenes | Scene-specific palettes that transition |
+| Pure #FFFFFF text on dark scenes | Cream #FDF1E1 |
+| Pure #000000 text on light scenes | Ink #111411 |
+| Saturated neon accents | Dusty, warm, scene-appropriate tones |
+| Sudden color jumps between scenes | Blur + brightness + shade gradient transitions |
+| Color overlays that flatten photography | Subtle opacity ramps (0.3 max) |

@@ -1,0 +1,28 @@
+# Anti-Slop Checklist
+
+- [ ] Sticky viewport (`position: sticky`, `top: 0`, `100vh`, `overflow: hidden`)
+- [ ] Scroll container height `calc(100vh + 3700px)` (or equivalent scene depth)
+- [ ] 7+ parallax layers with independent transforms
+- [ ] Transparent-edge PNG layers (alpha-channel feathered, not rectangular)
+- [ ] Lerp smoothing at 0.14 (not raw scroll linking)
+- [ ] Segment-based scroll choreography (segmentInOut per scene)
+- [ ] Blur ramp between scenes (0px → 14px on exiting layer)
+- [ ] Brightness/saturation shifts between scenes
+- [ ] Shade gradient at scene boundaries (opacity 0.25 max)
+- [ ] Infinite slider with 3-set clone + instant-jump normalization
+- [ ] Sight card fly-in from 420vw with power(1.55) easing
+- [ ] Monumental serif display type `clamp(4rem, 14vw, 14rem)`
+- [ ] Clean sans body type 14-18px
+- [ ] Story panels at 45% vertical, max-width 480px
+- [ ] Nav buttons fade in at scroll position 3360-3660px
+- [ ] Film grain overlay at 0.03-0.05 opacity
+- [ ] Scene-specific color palettes (not one static palette)
+- [ ] Cream text (#FDF1E1) on dark scenes, ink (#111411) on light scenes
+- [ ] Mouse parallax at 0.12 factor (optional, subtle)
+- [ ] `prefers-reduced-motion` honored (snap values, disable transitions)
+- [ ] No timer-based auto-scroll (user controls the pace)
+- [ ] No spring or bounce easing
+- [ ] No CSS-only parallax (`background-attachment: fixed`)
+- [ ] No rectangular images with hard edges
+- [ ] No card grids as primary layout
+- [ ] No single-layer photography (need 7+ layers for depth)

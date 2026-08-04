@@ -1,0 +1,103 @@
+# Texture & Surface
+
+## Primary Texture: AI-Generated Imagery
+
+The texture IS the AI imagery. Every image should have the qualities of machine-generated art:
+
+| Quality | Description |
+|---------|-------------|
+| **Impossible materials** | Surfaces that don't exist in reality — liquid metal flowers, glass clouds, stone water |
+| **Hybrid surfaces** | Materials blending into each other — flesh becoming stone, water becoming light |
+| **Scale ambiguity** | Objects at impossible scales — a tiny galaxy, a massive cell, a landscape inside a drop |
+| **Physics violations** | Gravity, light, and shadow that don't obey real-world physics |
+| **Intentional artifacts** | AI glitches, weird geometry, texture inconsistencies — featured, not hidden |
+
+**The goal:** Every image should feel like it came from a machine's imagination — not a photograph, not an illustration, but something that could only exist in latent space.
+
+---
+
+## Morphing Surfaces
+
+```css
+.morph-surface {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: morph 12s ease-in-out infinite;
+  filter: blur(0.5px);
+}
+
+@keyframes morph {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  33% { border-radius: 40% 60% 70% 30% / 50% 60% 40% 50%; }
+  66% { border-radius: 30% 70% 50% 50% / 40% 50% 60% 60%; }
+}
+```
+
+**Purpose:** UI elements with morphing borders — shapes that slowly shift like organic, living surfaces. This echoes the morphing quality of AI imagery and creates a sense that the UI is part of the same dreamlike world.
+
+---
+
+## Iridescent / Oily Surfaces
+
+```css
+.iridescent-surface {
+  background: conic-gradient(
+    from 0deg,
+    #E8D5D5, #D5D5E8, #D5DEE8, #DDE8D5, #E8DDD5, #E8D5D5
+  );
+  background-size: 200% 200%;
+  animation: iridescent-shift 8s ease-in-out infinite;
+  filter: saturate(0.7);
+}
+
+@keyframes iridescent-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+```
+
+**Purpose:** Iridescent surfaces on UI elements — like oil on water or a soap bubble. The iridescence is desaturated (filter: saturate(0.7)) to match the dreamlike palette. It shifts slowly, creating a living, shimmering surface.
+
+---
+
+## Image Processing
+
+AI imagery should be processed to enhance the dreamlike quality:
+
+| Processing | Effect | Parameters |
+|-----------|--------|------------|
+| **Slight blur** | Soft, dreamlike focus | 0.5-1px Gaussian blur |
+| **Color grade** | Desaturated pastels with saturated accents | Saturation 80-90% base, selective saturation boost |
+| **Contrast reduction** | Faded, memory-like | Contrast -10 to -15 |
+| **Warm/cool shift** | Dreamlike color temperature | Slight purple/blue tint in shadows |
+| **Grain** | Subtle analog texture | Opacity 0.02-0.03, overlay |
+
+**The goal:** The imagery should feel like a memory or a dream — slightly faded, slightly blurred, with vivid accents that feel like remembered details.
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Full-bleed AI surreal imagery |
+| Text overlays | Translucent (85% opacity), floating, no background |
+| UI elements | Morphing borders, iridescent surfaces |
+| Buttons | Iridescent gradient, morphing border-radius |
+| Navigation | Translucent, floating, minimal |
+| Dividers | None — sections transition via morphing crossfades |
+
+**No cards, no panels, no solid backgrounds.** Everything floats over the imagery. The only surfaces are the morphing, iridescent UI elements.
+
+---
+
+## Texture Don'ts
+
+| Don't | Do Instead |
+|------|------------|
+| Realistic photography | AI-generated surreal imagery |
+| Clean, artifact-free images | Intentional AI artifacts as design elements |
+| Sharp, precise borders | Morphing, organic borders |
+| Solid color backgrounds | Full-bleed AI imagery |
+| Flat UI surfaces | Iridescent, morphing, oily surfaces |
+| Digital gradients | Iridescent conic gradients with desaturated shifts |
+| Geometric patterns | Organic, morphing, dreamlike textures |

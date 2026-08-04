@@ -1,0 +1,139 @@
+# Layout Grammar
+
+## Grid System
+
+**No visible grid.** The 3D product fills the viewport; UI elements float at the edges. Internally:
+
+- 3D canvas: full viewport, `position: fixed`, `z-index: 0`
+- UI overlay: `position: relative`, `z-index: 10`
+- Product centered: the model sits at viewport center, always
+- Specs: side panel (right) or below (scroll-triggered)
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | Full viewport — `min-h-[100dvh]` |
+| Background | 3D canvas with neutral studio ground |
+| Product | Centered, full-viewport, photorealistic 3D model |
+| UI | Minimal — product name (top-left), scroll indicator (bottom-center) |
+
+```
+┌─────────────────────────────────────────┐
+│  PRODUCT NAME                  [SPECS]  │
+│                                         │
+│                                         │
+│            [3D PRODUCT MODEL]           │
+│            [Centered, full-viewport]     │
+│            [Orbital rotation enabled]    │
+│                                         │
+│                                         │
+│            [SCROLL TO EXPLORE]           │
+│              ↓                          │
+└─────────────────────────────────────────┘
+```
+
+**The product is the layout.** Everything else is minimal UI that floats at the edges. The 3D canvas is fixed; the UI scrolls over it.
+
+---
+
+## Scroll Sequence Layout
+
+```
+┌─────────────────────────────────────────┐
+│  [3D canvas — fixed, full viewport]     │
+│  [Product model — camera moves]         │
+│                                         │
+│  ┌─────────┐  ┌────────────────────┐    │
+│  │ Section │  │  Spec panel       │    │
+│  │ label   │  │  (slides in from  │    │
+│  │         │  │   right on scroll) │    │
+│  └─────────┘  └────────────────────┘    │
+│                                         │
+│  [Scroll drives camera: dolly, orbit,   │
+│   tilt, exploded view]                   │
+└─────────────────────────────────────────┘
+```
+
+The 3D canvas stays fixed. As the user scrolls, the camera moves around the product. Spec panels slide in from the right at specific scroll positions, providing details about the part of the product currently in view.
+
+---
+
+## Section Spacing
+
+```css
+--section-height: 100vh; /* Each scroll section is one viewport */
+--spec-panel-width: clamp(280px, 30vw, 400px);
+--spec-panel-margin: clamp(1.5rem, 4vw, 4rem);
+--ui-edge-margin: clamp(1.5rem, 4vw, 4rem);
+```
+
+**Each scroll section is one viewport height.** The user scrolls through 4-6 viewports of scroll space, and the camera moves through a corresponding sequence of angles and views.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Full-Viewport Product + Floating UI
+```
+┌─────────────────────────────────────────┐
+│  [Product name]              [Specs]   │
+│                                         │
+│         [3D Product Model]              │
+│                                         │
+│  [Scroll indicator]                     │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 2: Product + Side Spec Panel
+```
+┌─────────────────────────────┬───────────┐
+│                             │           │
+│    [3D Product Model]       │  SPECS    │
+│    (camera at angle)         │  Material │
+│                             │  Weight   │
+│                             │  Size     │
+│                             │  [Color]  │
+│                             │           │
+└─────────────────────────────┴───────────┘
+```
+
+### Pattern 3: Exploded View + Component Labels
+```
+┌─────────────────────────────────────────┐
+│  [Exploded 3D product]                 │
+│  [Components separated]                 │
+│                                         │
+│  → Component A (label)                  │
+│  → Component B (label)                  │
+│  → Component C (label)                  │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Full 3D canvas, side spec panel, orbital controls, scroll-driven camera |
+| **Tablet (768px)** | Full 3D canvas, spec panel below (toggle), simplified camera sequence |
+| **Mobile (375px)** | Full 3D canvas, specs as bottom sheet, touch orbital controls, reduced camera sequence |
+
+**On mobile:** The 3D product should still fill the viewport. Touch controls replace mouse drag for orbital rotation. The spec panel becomes a bottom sheet that slides up when tapped. The scroll-driven camera sequence is simplified — fewer angles, shorter scroll depth.
+
+---
+
+## Layout Don'ts
+
+| Don't | Do Instead |
+|------|------------|
+| Visible 3D controls (rotation widgets) | Invisible controls — mouse drag or touch |
+| Information overlays on the 3D scene | Side panels or below-section specs |
+| Busy backgrounds or environmental scenes | Neutral studio ground (gradient or solid) |
+| Multiple products in view | One product, centered, full-viewport |
+| Text over the 3D model | Text at the edges — product is the hero |
+| Standard page layout (header, content, footer) | 3D canvas fixed, UI floats over it |
+| Card grids for features | Scroll-driven camera reveals features |

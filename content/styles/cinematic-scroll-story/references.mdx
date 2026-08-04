@@ -1,0 +1,54 @@
+# Reference Gallery
+
+## Live Sites
+
+### Mostar City Scroll Story
+- **What works:** 7+ transparent-edge PNG parallax layers, segment-based scroll choreography, lerp smoothing at 0.14, blur ramps between scenes, infinite sight card slider with 3-set clone
+- **URL:** Reference implementation — the canonical example of this style
+
+### Raft (raft.com)
+- **What works:** Full-bleed video backgrounds, scroll-triggered scene changes, narrative structure, cinematic color grading
+- **URL:** raft.com
+
+### 21 Hrs On The Moon (21hrs.space) — Studio 28K
+- **What works:** Vast photography, minimal text, slow reveals, atmospheric pacing, scroll-driven scene transitions
+- **URL:** 21hrs.space
+
+### Apple AirPods Pro Page
+- **What works:** Scroll-driven product reveals, parallax depth, smooth camera movements, segment-based choreography
+- **URL:** apple.com/airpods-pro
+
+## Key Visual References
+
+### Layer Architecture
+- **Transparent-edge PNGs** — sky, architecture, midground, foreground with feathered alpha
+- **Theater flat stacking** — layers at different Z-depths with independent parallax
+- **Depth gradient** — sky (slowest) to foreground (fastest) parallax movement
+
+### Typography References
+- **Ogg Medium** at `clamp(4rem, 14vw, 14rem)` — monumental editorial serif
+- **Inter** at 16-18px — clean sans body text
+- **Story panels** — Inter Light 300, max-width 480px, 2-4 sentences
+
+### Motion References
+- **Lerp smoothing at 0.14** — the cinematic weight factor
+- **segmentInOut** — enter/hold/exit phases per scroll range
+- **Blur ramp 0px → 14px** — depth-of-field scene transitions
+- **Power(1.55) easing** — sight card fly-in from 420vw
+
+### Layout References
+- **Sticky stage + scroll container** — `calc(100vh + 3700px)` scroll depth
+- **Absolute-positioned layers** — CSS variable transforms driven by JS
+- **Story panels at 45% vertical** — centered, max-width 480px
+- **Infinite slider** — 3-set clone with instant-jump normalization
+
+## Screenshot Notes
+
+> When capturing references for this style, look for:
+> - The number of parallax layers (should be 7+)
+> - The scroll depth (should be 3000-4000px)
+> - The smoothness of motion (should have lerp weight, not raw scroll)
+> - The scene transitions (should use blur/brightness, not just fades)
+> - The transparent edges on images (should be feathered, not rectangular)
+> - The text density (should be minimal — title, story panels, nav only)
+> - The slider behavior (should be truly infinite, no visible rewind)

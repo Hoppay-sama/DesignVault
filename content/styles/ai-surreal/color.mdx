@@ -1,0 +1,79 @@
+# Color Architecture
+
+## Ground
+
+The ground is the AI imagery itself — there is no solid background color. However, for text areas and transitions:
+
+```css
+--color-ground-dark: #0D0D12;     /* Near-black with slight purple tint */
+--color-ground-light: #F0EDE8;    /* Warm off-white, like aged paper */
+```
+
+**Why tinted black:** Not pure #000000 — a slight purple/blue tint (#0D0D12) connects to the dreamlike palette. Pure black feels digital; tinted black feels like the dark parts of a dream.
+
+---
+
+## Desaturated Pastel Base
+
+```css
+--pastel-pink: #E8D5D5;       /* Dusty rose — soft, faded */
+--pastel-lavender: #D5D5E8;   /* Muted lavender — dreamlike */
+--pastel-blue: #D5DEE8;       /* Dusty blue — ethereal */
+--pastel-green: #DDE8D5;      /* Pale sage — natural but muted */
+--pastel-peach: #E8DDD5;     /* Warm peach — soft, faded */
+```
+
+**These are the base colors.** They appear in the AI imagery, in text overlays, and in UI elements. They're desaturated — pulled toward gray — so they feel like memories or dreams rather than reality.
+
+---
+
+## Saturated Accents
+
+```css
+--accent-magenta: #FF006E;    /* Vivid magenta — sudden, electric */
+--accent-electric-blue: #3A86FF; /* Electric blue — dream vivid */
+--accent-orange: #FB5607;     /* Saturated orange — warm vivid */
+--accent-violet: #8338EC;    /* Deep violet — psychedelic */
+```
+
+**Usage:** Saturated accents appear WITHIN the desaturated pastel fields — a vivid magenta flower in a dusty pink field, an electric blue ripple in a muted lavender pool. The contrast between muted base and saturated accent is the dreamlike color dynamic.
+
+**Rule:** Saturated accents should be rare and surprising. If everything is saturated, the effect is lost. The saturation should feel like a vivid memory within a faded dream.
+
+---
+
+## Text
+
+```css
+--color-text-on-dark: rgba(240, 237, 232, 0.85);  /* Warm off-white, translucent */
+--color-text-on-light: rgba(13, 13, 18, 0.85);    /* Dark, translucent */
+--color-text-muted: rgba(240, 237, 232, 0.5);    /* Muted, for labels */
+```
+
+**Why translucent text:** The text should feel like it's floating over the imagery — not sitting on top of it. Translucent text (85% opacity) creates a sense that the text is part of the dream, not an annotation on top of it.
+
+---
+
+## Iridescent / Oily Surface Colors
+
+```css
+--iridescent-surface: conic-gradient(
+  from 0deg,
+  #E8D5D5, #D5D5E8, #D5DEE8, #DDE8D5, #E8DDD5, #E8D5D5
+);
+```
+
+**Usage:** Iridescent surface colors appear on UI elements — buttons, borders, hover states. The iridescence shifts like oil on water — a rainbow that's desaturated and dreamlike, not vivid and holographic.
+
+---
+
+## Color Don'ts
+
+| Don't | Do Instead |
+|------|------------|
+| Uniformly saturated palette | Desaturated base with rare saturated accents |
+| Pure #000000 background | Tinted black #0D0D12 or the imagery itself |
+| Pure #FFFFFF text | Translucent warm off-white (85% opacity) |
+| Corporate color palettes | Dreamlike pastels — dusty, faded, memory-like |
+| Sharp color transitions | Morphing, blending color shifts |
+| Realistic color grading | Dreamlike color grading — impossible color combinations |

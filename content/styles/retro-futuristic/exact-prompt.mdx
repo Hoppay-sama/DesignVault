@@ -1,0 +1,161 @@
+# Exact Replica Prompt — Retro-Futuristic / Chrome Millennium
+
+> Copy this entire prompt and paste it into your AI coding assistant.
+
+---
+
+```
+Build a retro-futuristic page for "CHROME FM" — a music platform. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `Chrome FM — Tune Into the Future`.
+
+Vibe: The optimistic futurism of 1998-2004 reimagined with modern rendering. Chrome text effects, holographic gradients, inflatable 3D type. Black backgrounds make chrome pop. Not ironic pastiche — genuine reclamation of millennium visual language.
+
+---
+
+## ANTI-SLOP CONSTRAINTS
+
+- NO light backgrounds (pure black #000000 only)
+- NO flat silver/gray fills (chrome gradients with specular highlights only)
+- NO muted or desaturated accents (electric, saturated Y2K colors)
+- NO linear or controlled motion (spring physics — bouncy, energetic)
+- NO flat display type (inflated, 3D, chrome-rendered)
+- NO ironic pastiche (modern rendering of Y2K forms)
+- NO minimalist restraint (this style is maximal in visual effects)
+- NO earth tones or natural textures (synthetic, digital, metallic only)
+- NO serif typography (geometric, inflated, chrome only)
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Space+Mono:wght@400;700&display=swap
+```
+
+Usage:
+- **Orbitron 900**: Display headlines — `clamp(4rem, 8vw, 10rem)`, uppercase, tracking 0.04em, chrome gradient fill
+- **Space Mono 400**: Body text — `clamp(0.875rem, 1vw, 1.125rem)`, silver-white #E8E8E8
+- **Space Mono 700 UPPERCASE**: Labels — 10-14px, tracking 0.15em
+
+---
+
+## CHROME TEXT EFFECT
+
+```css
+.chrome-text {
+  background: linear-gradient(135deg, #E8E8E8 0%, #FFFFFF 25%, #C0C0C0 50%, #E8E8E8 75%, #A0A0A0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(255,255,255,0.3), 0 -1px 2px rgba(0,0,0,0.3);
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+}
+```
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --black: #000000;
+  --chrome: linear-gradient(135deg, #E8E8E8, #FFFFFF, #C0C0C0, #E8E8E8, #A0A0A0);
+  --holographic: linear-gradient(135deg, #FF006E, #FB5607, #FFBE0B, #8338EC, #3A86FF, #06FFA5);
+  --text-silver: #E8E8E8;
+  --accent-blue: #0066FF;
+  --accent-magenta: #FF006E;
+  --accent-green: #06FFA5;
+}
+```
+
+Body: `bg-black text-[#E8E8E8] antialiased font-mono overflow-hidden`.
+
+---
+
+## STRUCTURE
+
+### 1. Scanline Overlay (fixed, z-9999)
+```css
+.scanlines {
+  position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 1px, transparent 1px, transparent 3px);
+  opacity: 0.3;
+}
+```
+
+### 2. Hero Section
+- `min-h-screen`, pure black bg, centered content
+- Chrome headline: "CHROME FM" in Orbitron 900, chrome gradient, `clamp(4rem, 8vw, 10rem)`, uppercase
+- Orbiting 3D elements: 3-4 chrome spheres floating and rotating around the headline (framer-motion, spring physics, 8-12s orbits)
+- Holographic CTA: "TUNE IN" button with holographic gradient bg, scale 1.05 on hover (spring)
+- Tagline: Space Mono 400, "Tune into the future of sound", silver-white
+
+### 3. Features Section (3 chrome cards)
+- Each card: 1px chrome border, transparent bg, holographic gradient border on hover
+- Card content: icon (lucide), title (Orbitron 700), description (Space Mono 400)
+- Hover: lift -8px (spring stiffness 150, damping 12), holographic border animation
+- Staggered entrance: 100ms delay per card
+
+### 4. Footer
+- Pixel-art style credits: Space Mono 400, 12px, silver-white at 50% opacity
+- "CHROME FM © 2026 — TUNE INTO THE FUTURE"
+
+---
+
+## ANIMATIONS
+
+| Element | Animation | Physics | Duration |
+|---------|-----------|---------|----------|
+| Orbiting spheres | Float + rotate (all axes) | Spring (stiffness 100, damping 10) | 8-12s, infinite |
+| Chrome headline | Scale 0.8→1 + opacity 0→1 | Spring (stiffness 100) | 800ms |
+| Holographic CTA | Scale 0.9→1 + gradient shift | Spring (stiffness 200) | 600ms |
+| Chrome cards | Staggered fade + scale | Spring (stiffness 150) | 500ms each, 100ms stagger |
+| Scanlines | Opacity 0→0.3 | ease-in | 2000ms |
+| Holographic hover | Gradient position shift | ease-in-out | 600ms, infinite on hover |
+
+`prefers-reduced-motion: reduce` → disable all floating/rotation, instant entrance, static scanlines.
+
+---
+
+## HOLOGRAPHIC HOVER EFFECT
+
+```css
+.holo-hover {
+  background: linear-gradient(135deg, #FF006E, #FB5607, #FFBE0B, #8338EC, #3A86FF, #06FFA5);
+  background-size: 200% 200%;
+  transition: background-position 600ms ease-in-out;
+}
+.holo-hover:hover {
+  animation: holo-shift 3s ease-in-out infinite;
+}
+@keyframes holo-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+```
+
+---
+
+## ICONS
+
+lucide-react: `Radio` (tune in), `Headphones` (listen), `Zap` (energy), `Globe` (global). Sizes 24-32, strokeWidth 1.5, chrome gradient fill.
+
+---
+
+## ANTI-SLOP (LOCKED)
+
+- Pure black #000000 ground
+- Chrome gradient text (not flat silver)
+- Holographic accents on hover
+- Inflated 3D display type
+- Spring physics (bouncy, energetic)
+- Scanline overlay at 30% opacity
+- Orbiting 3D elements
+- Electric accent colors (#0066FF, #FF006E, #06FFA5)
+- No flat, muted, or minimalist design
+- No light backgrounds, no earth tones, no serif type
+
+---
+
+Recreate this page with the exact chrome effects, holographic interactions, spring motion, and Y2K aesthetic above.
+```

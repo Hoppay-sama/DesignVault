@@ -1,0 +1,156 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Retro-Futuristic is **energetic and bouncy**. This is the opposite of cinematic restraint — it's playful, optimistic, and physical. Spring physics, floating 3D objects, liquid metal morphing. The motion should feel like the millennium's optimism: everything is possible, everything is alive, everything is moving.
+
+---
+
+## Bouncy Spring Physics
+
+| Element | Animation | Physics | Duration |
+|---------|-----------|---------|----------|
+| 3D objects | Float + rotate | Spring (stiffness 100, damping 10) | Continuous |
+| Chrome text | Scale on hover | Spring (stiffness 200, damping 15) | 400ms |
+| Cards | Lift on hover | Spring (stiffness 150, damping 12) | 500ms |
+| Holographic borders | Gradient shift on hover | Ease-in-out | 600ms |
+
+```javascript
+// Spring physics (framer-motion)
+<motion.div
+  animate={{ y: [0, -10, 0], rotateY: [0, 360] }}
+  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+/>
+```
+
+**Why spring:** The Y2K aesthetic was optimistic and playful. Spring physics capture that energy — everything bounces, everything has life. Linear or ease-out feels too controlled; spring feels like the future is exciting.
+
+---
+
+## Floating / Rotating 3D Objects
+
+| Object | Motion | Duration | Easing |
+|--------|--------|----------|--------|
+| Orbiting elements | Circular orbit + self-rotation | 8-12s | linear, infinite |
+| Floating chrome spheres | Y-axis bob + slow rotate | 4-6s | ease-in-out, infinite |
+| Inflated type | Subtle scale breathing (1.0 → 1.02) | 3-5s | ease-in-out, infinite |
+| Wireframe shapes | 3D rotation (all axes) | 10-15s | linear, infinite |
+
+**The floating should feel weightless** — like objects in zero gravity. The motion is slow, continuous, and hypnotic. It creates a sense that the page is a 3D space, not a flat surface.
+
+---
+
+## Liquid Metal Morphing
+
+```css
+@keyframes liquid-morph {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+}
+
+.liquid-metal {
+  animation: liquid-morph 8s ease-in-out infinite;
+  background: var(--chrome-gradient);
+  filter: blur(2px) contrast(1.2);
+}
+```
+
+**Purpose:** Liquid metal morphing creates the illusion of a chrome surface that's alive — shifting, flowing, reshaping. This is the millennium's vision of nanotechnology and smart materials.
+
+---
+
+## Scanline Effects
+
+```css
+.scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.3;
+}
+```
+
+**Purpose:** Scanlines reference CRT monitors — the flickering, scanning display technology of the Y2K era. They're a textural overlay that says "this is a screen, this is digital, this is from the age of monitors."
+
+---
+
+## CRT Flicker on Hover
+
+```css
+@keyframes crt-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.95; }
+  52% { opacity: 0.98; }
+  54% { opacity: 0.93; }
+}
+
+.crt-hover:hover {
+  animation: crt-flicker 0.15s infinite;
+}
+```
+
+**Usage:** On hover, elements briefly flicker like a CRT monitor with a loose connection. It's a subtle, nostalgic effect that rewards interaction.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Chrome headline | Scale 0.8→1 + opacity 0→1 | 800ms | spring (stiffness 100) | 0ms |
+| Orbiting 3D elements | Fade in + begin orbit | 1200ms | ease-out | 400ms |
+| Holographic CTA | Scale 0.9→1 + gradient shift | 600ms | spring (stiffness 200) | 800ms |
+| Cards | Staggered fade-in + scale | 500ms each | spring (stiffness 150) | 1000ms (stagger 100ms) |
+| Scanline overlay | Opacity 0→0.3 | 2000ms | ease-in | 0ms |
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Chrome text | Gradient shift (rotate gradient 45deg) | — |
+| Holographic borders | Rainbow shift animation (1s loop) | — |
+| Cards | Lift -8px + chrome border glow | — |
+| Buttons | Holographic gradient fill + scale 1.05 | — |
+| 3D objects | Rotation speed 1x → 2x | — |
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- All floating/rotation: disabled (static)
+- Spring physics: instant (no bounce)
+- Scanlines: static (no flicker)
+- Liquid morphing: disabled
+- Entrance animations: instant opacity
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| Never | Why |
+|-------|-----|
+| Slow, cinematic fades | Wrong energy — this is bouncy, not contemplative |
+| Linear, mechanical motion | Too controlled — needs spring physics |
+| Subtle, barely-perceptible effects | This style is bold — effects should be visible |
+| Text typing animations | Too gimmicky, even for this playful style |
+| Parallax scroll | This style is about 3D space, not scroll depth |

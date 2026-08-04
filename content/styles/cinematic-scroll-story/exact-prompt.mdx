@@ -1,0 +1,196 @@
+# Exact Replica Prompt — Cinematic Scroll Story
+
+> Copy this entire prompt and paste it into your AI coding assistant.
+
+---
+
+```
+Build a cinematic scroll story for "MOSTAR" — a city scroll story showcasing the historic bridge, bazaar, and sights of Mostar. Stack: vanilla HTML/CSS/JS (no frameworks). Page title: `Mostar — A City Between Worlds`.
+
+Vibe: A film you control with your scroll wheel. 7+ transparent-edge PNG layers stack like theater flats. Each scene has its own color world. The scroll wheel is the camera dolly.
+
+---
+
+## ANTI-SLOP CONSTRAINTS
+
+- NO timer-based auto-scroll (user controls the pace)
+- NO single-layer photography (need 7+ parallax layers)
+- NO raw scroll linking (use lerp smoothing at 0.14)
+- NO rectangular images with hard edges (transparent-edge PNGs only)
+- NO uniform fade transitions (use blur/brightness/saturation shifts)
+- NO visible carousel rewind (3-set clone with instant-jump normalize)
+- NO spring or bounce easing
+- NO CSS-only parallax (background-attachment: fixed)
+- NO card grids as primary layout
+- NO more than minimal text (title, story panels, nav)
+
+---
+
+## STRUCTURE
+
+### Cinema Scroll Container
+```html
+<div class="cinema-scroll" style="height: calc(100vh + 3700px); position: relative;">
+  <div class="cinema-stage" style="position: sticky; top: 0; height: 100vh; overflow: hidden;">
+    <!-- 7+ parallax layers -->
+    <div class="layer" data-depth="0.3" id="sky"></div>
+    <div class="layer" data-depth="0.5" id="back-four"></div>
+    <div class="layer" data-depth="0.7" id="bazaar"></div>
+    <div class="layer" data-depth="0.85" id="splitframe-L"></div>
+    <div class="layer" data-depth="0.85" id="splitframe-R"></div>
+    <div class="layer" data-depth="0.9" id="bridge"></div>
+    <div class="layer" data-depth="1.0" id="frame-two"></div>
+    <!-- Story panel -->
+    <div class="story-panel" id="story-1"></div>
+    <!-- Sight slider -->
+    <div class="sights-slider" id="sights"></div>
+    <!-- Nav -->
+    <div class="cinema-nav" id="nav"></div>
+  </div>
+</div>
+```
+
+---
+
+## SCROLL CHOREOGRAPHY (JS)
+
+```javascript
+// Lerp smoothing
+let current = 0, target = 0;
+const lerpFactor = 0.14;
+
+function segmentInOut(scroll, start, end) {
+  const t = (scroll - start) / (end - start);
+  if (t < 0 || t > 1) return 0;
+  if (t < 0.3) return t / 0.3;
+  if (t > 0.7) return (1 - t) / 0.3;
+  return 1;
+}
+
+function update() {
+  current += (target - current) * lerpFactor;
+  const scroll = current;
+
+  // Layer 1: Sky — slow drift
+  setTransform('sky', { ty: -scroll * 0.3 * 0.08, scale: 1 + scroll * 0.00002 });
+
+  // Layer 2: Back architecture
+  setTransform('back-four', { ty: -scroll * 0.5 * 0.12, scale: 1 + scroll * 0.00003 });
+
+  // Layer 3: Bazaar — saturation ramp
+  const bazaarSat = 60 + segmentInOut(scroll, 1760, 2700) * 40;
+  document.getElementById('bazaar').style.filter = `saturate(${bazaarSat}%)`;
+
+  // Layer 5: Bridge — blur ramp on exit
+  const bridgeBlur = segmentInOut(scroll, 1200, 1620) * 14;
+  const bridgeBright = 1 - segmentInOut(scroll, 1200, 1620) * 0.15;
+  document.getElementById('bridge').style.filter = `blur(${bridgeBlur}px) brightness(${bridgeBright})`;
+
+  // Title — rise and fade
+  const titleProgress = segmentInOut(scroll, 0, 650);
+  document.getElementById('title').style.transform = `translateY(${-210 * titleProgress}px)`;
+  document.getElementById('title').style.opacity = 1 - titleProgress;
+
+  // Story panel — fade in
+  const storyProgress = segmentInOut(scroll, 1760, 2700);
+  document.getElementById('story-1').style.opacity = storyProgress;
+  document.getElementById('story-1').style.transform = `translateY(${40 - storyProgress * 40}px)`;
+
+  // Sights slider — fly in from 420vw
+  const sliderProgress = segmentInOut(scroll, 2760, 3560);
+  const sliderX = 420 - Math.pow(sliderProgress, 1.55) * 420;
+  document.getElementById('sights').style.transform = `translateX(${sliderX}vw)`;
+
+  // Nav buttons — fade in
+  const navProgress = Math.max(0, Math.min(1, (scroll - 3360) / 140));
+  document.getElementById('nav').style.opacity = navProgress;
+
+  requestAnimationFrame(update);
+}
+
+window.addEventListener('scroll', () => { target = window.scrollY; });
+update();
+```
+
+---
+
+## SCENES (scroll ranges)
+
+- **0-650px:** Title "MOSTAR" rises -210px, fades out. Sky and back layers drift slowly.
+- **560-1620px:** Bridge widens, splits, launches upward. Blur ramps to 14px. Brightness drops to 0.85.
+- **1760-2700px:** Bazaar gains saturation (60% → 100%). Story panel fades in at 45% vertical.
+- **2760-3560px:** Sights slider flies in from 420vw with power(1.55) easing. Cards show city landmarks.
+- **3360-3660px:** Nav buttons (PREV / NEXT) fade in, become clickable.
+
+---
+
+## INFINITE SLIDER (3-SET CLONE)
+
+```javascript
+const cards = [...document.querySelectorAll('.sight-card')];
+const setWidth = cards.length * 320; // card width
+// Clone cards 2x (3 sets total)
+// On scroll offset > setWidth: offset -= setWidth (instant normalize)
+```
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400;500&display=swap
+```
+
+- **Playfair Display 400-500**: Display title — `clamp(4rem, 14vw, 14rem)`
+- **Inter 400**: Body and story panels — 16-18px
+- **Inter 300**: Story panel text — `clamp(1rem, 1.5vw, 1.5rem)`
+- **Inter 500 UPPERCASE**: Nav buttons — 12-14px, tracking 0.1em
+
+---
+
+## COLOR
+
+```css
+:root {
+  --text-cream: #FDF1E1;
+  --text-ink: #111411;
+  --accent-amber: #C4956A;
+  --accent-blue: #5B8BA6;
+  --story-overlay: rgba(0, 0, 0, 0.6);
+  --card-bg: #FDF1E1;
+}
+```
+
+---
+
+## ANTI-SLOP (LOCKED)
+
+- Lerp smoothing at 0.14 (not raw scroll)
+- 7+ transparent-edge PNG parallax layers
+- Segment-based choreography (segmentInOut per scene)
+- Blur ramp 0px → 14px between scenes
+- Infinite slider with 3-set clone + instant-jump normalize
+- Sight card fly-in from 420vw with power(1.55) easing
+- Reduced motion: snap values, disable transitions
+- All images from remote URLs (transparent-edge PNGs)
+- No timer-based auto-scroll
+- No spring or bounce easing
+
+---
+
+## REDUCED MOTION
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
+/* JS: if reduced motion, snap current = target, disable lerp */
+```
+
+---
+
+Recreate this page with the exact scroll choreography, layer architecture, lerp smoothing, and scene transitions above.
+```

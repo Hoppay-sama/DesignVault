@@ -1,0 +1,39 @@
+# Design Principles
+
+## 1. SCROLL IS THE DIRECTOR
+
+Every pixel of scroll progress maps to a precise layer transform. The user's scroll wheel is the camera dolly, the crane, the zoom lens. Nothing animates on a timer — everything is choreographed to scroll position. A 3700px scroll container is the film reel; the sticky viewport is the screen. Lerp smoothing at 0.14 ensures the motion feels cinematic, not mechanical.
+
+**What it prevents:** Auto-playing animations that ignore user agency, and jittery raw-scroll transforms that feel like a broken video player.
+
+---
+
+## 2. LAYERS AS THEATER FLATS
+
+Transparent-edge PNGs stack at different Z-depths like theatrical flat sets — sky, distant architecture, midground bazaar, foreground bridge, frame elements. Each layer has an independent transform driven by scroll progress. The sky drifts slowly, the foreground races. This parallax separation creates real depth, not the fake depth of a CSS drop shadow.
+
+**What it prevents:** Single-layer photography that feels flat, and card-based layouts that have no spatial relationship between elements.
+
+---
+
+## 3. SEGMENT-BASED CHOREOGRAPHY
+
+The scroll range is divided into scenes. Each scene has its own enter/exit logic via a `segmentInOut` helper: a function that returns 0→1→0 across a defined scroll range. Scene 1 (0-650px): title rises and fades. Scene 2 (560-1620px): bridge splits and launches. Scene 3 (1760-2700px): bazaar saturates and story panel emerges. Scene 4 (2760-3560px): sight cards fly in from 420vw. Each scene is independently choreographed.
+
+**What it prevents:** Uniform fade-in-everything approaches where all elements animate the same way regardless of narrative position.
+
+---
+
+## 4. BLUR AS SCENE TRANSITION
+
+Between scenes, photographic layers ramp blur from 0px to 14px and shift brightness/saturation. This mimics a camera focus pull — the previous scene dissolves out of focus as the next scene sharpens. The blur is not a hover effect; it's a narrative device. It signals "this scene is ending" before the next scene's elements appear.
+
+**What it prevents:** Hard cuts between sections that feel like page loads rather than cinematic transitions.
+
+---
+
+## 5. INFINITE SLIDER WITH CLONE-NORMALIZE
+
+The sight card slider uses a 3-set clone technique: the card array is triplicated, and when the scroll offset reaches the end of the first set, the position instantly resets to the equivalent position in the second set. The user never sees the reset — it happens in a single frame. This creates true infinite scrolling without the visible "jump back" of naive carousel implementations.
+
+**What it prevents:** Carousels that visibly rewind, and finite sliders that run out of content mid-narrative.

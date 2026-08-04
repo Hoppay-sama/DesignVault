@@ -1,0 +1,127 @@
+# Layout Grammar
+
+## Grid System
+
+**No visible grid.** The layout is defined by absolute-positioned layers within a sticky stage. However, internally:
+
+- Sticky stage: 100vw × 100vh, `overflow: hidden`, `position: sticky`, `top: 0`
+- Scroll container: 100vw × `calc(100vh + 3700px)`, `position: relative`
+- Layers: `position: absolute`, `inset: 0`, with CSS variable transforms
+- Story panels: centered at 45% vertical, max-width 480px
+
+---
+
+## The Sticky Stage Architecture
+
+```css
+.cinema-scroll {
+  height: calc(100vh + 3700px); /* Total scroll distance */
+  position: relative;
+}
+
+.cinema-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  /* All parallax layers are children of this */
+}
+
+.cinema-layer {
+  position: absolute;
+  inset: 0;
+  /* Transform driven by JS scroll progress */
+  transform: translate3d(var(--tx), var(--ty), 0) scale(var(--scale));
+}
+```
+
+**Why sticky + scroll container:** The sticky stage stays fixed in the viewport while the user scrolls through 3700px of "virtual" scroll space. The JS reads `scrollTop` and maps it to layer transforms. This is the core architecture of scroll-driven cinema.
+
+---
+
+## Layer Stack (Z-Order)
+
+| Z-Index | Layer | Content | Parallax Depth |
+|---------|-------|---------|----------------|
+| 1 | Sky | Transparent-edge PNG of sky/atmosphere | Slowest (0.3) |
+| 2 | Back architecture | Distant buildings, bridges | Slow (0.5) |
+| 3 | Bazaar | Midground market scene | Medium (0.7) |
+| 4 | Splitframe L/R | Foreground frame elements | Fast (0.85) |
+| 5 | Bridge | Hero architectural element | Fast (0.9) |
+| 6 | Frame two | Closest foreground frame | Fastest (1.0) |
+| 7 | Story panel | Narrative text overlay | Independent |
+| 8 | Sights slider | Card carousel | Independent |
+| 9 | Nav buttons | UI navigation | Independent |
+
+**Depth factor:** Higher = more parallax movement per scroll pixel. The sky barely moves; the foreground races. This creates the illusion of real depth.
+
+---
+
+## Story Panel Layout
+
+```
+┌─────────────────────────────────────────┐
+│                                         │
+│  [Photographic layers behind]           │
+│                                         │
+│                                         │
+│         ┌─────────────────┐             │
+│         │  Story Panel    │             │
+│         │  (max-w-480px)  │             │
+│         │                 │             │
+│         │  2-4 sentences  │             │
+│         │  of narrative   │             │
+│         │                 │             │
+│         └─────────────────┘             │
+│         (centered at 45% vertical)      │
+│                                         │
+└─────────────────────────────────────────┘
+```
+
+Story panels fade in at precise scroll positions. They sit at 45% vertical — slightly above center — so the photographic layers remain visible above and below.
+
+---
+
+## Sights Slider Layout
+
+```
+┌─────────────────────────────────────────┐
+│                                         │
+│  [Cards fly in from 420vw on X]         │
+│                                         │
+│   ┌──────┐  ┌──────┐  ┌──────┐         │
+│   │ Card │  │ Card │  │ Card │  ←→     │
+│   │      │  │      │  │      │ infinite│
+│   └──────┘  └──────┘  └──────┘         │
+│                                         │
+│  [Nav buttons fade in below]            │
+│      [PREV]        [NEXT]              │
+└─────────────────────────────────────────┘
+```
+
+The slider occupies the lower third of the stage. Cards are 280-320px wide, cream background (#FDF1E1), with photographic content. The infinite scroll means cards extend beyond both edges.
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Full 7-layer parallax, 3700px scroll, mouse parallax |
+| **Tablet (768px)** | Reduce to 5 layers, 2800px scroll, disable mouse parallax |
+| **Mobile (375px)** | Reduce to 3 layers (sky, midground, foreground), 2000px scroll, disable mouse parallax, simplify slider to swipe |
+
+**On mobile:** The parallax depth is maintained but with fewer layers. The scroll choreography still works — the scenes still transition. Don't disable the scroll story on mobile; simplify it.
+
+---
+
+## Layout Don'ts
+
+| Don't | Do Instead |
+|----------|--------------|
+| Static sections stacked vertically | Sticky stage with scroll-driven layers |
+| Single-layer photography | 7+ transparent-edge PNG layers at different depths |
+| Card grids for content | Story panels and sight slider within the stage |
+| Standard navigation bar | Nav buttons that fade in at scroll position 3360px |
+| Fixed pixel scroll distances | Use `calc(100vh + Npx)` for viewport-relative depth |
+| CSS-only parallax (background-attachment) | JS lerp-smoothed transforms for cinematic weight |

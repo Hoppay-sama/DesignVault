@@ -1,0 +1,85 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Organic serif — warm, literary, botanical-illustration aesthetic |
+| **Examples** | Recoleta, Cormorant Garamond, Playfair Display, GT Sectra, Lora |
+| **Weight** | 400-600 (medium — not bold, the elegance is in the forms) |
+| **Tracking** | -0.01em to 0.02em (standard, not wide) |
+| **Size** | `clamp(2.5rem, 6vw, 5rem)` — large but not monumental |
+| **Transform** | Sentence case, with italic for emphasis |
+| **Special** | Italic variant for key words (e.g., "Rooted in *Nature*") |
+
+**Why organic serif:** The serif forms echo the organic curves of botanical illustration. Recoleta and Cormorant have letterforms that feel hand-drawn — the terminals, the curves, the proportions. This matches the hand-drawn, warm aesthetic of the style.
+
+---
+
+## Italic Emphasis
+
+```html
+<h1>Rooted in <em>Nature</em></h1>
+```
+
+```css
+h1 em {
+  font-style: italic;
+  font-weight: 400; /* Lighter than the roman — creates contrast */
+  color: var(--gold); /* Gold for the italic word — ritual emphasis */
+}
+```
+
+**Why italic:** The italic variant of an organic serif is distinctly different from the roman — it's more flowing, more calligraphic. Using italic for one key word creates emphasis through form change, not just weight or color. The gold color on the italic word is the ritual accent.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Warm serif for emphasis, clean sans for body — or full serif body |
+| **Examples** | Cormorant Garamond (full serif), Inter + Cormorant (mixed), Lora (full serif) |
+| **Weight** | 400-500 |
+| **Tracking** | 0.01em-0.02em (slightly open for readability) |
+| **Size** | `clamp(0.875rem, 1vw, 1.125rem)` — 14-18px |
+| **Line Height** | 1.6-1.7 (generous, slow reading) |
+
+**Why mixed approach:** A warm serif body (Cormorant) feels like reading a botanical journal. A clean sans body (Inter) with serif emphasis feels like a modern wellness brand. Choose based on how "literary" vs "modern" the brand should feel.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same family as body, lighter weight, wide tracking |
+| **Examples** | Cormorant Light, Inter Light |
+| **Weight** | 300-400 |
+| **Tracking** | 0.15em-0.25em (very wide, like botanical specimen labels) |
+| **Size** | 10-12px |
+| **Transform** | UPPERCASE |
+
+**Usage:** Section labels, ingredient names, botanical specimen tags. These tiny labels feel like the handwritten tags on herbarium specimens — "FOLIUM", "RADIX", "FLOS".
+
+---
+
+## Type Scale
+
+```
+Display:  clamp(2.5rem, 6vw, 5rem)    — large, organic serif
+Body:     clamp(0.875rem, 1vw, 1.125rem) — 14-18px, warm
+Micro:    10-12px                        — specimen labels
+```
+
+The scale is moderate — 10px to 80px. The contrast is between the organic display and the precise labels, not between extreme sizes.
+
+---
+
+## Font Pairing Logic
+
+**Organic serif display + same serif body:** Cormorant Garamond throughout. The consistency feels like a botanical journal — one voice, one hand, one pen. Use weight and italic for hierarchy.
+
+**Organic serif display + clean sans body:** Recoleta + Inter. The serif carries the brand voice (warm, literary); the sans carries the functional text (readable, modern). This is the wellness brand approach.
+
+**Never:** Geometric sans (wrong register — too digital), monospace (too technical), or decorative scripts (too crafty, not botanical).

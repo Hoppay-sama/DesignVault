@@ -1,0 +1,133 @@
+# Texture & Surface
+
+## Primary Texture: Dual-Image Reveal
+
+The background is not a solid color — it's a dual-image system:
+
+| Layer | Content | Visibility |
+|-------|---------|-----------|
+| Base layer | Dark, moody fashion photograph | Always visible |
+| Reveal layer | Brighter, alternative photograph | Revealed by mouse spotlight |
+| Mask | Radial gradient at mouse position | Controls reveal area |
+
+```css
+.image-reveal {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+.image-reveal__base {
+  position: absolute;
+  inset: 0;
+  background-image: url('dark-fashion-photo.jpg');
+  background-size: cover;
+  background-position: center;
+}
+.image-reveal__hidden {
+  position: absolute;
+  inset: 0;
+  background-image: url('bright-fashion-photo.jpg');
+  background-size: cover;
+  background-position: center;
+  -webkit-mask: radial-gradient(
+    circle var(--spotlight-radius) at var(--mouse-x) var(--mouse-y),
+    black 0%, transparent 100%
+  );
+  mask: radial-gradient(
+    circle var(--spotlight-radius) at var(--mouse-x) var(--mouse-y),
+    black 0%, transparent 100%
+  );
+}
+```
+
+**Why dual-image:** The reveal creates an interactive texture — the surface changes as you explore. It's not a static background; it's a surface that responds to touch.
+
+---
+
+## SVG Grid Overlay
+
+```css
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.1;
+  background-image: url("data:image/svg+xml,...");
+  /* SVG: thin lines at 40px intervals, stroke #64748b */
+}
+```
+
+**Parameters:**
+- Opacity: 0.1 (10% — subliminal, not visible as a grid)
+- Line color: slate #64748b
+- Line spacing: 40px
+- Parallax: offset by mouse position (16px max, ease 0.06)
+
+**Purpose:** The grid creates a technical drawing aesthetic. It's not a visible grid — it's a texture that says "precision, measurement, engineering" without being distracting.
+
+---
+
+## Checkerboard Pattern
+
+```css
+.checkerboard {
+  background-image:
+    linear-gradient(45deg, #000 25%, transparent 25%),
+    linear-gradient(-45deg, #000 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #000 75%),
+    linear-gradient(-45deg, transparent 75%, #000 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+  opacity: 0.08;
+}
+```
+
+**Usage:** Checkerboard patterns appear as accent elements — framing product images, filling small decorative areas, referencing 3D modeling viewports. They should be subtle (8% opacity) and used sparingly.
+
+---
+
+## Wireframe Globe
+
+```svg
+<svg viewBox="0 0 200 200">
+  <circle cx="100" cy="100" r="80" fill="none" stroke="#000" stroke-width="0.5"/>
+  <ellipse cx="100" cy="100" rx="80" ry="30" fill="none" stroke="#000" stroke-width="0.5"/>
+  <ellipse cx="100" cy="100" rx="80" ry="60" fill="none" stroke="#000" stroke-width="0.5"/>
+  <ellipse cx="100" cy="100" rx="30" ry="80" fill="none" stroke="#000" stroke-width="0.5"/>
+  <ellipse cx="100" cy="100" rx="60" ry="80" fill="none" stroke="#000" stroke-width="0.5"/>
+  <line x1="20" y1="100" x2="180" y2="100" stroke="#000" stroke-width="0.5"/>
+</svg>
+```
+
+**Usage:** The wireframe globe sits in a small box (120-160px) with a tagline. It rotates continuously (linear, 20s per rotation) — a slow, perpetual spin that signals "global, connected, always on." The globe is a technical decoration, not a functional element.
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Dual-image reveal (dark base + spotlight-revealed layer) |
+| Grid overlay | SVG grid at 10% opacity, slate #64748b |
+| Content area | Pure white #FFFFFF (over the reveal) |
+| L-corner brackets | 1px solid #000, 32px × 32px |
+| Drawer | White with backdrop blur, 1px left border #E5E5E5 |
+| CTA | Transparent bg, 1px border #000 → fill #000 on hover |
+| Checkerboard | 8% opacity, 20px squares, used as accent only |
+
+**No shadows, no gradients, no glassmorphism (except drawer backdrop blur).** The style is defined by precision and flatness — depth comes from the dual-image reveal, not from visual effects.
+
+---
+
+## Texture Don'ts
+
+| Don't | Do Instead |
+|------|------------|
+| Gradient backgrounds | Solid white or dual-image reveal |
+| Drop shadows | Flat surfaces — depth comes from the reveal interaction |
+| Film grain or noise | Clean, digital, precise — no analog texture |
+| Glassmorphism on cards | Backdrop blur only on the drawer overlay |
+| Patterned backgrounds (dots, lines) | SVG grid at 10% opacity only |
+| Textured photography | Clean, high-contrast fashion photography |
+| Colorful imagery | Dark/moody base, brighter reveal — both desaturated |

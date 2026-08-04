@@ -1,0 +1,153 @@
+# Exact Replica Prompt — AI-Surreal / Latent Space
+
+> Copy this entire prompt and paste it into your AI coding assistant.
+
+---
+
+```
+Build an AI-surreal page for "LATENT" — an AI art platform. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `LATENT — Dreamlike compositions from machine imagination`.
+
+Vibe: The uncanny beauty of machine-generated imagery embraced as aesthetic. Dreamlike compositions where scale, material, and physics don't obey reality. Desaturated pastels with sudden saturated accents. The design acknowledges its synthetic nature.
+
+---
+
+## ANTI-SLOP CONSTRAINTS
+
+- NO realistic photography (AI-generated surreal imagery only)
+- NO sharp, geometric UI (morphing, organic shapes)
+- NO fast, snappy motion (1000ms+ minimum, drift/morph/breathe)
+- NO text-heavy layouts (imagery carries 90% of weight)
+- NO uniformly saturated palette (desaturated base, rare saturated accents)
+- NO solid color backgrounds (full-bleed imagery is the background)
+- NO card-based layouts (floating text over full-bleed images)
+- NO corporate or geometric precision
+- NO hiding AI artifacts (feature them as design elements)
+- NO serif typography (neutral sans-serif only)
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap
+```
+
+Usage:
+- **Inter 300**: Display headlines — `clamp(1.5rem, 3vw, 3rem)`, sentence case, tracking 0.04em
+- **Inter 400**: Body text — `clamp(0.875rem, 1vw, 1rem)`, line-height 1.6
+- **Inter 300 UPPERCASE**: Labels — 10-12px, tracking 0.2em
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --ground-dark: #0D0D12;        /* Tinted black — slight purple */
+  --pastel-pink: #E8D5D5;        /* Dusty rose */
+  --pastel-lavender: #D5D5E8;   /* Muted lavender */
+  --pastel-blue: #D5DEE8;       /* Dusty blue */
+  --pastel-green: #DDE8D5;      /* Pale sage */
+  --accent-magenta: #FF006E;    /* Vivid accent */
+  --accent-electric-blue: #3A86FF;
+  --accent-violet: #8338EC;
+  --text-on-dark: rgba(240, 237, 232, 0.85);
+  --text-muted: rgba(240, 237, 232, 0.5);
+}
+```
+
+Body: `bg-[#0D0D12] text-[rgba(240,237,232,0.85)] antialiased font-body overflow-hidden`.
+
+---
+
+## STRUCTURE
+
+### 1. Hero Section
+- `min-h-[100dvh]`, full-bleed AI-generated surreal imagery
+- Image: dreamlike composition with impossible materials, desaturated pastels with one saturated accent
+- Text overlay (bottom-left, translucent):
+  - Label: "LATENT SPACE / SEED 42" — Inter 300, uppercase, tracking 0.2em, 12px, text-muted
+  - Headline: "Dreamlike compositions from machine imagination" — Inter 300, `clamp(1.5rem, 3vw, 3rem)`, sentence case, text-on-dark
+  - Subtext: "Synthetic media as aesthetic. The uncanny beauty of AI-generated imagery." — Inter 400, text-on-dark, max-width 400px
+  - CTA: "ENTER" — morphing border-radius, iridescent surface, text-on-dark
+
+### 2. Gallery Section (3-4 full-bleed images)
+- Each section: `min-h-[100dvh]`, full-bleed AI surreal imagery
+- Between sections: morphing crossfade (one image slowly becomes another, 2000ms)
+- Text per section: 1 label + 1 headline + 1-2 sentences (translucent, floating)
+- Images: different dreamlike compositions, each with its own color world
+
+### 3. About Section
+- Split: AI surreal imagery (left) + translucent text (right)
+- Headline: "Machine imagination" — Inter 300
+- Body: 2-3 sentences about AI as an artistic medium
+- Iridescent button: "EXPLORE THE LATENT SPACE"
+
+### 4. Footer
+- Tinted black bg, translucent text
+- "LATENT © 2026 — DREAMLIKE COMPOSITIONS" — Inter 300, uppercase, tracking 0.15em, 12px, text-muted
+
+---
+
+## MORPHING UI
+
+```css
+.morph-button {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: morph 12s ease-in-out infinite;
+  background: conic-gradient(from 0deg, #E8D5D5, #D5D5E8, #D5DEE8, #DDE8D5, #E8DDD5, #E8D5D5);
+  background-size: 200% 200%;
+  filter: saturate(0.7);
+  padding: 1rem 2rem;
+  color: rgba(13, 13, 18, 0.85);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 12px;
+}
+
+@keyframes morph {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  33% { border-radius: 40% 60% 70% 30% / 50% 60% 40% 50%; }
+  66% { border-radius: 30% 70% 50% 50% / 40% 50% 60% 60%; }
+}
+```
+
+---
+
+## ANIMATIONS
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Hero imagery | opacity 0→1 + scale(1.06)→1 | 2500ms | `ease-out` |
+| Display text | opacity 0→1 + translateY(12px)→0 | 1500ms | `ease-out` (delay 800ms) |
+| Body text | opacity 0→1 | 1200ms | `ease-out` (delay 1200ms) |
+| UI elements | opacity 0→1 + scale(0.98)→1 | 1000ms | `ease-out` (delay 1500ms) |
+| All imagery | drift: scale(1.0)→(1.04) + opacity breathing | 8-12s | `ease-in-out`, infinite |
+| Morphing UI | border-radius morph | 12s | `ease-in-out`, infinite |
+| Iridescent surfaces | gradient shift | 8s | `ease-in-out`, infinite |
+
+`prefers-reduced-motion: reduce` → disable all drift/morph/breathing, instant entrance.
+
+---
+
+## ANTI-SLOP (LOCKED)
+
+- Full-bleed AI-generated surreal imagery (not photography)
+- Desaturated pastel base with rare saturated accents
+- Morphing transitions (latent space interpolation)
+- Drift motion (8-12s, barely perceptible)
+- Breathing animation on imagery
+- Translucent text (85% opacity) floating over imagery
+- Minimal text — imagery carries 90% of weight
+- Intentional AI artifacts featured
+- Morphing, iridescent UI surfaces
+- Neutral sans-serif at light weight
+- No cards, no solid backgrounds, no sharp edges
+- No fast motion, no text-heavy sections
+
+---
+
+Recreate this page with the exact AI-surreal aesthetic, morphing UI, drift motion, and dreamlike color palette above.
+```

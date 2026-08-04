@@ -1,0 +1,69 @@
+# Common Mistakes
+
+## Mistake 1: Adding "Just One" Accent Color
+
+**What people do:** Add a purple or blue accent "to make it pop" because pure black-on-white feels too stark.
+
+**Why it fails:** The entire aesthetic is built on the absence of color. One accent color doesn't "pop" — it destroys the system. The purple immediately reads as a generic AI default, and the precision of the technical framing elements is undermined by the introduction of an organic color choice.
+
+**Fix:** Gray only. Gray-200 through gray-600. If you need emphasis, use weight, size, or opacity — never color. The restriction IS the design.
+
+---
+
+## Mistake 2: Using Cream or Off-White Background
+
+**What people do:** Use #F5F3F0 or #FAFAFA because "pure white is too harsh."
+
+**Why it fails:** Pure white is the point. Cream softens the aesthetic into something cozy and less intentional. The technical framing elements (L-brackets, wireframe globe, checkerboard) look wrong on cream — they need the stark contrast of pure white to read as precision instruments.
+
+**Fix:** Pure #FFFFFF. Always. If it feels too stark, the solution is better photography in the dual-image reveal, not a warmer background.
+
+---
+
+## Mistake 3: Making the Spotlight Too Large or Too Fast
+
+**What people do:** Set the spotlight radius to 600px+ or use ease factor 0.3+ for "snappy" response.
+
+**Why it fails:** A large spotlight reveals too much at once — the mystery of the hidden image is lost. A fast ease factor makes the spotlight feel like a cursor, not a flashlight. The interaction becomes trivial instead of exploratory.
+
+**Fix:** Radius `clamp(160px, 16vw, 420px)`. Ease factor 0.1. The spotlight should feel weighted — it trails the cursor slightly, creating a cinematic lag that makes the interaction feel intentional.
+
+---
+
+## Mistake 4: Centering Everything
+
+**What people do:** Center the headline, center the CTA, center the wireframe globe — because "centered looks clean."
+
+**Why it fails:** Centered layouts are the AI default. They feel generic and safe. This style is asymmetric — the headline belongs on the left, the feature block belongs on the right-bottom. The asymmetry creates visual tension that centered layouts eliminate.
+
+**Fix:** Headline left-aligned. CTA below headline, left-aligned. Wireframe globe box in the right-bottom area. L-corner brackets frame the asymmetric composition. The layout should feel composed, not centered.
+
+---
+
+## Mistake 5: Using Serif Typography
+
+**What people do:** Pair Orbitron with a serif body font "for contrast."
+
+**Why it fails:** Serif typefaces belong to editorial, literary, or traditional aesthetics. This style is futuristic and geometric. A serif body font creates a jarring mismatch — the display says "future" and the body says "past." The contrast is wrong.
+
+**Fix:** Geometric display (Orbitron) + humanist sans body (Plus Jakarta Sans). Both are modern. The contrast is in their geometry — Orbitron is extreme, Plus Jakarta Sans is moderate. This is the right kind of contrast.
+
+---
+
+## Mistake 6: Adding Drop Shadows
+
+**What people do:** Add box shadows to the CTA, the drawer, or the L-corner brackets "for depth."
+
+**Why it fails:** Drop shadows are a digital UI convention. They say "this is a clickable element on a flat surface." This style doesn't have flat surfaces — it has a dual-image reveal that creates real depth through interaction. Shadows compete with the reveal and make the page feel like a standard web app.
+
+**Fix:** No shadows. Depth comes from the spotlight reveal interaction. The only exception is the drawer's backdrop blur, which creates depth through focus, not shadow.
+
+---
+
+## Mistake 7: Skipping the Technical Framing Elements
+
+**What people do:** Build the white-on-black layout with the spotlight reveal but omit the L-corner brackets, wireframe globe, and checkerboard patterns.
+
+**Why it fails:** Without the technical framing, the style is just "white page with black text and a mouse interaction." The framing elements are what make it specifically futuristic fashion rather than generically minimal. They're the visual language that says "precision, engineering, technical craft."
+
+**Fix:** Include all three: L-corner brackets at the hero corners, wireframe globe in a tagline box, checkerboard patterns as accent elements. They should be subtle but present — they're the style's signature.

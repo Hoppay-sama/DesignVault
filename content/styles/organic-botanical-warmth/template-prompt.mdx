@@ -1,0 +1,135 @@
+# Parameterized Template — Organic Botanical Warmth
+
+> Use this template to generate an Organic Botanical Warmth page for YOUR brand.
+
+---
+
+```
+Build an organic botanical page for "[BRAND_NAME]" — [ONE-LINE DESCRIPTION, e.g., "a botanical skincare brand using forest-sourced ingredients"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + lucide-react. Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: A botanical journal. Deep forest backgrounds with luminous botanical photography. Hand-drawn illustrations with labels. Earth tones, gold foil, paper grain. Warm, tactile, crafted by hand.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY)
+
+- NO pure black background (deep forest #0A1A0F)
+- NO pure white text (warm cream #F5F0E8)
+- NO flat gold #FFD700 (gold foil gradient with shimmer)
+- NO green gradients or leaf icons (real botanical photography and illustration)
+- NO neon or synthetic colors (earth tones only)
+- NO geometric shapes or tech aesthetics
+- NO digital precision in illustrations (hand-drawn with imperfection)
+- NO fast, snappy motion (800ms+ durations)
+- NO cool color temperature (everything warm)
+
+---
+
+## FONTS
+
+Replace [DISPLAY_FONT] with an organic serif:
+- Cormorant Garamond (400-600, italic) — most versatile, literary
+- Recoleta (400-600) — warm, slightly quirky, hand-drawn feel
+- Playfair Display (400-600) — more dramatic, editorial
+- Lora (400-600) — softer, more readable
+
+Replace [BODY_FONT] with a clean sans (for contrast):
+- Inter (400-500) — neutral, readable
+- Plus Jakarta Sans (400-500) — slightly warmer
+
+Load via Google Fonts. Use 400-600 for display, 400-500 for body.
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --ground: #0A1A0F;           /* Deep forest */
+  --ground-warm: #1A1410;      /* Dark earth */
+  --sage: #8B9D83;             /* Muted sage */
+  --terracotta: #C17A54;       /* Warm clay */
+  --ochre: #C4A265;            /* Warm ochre / gold */
+  --gold-bright: #D4AF37;      /* Brighter gold for foil */
+  --cream: #F5F0E8;            /* Warm cream text */
+}
+```
+
+**Accent guidance:** Choose earth tones that match your botanical subject:
+- Terracotta #C17A54 — for root/bark/berry brands
+- Sage #8B9D83 — for leaf/herb brands
+- Ochre #C4A265 — for pollen/flower/honey brands
+
+---
+
+## GOLD FOIL EFFECT
+
+```css
+.gold-foil {
+  background: linear-gradient(135deg, #C4A265, #D4AF37, #C4A265, #B8932E, #D4AF37);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gold-shimmer 4s ease-in-out infinite;
+}
+```
+
+---
+
+## STRUCTURE
+
+### Hero
+- `min-h-[100dvh]`, full-bleed botanical photography
+- Photography: luminosity-boosted, warm-graded, glowing
+- Text overlay: label, headline with italic gold emphasis, subtext, CTA
+- CTA: 1px gold border, transparent → earth tone fill on hover
+
+### Products (3-4 cards)
+- Dark earth bg, botanical illustration, product name, price
+- Hand-drawn SVG illustrations with labels
+- Hover: lift -4px + subtle shadow (500ms)
+
+### Ingredients (botanical diagrams)
+- Hand-drawn botanical diagrams with labeled parts
+- SVG draw-on animation (stroke-dasharray, 2000ms, on scroll)
+- Description text alongside
+
+### Story
+- Full-bleed nature photography with serif overlay text
+- 2-3 sentences about botanical sourcing
+
+### Footer
+- Deep forest bg, cream text, minimal
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- Deep forest #0A1A0F background (not pure black)
+- Warm cream #F5F0E8 text (not pure white)
+- Earth tone palette only
+- Gold foil with shimmer (not flat gold)
+- Hand-drawn botanical illustrations with labels
+- Paper grain overlay at 0.03 opacity
+- Organic serif typography
+- Italic emphasis on key words in gold
+- Gentle motion (800ms+, ease-out, no bounce)
+- SVG draw-on for illustrations
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines:** 3-5 words. Poetic, not descriptive. "Rooted in Nature" not "We Make Botanical Haircare Products."
+
+**Body text:** 2-3 sentences. Evocative, specific. Write like a botanical journal, not a marketing page.
+
+**Illustrations:** Hand-drawn botanical diagrams with labeled parts (FOLIUM, RADIX, FLOS). Scientifically grounded, not decorative.
+
+**Photography:** Full-bleed botanical subjects (moss, ferns, leaves, bark). Luminosity-boosted, warm-graded, glowing against dark background.
+
+---
+
+Replace all [BRACKETED] placeholders, then paste into your AI coding assistant.
+```

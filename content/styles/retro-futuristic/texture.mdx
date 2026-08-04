@@ -1,0 +1,126 @@
+# Texture & Surface
+
+## Primary Texture: Chrome / Metallic
+
+The texture IS chrome. Every prominent surface should have a metallic quality:
+
+| Surface | Treatment |
+|---------|-----------|
+| Display text | Chrome gradient (silver/white/gray shift) with specular highlights |
+| Borders | Chrome gradient or 1px solid #C0C0C0 |
+| Buttons | Chrome gradient fill or holographic on hover |
+| Cards | 1px chrome border, transparent bg, holographic gradient on hover |
+| 3D objects | Chrome material (metallic shader or CSS gradient simulation) |
+
+**Chrome gradient:**
+```css
+background: linear-gradient(135deg, #E8E8E8 0%, #FFFFFF 25%, #C0C0C0 50%, #E8E8E8 75%, #A0A0A0 100%);
+```
+
+The gradient shifts between silver, white, and gray — simulating light hitting a curved metallic surface.
+
+---
+
+## Holographic / Iridescent Reflections
+
+```css
+.holographic {
+  background: linear-gradient(135deg, #FF006E, #FB5607, #FFBE0B, #8338EC, #3A86FF, #06FFA5);
+  background-size: 200% 200%;
+  animation: holo-shift 3s ease-in-out infinite;
+}
+
+@keyframes holo-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+```
+
+**Usage:** Holographic gradients appear on hover, on chrome borders, and as accent fills. The iridescence shifts continuously — like light hitting an oil slick or a CD surface. The rainbow is the "color" in a style that's otherwise chrome and black.
+
+---
+
+## Scanlines
+
+```css
+.scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.3;
+}
+```
+
+**Parameters:**
+- Line spacing: 3px (1px dark, 2px transparent)
+- Opacity: 0.3 (visible but not overwhelming)
+- Position: fixed (covers viewport, doesn't scroll)
+
+**Purpose:** Scanlines reference CRT monitors — the display technology of the Y2K era. They're a textural overlay that says "this is a screen, this is digital, this is from the age of monitors."
+
+---
+
+## Pixel Dithering
+
+```css
+.pixel-dither {
+  background-image: radial-gradient(circle, #C0C0C0 1px, transparent 1px);
+  background-size: 4px 4px;
+  opacity: 0.05;
+}
+```
+
+**Usage:** Subtle pixel dithering on backgrounds creates a retro-digital texture. It references the limited color depth of early computer graphics. Keep it very subtle (5% opacity).
+
+---
+
+## Lens Flare
+
+```css
+.lens-flare {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+  filter: blur(20px);
+  pointer-events: none;
+}
+```
+
+**Usage:** Lens flares appear on chrome surfaces — simulating light hitting a camera lens. They should be subtle and positioned where a real light source would create a flare. This is a millennium visual effect — the era loved lens flares.
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Pure black #000000 |
+| Display text | Chrome gradient (background-clip: text) |
+| Body text | Silver-white #E8E8E8 on black |
+| Cards | 1px chrome border, transparent bg, holographic hover |
+| Buttons | Chrome gradient or holographic fill |
+| 3D objects | Chrome material with specular highlights |
+| Scanlines | Fixed overlay at 30% opacity |
+| Pixel dither | 5% opacity on backgrounds (optional) |
+
+---
+
+## Texture Don'ts
+
+| Don't | Do Instead |
+|------|------------|
+| Flat, matte surfaces | Chrome gradients with specular highlights |
+| Subtle, invisible textures | Bold scanlines, holographic shifts, lens flares |
+| Film grain or analog noise | Digital textures — scanlines, pixel dithering |
+| Paper or natural textures | Synthetic, digital, metallic textures only |
+| Subtle gradients | Bold chrome gradients with high contrast |
+| Muted holographic effects | Full rainbow iridescence that shifts on interaction |

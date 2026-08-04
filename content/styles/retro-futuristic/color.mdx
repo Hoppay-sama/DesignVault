@@ -1,0 +1,114 @@
+# Color Architecture
+
+## Ground
+
+```css
+--color-ground: #000000; /* Pure black — the stage for chrome */
+```
+
+**Why pure black:** Chrome against black is the same principle as stars against the night sky. The darkness makes the metallic surfaces visible. A chrome gradient on white looks washed out; on black, it looks like polished metal. The black is absolute — not dark gray, not near-black.
+
+---
+
+## Chrome Gradient
+
+```css
+--chrome-gradient: linear-gradient(
+  135deg,
+  #E8E8E8 0%,
+  #FFFFFF 20%,
+  #C0C0C0 40%,
+  #808080 60%,
+  #C0C0C0 80%,
+  #E8E8E8 100%
+);
+
+--chrome-blue-shift: linear-gradient(
+  135deg,
+  #E8E8E8 0%,
+  #FFFFFF 15%,
+  #B0C4DE 35%,
+  #C0C0C0 55%,
+  #E8E8E8 80%,
+  #A0A0A0 100%
+);
+```
+
+**The chrome gradient** shifts between silver (#E8E8E8), white (#FFFFFF), and gray (#C0C0C0). The blue-shifted variant adds a subtle cool tint (#B0C4DE) that references the cool tones of polished chrome under daylight.
+
+---
+
+## Holographic / Iridescent Accents
+
+```css
+--holographic-gradient: linear-gradient(
+  135deg,
+  #FF006E 0%,
+  #FB5607 15%,
+  #FFBE0B 30%,
+  #8338EC 45%,
+  #3A86FF 60%,
+  #06FFA5 75%,
+  #FF006E 100%
+);
+
+--iridescent-shift: conic-gradient(
+  from 0deg,
+  #FF006E, #FB5607, #FFBE0B, #8338EC, #3A86FF, #06FFA5, #FF006E
+);
+```
+
+**Usage:** Holographic gradients appear on hover, on chrome borders, and as accent fills. The iridescence shifts with interaction — like light hitting an oil slick or a CD surface. The rainbow is the "color" in a style that's otherwise chrome and black.
+
+---
+
+## Electric Accents
+
+```css
+--accent-electric-blue: #0066FF;  /* Y2K electric blue */
+--accent-hot-magenta: #FF006E;   /* Hot pink/magenta */
+--accent-acid-green: #06FFA5;     /* Acid green — Matrix reference */
+--accent-cyber-yellow: #FFBE0B;   /* Cyber yellow */
+```
+
+**Rule:** These electric accents appear as solid color fills on small elements — buttons, icons, highlights. They're the Y2K color palette: saturated, electric, optimistic. Use them sparingly — the chrome and holographic gradients are the primary visual interest.
+
+---
+
+## Text
+
+```css
+--text-on-black: #E8E8E8;       /* Silver-white — readable on black */
+--text-chrome: transparent;      /* Chrome gradient fill via background-clip */
+--text-muted: rgba(232, 232, 232, 0.5); /* Muted silver for secondary text */
+```
+
+**On black:** Text is silver-white (#E8E8E8), not pure white. Pure white on black creates too much contrast — silver-white feels like it belongs in the chrome world.
+
+---
+
+## Color Treatment
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Pure black #000000 |
+| Display text | Chrome gradient (background-clip: text) |
+| Body text | Silver-white #E8E8E8 |
+| Borders | Chrome gradient or 1px solid #C0C0C0 |
+| Buttons | Chrome gradient fill or holographic on hover |
+| Cards | 1px chrome border, transparent bg, holographic hover |
+| Accents | Electric blue, hot magenta, acid green (sparingly) |
+
+---
+
+## Color Don'ts
+
+| Don't | Do Instead |
+|------|------------|
+| White or light background | Pure black #000000 — chrome needs darkness |
+| Flat silver/gray fills | Chrome gradients with specular highlights |
+| Muted or desaturated accents | Electric, saturated Y2K colors |
+| Static color palettes | Holographic gradients that shift on interaction |
+| Pastel tones | Electric, high-saturation colors only |
+| Earth tones | Wrong era entirely — this is synthetic, not natural |
+| Subtle gradients | Bold chrome gradients with high contrast |

@@ -1,0 +1,80 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Editorial serif — monumental, narrative, cinematic |
+| **Examples** | Ogg Medium, Playfair Display, Cormorant Garamond, GT Sectra |
+| **Weight** | 400-500 (medium, not bold — the scale provides the impact) |
+| **Tracking** | -0.02em to 0.01em (tight, monumental) |
+| **Size** | `clamp(4rem, 14vw, 14rem)` — truly monumental, fills the stage |
+| **Transform** | Sentence case or title case, never uppercase for display |
+
+**Why monumental serif:** The scroll story is a film. The title is the opening credit. A serif at 14vw carries the weight of a cinema marquee. Sans-serif feels like a web app; serif feels like a story.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Clean, readable sans-serif — the narrator's voice |
+| **Examples** | Inter, Söhne, Aperçu, Aktiv Grotesk |
+| **Weight** | 400-500 |
+| **Tracking** | 0.01em-0.02em (slightly open for readability) |
+| **Size** | `clamp(0.875rem, 1vw, 1.125rem)` — 14-18px |
+| **Line Height** | 1.5-1.6 (comfortable for story panels) |
+
+**Why sans body:** The serif display is the title; the sans body is the narration. The contrast between the two typefaces mirrors the contrast between the cinematic image and the explanatory text.
+
+---
+
+## Story Panel Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same sans as body, lighter weight |
+| **Examples** | Inter Light (300), Söhne Light |
+| **Weight** | 300-400 |
+| **Tracking** | 0.02em-0.04em (open, breathable) |
+| **Size** | `clamp(1rem, 1.5vw, 1.5rem)` — larger than body, smaller than display |
+| **Line Height** | 1.5 |
+| **Max Width** | 480px (narrow, like a story card) |
+
+**Usage:** Story panels that fade in at precise scroll positions. These carry 2-4 sentences of narrative text — the "scene description" between cinematic moments.
+
+---
+
+## Navigation / UI Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same sans family, small and functional |
+| **Weight** | 400-500 |
+| **Tracking** | 0.08em-0.12em (wide, like film chapter markers) |
+| **Size** | 12-14px |
+| **Transform** | UPPERCASE for nav buttons and labels |
+
+**Usage:** Navigation buttons that fade in at scroll position 3360-3660px. These are functional UI — they should feel like chapter markers in a film, not web navigation.
+
+---
+
+## Type Scale
+
+```
+Display:      clamp(4rem, 14vw, 14rem)    — monumental, fills the stage
+Story panel:  clamp(1rem, 1.5vw, 1.5rem)  — narrative interludes
+Body:         clamp(0.875rem, 1vw, 1.125rem) — standard readable text
+Nav/UI:       12-14px                       — functional chapter markers
+```
+
+The scale spans from 12px to 224px — a 18:1 ratio. The display is the film title; the nav is the DVD menu.
+
+---
+
+## Font Pairing Logic
+
+**Serif display + sans body:** The classic editorial pairing. Ogg Medium + Inter. Playfair Display + Söhne. The serif carries emotion; the sans carries information.
+
+**Never:** Two sans-serifs (no contrast), two serifs (too uniform, loses the narrator/title distinction), or monospace for anything (too technical for a narrative).

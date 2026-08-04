@@ -1,0 +1,117 @@
+# Layout Grammar
+
+## Grid System
+
+**No visible grid.** The layout is image-dominant, asymmetric, and floating. Content drifts over full-bleed imagery. Internally:
+
+- Full-bleed sections: 100vw width, `min-h-[100dvh]`
+- Text containers: max-width 520px (moderate, floating)
+- Text placement: asymmetric, floating, never centered in a grid
+- Overlays: translucent, positioned at viewport edges or offset
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | Full viewport — `min-h-[100dvh]` |
+| Background | Full-bleed AI-generated surreal imagery |
+| Text position | Floating, asymmetric — bottom-left or top-right offset |
+| Headline size | `clamp(1.5rem, 3vw, 3rem)` — moderate, not monumental |
+| Text opacity | 85% — translucent, floating over imagery |
+
+```
+┌─────────────────────────────────────────┐
+│                                         │
+│  [Full-bleed AI-generated surreal image]│
+│  [Dreamlike, impossible materials]      │
+│  [Morphing, drifting]                   │
+│                                         │
+│  LATENT SPACE                           │
+│  Dreamlike compositions from            │
+│  machine imagination                    │
+│  [ENTER]                                │
+└─────────────────────────────────────────┘
+```
+
+**The hero is the imagery.** Text floats over it, translucent and minimal. The image carries 90% of the visual weight.
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(4rem, 12vh, 10rem);
+--content-max-width: 520px;
+--edge-margin: clamp(2rem, 5vw, 5rem);
+```
+
+**Spacing is generous.** The sections should feel like scenes in a dream — each with its own imagery, separated by the pause of whitespace. The pacing is slow, dreamlike, unhurried.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Full-Bleed Image + Floating Text
+```
+┌─────────────────────────────────────────┐
+│  [Full-bleed AI surreal imagery]        │
+│                                         │
+│       floating text                    │
+│       (translucent, offset)             │
+│                                         │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 2: Split — Image + Text
+```
+┌──────────────────┬──────────────────────┐
+│                  │                      │
+│  [AI surreal    │  Label               │
+│   imagery]       │  Headline            │
+│                  │  Body text           │
+│                  │  (translucent)       │
+│                  │                      │
+└──────────────────┴──────────────────────┘
+```
+
+### Pattern 3: Image Sequence (Latent Space Scroll)
+```
+┌─────────────────────────────────────────┐
+│  [Image state 1]                       │
+│  (morphs as you scroll)                 │
+├─────────────────────────────────────────┤
+│  [Image state 2]                       │
+│  (intermediate morph)                  │
+├─────────────────────────────────────────┤
+│  [Image state 3]                       │
+│  (final state)                          │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Full-bleed imagery, floating text, parallax through latent space |
+| **Tablet (768px)** | Imagery still full-bleed, text overlays simplified, reduced parallax |
+| **Mobile (375px)** | Full-bleed imagery, text below image (stacked), minimal parallax |
+
+**On mobile:** The imagery should still dominate. Text stacks below the image rather than overlaying — overlays can be hard to read on small screens. The dreamlike quality is maintained through the imagery, not the motion.
+
+---
+
+## Layout Don'ts
+
+| Don't | Do Instead |
+|------|------------|
+| Card grids | Full-bleed image sections with floating text |
+| Centered, grid-based layouts | Asymmetric, floating, image-dominant |
+| Dense content areas | Generous spacing with surreal imagery |
+| Text-heavy sections | Minimal text — imagery carries the weight |
+| Standard navigation | Minimal, translucent nav that floats |
+| Bordered containers | No borders — content floats freely over imagery |
+| Multiple images per section | One full-bleed image per section (or morphing sequence) |

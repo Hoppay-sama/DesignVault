@@ -1,0 +1,170 @@
+# Exact Replica Prompt — Organic Botanical Warmth
+
+> Copy this entire prompt and paste it into your AI coding assistant.
+
+---
+
+```
+Build an organic botanical page for "MOSS" — a botanical haircare brand. Stack: React + Vite + TypeScript + Tailwind CSS v4 + lucide-react. Page title: `MOSS — Rooted in Nature`.
+
+Vibe: A botanical journal. Deep forest backgrounds with luminous botanical photography. Hand-drawn illustrations with labels. Earth tones, gold foil, paper grain. Warm, tactile, crafted by hand.
+
+---
+
+## ANTI-SLOP CONSTRAINTS
+
+- NO pure black background (deep forest #0A1A0F)
+- NO pure white text (warm cream #F5F0E8)
+- NO flat gold #FFD700 (gold foil gradient with shimmer)
+- NO green gradients or leaf icons (real botanical photography and illustration)
+- NO neon or synthetic colors (earth tones only)
+- NO geometric shapes or tech aesthetics
+- NO digital precision in illustrations (hand-drawn with imperfection)
+- NO fast, snappy motion (800ms+ durations, organic easing)
+- NO cool color temperature (everything warm)
+- NO minimalist sans-serif as primary typeface (organic serif)
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500&display=swap
+```
+
+Usage:
+- **Cormorant Garamond 400-600**: Display headlines, `clamp(2.5rem, 6vw, 5rem)`, sentence case
+- **Cormorant Garamond italic 400**: Emphasis words in gold — ritual accent
+- **Inter 400**: Body text, `clamp(0.875rem, 1vw, 1.125rem)`, line-height 1.6
+- **Inter 500 UPPERCASE**: Labels — 10-12px, tracking 0.2em
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --ground: #0A1A0F;           /* Deep forest */
+  --ground-warm: #1A1410;      /* Dark earth */
+  --sage: #8B9D83;             /* Muted sage */
+  --terracotta: #C17A54;       /* Warm clay */
+  --ochre: #C4A265;            /* Warm ochre / gold */
+  --gold-bright: #D4AF37;      /* Brighter gold for foil */
+  --copper: #B87333;           /* Copper accent */
+  --cream: #F5F0E8;            /* Warm cream text */
+  --text-muted: rgba(245, 240, 232, 0.6);
+}
+```
+
+Body: `bg-[#0A1A0F] text-[#F5F0E8] antialiased font-body`.
+
+---
+
+## GOLD FOIL EFFECT
+
+```css
+.gold-foil {
+  background: linear-gradient(135deg, #C4A265, #D4AF37, #C4A265, #B8932E, #D4AF37);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gold-shimmer 4s ease-in-out infinite;
+}
+@keyframes gold-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+```
+
+---
+
+## PAPER GRAIN
+
+```css
+.paper-grain {
+  position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,..."); /* feTurbulence */
+  mix-blend-mode: overlay;
+}
+```
+
+---
+
+## STRUCTURE
+
+### 1. Hero Section
+- `min-h-[100dvh]`, full-bleed botanical photography (moss, ferns)
+- Photography: luminosity-boosted, warm-graded, glowing against deep forest
+- Text overlay (bottom-left):
+  - Label: "BOTANICAL HAIRCARE / EST. 2024" — Inter 500, uppercase, tracking 0.2em, 12px, cream at 60%
+  - Headline: "Rooted in *Nature*" — Cormorant 500, `clamp(2.5rem, 6vw, 5rem)`, "Nature" in italic + gold foil
+  - Subtext: "Botanical haircare, grown not made. Formulated with forest botanicals." — Inter 400, cream at 70%, max-width 400px
+  - CTA: "DISCOVER" — 1px gold border, transparent bg → sage fill on hover (500ms)
+
+### 2. Products Section (3 cards)
+- Each card: dark earth bg (#1A1410), botanical illustration, product name, price
+- Botanical illustrations: hand-drawn SVG with watercolor fill, labels (FOLIUM, RADIX)
+- Hover: lift -4px + subtle shadow (500ms)
+- Staggered entrance: 200ms per card
+
+### 3. Ingredients Section (botanical diagrams)
+- Full-bleed section with hand-drawn botanical diagrams
+- Labeled parts: FOLIUM (leaf), RADIX (root), FLOS (flower)
+- SVG draw-on animation (stroke-dasharray, 2000ms, triggered on scroll)
+- Description text alongside each diagram
+
+### 4. Story Section
+- Full-bleed nature photography (forest, moss, streams)
+- Serif overlay text: "From the forest floor to your hair" — Cormorant 500, cream
+- Body text: 2-3 sentences about botanical sourcing
+
+### 5. Footer
+- Deep forest bg, cream text
+- "MOSS BOTANICAL HAIRCARE" — Inter 500, uppercase, tracking 0.15em, 12px
+- "© 2026 — ROOTED IN NATURE"
+
+---
+
+## ANIMATIONS
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Hero photography | opacity 0→1 + scale(1.03)→1 | 1800ms | `ease-out` | 0ms |
+| Headline | opacity 0→1 + translateY(16px)→0 | 1200ms | `cubic-bezier(0.25,0.46,0.45,0.94)` | 400ms |
+| Gold italic word | opacity 0→1 + shimmer | 1000ms | `ease-out` | 800ms |
+| Body text | opacity 0→1 | 1000ms | `ease-out` | 600ms |
+| CTA | opacity 0→1 + translateY(8px)→0 | 800ms | `ease-out` | 1000ms |
+| Botanical illustrations | SVG draw-on (stroke-dasharray) | 2000ms | `ease-in-out` | on scroll |
+| Product cards | staggered fade + lift | 500ms each | `ease-out` | 200ms stagger |
+
+`prefers-reduced-motion: reduce` → instant opacity, no draw-on, no drift.
+
+---
+
+## ICONS
+
+lucide-react: `Leaf` (ingredients), `Droplet` (formulation), `Sprout` (growth), `ArrowRight` (CTA). Sizes 16-20, strokeWidth 1.5.
+
+---
+
+## ANTI-SLOP (LOCKED)
+
+- Deep forest #0A1A0F background (not pure black)
+- Warm cream #F5F0E8 text (not pure white)
+- Earth tone palette (terracotta, sage, ochre, gold)
+- Gold foil effect with shimmer (not flat #FFD700)
+- Hand-drawn botanical illustrations with labels
+- Paper grain overlay at 0.03 opacity
+- Organic serif typography (Cormorant Garamond)
+- Italic emphasis on key words in gold
+- Gentle motion (800ms+, ease-out, no bounce)
+- SVG draw-on for illustrations
+- No neon, no geometric, no digital precision
+
+---
+
+Recreate this page with the exact earth tones, botanical illustrations, gold foil, and organic typography above.
+```

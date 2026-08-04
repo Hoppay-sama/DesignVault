@@ -1,0 +1,135 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Cinematic Scroll Story is **scroll-choreographed, not timer-driven**. Every transform is a function of scroll progress. The user is the director — they control the pace. Lerp smoothing at 0.14 ensures the motion trails the scroll slightly, creating a cinematic "weight" rather than a 1:1 mechanical link.
+
+---
+
+## Scroll-Driven Parallax
+
+| Layer | Transform | Scroll Range | Easing |
+|-------|-----------|-------------|--------|
+| Sky | translateY(0 → -80px), scale(1.0 → 1.08) | 0-3700px (full) | lerp 0.14 |
+| Back architecture | translateY(0 → -160px), scale(1.0 → 1.12) | 0-3700px | lerp 0.14 |
+| Bazaar | translateY(0 → -240px), saturation(60% → 100%) | 0-2700px | lerp 0.14 |
+| Bridge | translateY(0 → -320px), blur(0 → 14px) | 0-1620px | lerp 0.14 |
+| Frame | translateY(0 → -120px) | 0-3700px | lerp 0.14 |
+| Title | translateY(0 → -210px), opacity(1 → 0) | 0-650px | segmentInOut |
+| Story panel | opacity(0 → 1), translateY(40px → 0) | 1760-2700px | segmentInOut |
+
+**Lerp smoothing formula:**
+```javascript
+current += (target - current) * 0.14;
+```
+This creates a slight lag — the layers "follow" the scroll rather than snapping to it. The effect is cinematic weight.
+
+---
+
+## Segment-Based Choreography (segmentInOut)
+
+Each scene has a scroll range with enter and exit phases:
+
+```javascript
+function segmentInOut(scroll, start, end) {
+  const t = (scroll - start) / (end - start);
+  if (t < 0 || t > 1) return 0;
+  // Enter: 0 → 1 in first 30% of range
+  // Hold: 1 for middle 40%
+  // Exit: 1 → 0 in last 30% of range
+  if (t < 0.3) return t / 0.3;
+  if (t > 0.7) return (1 - t) / 0.3;
+  return 1;
+}
+```
+
+| Scene | Scroll Range | Enter | Hold | Exit |
+|-------|-------------|-------|------|------|
+| Title | 0-650px | 0-195px (rise) | 195-455px | 455-650px (fade) |
+| Bridge split | 560-1620px | 560-980px (widen) | 980-1200px | 1200-1620px (launch + blur) |
+| Bazaar | 1760-2700px | 1760-2100px (saturate) | 2100-2400px | 2400-2700px (desaturate) |
+| Sights slider | 2760-3560px | 2760-3100px (fly-in) | 3100-3400px | 3400-3560px (hold) |
+| Nav buttons | 3360-3660px | 3360-3500px (fade) | 3500-3660px | — |
+
+---
+
+## Sight Card Slider Fly-In
+
+```css
+/* Cards start at 420vw (off-screen right) and fly to center */
+transform: translateX(clamp(420vw, calc(420vw - scroll-progress * 420vw), 0));
+/* Easing: power(1.55) — fast start, slow finish */
+```
+
+The slider uses a custom power easing: `Math.pow(t, 1.55)`. This creates a fast initial fly-in that decelerates as the cards approach center — like a camera whip-panning and settling.
+
+---
+
+## Infinite Slider (Clone + Normalize)
+
+```javascript
+// 3-set clone: [cards][cards][cards]
+// When scroll offset passes end of set 1, instant-jump to equivalent position in set 2
+const setWidth = cards.length * cardWidth;
+if (offset > setWidth) {
+  offset -= setWidth; // Instant normalize — no visible jump
+}
+```
+
+**Why 3 sets:** The user never sees the edges. At any scroll position, there are always cards to the left and right. The reset happens in a single frame — invisible.
+
+---
+
+## Mouse Parallax (Optional)
+
+```javascript
+// Subtle mouse-driven parallax on top of scroll parallax
+const mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+const mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+// Apply: layer.translateX += mouseX * depthFactor * 0.12;
+// Depth factor varies per layer (0.5 for sky, 1.0 for foreground)
+```
+
+**Factor 0.12:** Very subtle. The mouse parallax adds life without competing with the scroll choreography.
+
+---
+
+## Blur/Brightness/Saturation Shifts
+
+| Transition | Property | Range | Trigger |
+|-----------|----------|-------|---------|
+| Scene 1 → 2 | blur | 0px → 14px on bridge | scroll 1200-1620px |
+| Scene 2 → 3 | brightness | 1.0 → 0.85 on bridge | scroll 1200-1620px |
+| Scene 3 enter | saturation | 60% → 100% on bazaar | scroll 1760-2100px |
+| Scene 3 exit | saturation | 100% → 70% on bazaar | scroll 2400-2700px |
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- All scroll-driven transforms snap to final values (no lerp)
+- Blur transitions disabled (instant swap)
+- Parallax disabled (layers static)
+- Slider auto-centers (no fly-in)
+- Story panels appear at full opacity
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| Never | Why |
+|-------|-----|
+| Timer-based auto-scroll | The user controls the pace — always |
+| Spring or bounce easing | Wrong register — this is a film, not a toy |
+| Rotation on photographic layers | Breaks the theatrical flat metaphor |
+| Scale on text elements | Text should translate and fade, not grow |
+| Staggered card entrances | Cards fly in as a group, not individually |

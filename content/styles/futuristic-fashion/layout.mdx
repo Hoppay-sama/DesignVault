@@ -1,0 +1,141 @@
+# Layout Grammar
+
+## Grid System
+
+**No visible grid, but a subliminal SVG grid overlay at 10% opacity.** Internally:
+
+- Full viewport: `min-h-screen`, `overflow-hidden`
+- Content max-width: `clamp(320px, 90vw, 1400px)`
+- Edge margin: `clamp(1.5rem, 4vw, 4rem)`
+- The SVG grid overlay creates a technical drawing aesthetic without being a visible grid
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | Full viewport — `min-h-screen` |
+| Background | Dual-image reveal (dark base + spotlight-revealed layer) |
+| Layout | Asymmetric — headline left, feature block right-bottom |
+| Framing | L-corner brackets at composition edges |
+| Overflow | Hidden — the spotlight stays within viewport |
+
+```
+┌─[L]──────────────────────────────────[L]─┐
+│                                           │
+│  LOGO˚                        SHOP | COL  |
+│                              ┌────────────┤
+│  FUTURE                      │  JOURNAL   │
+│  FORWARD                     │  [bag]     │
+│  FASHION                     └────────────┤
+│                                           │
+│  ┌─────────┐    ┌─────────────────────┐   │
+│  │SHOP NOW │    │  Wireframe globe    │   │
+│  └─────────┘    │  + tagline text     │   │
+│                 └─────────────────────┘   │
+│                                           │
+└─[L]──────────────────────────────────[L]─┘
+```
+
+**The L-corner brackets** frame the composition like a camera viewfinder. They're positioned at the four corners of the hero, creating a technical framing that says "this is a composed shot."
+
+---
+
+## L-Corner Brackets
+
+```css
+.corner-bracket {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #000;
+}
+.corner-tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+.corner-tr { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+.corner-bl { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+.corner-br { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+```
+
+**Purpose:** The brackets frame the viewport like a camera viewfinder. They're a visual language that says "precision, composition, technical craft." They should be thin (1px), black, and positioned 20px from the viewport edges.
+
+---
+
+## Side Drawer Navigation
+
+```
+┌─────────────────────────────┬──────────────┐
+│                             │              │
+│  [Main composition]         │  [Drawer]    │
+│  (dimmed + blurred          │  SHOP        │
+│   when drawer open)         │  COLLECTIONS │
+│                             │  JOURNAL     │
+│                             │  CART (0)    │
+│                             │              │
+└─────────────────────────────┴──────────────┘
+```
+
+The drawer slides in from the right:
+- Width: `clamp(280px, 30vw, 400px)`
+- Background: white with backdrop blur
+- Easing: `cubic-bezier(0.76, 0, 0.24, 1)`
+- The main composition dims and blurs when the drawer is open
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Asymmetric Hero
+```
+┌─────────────────────────────────────────┐
+│  LOGO                        NAV + CART │
+│                                         │
+│  HEADLINE                               │
+│  (large, left-aligned)                  │
+│                                         │
+│  [CTA]          [Wireframe globe box]  │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 2: Checkerboard Accent Section
+```
+┌─────────────────────────────────────────┐
+│  [Checkerboard SVG]  [Product image]    │
+│  [Product details]   [Checkerboard SVG] │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 3: Full-Bleed Feature
+```
+┌─────────────────────────────────────────┐
+│  [Full-bleed fashion photography]       │
+│  [Small label overlay]                  │
+│  [Technical annotation]                 │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Full asymmetric hero, L-corner brackets, side drawer, wireframe globe |
+| **Tablet (768px)** | Simplified hero — headline stacks, globe hidden, brackets smaller |
+| **Mobile (375px)** | Centered hero, no L-brackets, drawer becomes full-width overlay, spotlight radius reduces to 120-200px |
+
+**On mobile:** The spotlight interaction still works but with a smaller radius. The L-corner brackets may be hidden — they can feel cramped on small screens. The drawer becomes a full-width overlay rather than a side panel.
+
+---
+
+## Layout Don'ts
+
+| Don't | Do Instead |
+|------|------------|
+| Centered layouts | Asymmetric — headline left, feature block right |
+| Card-based design | Full-bleed sections with technical framing |
+| Top navigation bar | Side drawer navigation (right slide-in) |
+| Visible grid lines | Subliminal SVG grid at 10% opacity |
+| Standard hero centering | L-corner bracket framing at viewport edges |
+| Multiple columns of text | Single column, left-aligned, precise |
+| Filling the viewport with content | Let the white space breathe — the white IS the design |

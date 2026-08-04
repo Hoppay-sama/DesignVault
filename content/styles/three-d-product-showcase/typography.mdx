@@ -1,0 +1,66 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Minimal, functional — doesn't compete with the 3D product |
+| **Examples** | Inter, Geist, Söhne, Aktiv Grotesk, Satoshi |
+| **Weight** | 400-600 (medium — not bold, the product is the hero) |
+| **Tracking** | 0.02em-0.04em (standard) |
+| **Size** | `clamp(2rem, 5vw, 4rem)` — large product name, small relative to the model |
+| **Transform** | Sentence case for product name, UPPERCASE for labels |
+
+**Why minimal sans:** The 3D product is the visual hero. The typography should be invisible — neutral, clean, functional. If the type has personality, it competes with the product. Inter and Geist are designed to be unseen.
+
+---
+
+## Body / Specs Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Monospace or clean sans — technical, precise |
+| **Examples** | JetBrains Mono, Space Mono, Inter, Geist Mono |
+| **Weight** | 400-500 |
+| **Tracking** | 0.01em-0.02em (standard) |
+| **Size** | `clamp(0.875rem, 1vw, 1rem)` — 14-16px for specs |
+| **Line Height** | 1.5-1.6 |
+
+**Why mono for specs:** Product specifications are technical data — dimensions, materials, weights. Monospace presents this data like a technical readout, which matches the precision of the 3D rendering. The mono type says "this is data, not marketing."
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same family as body, wide tracking |
+| **Examples** | Inter, Geist |
+| **Weight** | 400-500 |
+| **Tracking** | 0.15em-0.25em (very wide, technical) |
+| **Size** | 10-12px |
+| **Transform** | UPPERCASE |
+
+**Usage:** Section labels, spec categories, navigation. These tiny labels feel like technical annotations — "MATERIALS", "DIMENSIONS", "FINISH", "WEIGHT".
+
+---
+
+## Type Scale
+
+```
+Display (product name):  clamp(2rem, 5vw, 4rem)  — large but smaller than the model
+Body (specs):             clamp(0.875rem, 1vw, 1rem) — 14-16px, mono or sans
+Micro (labels):           10-12px                    — technical annotations
+```
+
+The scale is compact — 10px to 64px. The contrast is between the large product name and the precise spec data, not between extreme type sizes. The product model is always larger than any text.
+
+---
+
+## Font Pairing Logic
+
+**Sans display + mono specs:** Inter (product name) + JetBrains Mono (specifications). The sans carries the brand voice (clean, modern); the mono carries the technical data (precise, measured). This pairing mirrors the relationship between marketing and engineering.
+
+**Alternative:** Single sans family throughout — Inter for everything. Simpler, but loses the technical readout quality of mono specs.
+
+**Never:** Serif typefaces (wrong register — this is technical, not editorial), decorative fonts (competes with product), or multiple display fonts (the product is the only display element).

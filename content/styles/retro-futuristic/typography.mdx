@@ -1,0 +1,92 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Inflated, 3D, chrome-rendered — the millennium's love letter to dimensional type |
+| **Examples** | Orbitron, Eurostile Extended, Space Grotesk (heavy), Monument Extended, inflated/bubble custom fonts |
+| **Weight** | 700-900 (heavy — the type needs mass for the 3D effect) |
+| **Tracking** | 0.02em-0.06em (slightly open, geometric) |
+| **Size** | Monumental — `clamp(4rem, 8vw, 10rem)` or larger |
+| **Transform** | UPPERCASE for headlines |
+| **3D Treatment** | Chrome gradient fill, extruded shadow, inflated/bubble outline |
+
+**Why inflated 3D type:** The Y2K aesthetic was obsessed with dimensional type — type that looked like it was extruded, inflated, or rendered in 3D. Modern CSS (background-clip: text, text-shadow, gradient fills) can simulate this without actual 3D rendering. The type should feel like a physical object, not pixels.
+
+---
+
+## Chrome Text Effect
+
+```css
+.chrome-text {
+  background: linear-gradient(
+    135deg,
+    #E8E8E8 0%,
+    #FFFFFF 25%,
+    #C0C0C0 50%,
+    #E8E8E8 75%,
+    #A0A0A0 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.3),
+               0 -1px 2px rgba(0, 0, 0, 0.3);
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+}
+```
+
+**The chrome gradient** shifts between silver (#E8E8E8), white (#FFFFFF), and gray (#C0C0C0). The text-shadow creates the illusion of light hitting a curved metallic surface — highlights on top, shadows on bottom.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Clean sans or pixel font — provides contrast to the inflated display |
+| **Examples** | Space Mono, JetBrains Mono, Inter, Plus Jakarta Sans |
+| **Weight** | 400-600 |
+| **Tracking** | 0.02em-0.04em |
+| **Size** | `clamp(0.875rem, 1vw, 1.125rem)` — 14-18px |
+| **Line Height** | 1.5-1.6 |
+
+**Why pixel/mono body:** A monospace body font references the pixel fonts of the Y2K era while remaining readable. The contrast between inflated chrome display and pixel body creates a productive tension: the display is from the future; the body is from the computer.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Pixel font or monospace — technical, retro-digital |
+| **Examples** | Space Mono, JetBrains Mono, VT323 (for extreme pixel) |
+| **Weight** | 400-500 |
+| **Tracking** | 0.1em-0.2em (wide, like old computer labels) |
+| **Size** | 10-14px |
+| **Transform** | UPPERCASE |
+
+**Usage:** Section labels, navigation, technical annotations. These tiny labels feel like readouts from a millennium-era computer interface — "SYSTEM", "STATUS", "FREQUENCY".
+
+---
+
+## Type Scale
+
+```
+Display:  clamp(4rem, 8vw, 10rem)  — monumental, inflated, chrome
+Body:     clamp(0.875rem, 1vw, 1.125rem) — 14-18px, clean sans or mono
+Micro:    10-14px                    — pixel/mono labels
+```
+
+The scale spans from 10px to 160px — a 16:1 ratio. The display is the chrome monument; the micro is the computer readout.
+
+---
+
+## Font Pairing Logic
+
+**Inflated display + pixel/mono body:** Orbitron (chrome, inflated) + Space Mono (pixel, technical). The display is the millennium dream; the body is the millennium computer. This pairing captures both the optimism and the technology of the era.
+
+**Alternative:** Eurostile Extended (display) + Inter (body) — less pixel, more modern. The contrast is between the geometric display and the humanist body.
+
+**Never:** Serif typefaces (wrong era entirely), thin/light weights (the display needs mass), or handwritten fonts (wrong register).

@@ -1,0 +1,142 @@
+# Parameterized Template — Cinematic Scroll Story
+
+> Use this template to generate a Cinematic Scroll Story for YOUR brand or destination.
+
+---
+
+```
+Build a cinematic scroll story for "[LOCATION/BRAND/TOPIC]" — [ONE-LINE DESCRIPTION, e.g., "a heritage city showcasing its historic architecture, markets, and landmarks"]. Stack: vanilla HTML/CSS/JS or React + GSAP. Page title: `[TITLE] — [TAGLINE]`.
+
+Vibe: A film you control with your scroll wheel. 5-7 transparent-edge PNG layers stack like theater flats. Each scene has its own color world. The scroll wheel is the camera dolly.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY)
+
+- NO timer-based auto-scroll (user controls the pace)
+- NO single-layer photography (need 5-7 parallax layers)
+- NO raw scroll linking (use lerp smoothing at 0.10-0.15)
+- NO rectangular images with hard edges (transparent-edge PNGs only)
+- NO uniform fade transitions (use blur/brightness/saturation shifts)
+- NO visible carousel rewind (3-set clone with instant-jump normalize)
+- NO spring or bounce easing
+- NO card grids as primary layout
+
+---
+
+## STRUCTURE
+
+### Sticky Stage + Scroll Container
+- Scroll container: `height: calc(100vh + [SCROLL_DEPTH]px)` — 2500-4000px depending on content
+- Sticky stage: `position: sticky; top: 0; height: 100vh; overflow: hidden`
+- 5-7 absolute-positioned layers with CSS variable transforms
+
+### Layer Stack (adjust depth per content)
+| Layer | Depth Factor | Content |
+|-------|------------|---------|
+| Sky/backdrop | 0.3 | [SKY_OR_BACKDROP] |
+| Distant scene | 0.5 | [DISTANT_ARCHITECTURE_OR_LANDSCAPE] |
+| Midground | 0.7 | [MIDGROUND_SCENE] |
+| Foreground frame | 0.85 | [FOREGROUND_ELEMENTS] |
+| Hero element | 0.9 | [HERO_ARCHITECTURAL_ELEMENT] |
+| Closest frame | 1.0 | [NEAREST_FOREGROUND] |
+
+---
+
+## SCROLL CHOREOGRAPHY
+
+### Lerp Smoothing
+```javascript
+let current = 0, target = 0;
+const lerpFactor = 0.14; // 0.10-0.15 range
+current += (target - current) * lerpFactor;
+```
+
+### Segment-Based Scenes (define 4-5 scenes)
+| Scene | Scroll Range | Enter | Hold | Exit |
+|-------|------------|-------|------|------|
+| Title | 0-[S1]px | Rise | Hold | Fade out |
+| [SCENE_2] | [S2_START]-[S2_END]px | [ENTER_EFFECT] | Hold | [EXIT_EFFECT] |
+| [SCENE_3] | [S3_START]-[S3_END]px | [ENTER_EFFECT] | Hold | [EXIT_EFFECT] |
+| Sights slider | [S4_START]-[S4_END]px | Fly-in from 420vw | Hold | — |
+| Nav | [S5_START]-[S5_END]px | Fade in | — | — |
+
+### segmentInOut Helper
+```javascript
+function segmentInOut(scroll, start, end) {
+  const t = (scroll - start) / (end - start);
+  if (t < 0 || t > 1) return 0;
+  if (t < 0.3) return t / 0.3;
+  if (t > 0.7) return (1 - t) / 0.3;
+  return 1;
+}
+```
+
+---
+
+## TECHNIQUES
+
+- **Blur ramp:** 0px → 14px on exiting layers (depth-of-field transition)
+- **Brightness shift:** 1.0 → 0.85 on exiting layers
+- **Saturation ramp:** 60% → 100% on entering layers
+- **Shade gradient:** opacity 0 → 0.25 → 0 at scene boundaries
+- **Mouse parallax:** (optional) 0.12 factor, depth-weighted per layer
+- **Infinite slider:** 3-set clone with instant-jump normalize
+- **Sight card fly-in:** from 420vw with power(1.55) easing
+
+---
+
+## FONTS
+
+- **Display:** [SERIF_FONT] 400-500 — `clamp(4rem, 14vw, 14rem)` — monumental editorial serif
+- **Body:** [SANS_FONT] 400 — 16-18px — clean sans
+- **Story panels:** [SANS_FONT] 300 — `clamp(1rem, 1.5vw, 1.5rem)` — max-width 480px
+- **Nav:** [SANS_FONT] 500 UPPERCASE — 12-14px, tracking 0.1em
+
+Good display choices: Ogg Medium, Playfair Display, Cormorant Garamond, GT Sectra
+Good body choices: Inter, Söhne, Aperçu, Aktiv Grotesk
+
+---
+
+## COLOR
+
+Scene-specific palettes — each scene has its own color world:
+```css
+:root {
+  --text-cream: #FDF1E1;  /* On dark scenes */
+  --text-ink: #111411;    /* On light scenes */
+  --accent: [SCENE_ACCENT]; /* Warm or cool, per scene */
+  --story-overlay: rgba(0, 0, 0, 0.6);
+  --card-bg: #FDF1E1;
+}
+```
+
+---
+
+## ANTI-SLOP (LOCKED)
+
+- Lerp smoothing required (0.10-0.15)
+- 5-7 transparent-edge PNG parallax layers
+- Segment-based choreography (segmentInOut per scene)
+- Blur/brightness/saturation transitions between scenes
+- Infinite slider with clone+normalize (if cards present)
+- Reduced motion fallback (snap values, disable transitions)
+- No simple fade-only transitions
+- No timer-based auto-scroll
+
+---
+
+## CONTENT GUIDANCE
+
+**Title:** 1-2 words. Monumental. The opening credit of the film.
+
+**Story panels:** 2-4 sentences per scene. Narrative, evocative. Write like a travel documentarian, not a marketer.
+
+**Sight cards:** 4-8 cards showcasing key landmarks/destinations. Each card has a photographic image and a 1-2 word label.
+
+**Images:** All must be transparent-edge PNGs with feathered alpha. Remove backgrounds, feather edges. Each layer should look like a theatrical flat, not a rectangular photo.
+
+---
+
+Replace all [BRACKETED] placeholders, then paste into your AI coding assistant.
+```

@@ -1,0 +1,64 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Clean, neutral sans-serif — doesn't compete with the imagery |
+| **Examples** | Geist, Inter, Söhne, Aktiv Grotesk, Satoshi |
+| **Weight** | 300-400 (light — the imagery is heavy, the type is not) |
+| **Tracking** | 0.02em-0.06em (slightly open, breathable) |
+| **Size** | `clamp(1.5rem, 3vw, 3rem)` — moderate, not monumental |
+| **Transform** | Sentence case, never uppercase for display |
+
+**Why neutral sans:** The imagery is surreal and dreamlike. The typography should be the opposite — neutral, clean, invisible. If the type has personality, it competes with the imagery. Geist and Inter are designed to be invisible — the reader sees through them to the content.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same family as display, lighter weight |
+| **Examples** | Geist Light, Inter Light (300), Söhne Light |
+| **Weight** | 300-400 (light — floating, not grounded) |
+| **Tracking** | 0.01em-0.02em (standard) |
+| **Size** | `clamp(0.875rem, 1vw, 1rem)` — 14-16px |
+| **Line Height** | 1.6-1.7 (generous, slow reading) |
+
+**Why light weight:** The text should feel like it's floating over the imagery — weightless, translucent, dreamlike. Heavy type would anchor it to the page; light type lets it drift.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same family, light weight, wide tracking |
+| **Examples** | Geist Light, Inter Light |
+| **Weight** | 300 |
+| **Tracking** | 0.15em-0.25em (very wide, like dream annotations) |
+| **Size** | 10-12px |
+| **Transform** | UPPERCASE |
+
+**Usage:** Section labels, image captions, technical annotations. These tiny labels feel like the metadata of a dream — "LATENT SPACE", "SEED 42", "STEP 1000".
+
+---
+
+## Type Scale
+
+```
+Display:  clamp(1.5rem, 3vw, 3rem)    — moderate, neutral
+Body:     clamp(0.875rem, 1vw, 1rem)  — 14-16px, light
+Micro:    10-12px                      — dream annotations
+```
+
+The scale is compact — 10px to 48px. The contrast is between the surreal imagery and the neutral type, not between type sizes. The type is deliberately small — it doesn't compete with the visuals.
+
+---
+
+## Font Pairing Logic
+
+**Single family approach:** Use one typeface (Geist or Inter) at multiple weights. Light for display, Light/Regular for body, Light for micro. The consistency creates visual quiet — one voice at different volumes, all whispering.
+
+**Never:** Serif typefaces (too literary — this is synthetic, not editorial), decorative fonts (too much personality — competes with imagery), or monospace (too technical — this is dreamlike, not technical).

@@ -1,0 +1,125 @@
+# Texture & Surface
+
+## Primary Texture: Botanical Photography
+
+The texture IS the botanical subject — moss, ferns, leaves, bark, petals. Every image must be processed to feel like a specimen in a dark-room gallery:
+
+| Processing | Effect | Parameters |
+|-----------|--------|------------|
+| **Luminosity boost** | Make the subject glow | Brightness +15, contrast +10 |
+| **Background darkening** | Darken non-subject areas | Vignette, radial gradient |
+| **Color enhancement** | Slightly saturate earth tones | Saturation 110-120% |
+| **Warm grade** | Shift overall tone warm | Shadow tint +5 warm |
+| **Paper grain** | Subtle analog texture | Overlay at 0.03 opacity |
+
+**The goal:** Botanical subjects should look like they're glowing from within — bioluminescent specimens against a dark forest background.
+
+---
+
+## Paper Grain
+
+```css
+.paper-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,..."); /* feTurbulence */
+  mix-blend-mode: overlay;
+}
+```
+
+**Parameters:**
+- Opacity: 0.02-0.04 (barely visible — like paper texture)
+- Position: fixed (covers viewport, doesn't scroll)
+- Blend mode: overlay or soft-light
+
+**Purpose:** Paper grain adds a tactile, handmade quality. It says "this was made on paper, not on a screen." The texture is subliminal — you feel it more than you see it.
+
+---
+
+## Watercolor Wash
+
+```css
+.watercolor-wash {
+  background: radial-gradient(
+    ellipse at 30% 40%,
+    rgba(139, 157, 131, 0.15) 0%,
+    transparent 60%
+  );
+  filter: blur(20px);
+}
+```
+
+**Usage:** Watercolor wash backgrounds create soft, organic color fields behind text or illustrations. They should be very subtle (15% opacity) and heavily blurred — like watercolor paint bleeding into wet paper.
+
+---
+
+## Botanical Illustration Detail
+
+Hand-drawn botanical illustrations should have:
+- **Fine line work** — thin strokes (0.5-1px), detailed venation, texture lines
+- **Watercolor fill** — subtle, translucent color within the line drawing
+- **Labels** — handwritten-style text pointing to plant parts (FOLIUM, RADIX, FLOS)
+- **Imperfection** — slightly uneven lines, not perfectly smooth vectors
+
+**Implementation:** SVG illustrations with hand-drawn path data, or processed raster illustrations. The key is that they look hand-made, not computer-generated.
+
+---
+
+## Gold Foil Effect
+
+```css
+.gold-foil {
+  background: linear-gradient(
+    135deg,
+    #C4A265 0%,
+    #D4AF37 25%,
+    #C4A265 50%,
+    #B8932E 75%,
+    #D4AF37 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 1px 2px rgba(196, 162, 101, 0.3);
+  background-size: 200% 200%;
+  animation: gold-shimmer 4s ease-in-out infinite;
+}
+
+@keyframes gold-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+```
+
+**Purpose:** Gold foil has a metallic shimmer that flat gold (#FFD700) doesn't capture. The gradient shift simulates light reflecting off actual gold leaf — a subtle, continuous shimmer.
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Deep forest #0A1A0F or dark earth #1A1410 |
+| Botanical photography | Luminosity-boosted, warm-graded, glowing |
+| Text areas | Transparent over photography, or dark earth solid |
+| Cards | Dark earth bg with botanical illustration, subtle shadow |
+| CTA | Gold border (1px), transparent bg → earth tone fill on hover |
+| Illustrations | Hand-drawn SVG with watercolor fill and labels |
+| Gold accents | Gold foil gradient with shimmer animation |
+
+---
+
+## Texture Don'ts
+
+| Don't | Do Instead |
+|------|------------|
+| Digital flat colors | Earth tones with paper grain, watercolor wash |
+| Perfectly smooth vectors | Hand-drawn illustrations with slight imperfection |
+| Neon or synthetic colors | Earth tones — terracotta, sage, ochre, gold |
+| Geometric patterns | Botanical patterns — leaf venation, petal textures |
+| Glassmorphism | Opaque surfaces with botanical texture |
+| Drop shadows (digital) | Subtle, soft shadows (like paper on a table) |
+| Flat gold (#FFD700) | Gold foil gradient with shimmer effect |

@@ -1,0 +1,133 @@
+# Parameterized Template — AI-Surreal / Latent Space
+
+> Use this template to generate an AI-Surreal page for YOUR brand.
+
+---
+
+```
+Build an AI-surreal page for "[BRAND_NAME]" — [ONE-LINE DESCRIPTION, e.g., "an AI art platform showcasing machine-generated imagery"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: The uncanny beauty of machine-generated imagery. Dreamlike compositions where scale, material, and physics don't obey reality. Desaturated pastels with sudden saturated accents.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY)
+
+- NO realistic photography (AI-generated surreal imagery only)
+- NO sharp, geometric UI (morphing, organic shapes)
+- NO fast, snappy motion (1000ms+ minimum)
+- NO text-heavy layouts (imagery carries 90% of weight)
+- NO uniformly saturated palette (desaturated base, rare saturated accents)
+- NO solid color backgrounds (full-bleed imagery is the background)
+- NO card-based layouts
+- NO hiding AI artifacts (feature them)
+- NO serif typography (neutral sans-serif only)
+
+---
+
+## FONTS
+
+Replace [DISPLAY_FONT] with a neutral, invisible sans-serif:
+- Inter (300-400) — most versatile, invisible
+- Geist (300-400) — modern, designed to be unseen
+- Söhne (300-400) — premium, neutral
+
+Load via Google Fonts. Use 300 for display, 400 for body. Light weights only — the text should float, not anchor.
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --ground-dark: #0D0D12;        /* Tinted black */
+  --pastel-pink: #E8D5D5;        /* Dusty rose */
+  --pastel-lavender: #D5D5E8;   /* Muted lavender */
+  --pastel-blue: #D5DEE8;       /* Dusty blue */
+  --accent-magenta: #FF006E;    /* Vivid accent */
+  --accent-electric-blue: #3A86FF;
+  --text-on-dark: rgba(240, 237, 232, 0.85);
+}
+```
+
+**Accent guidance:** Choose saturated accents that contrast with your pastel base:
+- Magenta #FF006E — for pink/rose pastel bases
+- Electric blue #3A86FF — for blue/lavender pastel bases
+- Deep violet #8338EC — for psychedelic dreamlike palettes
+
+---
+
+## STRUCTURE
+
+### Hero
+- `min-h-[100dvh]`, full-bleed AI surreal imagery
+- Text overlay: translucent (85%), floating, asymmetric
+- Headline: [DISPLAY_FONT] 300, `clamp(1.5rem, 3vw, 3rem)`, sentence case
+- CTA: morphing border-radius, iridescent surface
+
+### Gallery (3-4 sections)
+- Each: `min-h-[100dvh]`, full-bleed AI imagery
+- Between sections: morphing crossfade (2000ms)
+- Text per section: 1 label + 1 headline + 1-2 sentences (translucent)
+
+### About
+- Split: AI imagery + translucent text
+- 2-3 sentences about AI as artistic medium
+
+### Footer
+- Tinted black bg, translucent text, minimal
+
+---
+
+## MORPHING UI
+
+```css
+.morph-button {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: morph 12s ease-in-out infinite;
+  background: conic-gradient(from 0deg, #E8D5D5, #D5D5E8, #D5DEE8, #DDE8D5, #E8DDD5);
+  filter: saturate(0.7);
+}
+```
+
+---
+
+## ANIMATIONS
+
+- Hero imagery: opacity 0→1 + scale(1.06)→1, 2500ms, ease-out
+- Text: opacity 0→1 + translateY, 1200-1500ms, ease-out (staggered delays)
+- All imagery: drift (scale + opacity breathing), 8-12s, infinite
+- Morphing UI: border-radius morph, 12s, infinite
+- Iridescent: gradient shift, 8s, infinite
+
+`prefers-reduced-motion: reduce` → disable all drift/morph/breathing, instant entrance.
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- Full-bleed AI-generated surreal imagery (not photography)
+- Desaturated pastel base with rare saturated accents
+- Morphing transitions (latent space interpolation)
+- Drift motion (8-12s, barely perceptible)
+- Translucent text (85% opacity) floating over imagery
+- Minimal text — imagery carries 90% of weight
+- Intentional AI artifacts featured
+- Morphing, iridescent UI surfaces
+- Neutral sans-serif at light weight
+- No cards, no solid backgrounds, no sharp edges
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines:** 4-8 words. Poetic, dreamlike. "Dreamlike compositions from machine imagination" not "We Use AI to Generate Art."
+
+**Body text:** 1-2 sentences. Evocative, minimal. Write like a dream annotation, not a marketing pitch.
+
+**Imagery:** AI-generated (Midjourney, DALL-E, Stable Diffusion). Impossible materials, hybrid surfaces, scale ambiguity. Desaturated pastels with one saturated accent per image. Feature artifacts, don't hide them.
+
+---
+
+Replace all [BRACKETED] placeholders, then paste into your AI coding assistant.
+```

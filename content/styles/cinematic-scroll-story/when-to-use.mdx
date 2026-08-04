@@ -1,0 +1,48 @@
+# When to Use
+
+## Perfect For
+
+| Context | Why This Style Works |
+|---------|---------------------|
+| **Travel/tourism** | The scroll story mimics a journey — each scene is a destination |
+| **Brand storytelling** | The cinematic narrative structure communicates brand heritage and values |
+| **Documentary sites** | The scroll-as-film metaphor is literally how documentaries work |
+| **Cultural institutions** | Museums, heritage sites — the narrative pacing matches the content |
+| **Long-form narratives** | The segment-based choreography supports complex, multi-act stories |
+| **City/destination guides** | The reference implementation (Mostar) is exactly this — a city scroll story |
+| **Architecture portfolios** | The parallax layering showcases architectural photography with depth |
+
+## Brand Personality Match
+
+This style reinforces brands that are:
+- **Narrative-driven** — the story IS the product
+- **Cinematic** — visual-first, atmosphere-heavy
+- **Immersive** — the user doesn't browse, they experience
+- **Cultural** — rooted in place, heritage, or craft
+- **Premium** — the production value signals quality
+
+## Avoid When
+
+| Context | Why It Fails |
+|---------|-------------|
+| **SaaS dashboards** | Users need information density, not a film |
+| **E-commerce product pages** | The scroll story is too slow for transactional browsing |
+| **Developer tools** | Too atmospheric, not technical enough |
+| **News/content sites** | The narrative pacing can't support rapid content scanning |
+| **Mobile-first with limited scroll** | The 3700px scroll depth requires committed engagement |
+| **Accessibility-critical sites** | The heavy scroll-driven motion can be challenging, even with reduced-motion fallbacks |
+| **Sites needing SEO content** | The minimal text and JS-driven content are not search-friendly |
+
+## How to Decide
+
+Ask: **"Does my content have a narrative arc that benefits from cinematic pacing?"**
+
+If yes → Cinematic Scroll Story.
+If no → Consider Vast Quiet Cinematic (simpler, less narrative), Dark Cinematic Studio (warmer, more motion), or Editorial Serif Narrative (more text-driven).
+
+## Technical Considerations
+
+- **Performance:** 7+ parallax layers with lerp smoothing requires careful optimization. Use `transform: translate3d()` for GPU acceleration, `will-change: transform` on layers, and debounce scroll handlers.
+- **Mobile:** Reduce to 3-5 layers and 2000-2800px scroll depth. Disable mouse parallax. The story still works — just simplified.
+- **Accessibility:** The reduced-motion fallback must snap all values to their final state. The narrative should still be readable without motion — story panels should appear at full opacity.
+- **Content:** All images must be transparent-edge PNGs. This requires image editing — you can't use stock photos directly.

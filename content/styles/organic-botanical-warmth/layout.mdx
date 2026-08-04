@@ -1,0 +1,127 @@
+# Layout Grammar
+
+## Grid System
+
+**No visible grid.** The layout is gallery-like and organic — content flows like a walk through a botanical garden. However, internally:
+
+- Full-bleed sections: 100vw width, `min-h-[80vh]` to `100vh`
+- Text containers: max-width 560px (moderate, like a journal page)
+- Edge margin: `clamp(2rem, 5vw, 5rem)`
+- Asymmetric placement with organic flow
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | `min-h-[100dvh]` |
+| Background | Full-bleed botanical photography (moss, ferns, leaves) |
+| Layout | Asymmetric — text offset, photography dominant |
+| Headline | Organic serif, italic emphasis on key word |
+| CTA | Gold-bordered, earth-tone fill on hover |
+
+```
+┌─────────────────────────────────────────┐
+│                                         │
+│  [Full-bleed botanical photography]     │
+│  [Moss, ferns, leaves — glowing]       │
+│                                         │
+│  Rooted in *Nature*                     │
+│  Botanical haircare, grown not made     │
+│  [DISCOVER] (gold border)               │
+│                                         │
+└─────────────────────────────────────────┘
+```
+
+**The hero is the botanical photograph.** Text overlays at the bottom-left, small relative to the image. The italic word ("Nature") is gold — the ritual accent.
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(4rem, 10vh, 8rem);
+--content-max-width: 560px;
+--edge-margin: clamp(2rem, 5vw, 5rem);
+```
+
+**Spacing is generous but not monumental.** This style has warmth — it doesn't need the extreme whitespace of cinematic styles. The sections should feel like rooms in a botanical garden — each with its own content, connected by paths.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Full-Bleed Botanical + Text Overlay
+```
+┌─────────────────────────────────────────┐
+│  [Full-bleed botanical photography]     │
+│                                         │
+│  Section label                          │
+│  HEADLINE with *italic* emphasis        │
+│  Body text (2-3 sentences)             │
+│  [CTA]                                  │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 2: Split — Botanical Illustration + Text
+```
+┌──────────────────┬──────────────────────┐
+│                  │                      │
+│  [Botanical      │  Section label       │
+│   illustration   │  HEADLINE            │
+│   with labels]   │  Body text...        │
+│                  │  [CTA]               │
+│                  │                      │
+└──────────────────┴──────────────────────┘
+```
+
+### Pattern 3: Product Cards with Botanical Illustrations
+```
+┌──────────┐  ┌──────────┐  ┌──────────┐
+│ Botanical│  │ Botanical│  │ Botanical│
+│ illus.   │  │ illus.   │  │ illus.   │
+│          │  │          │  │          │
+│ Product  │  │ Product  │  │ Product  │
+│ name     │  │ name     │  │ name     │
+│ $price   │  │ $price   │  │ $price   │
+└──────────┘  └──────────┘  └──────────┘
+```
+
+### Pattern 4: Ingredients Diagram
+```
+┌─────────────────────────────────────────┐
+│  [Hand-drawn botanical diagram]         │
+│  with labeled parts:                    │
+│  → FOLIUM (leaf)                        │
+│  → RADIX (root)                         │
+│  → FLOS (flower)                        │
+│  Description text alongside             │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Full asymmetric layouts, split sections, botanical illustrations alongside text |
+| **Tablet (768px)** | Split sections stack, illustrations above text, reduced spacing |
+| **Mobile (375px)** | Full-bleed sections stack vertically, text full-width with edge margins, illustrations simplified |
+
+**On mobile:** The botanical photography should still dominate. Don't shrink it to make room for text. Stack vertically — photo above, text below.
+
+---
+
+## Layout Don'ts
+
+| Don't | Do Instead |
+|------|------------|
+| Geometric grid layouts | Organic, gallery-like flow |
+| Dense content areas | Generous spacing with botanical imagery |
+| Card grids without botanical elements | Cards with botanical illustrations, not just product photos |
+| Centered, symmetrical layouts | Asymmetric with organic flow |
+| Standard product grids | Products presented as botanical specimens |
+| Busy navigation | 3-4 links max, warm serif or clean sans |
+| Neutral black backgrounds | Deep forest #0A1A0F or dark earth #1A1410 |

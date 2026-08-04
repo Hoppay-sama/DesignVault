@@ -1,0 +1,79 @@
+# Vocabulary Bank
+
+## Primary Terms
+
+| Term | Why It Matters |
+|------|---------------|
+| `sticky viewport` | The stage stays fixed while the user scrolls through virtual space |
+| `parallax layers` | 7+ transparent-edge PNGs at different Z-depths with independent transforms |
+| `transparent-edge PNG` | Images with alpha-channel feathered edges — stack like theater flats |
+| `scroll-driven choreography` | Every transform is a function of scroll progress, not a timer |
+| `segmentInOut` | Helper function for enter/hold/exit phases per scroll range |
+| `lerp smoothing` | Linear interpolation at 0.14 factor — creates cinematic weight |
+| `theater flats` | Theatrical set pieces — the metaphor for how layers stack |
+
+---
+
+## Secondary Terms
+
+| Term | Effect |
+|------|--------|
+| `blur ramp` | 0px → 14px blur as a layer exits — depth-of-field transition |
+| `shade gradient` | Brief darkening at scene boundaries — film transition |
+| `infinite slider` | 3-set clone with instant-jump normalization — true infinite scroll |
+| `fly-in from 420vw` | Sight cards enter from far off-screen right with power(1.55) easing |
+| `mouse parallax` | Subtle 0.12 factor mouse-driven offset on top of scroll parallax |
+| `saturation ramp` | Bazaar layer desaturates to 60% and ramps to 100% on enter |
+| `scene palette` | Each scene has its own color world that transitions |
+| `depth factor` | Per-layer multiplier for parallax intensity (0.3 sky → 1.0 foreground) |
+| `focus pull` | Blur transition between layers — mimics a camera focus shift |
+| `narrative scroll` | The scroll container is the film reel; the sticky stage is the screen |
+
+---
+
+## Context Terms
+
+| Term | Mood |
+|------|------|
+| `theater flat` | Staged, deliberate, artificial-but-believable |
+| `film scroll` | The page is a film you control with your scroll wheel |
+| `scene transition` | Blur + brightness + shade — like a cut in cinema |
+| `camera dolly` | The scroll wheel is the camera movement |
+| `opening credits` | The monumental serif title at scene 1 |
+| `chapter markers` | Nav buttons that fade in at the end — like DVD chapters |
+| `Mostar` | The reference implementation — a city scroll story |
+| `bazaar` | The warm midground scene — market, lanterns, life |
+
+---
+
+## Banned Terms
+
+| Term | Why It Breaks the Style |
+|------|------------------------|
+| `static sections` | The page is a continuous scroll story, not stacked sections |
+| `simple fade transitions` | Fades are insufficient — use blur, brightness, and shade |
+| `single-layer photography` | One image can't create depth — need 7+ parallax layers |
+| `card-based layout` | Cards belong in the sight slider, not as the primary layout |
+| `auto-playing animation` | The user controls the pace — never timer-driven |
+| `spring easing` | Wrong register — this is a film, not a toy |
+| `CSS-only parallax` | `background-attachment: fixed` can't do multi-layer lerp-smoothed transforms |
+| `rectangular images` | Hard edges break the theater flat metaphor — use transparent PNGs |
+| `timer-based carousel` | The slider is scroll-driven, not auto-advancing |
+
+---
+
+## Prompt-Ready Phrases
+
+```
+"sticky viewport with 3700px scroll container"
+"7+ transparent-edge PNG parallax layers"
+"scroll-driven choreography with lerp smoothing at 0.14"
+"segmentInOut transitions per scene range"
+"blur ramp 0px to 14px between scenes"
+"infinite slider with 3-set clone and instant-jump normalize"
+"sight card fly-in from 420vw with power(1.55) easing"
+"theater flat layering with feathered alpha edges"
+"shade gradient at scene boundaries (opacity 0.25 max)"
+"monumental serif display at clamp(4rem, 14vw, 14rem)"
+"reduced motion: snap values, disable transitions"
+```

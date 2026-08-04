@@ -1,11 +1,9 @@
 import Link from 'next/link';
 import { getAllStyles } from '@/lib/content';
-import { getAllTags } from '@/lib/vocabulary';
 import { StyleGallery } from '@/components/StyleGallery';
 
 export default function Home() {
   const styles = getAllStyles();
-  const allTags = getAllTags();
 
   return (
     <main className="min-h-screen">
@@ -76,7 +74,7 @@ export default function Home() {
       </section>
 
       {/* Interactive Gallery (filters + grid) */}
-      <StyleGallery styles={styles} allTags={allTags} />
+      <StyleGallery styles={styles} />
 
       {/* Footer */}
       <footer className="border-t border-border px-6 lg:px-8 py-12">

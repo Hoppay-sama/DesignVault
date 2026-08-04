@@ -1,0 +1,124 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in AI-Surreal is **dreamlike and morphing**. Nothing snaps, nothing bounces, nothing moves with mechanical precision. Elements drift like objects in a dream — slowly, continuously, morphing between states. The motion should feel like watching a latent space interpolation — one image slowly becoming another, one form melting into the next.
+
+---
+
+## Drift Motion
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Full-bleed imagery | Subtle scale(1.0)→scale(1.04) + opacity breathing | 8-12s | `ease-in-out`, infinite |
+| Floating text | translateY(0)→translateY(-8px)→0 | 6-8s | `ease-in-out`, infinite |
+| UI elements | Subtle position drift (2-4px) | 10-15s | `ease-in-out`, infinite |
+
+**The drift should be barely perceptible.** Like watching a dream — you don't notice the movement while it's happening, but when you look away and back, things have shifted. The motion creates a sense that the page is alive, breathing, dreaming.
+
+---
+
+## Morphing Transitions
+
+```css
+@keyframes morph {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  33% { border-radius: 40% 60% 70% 30% / 50% 60% 40% 50%; }
+  66% { border-radius: 30% 70% 50% 50% / 40% 50% 60% 60%; }
+}
+
+.morph-element {
+  animation: morph 12s ease-in-out infinite;
+}
+```
+
+**Purpose:** Morphing transitions between states — one form slowly becoming another. This mimics the latent space interpolation of AI image generation: seed 42 slowly morphing into seed 43. The morphing should be slow (10-15s) and continuous.
+
+---
+
+## Parallax Through Latent Space
+
+| Effect | Specification |
+|--------|--------------|
+| Scroll-linked image shift | As the user scrolls, the imagery slowly shifts — like moving through latent space |
+| Depth parallax | Foreground elements drift faster than background (subtle, 3-5%) |
+| Image crossfade | Between sections, images crossfade through 2-3 intermediate states |
+| Color morphing | Pastel colors slowly shift hue as the user scrolls |
+
+**The scroll should feel like traveling through latent space.** Each scroll position reveals a slightly different version of the image — like scrolling through AI-generated variations. The transitions should be smooth, morphing, dreamlike.
+
+---
+
+## Breathing / Pulsing
+
+```css
+@keyframes breathe {
+  0%, 100% { opacity: 0.9; transform: scale(1.0); }
+  50% { opacity: 1.0; transform: scale(1.02); }
+}
+
+.breathe {
+  animation: breathe 6s ease-in-out infinite;
+}
+```
+
+**Purpose:** Subtle breathing/pulsing on imagery and UI elements — like the page is alive. The effect should be barely perceptible — a 2% scale change and 10% opacity shift over 6 seconds. It creates a sense of organic, living motion.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Full-bleed imagery | Opacity 0→1 + scale(1.06)→1 | 2500ms | `ease-out` | 0ms |
+| Display text | Opacity 0→1 + translateY(12px)→0 | 1500ms | `ease-out` | 800ms |
+| Body text | Opacity 0→1 | 1200ms | `ease-out` | 1200ms |
+| UI elements | Opacity 0→1 + scale(0.98)→1 | 1000ms | `ease-out` | 1500ms |
+
+**Key:** All durations are VERY SLOW (1000ms+). This is the slowest-moving style. The motion should feel like emerging from a dream — gradual, inevitable, unhurried.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Imagery | Subtle brightness 1.0 → 1.03 (800ms) | — |
+| Text | Opacity 0.85 → 1.0 (500ms) | — |
+| Buttons | Iridescent gradient shift (1000ms) | — |
+| Links | Color morph through pastel hues (600ms) | — |
+
+**All hover transitions are slow (500ms+).** Quick hover states feel mechanical and break the dreamlike atmosphere.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- All drift: disabled (static)
+- Morphing: disabled
+- Breathing: disabled
+- Parallax: disabled
+- Entrance animations: instant opacity
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| Never | Why |
+|-------|-----|
+| Fast, snappy transitions | Breaks the dreamlike atmosphere |
+| Bounce or spring physics | Too energetic — this is drifting, not bouncing |
+| Mechanical, linear motion | Too precise — dreams aren't precise |
+| Staggered reveals | Motion should be continuous, not choreographed |
+| Auto-playing carousels | The user controls the pace through scroll |
+| Particle effects | Too digital — this is organic and dreamlike |

@@ -1,0 +1,81 @@
+# Color Architecture
+
+## Ground
+
+```css
+--color-ground: #0A1A0F;       /* Deep forest — the dark-room gallery */
+--color-ground-alt: #0D1B2A;   /* Midnight green — slightly cooler */
+--color-ground-warm: #1A1410;  /* Dark earth — warm dark background */
+```
+
+**Why deep forest:** Not neutral black (#000000) — that's too digital. Deep forest green (#0A1A0F) has a botanical warmth. It's the color of a darkroom, a forest at dusk, a museum display case. The botanical imagery glows against it like bioluminescent specimens.
+
+---
+
+## Earth Tone Palette
+
+```css
+--color-terracotta: #C17A54;   /* Warm clay — stems, bark, earth */
+--color-sage: #8B9D83;         /* Muted sage — leaves, herbs */
+--color-ochre: #C4A265;        /* Warm ochre — pollen, dried leaves */
+--color-olive: #6B7A3F;        /* Deep olive — dark foliage */
+--color-clay: #B5654A;         /* Clay — terracotta variant */
+--color-cream: #F5F0E8;        /* Warm cream — paper, text on dark */
+```
+
+**These are the earth tones.** They come from minerals, plants, and soils — not from a digital color picker. Terracotta is fired clay. Sage is dried herbs. Ochre is mineral pigment. The palette is what a botanical illustrator would use.
+
+---
+
+## Gold / Copper Accents
+
+```css
+--color-gold: #C4A265;         /* Gold leaf — ritual accent */
+--color-gold-bright: #D4AF37;  /* Brighter gold for foil effect */
+--color-copper: #B87333;       /* Copper — warm metallic */
+```
+
+**Usage:** Gold appears on key text (italic emphasis), section dividers, and small accent elements. It should have a foil-like shimmer — use a subtle gradient or text-shadow to simulate the metallic quality. Copper is an alternative for warmer palettes.
+
+---
+
+## Text
+
+```css
+--color-text-on-dark: #F5F0E8;     /* Warm cream on dark backgrounds */
+--color-text-on-light: #1A1410;   /* Dark earth on light backgrounds */
+--color-text-muted: rgba(245, 240, 232, 0.6); /* Muted cream for secondary */
+--color-text-gold: #C4A265;       /* Gold for emphasis words */
+```
+
+**On dark backgrounds:** Text is warm cream (#F5F0E8), not pure white. Pure white on deep forest green creates too much contrast and feels digital. Cream has a paper-like warmth.
+
+---
+
+## Botanical Color Treatment
+
+Botanical photography should be processed to glow against the dark background:
+
+| Treatment | Effect | Parameters |
+|-----------|--------|------------|
+| **Luminosity boost** | Make the subject glow | Brightness +15, contrast +10 |
+| **Background darkening** | Darken the non-subject areas | Vignette, radial gradient |
+| **Color enhancement** | Slightly saturate the earth tones | Saturation 110-120% |
+| **Warm grade** | Shift overall tone warm | Shadow tint +5 warm |
+| **Paper grain** | Add subtle texture | Overlay at 0.03 opacity |
+
+**The goal:** Botanical subjects should look like they're glowing from within — bioluminescent specimens in a dark-room gallery. The background recedes; the subject luminates.
+
+---
+
+## Color Don'ts
+
+| Don't | Do Instead |
+|------|------------|
+| Neutral black background (#000000) | Deep forest #0A1A0F or dark earth #1A1410 |
+| Neon or saturated greens | Muted sage #8B9D83, deep olive #6B7A3F |
+| Digital blue accents | Earth tones — terracotta, sage, ochre, gold |
+| Pure white text on dark | Warm cream #F5F0E8 |
+| Flat gold (#FFD700) | Gold leaf effect — #C4A265 with shimmer |
+| Cool-toned palette | Warm earth tones throughout |
+| High-contrast photography | Luminous, glowing, warm-graded botanical imagery |

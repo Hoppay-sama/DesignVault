@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { StyleEntry, StyleAxis } from '@/lib/types';
 
 interface AxisRange {
@@ -36,6 +36,7 @@ const AXIS_KEYS: (keyof StyleAxis)[] = [
 ];
 
 const DEFAULT_RANGE: AxisRange = { min: 1, max: 5 };
+const VISIBLE_TAG_COUNT = 6;
 
 function createDefaultAxisFilters(): AxisFiltersState {
   return {
@@ -50,14 +51,36 @@ function createDefaultAxisFilters(): AxisFiltersState {
 
 interface StyleFiltersProps {
   styles: StyleEntry[];
-  allTags: string[];
   onFilteredStyles: (filtered: StyleEntry[]) => void;
 }
 
-export function StyleFilters({ styles, allTags, onFilteredStyles }: StyleFiltersProps) {
+export function StyleFilters({ styles, onFilteredStyles }: StyleFiltersProps) {
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [axisFilters, setAxisFilters] = useState<AxisFiltersState>(createDefaultAxisFilters);
   const [showAxisFilters, setShowAxisFilters] = useState(false);
+  const [showAllTags, setShowAllTags] = useState(false);
+
+  // Compute tags sorted by frequency from the styles data
+  const { topTags, allTagsByFrequency, tagCounts } = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const style of styles) {
+      for (const tag of style.tags) {
+        counts[tag] = (counts[tag] || 0) + 1;
+      }
+    }
+
+    const sorted = Object.entries(counts)
+      .sort(([, a], [, b]) => b - a);
+
+    return {
+      topTags: sorted.slice(0, VISIBLE_TAG_COUNT).map(([tag]) => tag),
+      allTagsByFrequency: sorted.map(([tag]) => tag),
+      tagCounts: counts,
+    };
+  }, [styles]);
+
+  const visibleTags = showAllTags ? allTagsByFrequency : topTags;
+  const hasMoreTags = allTagsByFrequency.length > VISIBLE_TAG_COUNT;
 
   const applyFilters = useCallback(
     (tag: string | null, axes: AxisFiltersState) => {
@@ -84,10 +107,9 @@ export function StyleFilters({ styles, allTags, onFilteredStyles }: StyleFilters
     [styles, onFilteredStyles]
   );
 
-  const handleTagClick = (tag: string) => {
-    const newTag = activeTag === tag ? null : tag;
-    setActiveTag(newTag);
-    applyFilters(newTag, axisFilters);
+  const handleTagClick = (tag: string | null) => {
+    setActiveTag(tag);
+    applyFilters(tag, axisFilters);
   };
 
   const handleAxisChange = (axis: keyof StyleAxis, bound: 'min' | 'max', value: number) => {
@@ -116,36 +138,52 @@ export function StyleFilters({ styles, allTags, onFilteredStyles }: StyleFilters
       axisFilters[key].max !== DEFAULT_RANGE.max
   );
 
+  // Count currently visible styles
+  const filteredCount = activeTag
+    ? styles.filter((s) => s.tags.includes(activeTag)).length
+    : styles.length;
+
   return (
     <div className="space-y-6">
+      {/* Style count */}
+      <p className="text-center font-mono-label text-text-muted tracking-widest">
+        {filteredCount} {filteredCount === 1 ? 'STYLE' : 'STYLES'}
+      </p>
+
       {/* Tag Pills */}
       <div className="flex flex-wrap items-center justify-center gap-2">
         <button
-          onClick={() => handleTagClick('')}
-          className={`px-4 py-2 rounded-full text-sm transition-colors ${
+          onClick={() => handleTagClick(null)}
+          className={`px-3 py-1.5 rounded-full text-xs transition-colors ${
             activeTag === null
-              ? 'bg-ground-elevated border border-border text-text-primary'
+              ? 'bg-accent text-accent-text'
               : 'bg-ground-elevated border border-border text-text-secondary hover:text-text-primary hover:border-border-hover'
           }`}
         >
-          All Styles ({styles.length})
+          All
         </button>
-        {allTags.map((tag) => {
-          const count = styles.filter((s) => s.tags.includes(tag)).length;
-          return (
-            <button
-              key={tag}
-              onClick={() => handleTagClick(tag)}
-              className={`px-4 py-2 rounded-full text-sm transition-colors ${
-                activeTag === tag
-                  ? 'bg-accent text-accent-text border border-accent'
-                  : 'bg-ground-elevated border border-border text-text-secondary hover:text-text-primary hover:border-border-hover'
-              }`}
-            >
-              {tag} ({count})
-            </button>
-          );
-        })}
+        {visibleTags.map((tag) => (
+          <button
+            key={tag}
+            onClick={() => handleTagClick(tag)}
+            className={`px-3 py-1.5 rounded-full text-xs transition-colors ${
+              activeTag === tag
+                ? 'bg-accent text-accent-text'
+                : 'bg-ground-elevated border border-border text-text-secondary hover:text-text-primary hover:border-border-hover'
+            }`}
+          >
+            {tag}
+            <span className="ml-1 opacity-50">{tagCounts[tag]}</span>
+          </button>
+        ))}
+        {hasMoreTags && (
+          <button
+            onClick={() => setShowAllTags(!showAllTags)}
+            className="px-3 py-1.5 rounded-full text-xs text-text-muted hover:text-text-secondary transition-colors"
+          >
+            {showAllTags ? 'Show less' : `+${allTagsByFrequency.length - VISIBLE_TAG_COUNT} more`}
+          </button>
+        )}
       </div>
 
       {/* Axis Filter Toggle */}

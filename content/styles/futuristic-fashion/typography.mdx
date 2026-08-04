@@ -1,0 +1,66 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Geometric, futuristic, engineered |
+| **Examples** | Orbitron 600-900, Eurostile Extended, Space Grotesk, Monument Extended |
+| **Weight** | 600-900 (bold — this style uses heavy display type) |
+| **Tracking** | 0.02em-0.06em (slightly open, geometric) |
+| **Size** | `clamp(2rem, 4.5vw, 5.25rem)` — large but not monumental |
+| **Transform** | UPPERCASE for headlines |
+
+**Why geometric display:** The futuristic aesthetic demands type that looks engineered, not written. Orbitron's circular geometry and wide stance feel like they were designed in a CAD program. This matches the wireframe globe and checkerboard technical framing.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Clean, modern, highly readable sans-serif |
+| **Examples** | Plus Jakarta Sans 400-700, Inter, Satoshi, Space Grotesk |
+| **Weight** | 400-700 (range for hierarchy) |
+| **Tracking** | 0.01em-0.02em (standard) |
+| **Size** | `clamp(0.7rem, 0.35vw + 0.55rem, 0.9rem)` — small, precise |
+| **Line Height** | 1.5-1.6 |
+
+**Why Plus Jakarta Sans:** It's geometric but humanist — the body text feels modern without being cold. The contrast with Orbitron's extreme geometry creates a productive tension: the display is machine-like, the body is human.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same family as body, lighter weight |
+| **Examples** | Plus Jakarta Sans 400-500 |
+| **Weight** | 400-500 |
+| **Tracking** | 0.15em-0.25em (very wide, technical) |
+| **Size** | 10-12px |
+| **Transform** | UPPERCASE |
+
+**Usage:** Section labels, product codes, technical annotations. These tiny labels feel like measurement readouts on a technical instrument — "SHOP", "COLLECTIONS", "JOURNAL", product codes, size indicators.
+
+---
+
+## Type Scale
+
+```
+Display:  clamp(2rem, 4.5vw, 5.25rem)  — large, geometric, uppercase
+Body:     clamp(0.7rem, 0.35vw + 0.55rem, 0.9rem) — small, precise
+Micro:    10-12px                        — technical labels
+```
+
+The scale is compact — 10px to 84px. The contrast is between the geometric display and the precise body, not between extreme type sizes.
+
+---
+
+## Font Pairing Logic
+
+**Geometric display + humanist body:** Orbitron + Plus Jakarta Sans. The display is the brand statement (futuristic, engineered); the body is the user interface (readable, functional). This pairing creates a specific tension: the brand feels like the future, the interface feels like now.
+
+**Alternative:** Space Grotesk for both display and body — it has geometric qualities at heavy weights and humanist qualities at regular weights. A single-family approach with extreme weight contrast.
+
+**Never:** Serif typefaces (wrong register entirely), monospace for body (too technical for fashion), or decorative/display fonts that aren't geometric.

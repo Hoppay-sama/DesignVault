@@ -1,0 +1,139 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in 3D Product Showcase is **smooth and camera-driven**. The user controls the camera — scroll drives dolly, pan, and tilt movements. Orbital rotation lets the user inspect the product from any angle. Exploded views reveal internal components. All motion is smooth, weighted, and cinematic — like a professional product video where the user is the director.
+
+---
+
+## Scroll-Driven Camera
+
+| Scroll Range | Camera Movement | Purpose |
+|-------------|-----------------|---------|
+| 0-25% | Dolly in (camera moves toward product) | Close-up of product details |
+| 25-50% | Orbital pan (camera circles 90°) | Side profile view |
+| 50-75% | Tilt up (camera moves from below to above) | Top-down view |
+| 75-100% | Pull back (camera retreats to full product) | Full product in context |
+
+```javascript
+// Scroll-driven camera (React Three Fiber)
+useFrame(() => {
+  const scrollProgress = scroll.offset;
+  camera.position.x = Math.sin(scrollProgress * Math.PI * 2) * 5;
+  camera.position.z = Math.cos(scrollProgress * Math.PI * 2) * 5;
+  camera.position.y = scrollProgress * 3;
+  camera.lookAt(0, 0, 0);
+});
+```
+
+**The scroll should feel like a camera movement**, not a page scroll. The product stays centered; the camera orbits, dollies, and tilts around it. The easing should be smooth — `cubic-bezier(0.22, 1, 0.36, 1)` — with no sudden jumps.
+
+---
+
+## Orbital Rotation (User Control)
+
+| Property | Specification |
+|----------|--------------|
+| **Control** | Mouse drag or touch |
+| **Rotation** | 360° horizontal, ±60° vertical |
+| **Damping** | 0.1 (smooth follow, slight lag) |
+| **Auto-rotate** | Optional, 0.5 RPM when idle |
+| **Zoom** | Scroll wheel, clamp(2, 10) distance |
+
+**The orbital control should feel weighted.** Damping at 0.1 creates a slight lag — the camera follows the mouse, not snaps to it. This creates a cinematic quality, like a camera on a motorized rig.
+
+---
+
+## Exploded View Animation
+
+```javascript
+// Exploded view (scroll-driven or toggle)
+const explodeProgress = useScrollOffset(0.6, 0.8); // Triggered at 60-80% scroll
+components.forEach((comp, i) => {
+  comp.position.x = comp.originalPos.x + comp.explodeDir.x * explodeProgress * 2;
+  comp.position.y = comp.originalPos.y + comp.explodeDir.y * explodeProgress * 2;
+  comp.position.z = comp.originalPos.z + comp.explodeDir.z * explodeProgress * 2;
+});
+```
+
+**Purpose:** Exploded views reveal the product's internal components — each part separates along its assembly axis. The animation should be smooth (1000ms+) and triggered by scroll position or a toggle button. The explosion should feel like a technical diagram coming to life.
+
+---
+
+## Material / Finish Transitions
+
+| Trigger | Animation | Duration |
+|---------|-----------|----------|
+| Color swatch click | Material color crossfade | 600ms |
+| Finish toggle (matte ↔ gloss) | Roughness/metalness lerp | 800ms |
+| Environment change | Environment map crossfade | 1000ms |
+
+```javascript
+// Material transition (lerp)
+useFrame(() => {
+  material.color.lerp(targetColor, 0.1);
+  material.roughness += (targetRoughness - material.roughness) * 0.1;
+  material.metalness += (targetMetalness - material.metalness) * 0.1;
+});
+```
+
+**Purpose:** When the user selects a different color or finish, the material properties smoothly transition — not an instant swap. The lerp creates a morphing effect that feels like the product is physically changing material.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| 3D canvas | Opacity 0→1 | 1500ms | `ease-out` | 0ms |
+| Product model | Scale 0.9→1 + opacity 0→1 | 2000ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 500ms |
+| Product name | Opacity 0→1 + translateY(16px)→0 | 800ms | `ease-out` | 1000ms |
+| Spec panel | Opacity 0→1 + translateX(20px)→0 | 600ms | `ease-out` | 1200ms |
+| Scroll indicator | Opacity 0→1 | 1000ms | `ease-out` | 2000ms |
+
+**Key:** The 3D model entrance is SLOW (2000ms). The product should feel like it's materializing, not appearing. The scale-up from 0.9 to 1.0 creates a subtle "growing into place" effect.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Color swatches | Scale 1.0 → 1.1 (200ms) | Selected: ring border |
+| Toggle buttons | Background fill (300ms) | Active: filled bg |
+| Scroll indicator | Bounce animation (600ms) | — |
+| Hotspots | Pulse animation (1000ms) | Click: camera move to detail |
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- Scroll-driven camera: disabled (static front view)
+- Orbital damping: instant (no lag)
+- Auto-rotate: disabled
+- Exploded view: instant (fully exploded or collapsed)
+- Material transitions: instant swap
+- Entrance animations: instant opacity
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| Never | Why |
+|-------|-----|
+| Fast, snappy camera cuts | Breaks the cinematic quality — camera moves should be smooth |
+| Bounce or spring on the model | The product is a physical object, not a toy |
+| Auto-rotating without user control | The user should be the director |
+| Particle effects | Too digital — this is a product showcase, not a game |
+| Text typing animations | Too gimmicky for a technical product display |
+| Screen shake or impact effects | Wrong register — this is precision, not action |

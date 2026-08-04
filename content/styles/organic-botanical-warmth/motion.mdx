@@ -1,0 +1,118 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Organic Botanical Warmth is **gentle and natural**. Like leaves drifting in a breeze, watercolor slowly spreading, or a flower opening. Nothing snaps, nothing bounces, nothing moves mechanically. The motion should feel like watching nature — slow, organic, inevitable.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Hero photography | Opacity 0→1 + subtle scale(1.03)→1 | 1800ms | `ease-out` | 0ms |
+| Display headline | Opacity 0→1 + translateY(16px)→0 | 1200ms | `cubic-bezier(0.25, 0.46, 0.45, 0.94)` | 400ms |
+| Italic emphasis word | Opacity 0→1 + gold shimmer | 1000ms | `ease-out` | 800ms |
+| Body text | Opacity 0→1 | 1000ms | `ease-out` | 600ms |
+| CTA | Opacity 0→1 + translateY(8px)→0 | 800ms | `ease-out` | 1000ms |
+| Botanical illustrations | SVG draw-on (stroke-dasharray) | 2000ms | `ease-in-out` | on scroll |
+
+**Key:** All durations are SLOW (800ms+). The motion should feel like watching a plant grow — gradual, inevitable, organic.
+
+---
+
+## SVG Draw-On Animations
+
+```css
+.botanical-illustration {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw-on 2000ms ease-in-out forwards;
+}
+
+@keyframes draw-on {
+  to { stroke-dashoffset: 0; }
+}
+```
+
+**Purpose:** Botanical illustrations should appear as if being drawn by hand — the stroke slowly traces the path, like watching an illustrator's pen move across paper. This is the signature motion of the style.
+
+---
+
+## Scroll Behavior
+
+| Effect | Specification |
+|--------|--------------|
+| Parallax on botanical photography | Very subtle — 3-5% of scroll distance |
+| Section transitions | Crossfade with 600ms overlap |
+| Text reveals on scroll | Fade-in when entering viewport (IntersectionObserver) |
+| Image scale on scroll | Subtle scale(1.0)→scale(1.04) over section height |
+| Illustration draw-on | Triggered when illustration enters viewport |
+
+**The parallax should be barely perceptible.** Like the slight movement of branches when you walk past a tree. If users notice the parallax, it's too much.
+
+---
+
+## Leaf Drift (Optional Ambient Motion)
+
+```css
+@keyframes leaf-drift {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(4px, -6px) rotate(2deg); }
+  50% { transform: translate(-2px, 4px) rotate(-1deg); }
+  75% { transform: translate(6px, 2px) rotate(1deg); }
+}
+
+.leaf-element {
+  animation: leaf-drift 8s ease-in-out infinite;
+}
+```
+
+**Purpose:** Subtle, continuous drifting of decorative botanical elements — like leaves swaying in a gentle breeze. The movement should be barely perceptible, creating a sense that the page is alive.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Navigation links | Color shift to gold #C4A265 (400ms) | — |
+| CTA | Background fill with earth tone (500ms) | — |
+| Botanical illustrations | Subtle brightness 1.0 → 1.05 (600ms) | — |
+| Product cards | Lift -4px + subtle shadow (500ms) | — |
+| Gold text | Shimmer animation (gradient shift, 1s) | — |
+
+**All hover transitions are slow (400ms+).** Quick hover states feel mechanical and break the natural atmosphere.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- All entrance animations: instant opacity
+- SVG draw-on: instant (full stroke visible)
+- Parallax: disabled
+- Leaf drift: disabled (static)
+- Image scale on scroll: disabled
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| Never | Why |
+|-------|-----|
+| Fast, snappy transitions | Breaks the natural, organic atmosphere |
+| Bounce or spring physics | Too playful — this is contemplative, not energetic |
+| Rotation or skew | Too dynamic for botanical subjects |
+| Staggered card entrances | Motion should be sparse, not choreographed |
+| Auto-scrolling carousels | The user controls the pace |
+| Particle effects | Too digital — this style is natural and tactile |

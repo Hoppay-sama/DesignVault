@@ -1,0 +1,143 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Futuristic Fashion is **precise and interactive**. The mouse is the primary motion driver — a spotlight that reveals hidden layers. Secondary motion comes from parallax grid offsets and drawer slide-ins. Everything moves with technical precision, not organic ease. The motion feels engineered.
+
+---
+
+## Mouse-Tracking Spotlight
+
+| Property | Specification |
+|----------|--------------|
+| **Ease factor** | 0.1 (smooth follow, slight lag) |
+| **Radius** | `clamp(160px, 16vw, 420px)` — viewport-relative |
+| **Mask** | Radial gradient, transparent center → dark edges |
+| **Layers** | Base image (dark) + reveal image (bright) beneath |
+| **Update** | `requestAnimationFrame` with lerp smoothing |
+
+```javascript
+let mouseX = 0, mouseY = 0;
+let smoothX = 0, smoothY = 0;
+const ease = 0.1;
+
+function updateSpotlight() {
+  smoothX += (mouseX - smoothX) * ease;
+  smoothY += (mouseY - smoothY) * ease;
+  document.documentElement.style.setProperty('--mouse-x', smoothX + 'px');
+  document.documentElement.style.setProperty('--mouse-y', smoothY + 'px');
+  requestAnimationFrame(updateSpotlight);
+}
+```
+
+**The spotlight should feel like a flashlight** — smooth, weighted, slightly trailing the cursor. The 0.1 ease factor creates a cinematic lag that makes the interaction feel intentional, not instantaneous.
+
+---
+
+## Parallax Grid Offset
+
+| Property | Specification |
+|----------|--------------|
+| **Ease factor** | 0.06 (slower than spotlight — more subtle) |
+| **Offset** | `cx * 16 / cy * 16` (16px max offset) |
+| **Target** | SVG grid overlay only |
+
+```javascript
+const cx = (e.clientX / window.innerWidth - 0.5) * 2;
+const cy = (e.clientY / window.innerHeight - 0.5) * 2;
+gridX += (cx * 16 - gridX) * 0.06;
+gridY += (cy * 16 - gridY) * 0.06;
+grid.style.transform = `translate(${gridX}px, ${gridY}px)`;
+```
+
+**The grid parallax is subliminal.** At 16px max offset with 0.06 ease, the grid barely moves. But the movement is perceptible — it creates a sense that the page is a 3D space, not a flat surface.
+
+---
+
+## Side Drawer Slide-In
+
+| Property | Specification |
+|----------|--------------|
+| **Direction** | Right slide-in (translateX 100% → 0) |
+| **Duration** | 400-500ms |
+| **Easing** | `cubic-bezier(0.76, 0, 0.24, 1)` — smooth, precise |
+| **Backdrop** | Blur overlay, fade-in 300ms |
+
+```css
+.drawer {
+  transform: translateX(100%);
+  transition: transform 500ms cubic-bezier(0.76, 0, 0.24, 1);
+}
+.drawer.open {
+  transform: translateX(0);
+}
+.drawer-backdrop {
+  opacity: 0;
+  transition: opacity 300ms ease;
+  backdrop-filter: blur(8px);
+}
+.drawer-backdrop.open {
+  opacity: 1;
+}
+```
+
+**Why this easing:** `cubic-bezier(0.76, 0, 0.24, 1)` is a smooth S-curve — fast start, slow finish, no bounce. It feels engineered, not organic. The drawer slides in with precision and settles exactly where it should.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Logo | Opacity 0→1 + translateY(-8px)→0 | 600ms | `ease-out` | 0ms |
+| Nav links | Opacity 0→1 | 400ms | `ease-out` | 200ms (staggered 80ms) |
+| L-corner brackets | Scale 0.8→1 + opacity 0→1 | 800ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 400ms |
+| Headline | Opacity 0→1 + translateY(20px)→0 | 700ms | `ease-out` | 600ms |
+| Wireframe globe | Rotation 0→360deg + opacity 0→1 | 1200ms | `linear` | 800ms |
+| CTA | Opacity 0→1 + scale(0.95)→1 | 500ms | `ease-out` | 1000ms |
+
+**Key:** The wireframe globe rotates continuously — a slow, perpetual spin that signals "global, connected, always on." The rotation is linear, not eased, because it's mechanical.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Nav links | Color #000 → #333 (300ms) | — |
+| CTA | Background transparent → #000, text #000 → #FFF (300ms) | — |
+| L-corner brackets | Scale 1.0 → 1.02 (400ms) | — |
+| Wireframe globe | Rotation speed 1x → 2x (600ms) | — |
+| Checkerboard | Opacity 0.5 → 0.8 (300ms) | — |
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- Spotlight: instant position (no lerp)
+- Grid parallax: disabled
+- Drawer: instant open/close
+- Entrance animations: instant opacity
+- Wireframe globe: static (no rotation)
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| Never | Why |
+|-------|-----|
+| Bounce or spring easing | Wrong register — this is precision, not play |
+| Auto-rotating carousels | The user controls exploration via spotlight |
+| Pulsing or breathing effects | Too organic for the engineered aesthetic |
+| Text typing animations | Too gimmicky for this precise style |
+| Parallax on text elements | Only the grid and spotlight move |

@@ -1,0 +1,132 @@
+# Parameterized Template — Retro-Futuristic / Chrome Millennium
+
+> Use this template to generate a Retro-Futuristic page for YOUR brand.
+
+---
+
+```
+Build a retro-futuristic page for "[BRAND_NAME]" — [ONE-LINE DESCRIPTION, e.g., "a Gen-Z music platform for discovering futuristic sounds"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: The optimistic futurism of 1998-2004 reimagined with modern rendering. Chrome text, holographic gradients, inflatable 3D type. Black backgrounds make chrome pop.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY)
+
+- NO light backgrounds (pure black #000000 only)
+- NO flat silver/gray fills (chrome gradients only)
+- NO muted or desaturated accents (electric, saturated Y2K colors)
+- NO linear or controlled motion (spring physics)
+- NO flat display type (inflated, 3D, chrome-rendered)
+- NO minimalist restraint (maximal visual effects)
+- NO earth tones or natural textures
+- NO serif typography
+
+---
+
+## FONTS
+
+Replace [DISPLAY_FONT] with a geometric, futuristic typeface:
+- Orbitron (700-900) — most versatile, CAD aesthetic
+- Eurostile Extended (700) — wide, architectural, millennium
+- Space Grotesk (700) — slightly softer, still geometric
+
+Replace [BODY_FONT] with a pixel/mono or clean sans:
+- Space Mono (400-700) — pixel, retro-digital
+- JetBrains Mono (400-700) — technical, readable
+- Inter (400-700) — modern, if you want less pixel
+
+Load via Google Fonts. Use 700-900 for display, 400-700 for body.
+
+---
+
+## CHROME TEXT EFFECT
+
+```css
+.chrome-text {
+  background: linear-gradient(135deg, #E8E8E8, #FFFFFF, #C0C0C0, #E8E8E8, #A0A0A0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(255,255,255,0.3), 0 -1px 2px rgba(0,0,0,0.3);
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+}
+```
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --black: #000000;
+  --chrome: linear-gradient(135deg, #E8E8E8, #FFFFFF, #C0C0C0, #E8E8E8, #A0A0A0);
+  --holographic: linear-gradient(135deg, #FF006E, #FB5607, #FFBE0B, #8338EC, #3A86FF, #06FFA5);
+  --text-silver: #E8E8E8;
+  --accent-blue: #0066FF;
+  --accent-magenta: #FF006E;
+  --accent-green: #06FFA5;
+}
+```
+
+---
+
+## STRUCTURE
+
+### Scanline Overlay
+- Fixed, z-9999, 30% opacity, 1px lines at 3px intervals
+
+### Hero
+- `min-h-screen`, pure black, centered poster composition
+- Chrome headline: [DISPLAY_FONT] 900, `clamp(4rem, 8vw, 10rem)`, uppercase, chrome gradient
+- Orbiting 3D elements: 3-4 chrome spheres, spring physics, 8-12s orbits
+- Holographic CTA: holographic gradient bg, scale 1.05 on hover (spring)
+
+### Features (3-4 chrome cards)
+- 1px chrome border, transparent bg, holographic border on hover
+- Spring lift on hover (-8px, stiffness 150, damping 12)
+- Staggered entrance (100ms per card)
+
+### Footer
+- Space Mono / pixel font, 12px, silver-white at 50% opacity
+
+---
+
+## ANIMATIONS
+
+- Orbiting elements: spring physics, 8-12s, infinite
+- Chrome headline: scale 0.8→1, spring (stiffness 100), 800ms
+- Holographic CTA: scale 0.9→1, spring (stiffness 200), 600ms
+- Cards: staggered fade + scale, spring (stiffness 150), 500ms each
+- Scanlines: opacity 0→0.3, 2000ms
+- Holographic hover: gradient shift, 600ms, infinite on hover
+
+`prefers-reduced-motion: reduce` → disable all floating/rotation, instant entrance, static scanlines.
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- Pure black #000000 ground
+- Chrome gradient text (not flat silver)
+- Holographic accents on hover
+- Inflated 3D display type
+- Spring physics (bouncy, energetic)
+- Scanline overlay at 30% opacity
+- Electric accent colors used sparingly
+- No flat, muted, or minimalist design
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines:** 1-3 words. Chrome-rendered. Uppercase. "CHROME FM" not "Welcome to Our Music Platform."
+
+**Body text:** 1-3 sentences. Technical, energetic. Write like a millennium product launch, not a modern marketing page.
+
+**Visual effects:** Embrace excess — chrome, holographic, scanlines, lens flare, floating 3D objects. The style should feel like the millennium's dream of the future.
+
+---
+
+Replace all [BRACKETED] placeholders, then paste into your AI coding assistant.
+```

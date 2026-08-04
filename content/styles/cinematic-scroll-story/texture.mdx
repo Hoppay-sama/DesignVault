@@ -1,0 +1,110 @@
+# Texture & Surface
+
+## Primary Texture: Transparent-Edge PNG Layers
+
+The texture of this style is photographic — but not flat photography. Each layer is a transparent-edge PNG that stacks like a theatrical flat:
+
+| Layer | Content | Edge Treatment |
+|-------|---------|---------------|
+| Sky | Atmospheric gradient, clouds | Fully transparent bottom edge |
+| Back architecture | Distant buildings, bridges | Transparent left/right/bottom, feathered top |
+| Bazaar | Market scene, lanterns, people | Transparent edges, feathered into background |
+| Splitframe L/R | Foreground frame elements | Transparent inner edges, hard outer frame |
+| Bridge | Hero architectural element | Transparent edges, feathered for depth blending |
+| Frame two | Closest foreground | Transparent inner, hard outer frame |
+
+**Why transparent edges:** The layers blend into each other at their edges. There are no hard rectangular boundaries — the layers merge like theater flats viewed from the audience. This creates the illusion of a continuous 3D scene from 2D layers.
+
+---
+
+## Film Grain
+
+```css
+.film-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,...");
+  mix-blend-mode: overlay;
+}
+```
+
+**Parameters:**
+- Opacity: 0.03-0.05 (barely visible — this is a film, not a horror game)
+- Position: fixed (covers viewport, doesn't scroll with layers)
+- Blend mode: overlay
+
+---
+
+## Shade Gradients (Scene Transitions)
+
+```css
+.scene-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.25) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  opacity: var(--shade-opacity); /* Ramps with scroll at scene boundaries */
+}
+```
+
+**Purpose:** Between scenes, a shade gradient creates a brief darkening — like a film's scene transition. The opacity ramps from 0 to 0.25 and back to 0 at each scene boundary.
+
+---
+
+## Blur as Texture
+
+Blur isn't just a transition — it's a textural quality. The bridge layer ramps blur from 0px to 14px as it exits. This creates a depth-of-field effect: the bridge goes out of focus as the bazaar scene sharpens. The blur is a textural signal that says "this layer is receding."
+
+| Layer | Blur Range | Trigger |
+|-------|-----------|---------|
+| Bridge | 0px → 14px | scroll 1200-1620px (exit phase) |
+| Bazaar | 14px → 0px | scroll 1760-2100px (enter phase) |
+| Sky | 0px (constant) | Never blurs — it's the backdrop |
+
+---
+
+## Image Processing Rules
+
+All photographic layers must be processed:
+
+1. **Remove backgrounds** — transparent edges (PNG with alpha channel)
+2. **Color-grade per scene** — each layer matches its scene palette
+3. **Desaturate slightly** — 80-90% saturation (not full, not raw)
+4. **Add film grain** — overlay at 0.04 opacity
+5. **Feather edges** — soft alpha transitions, no hard rectangular boundaries
+
+**The goal:** Each layer should look like a film set piece — a theatrical flat with a photographic surface, not a rectangular image slapped on a page.
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Stage background | Sky layer (transparent-edge PNG) |
+| Layer surfaces | Photographic, color-graded per scene |
+| Story panels | Semi-transparent dark overlay (rgba(0,0,0,0.6)) with cream text |
+| Sight cards | Cream (#FDF1E1) solid background, photographic content |
+| Nav buttons | Transparent, thin border (1px, 40% opacity), cream text |
+| Dividers | None — scenes transition via blur and shade gradients |
+
+---
+
+## Texture Don'ts
+
+| Don't | Do Instead |
+|----------|--------------|
+| Rectangular images with hard edges | Transparent-edge PNGs with feathered alpha |
+| Raw, unprocessed photography | Color-graded, slightly desaturated, film grain |
+| CSS box shadows for depth | Z-depth via parallax layer separation |
+| Gradient overlays on layers | Shade gradients only at scene boundaries |
+| Glassmorphic story panels | Semi-transparent dark overlay with cream text |
+| Patterned backgrounds | The photographic layers ARE the background |

@@ -1,0 +1,112 @@
+# Layout Grammar
+
+## Grid System
+
+**No visible grid.** The layout is spatial and scene-based, not grid-based. Elements float in 3D space, orbit around a central composition, and arrange themselves like objects in a virtual showroom. Internally:
+
+- Full viewport: `min-h-screen`, `overflow-hidden`
+- Content centered: `max-w-[1200px] mx-auto`
+- Hero composition: centered, poster-like
+- 3D elements: absolute-positioned with orbit animations
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | Full viewport — `min-h-screen` |
+| Background | Pure black #000000 |
+| Layout | Centered, poster-like — giant chrome type with orbiting 3D elements |
+| Composition | Type centered, 3D objects orbiting around it |
+
+```
+┌─────────────────────────────────────────┐
+│         ◆ (orbiting element)            │
+│                                         │
+│    ╔═══════════════════════════╗       │
+│    ║   CHROME FM (chrome text)  ║       │
+│    ╚═══════════════════════════╝       │
+│                                         │
+│         ◆ (orbiting element)            │
+│    [HOLOGRAPHIC CTA]                   │
+└─────────────────────────────────────────┘
+```
+
+**The hero is a poster.** Giant chrome type centered, 3D elements orbiting around it, holographic CTA below. It's not a web layout — it's a millennium concert poster rendered in a browser.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Centered Poster Hero
+```
+┌─────────────────────────────────────────┐
+│         [3D orbiting elements]          │
+│                                         │
+│         CHROME TYPE                     │
+│         (giant, centered)               │
+│                                         │
+│         [HOLOGRAPHIC CTA]               │
+│         [3D orbiting elements]          │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 2: Chrome Card Grid
+```
+┌──────────┐  ┌──────────┐  ┌──────────┐
+│ Chrome   │  │ Chrome   │  │ Chrome   │
+│ border   │  │ border   │  │ border   │
+│ card     │  │ card     │  │ card     │
+│ Holo     │  │ Holo     │  │ Holo     │
+│ hover    │  │ hover    │  │ hover    │
+└──────────┘  └──────────┘  └──────────┘
+```
+
+### Pattern 3: Spatial Scene
+```
+┌─────────────────────────────────────────┐
+│  [3D object]    [Headline]    [3D obj]  │
+│                                         │
+│        [Floating chrome sphere]         │
+│                                         │
+│  [Body text]    [CTA]    [3D object]   │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(4rem, 10vh, 8rem);
+--content-max-width: 1200px;
+--edge-margin: clamp(1.5rem, 4vw, 4rem);
+```
+
+**Spacing is generous but not monumental.** This style has energy — it doesn't need the extreme whitespace of cinematic styles. The sections should feel like scenes in a virtual showroom, not pages in a book.
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Full poster hero with orbiting 3D elements, chrome card grid |
+| **Tablet (768px)** | Simplified hero — fewer orbiting elements, cards stack 2-column |
+| **Mobile (375px)** | Centered hero, no orbiting elements, cards stack 1-column, chrome text scales down |
+
+**On mobile:** The 3D orbiting elements are removed — they're too complex for small screens. The chrome text remains but scales down. The holographic CTA stays. The energy is maintained through color and type, not 3D motion.
+
+---
+
+## Layout Don'ts
+
+| Don't | Do Instead |
+|------|------------|
+| Grid-based layouts | Spatial, scene-based compositions |
+| Left-aligned editorial layouts | Centered, poster-like compositions |
+| Dense content areas | Generous spacing with floating elements |
+| Standard card grids | Chrome-bordered cards with holographic hover |
+| Top navigation bars | Minimal nav — chrome text links or icon nav |
+| Asymmetric layouts | This style is centered and poster-like — symmetry is part of the aesthetic |

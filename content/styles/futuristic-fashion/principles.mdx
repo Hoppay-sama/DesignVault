@@ -1,0 +1,39 @@
+# Design Principles
+
+## 1. WHITE AS CANVAS
+
+Not cream, not off-white, not "warm white" — pure white (#FFFFFF). The background is a blank gallery wall. Black ink sits on it with absolute precision. No gradients, no tints, no warmth. The purity of the white is what makes the technical framing elements (L-corner brackets, wireframe globes, checkerboard patterns) feel precise rather than decorative.
+
+**What it prevents:** The AI tendency to add "warmth" with cream or off-white backgrounds, which softens the futuristic precision into something cozy and less intentional.
+
+---
+
+## 2. INTERACTIVE REVEAL
+
+The mouse is a spotlight. As the user moves their cursor across the dark background image, a soft circular mask reveals a second image beneath — like a flashlight in a dark room. The spotlight has a radius that clamps between 160px and 420px, with ease-factor smoothing at 0.1. This isn't a hover effect; it's a continuous interaction that makes every cursor movement meaningful.
+
+**What it prevents:** Static imagery that the user passively consumes. The spotlight reveal turns viewing into an active, exploratory act.
+
+---
+
+## 3. TECHNICAL FRAMING
+
+L-corner brackets frame the composition like a camera viewfinder. Wireframe globe SVGs signal global reach. Checkerboard patterns reference 3D modeling viewports. These elements aren't decoration — they're a visual language that says "precision, measurement, technical craft." They frame the fashion content the way a camera viewfinder frames a subject.
+
+**What it prevents:** Generic fashion layouts that rely on photography alone. The technical framing creates a specific aesthetic register — futuristic, precise, engineered.
+
+---
+
+## 4. GRAY IS THE ONLY COLOR
+
+Pure white ground, pure black text, gray accents only. Gray-200 through gray-600. No purple, no cream, no blue, no warm tones. The grid overlay is slate (#64748b) at 10% opacity. This extreme color restriction forces all visual interest into the typography, the layout, and the interactive elements. Color would dilute the precision.
+
+**What it prevents:** The AI tendency to add "just one accent color" which inevitably becomes a purple or blue gradient that destroys the minimalist futuristic aesthetic.
+
+---
+
+## 5. SIDE DRAWER NAVIGATION
+
+Navigation doesn't sit in a top bar. It slides in from the right as a drawer — Shop, Collections, Journal, Cart. The drawer has a backdrop blur and slides with `cubic-bezier(0.76, 0, 0.24, 1)` easing. This keeps the main composition clean (no nav clutter) while providing full navigation when needed. The drawer itself is a design element — its slide-in motion is part of the aesthetic.
+
+**What it prevents:** Traditional top navigation bars that break the gallery-wall purity of the white canvas.

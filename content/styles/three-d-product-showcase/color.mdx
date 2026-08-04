@@ -1,0 +1,86 @@
+# Color Architecture
+
+## Ground
+
+```css
+--color-ground-light: #F5F5F5;    /* Light gray — studio seamless paper */
+--color-ground-mid: #E0E0E0;     /* Medium gray — gradient midpoint */
+--color-ground-dark: #1A1A1A;    /* Dark — for dramatic product shots */
+--color-ground-gradient: radial-gradient(
+  ellipse at center,
+  #F5F5F5 0%,
+  #E0E0E0 70%,
+  #C0C0C0 100%
+);
+```
+
+**Why neutral gray:** The background is a studio seamless paper roll. Light gray (#F5F5F5) is the standard product photography background — it's neutral, doesn't compete with the product, and provides a clean surface for shadows. The gradient creates a subtle vignette that focuses attention on the center.
+
+---
+
+## Text
+
+```css
+--color-text-on-light: #1A1A1A;  /* Near-black on light gray */
+--color-text-on-dark: #F5F5F5;   /* Light gray on dark */
+--color-text-muted: #888888;     /* Medium gray for labels and specs */
+--color-text-accent: #0066FF;    /* Electric blue for interactive elements */
+```
+
+**On light backgrounds:** Near-black text (#1A1A1A), not pure black. Pure black on light gray is too harsh — near-black has a slightly softer contrast that feels more like print.
+
+---
+
+## Accent
+
+```css
+--color-accent: #0066FF;         /* Electric blue — interactive highlight */
+--color-accent-hover: #0052CC;   /* Darker blue on hover */
+```
+
+**Usage:** The accent appears on interactive elements — "ROTATE" buttons, "EXPLODE VIEW" toggles, scroll indicators. It should be used sparingly — the product provides all the color; the accent is for UI affordances only.
+
+**Why electric blue:** It's the color of technical interfaces — CAD programs, 3D modeling software, engineering tools. The blue signals "this is a technical, interactive experience."
+
+---
+
+## Product Color
+
+The product provides all color. The 3D model's materials and finishes are the color palette:
+
+| Material | Color Treatment |
+|----------|----------------|
+| **Anodized aluminum** | Silver/gray with specular highlights |
+| **Plastic** | Matte, solid color (product's actual color) |
+| **Glass** | Transparent with refraction and environment reflections |
+| **Fabric** | Diffuse, textured, product's actual color |
+| **Leather** | Semi-gloss, warm tones, texture detail |
+
+**The product's color is the design's color.** The background is neutral; the UI is minimal; the product is the only source of visual richness.
+
+---
+
+## Studio Lighting Color
+
+```css
+--light-key: #FFFFFF;       /* Key light — pure white, main illumination */
+--light-fill: #F0F0F0;      /* Fill light — slightly warm, shadow detail */
+--light-rim: #E8E8E8;       /* Rim light — edge definition */
+--light-ambient: #404040;   /* Ambient — base illumination */
+```
+
+**Why white lighting:** Studio lighting is neutral white — not colored, not warm, not cool. The goal is to show the product's true colors, not to create a mood. Colored lighting would distort the product's materials.
+
+---
+
+## Color Don'ts
+
+| Don't | Do Instead |
+|------|------------|
+| Colored backgrounds | Neutral gray (#F5F5F5 to #1A1A1A) |
+| Multiple accent colors | One electric blue (#0066FF) for UI only |
+| Colored studio lighting | Neutral white lighting — show true product colors |
+| Busy environmental backgrounds | Studio seamless — gradient or solid neutral |
+| Gradient overlays on product | Clean 3D rendering with proper lighting |
+| Pure black text on light | Near-black #1A1A1A |
+| Color that competes with product | Product provides all color; UI is neutral |
