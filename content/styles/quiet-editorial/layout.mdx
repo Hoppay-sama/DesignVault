@@ -1,0 +1,133 @@
+# Layout Grammar
+
+## Grid System
+
+**No grid at all — just a measure.** The layout is a single typographic column with generous margins. Content is set on a strict vertical rhythm; the whitespace between sections is a design element, not empty space. Internally:
+
+- Content column: `max-w-[65ch]` — the measure is the grid
+- Alignment: left-aligned or centered column, never split into card regions
+- Vertical rhythm: consistent 8px-based spacing scale, `scroll-margin-top` on section anchors
+- Simple 2-column allowed: text column + fixed margin-note column (60/40)
+- No bento grids, no card grids, no asymmetric collage
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | `min-h-[50vh]` — generous, but not a wall |
+| Background | White or warm off-white — nothing else |
+| Text position | Centered or left-aligned typographic block |
+| Headline size | `clamp(2rem, 4vw, 3rem)` — moderate, never monumental |
+| Kicker | Small-caps label above headline (e.g. "Issue 04 — Longform") |
+
+```
+┌─────────────────────────────────────────┐
+│                                         │
+│                                         │
+│  KICKER: ISSUE 04 — LONGFORM            │
+│                                         │
+│  The case for                         │
+│  silence on the web                     │
+│                                         │
+│  An essay on why the loudest pages      │
+│  say the least.                         │
+│                                         │
+│  [READ]                                │
+│                                         │
+└─────────────────────────────────────────┘
+```
+
+**The hero is typography and whitespace.** No image, no illustration, no gradient. The reader's eye lands on the words within a vast field of quiet. If the headline works, the hero works.
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(4rem, 10vh, 8rem);
+--content-max-width: 65ch;
+--measure: 65ch;
+--line-height-body: 1.6;
+--edge-margin: clamp(1.5rem, 4vw, 4rem);
+```
+
+**Spacing is the layout.** Sections are separated by large, consistent vertical pauses — the reader should feel the rhythm of the page like paragraphs of a long article. Density is the enemy; every section breathes.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Single Editorial Column
+```
+┌─────────────────────────────────────────┐
+│                                         │
+│  Kicker                                │
+│  Headline                              │
+│  Deck                                   │
+│                                         │
+│  Body text at 65ch, 1.6+ line height   │
+│  Body text at 65ch, 1.6+ line height   │
+│                                         │
+│  Pull quote — set larger, italic,      │
+│  generous margins around it            │
+│                                         │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 2: Split — Text + Margin Notes
+```
+┌──────────────────────────┬──────────────┐
+│                          │              │
+│  Headline                │  Note:       │
+│  Body text at 65ch       │  sidebar     │
+│  Body text at 65ch       │  annotation  │
+│                          │  (small,     │
+│  Pull quote              │  muted)      │
+│                          │              │
+└──────────────────────────┴──────────────┘
+```
+
+### Pattern 3: Longform Article Flow
+```
+┌─────────────────────────────────────────┐
+│  Kicker / Standfirst                    │
+│                                         │
+│  Section 1 heading                     │
+│  Body paragraphs (65ch)                │
+│                                         │
+│  Pull quote                             │
+│                                         │
+│  Section 2 heading                     │
+│  Body paragraphs (65ch)                │
+│                                         │
+│  Footer meta: author, date, colophon   │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Single 65ch column, generous section padding, optional margin-note column |
+| **Tablet (768px)** | Column narrows with the viewport, margin notes collapse into inline notes |
+| **Mobile (375px)** | Single column, reduced section padding (`clamp(3rem, 8vh, 5rem)`), full-width text |
+
+**On mobile:** The measure collapses to the viewport — nothing stacks, nothing reflows into cards. The typographic hierarchy (kicker → headline → deck → body) is what carries the layout, so it must survive at every width. Whitespace shrinks but never disappears.
+
+---
+
+## Layout Don'ts
+
+| Don't | Do Instead |
+|------|------------|
+| Bento grids | Single 65ch editorial column |
+| Card grids | Continuous article flow with section breaks |
+| Full-bleed imagery heroes | Typographic heroes on whitespace |
+| Dense multi-column layouts | One column, generous vertical rhythm |
+| Sticky animated navigation | Minimal static header, content-forward |
+| Decorative dividers (rules, shapes) | Whitespace as the only separator |
+| Centered-everything symmetry | Left-aligned column with deliberate rhythm |

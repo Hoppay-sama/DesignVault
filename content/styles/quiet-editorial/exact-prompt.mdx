@@ -1,0 +1,115 @@
+# Exact Replica Prompt — Quiet Editorial
+
+> Copy this entire prompt and paste it into your AI coding assistant.
+
+---
+
+```
+Build a quiet editorial page for "MERIDIAN" — a longform publication for essays and research. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `MERIDIAN — Essays that breathe`.
+
+Vibe: Silence as design. Generous whitespace, restrained typography, content that breathes. The page feels like a well-edited print publication — every word earns its place. Motion is nearly absent; the design trusts the reader to engage without spectacle.
+
+---
+
+## ANTI-SLOP CONSTRAINTS
+
+- NO decorative animations (fade-in only, 600-900ms)
+- NO busy layouts (single column, simple 2-column at most)
+- NO loud colors (near-monochrome; one muted accent at most)
+- NO spectacle over substance (content is the hero)
+- NO parallax, no scroll effects
+- NO bouncy animations (no springs, no overshoot)
+- NO bento grids or card grids
+- NO gradients (flat color only)
+- NO grain or depth effects (clean, paper-like)
+- NO bold/display extremes (moderate sizes, restrained weights)
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@400;500&display=swap
+```
+
+Usage:
+- **Newsreader 400**: Display headlines — `clamp(2rem, 4vw, 3rem)` (32-48px), sentence case, tight tracking (-0.01em), generous leading 1.25
+- **Inter 400**: Body text — 1rem, line-height 1.7, measure max-w-[65ch]
+- **Inter 400 UPPERCASE**: Kickers/labels — 11-12px, tracking 0.2em
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --paper: #FAF9F6;        /* Warm off-white */
+  --paper-alt: #F3F1EC;    /* Slightly deeper off-white for alt sections */
+  --ink: #1C1B19;          /* Warm near-black */
+  --gray: #6E6A63;         /* Warm gray — secondary text */
+  --line: #E4E1DA;         /* Hairline divider */
+  --accent: #9A6B4F;       /* Muted terracotta — links & highlights only */
+}
+```
+
+Body: `bg-[#FAF9F6] text-[#1C1B19] antialiased font-body`.
+
+---
+
+## STRUCTURE
+
+### 1. Hero Section
+- `min-h-[85dvh]`, centered, max-w-[65ch], generous top padding (py-24+)
+- Kicker: "MERIDIAN / ESSAY NO. 12" — Inter 400 uppercase, tracking 0.2em, 11px, text-[#6E6A63]
+- Headline: "The quiet power of the well-set page" — Newsreader 400, `clamp(2rem, 4vw, 3rem)`, sentence case
+- Standfirst: 1-2 sentences of warm gray body text, max-w-[48ch], mt-8
+- One text link in accent color: "Read the essay"
+
+### 2. Longform Article Section
+- Single column, `max-w-[65ch]`, centered, generous paragraph spacing (space-y-8)
+- First paragraph opens with a drop cap — first letter Newsreader 500, float-left, ~3em
+- Body: Inter 400, 1rem, line-height 1.7
+- Pull quote mid-article: Newsreader 400 italic, `clamp(1.5rem, 3vw, 2rem)`, left-aligned, generous margins
+- Section subheads: Newsreader 400, 1.5rem, sentence case
+
+### 3. Editorial Grid Section (simple 2-column)
+- Two columns of essay links separated by a hairline 1px border (text-[#E4E1DA])
+- Each item: kicker (uppercase 11px) + title (Newsreader 1.25rem) + 1-line dek (gray)
+- No cards, no backgrounds — hairline rules only
+
+### 4. Footer
+- Hairline top border, generous py, minimal
+- "MERIDIAN © 2026 — Essays that breathe" — Inter 400 uppercase, tracking 0.15em, 11px, text-[#6E6A63]
+
+---
+
+## ANIMATIONS
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Hero headline | opacity 0→1 + translateY(8px)→0 | 700ms | `ease-out` |
+| Standfirst | opacity 0→1 | 700ms | `ease-out` (delay 150ms) |
+| Article sections | fade-in on scroll | 700ms | `ease-out` |
+| Pull quote | opacity 0→1 + translateY(8px)→0 | 800ms | `ease-out` |
+| Hairline dividers | opacity 0→1 | 500ms | `ease-out` |
+
+`prefers-reduced-motion: reduce` → instant entrance, no transitions.
+
+---
+
+## ANTI-SLOP (LOCKED)
+
+- Generous whitespace throughout — at least 40% empty space per viewport
+- Restrained typography — no bold or display extremes
+- Minimal motion — slow fades only, no springs, no parallax
+- Longform readable — max-w-[65ch], 1.6+ line height
+- Near-monochrome palette — one muted accent at most
+- No decorative animations, no busy layouts, no loud colors
+- Content-forward, design-invisible
+- Clean paper-like texture — no grain, no depth effects
+
+---
+
+Recreate this page with the exact quiet editorial aesthetic, restrained typography, and near-monochrome palette above.
+```

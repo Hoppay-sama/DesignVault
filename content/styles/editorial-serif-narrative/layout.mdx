@@ -1,0 +1,133 @@
+# Layout Grammar
+
+## Grid
+
+This is a magazine grid, not a web card grid. Text flows through column measures, photography breaks the grid, and running heads anchor the page like a periodical. Internally:
+
+- Page grid: 12-column, with text set across a comfortable sub-measure
+- Body measure: 60-75ch max width — never wider
+- Column rules: hairline `1px` warm ink rules between columns where used
+- Vertical rhythm: baseline grid, all spacing in multiples of `8px`
+- Running head: fixed section label (recto) + folio/page number (verso)
+- Full-bleed photography: breaks the grid freely between text sections
+
+---
+
+## Chapter Opener (Hero)
+
+| Property | Specification |
+|----------|--------------|
+| Height | `min-h-[100dvh]` — a stately chapter opener, not a squeeze |
+| Background | Warm paper tone or full-bleed editorial photography |
+| Kicker | Uppercase, letterspaced, serif or small sans — "SECTION ONE" |
+| Headline size | `clamp(3rem, 8vw, 6rem)` — serif display type |
+| Deck | 1-2 lines of sans body, softened but still sharp |
+| Meta line | Byline, date, reading time — like an article's folio |
+
+```
+┌────────────────────────────────────────────────┐
+│  VOL. 06 — FIELD NOTES             P. 34       │
+│                                                │
+│  [ONE]                                         │
+│  THE LONG WAY HOME                             │
+│  A story told in chapters, one scroll at a     │
+│  time — drop caps lead, pull quotes interject.  │
+│                                                │
+│  By A. Rivera — 12 min read · Issue No. 2026    │
+└────────────────────────────────────────────────┘
+```
+
+**The opener reads like a magazine feature title.** Kicker → serif display head → deck → meta. Once you scroll, the narrative begins.
+
+---
+
+## Reading Rhythm & Spacing
+
+```css
+--section-padding-y: clamp(4rem, 10vh, 8rem);
+--content-max-width: 64ch;
+--edge-margin: clamp(1.25rem, 4vw, 4rem);
+--baseline: 8px;
+```
+
+**Spacing is paced like paragraphs, not blocks.** Whitespace opens a new beat of the story. Chapters are separated by generous padding; paragraphs within a chapter breathe with margins — never double-spaced blob text.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Full-Bleed Photo Interlude
+```
+┌─────────────────────────────────────────────┐
+│  [Full-bleed editorial photograph]          │
+│  [caption, small serif, baseline offset]    │
+├─────────────────────────────────────────────┤
+```
+Photography interrupts the narrative like a spread in a magazine — a beat of image before the text continues.
+
+### Pattern 2: Pull Quote Breaking the Grid
+```
+┌──────────────┬──────────────────────────────┐
+│              │  (two-column body text)      │
+│   "The        │  and the pull quote          │
+│    measure    │  breaks out of the          │
+│    sets the   │  grid at 2x body size,      │
+│    pace."     │  ragged left, anchored      │
+│              │  between paragraphs          │
+└──────────────┴──────────────────────────────┘
+```
+Pull quotes sit outside the column measure — offset, centered, or bar-anchored — never a full-width banner.
+
+### Pattern 3: Two-Column Body with Running Head
+```
+┌─────────────────────────────────────────────┐
+│  CONVENTION · 01               [3]          │
+│  The Type        The History               │
+│  of the Field    of the Field              │
+│  ────────────    ────────────               │
+│  Drop cap at     Body text flows           │
+│  the open of     in the same measure,       │
+│  the chapter.    60-72ch combined per col.  │
+│  [caption]       [caption]                  │
+└─────────────────────────────────────────────┘
+```
+Multi-column sections keep a coherent tale: a drop cap on the opening paragraph, running head above, folio pinned in the corner.
+
+### Section 4: Scroll-Driven Chapter Transition
+```
+┌─────────────────────────────────────────────┐
+│  [Chapter A — full text spread]             │
+│  (scroll)                                   │
+├─────────────────────────────────────────────┤
+│  [Chapter B — playful transition]           │
+│  (new kicker + heading scrolls in)          │
+└─────────────────────────────────────────────┘
+```
+Chapters advance like page-turns: the folio count increments, the kicker changes, and a quiet reveal leads into the next section. The motion is a page-turn, not a dashboard animation (3/6 axis — restrained but present).
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Multi-column (2-3), pull quotes breaking the grid, full-bleed photo interludes |
+| **Tablet (768px)** | Collapse to measure-wide single column, keep drop caps, simplify folio, pull quote still in grid |
+| **Mobile (375px)** | Single column at 60-72ch; drop cap retained; photography keeps full-bleed; the running head shrinks to a small brand + section |
+
+**On mobile:** The reading stays legible first — the measure is king, so the layout collapses to one coherent column before anything else moves. Pull quotes become inline emphases, never a wide block that forces a hard bounce.
+
+---
+
+## Layout Don'ts
+
+| Don't | Do Instead |
+|-------|-----------|
+| Card grids / dashboard tiles | Text set in measures and columns like a magazine spread |
+| Centered, single-column web column | Multi-column grid with full-bleed photo breaks |
+| Drowned-by-whitespace sections | Paced spacing — pages that read as a story |
+| No-where-to-breathe walls of text | Drop caps, pull quotes, chapter opens, deliberate pauses |
+| Same grid everywhere | Grid that fractures: photo (full-bleed) → text (measure) → pull quote (breaking) |
+| Bordered card boxes | Open column flow, hairline rules, and folio running heads |
+| Auto-decided colors | Warm paper + ink palette (see principles) |
+| Everything full-width | Let the measure sit inside the page; let the margins hold the story |

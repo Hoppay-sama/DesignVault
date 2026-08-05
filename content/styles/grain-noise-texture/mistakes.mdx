@@ -1,0 +1,59 @@
+# Common Mistakes
+
+## Mistake 1: Grain Overload
+
+**What people do:** Crank the noise overlay up so every pixel shimmers — or stack grain, paper, and halftone everywhere at full strength.
+
+**Why it fails:** Texture is the design, not the only thing. Overloaded grain reads as cheap and gimmicky, muddies every element it touches, and — at high opacity — starts to strobe and fatigue the eye. It also screams "Instagram filter," which is the opposite of the tactile, intentional analog warmth the style is after.
+
+**Fix:** Keep film grain overlays at opacity 0.03-0.08 (per the style's texture spec). Layer texture selectively: full grain on surfaces and imagery, near-none behind body copy. If a viewer can't tell whether it's intentional, you've overshot.
+
+---
+
+## Mistake 2: Crushed Contrast
+
+**What people do:** Push every block to near-black and text to pure white to "make it pop" against the muted palette.
+
+**Why it fails:** This is a muted, desaturated style. Crushed contrast reads as digital — screens, not paper. It also kills the grain: noise is only visible in the midtones, so high-contrast compressions turn the texture into visual static or make it disappear entirely.
+
+**Fix:** Work in reduced contrast — ink-toned text (stone, graphite, chalk) on warm neutral stock. Slightly reduce text contrast so type feels set in ink. Let the midtones carry the grain.
+
+---
+
+## Mistake 3: Texture Without Hierarchy
+
+**What people do:** Cover everything in equal-density grain — headlines, body text, buttons, whitespace all get the same treatment.
+
+**Why it fails:** If every surface has identical texture, nothing has texture. The eye gets no landing spot; legibility erodes where it matters most; and the design flattens into a uniform gray hum. Texture without hierarchy is decoration without composition.
+
+**Fix:** Treat grain density like a typographic scale. Deep grain on hero surfaces and imagery, lighter on content panels, minimal or none behind small text. Reserve the strongest texture (risograph misregistration, halftone) for accent moments.
+
+---
+
+## Mistake 4: Fake Film Look
+
+**What people do:** Slap on the clichés — heavy vignette, dust scratches, light leaks, a 35mm frame border — and call it "analog."
+
+**Why it fails:** These are signifiers of film, not film's actual texture. The style isn't cosplay of a camera reel; it's the physical feeling of ink and paper. Cine-clichés read as gimmicky and dated, and they contradict the muted, printed, tactile warmth the style is built on.
+
+**Fix:** Use the real materials: SVG feTurbulence grain, paper fiber, halftone dots, risograph misregistration. If it evokes uncoated stock rather than a movie projector, it belongs here. When in doubt, ask whether the effect would survive being printed on paper — if it wouldn't, it's the fake film look.
+
+---
+
+## Mistake 5: Texture Muddying Legibility
+
+**What people do:** Keep texture at full strength behind body copy, then reduce font weights or add drop shadows to compensate.
+
+**Why it fails:** The style's own typography rule is slightly reduced contrast on muted stock — that margin is thin. Grain behind small text pushes legibility over the edge, and the compensating tricks (shadows, outlines, glow) reintroduce exactly the glossy digital look the style exists to avoid.
+
+**Fix:** Keep the heaviest texture away from text-bearing areas. If a section has body copy, let it sit on the cleanest surface on the page. Legibility first, texture second — the tactile feel comes from the surfaces around the text, not through it.
+
+---
+
+## Mistake 6: Digital Springiness
+
+**What people do:** Add bouncy spring physics, elastic hovers, and 300ms ease-out transitions to "liven up" the page.
+
+**Why it fails:** The style's motion is gentle — 24fps grain jitter, slow fades. Snappy, springy motion is the vocabulary of glossy tech products. It breaks the analog spell instantly: paper doesn't bounce.
+
+**Fix:** All transitions slow and soft (600ms+ ease-in-out minimum). Grain animates with subtle 24fps jitter. Honoring `prefers-reduced-motion` is non-negotiable — static grain, no shimmer — because this style's whole identity is calm and tactile, not kinetic.

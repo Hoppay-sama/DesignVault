@@ -1,0 +1,122 @@
+# Parameterized Template — Kinetic Typography
+
+> Use this template to generate a Kinetic Typography page for YOUR brand.
+
+---
+
+```
+Build a kinetic typography page for "[BRAND_NAME]" — [ONE-LINE DESCRIPTION, e.g., "a motion design studio that specializes in title sequences"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + GSAP (ScrollTrigger). Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: Type IS the design. Monumental display faces (120px+) that animate, split, morph, and respond to scroll. Letterforms carry all visual weight — imagery is secondary or absent.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY)
+
+- NO static type (every headline must animate on [TRIGGER])
+- NO small headlines (display sizes 120px+ / `clamp(4rem, 12vw, 12rem)`)
+- NO image-dominant layouts (type carries the composition)
+- NO bounce easing on text (use [EASING] — power/ease curves only)
+- NO long body copy (words are choreographed, not paragraphs)
+- NO uniformly weighted typography (use variable font axes)
+- NO card-based layouts
+- NO decorative imagery (motion provides all visual interest)
+- NO thin, light display fonts (bold condensed display only)
+
+---
+
+## FONTS
+
+Replace [DISPLAY_FONT] with a bold condensed or experimental display face:
+- Archivo Black — heavy, condensed, reliable
+- Anton — ultra-condensed, poster-grade
+- Bebas Neue — tall, narrow, kinetic
+- Space Grotesk (700) — modern grotesque with character
+
+Load via Google Fonts. Pair with a variable font (e.g., Inter Variable 100-900) for weight-axis animation. Body text stays minimal and neutral.
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --ground: #0A0A0A;              /* Near-black */
+  --type-primary: #FFFFFF;        /* White */
+  --type-secondary: #FFFFFF66;    /* 40% white for ghost text */
+  --accent: #FF2A00;              /* Single high-voltage accent */
+  --outline: rgba(255,255,255,0.25);
+}
+```
+
+**Palette guidance:** High-contrast duotone only — black/white or one single color. The accent is a signal, used for one word, one stroke, or one axis state. NO gradients, NO multi-color palettes.
+
+---
+
+## STRUCTURE
+
+### Hero
+- `min-h-[100dvh]`, near-black ground
+- Headline: [DISPLAY_FONT], `clamp(4rem, 12vw, 12rem)`, uppercase, tight leading (0.9-0.95)
+- Split-text reveal: letter-by-letter stagger on [TRIGGER]
+- Scrub: `[SCROLL_SCRUB]` — headline scales from 1 → 1.6 or clips as you scroll
+
+### Marquee Strips (1-2)
+- Full-width horizontal marquee, continuous loop (30-60s)
+- Uppercase repeated phrase, [DISPLAY_FONT] at 8-12rem
+- One strip can run in reverse for counterpoint
+
+### Scrub Section (2-3)
+- Each: pinned `min-h-[100dvh]` block, GSAP ScrollTrigger + scrub
+- Scroll-driven weight: variable font axis 100→900 mapped to scroll progress
+- Word-level choreography: stagger words left-to-right as you pass
+
+### Statement
+- One oversized word or phrase, 20-30vw, magnetic follow on cursor
+- Ghost-text layer behind: outline-only type, 40% opacity
+
+### Footer
+- Ground color, minimal text, one marquee or no motion
+
+---
+
+## ANIMATIONS
+
+- Split-text reveal: letters/words, stagger 0.05-0.1s, power3.out, triggered on [TRIGGER]
+- Scroll-driven weight: variable font `font-variation-settings: 'wght' 100→900`, scrub [SCROLL_SCRUB]
+- Horizontal marquee: translateX loop, 30-60s, linear, infinite
+- Pinned sequences: GSAP ScrollTrigger `scrub: 1`, `pin: true`
+- Magnetic text: cursor proximity, spring-based resistance, 0.3-0.5s
+- Scramble/decode: character swap on load or scroll, 800-1200ms per phrase
+
+`prefers-reduced-motion: reduce` → disable all animation, instant reveals, static type.
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- Monumental display type (120px+), type IS the hero
+- High-contrast duotone palette (B&W or single accent color)
+- Variable font weight mapped to scroll (100→900)
+- Split-text letter-by-letter or word-by-word reveals
+- Continuous horizontal marquees
+- GSAP ScrollTrigger pinned text sequences with scrub
+- Magnetic cursor-following text
+- Tight leading, uppercase, oversized scale contrast
+- No imagery unless it serves the type
+- No bounce easing — power/expo curves only
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines:** 2-6 words. Short, monumental, declarative. "MOVE THE WHOLE ROOM" not "Our platform enables motion-first communication." Long headlines break the choreography — split into marquee strips instead.
+
+**Body text:** 1-2 sentences max. Sparse. The words you do write must be worth animating.
+
+**Choreography:** One effect per headline. A headline that splits AND scales AND scrambles reads as noise. Choose: letter stagger, or weight scrub, or marquee — not all three on the same line.
+
+---
+
+Replace all [BRACKETED] placeholders, then paste into your AI coding assistant.
+```

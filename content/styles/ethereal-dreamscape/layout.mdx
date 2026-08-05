@@ -1,0 +1,122 @@
+# Layout Grammar
+
+## Grid System
+
+**No grid, no rows, no columns.** Elements are placed freely in space like objects drifting in a dream. The layout is so space-dominant it reads as sparse (density score 1). Layers of translucent wash overlap and slide beneath one another — soft pastel sheets at low opacity drifting over the gradient mesh. Internally:
+
+- Canvas sections: 100vw width, `min-h-[100dvh]` — the atmosphere fills the frame
+- Content containers: max-width 520px (moderate, floating)
+- Placement: absolute, offset, weightless — never baseline-aligned to a grid
+- Layering: overlapping translucent sheets with background-blur between them
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | Full viewport — `min-h-[100dvh]` |
+| Background | Full-bleed gradient-mesh atmosphere (aurora wash) |
+| Text position | Floating — offset from center, breathing in place |
+| Headline size | `clamp(2rem, 5vw, 4.5rem)` — delicate, airy sans (Outfit Light) |
+| Letter-spacing | Generous — 0.08em to 0.12em on headings |
+| Text opacity | 88% — luminous, translucent over the wash |
+
+```
+┌─────────────────────────────────────────┐
+│                                         │
+│                    ✦  drifting orb      │
+│                                         │
+│               WEIGHTLESS                │
+│               Morning air over          │
+│               lavender fields           │
+│               [ENTER]                   │
+│                                         │
+│        [gradient mesh + mist layer]     │
+└─────────────────────────────────────────┘
+```
+
+**The atmosphere is the hero.** Aurora gradient-mesh washes fill the frame. Text floats over them at 88% opacity, translucent and luminous. The gradient mesh carries 90% of the visual weight — the page reads like a soft recollection, mist over memory.
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(6rem, 16vh, 12rem);
+--content-max-width: 520px;
+--edge-margin: clamp(2rem, 6vw, 6rem);
+--layer-gap: clamp(4rem, 10vh, 8rem);
+```
+
+**Spacing is enormous.** Sections are scenes already dissolving — one dream state drifting into the next, separated by the slow pause of empty atmosphere. Nothing is crowded; crowding breaks the weightless illusion. The pacing is unhurried, like watching fog move.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Gradient Wash + Floating Text
+```
+┌─────────────────────────────────────────┐
+│                                         │
+│        [full-bleed gradient mesh]       │
+│                                         │
+│     floating text — offset, luminous    │
+│     (delicate, airy, letter-spaced)     │
+│                                         │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 2: Overlapping Translucent Sheets
+```
+┌─────────────────────────────────────────┐
+│                                         │
+│   [wash A]                              │
+│              [wash B — 60% opacity]     │
+│                      [wash C — 40%]     │
+│   text drifts above the overlap         │
+│                                         │
+└─────────────────────────────────────────┘
+```
+
+Layers slide over one another on scroll. Each sheet is soft-saturated so the stack stays legible and creates deep, ambiguous depth.
+
+### Pattern 3: Drift Sequence (Dream Scroll)
+```
+┌─────────────────────────────────────────┐
+│  [state 1 — weightless moment]          │
+│  (elements hover, barely moving)        │
+├─────────────────────────────────────────┤
+│  [state 2 — intermediate drift]         │
+│  (fog shifts, the wash breathes)        │
+├─────────────────────────────────────────┤
+│  [state 3 — dream settle]               │
+│  (faint glow return, slow calm)         │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|---------------|
+| **Desktop (1200px+)** | Full-wash atmosphere, layered translucent sheets, gentle parallax drift |
+| **Tablet (768px)** | Washes still full-bleed, fewer overlapping sheets, reduced drift |
+| **Mobile (375px)** | Full-wash atmosphere, text stacked above the wash (no overlap), no parallax |
+
+**On mobile:** The atmosphere still dominates, but text sits directly on the wash rather than overlapping busy aurora deposits — legibility collapses in motion on small screens. Softness is carried by color and grain, not by high-speed blur.
+
+---
+
+## Layout Don'ts
+
+| Don't                    | Do Instead                      |
+|--------------------------|---------------------------------|
+| Card grids               | Floating sections over gradient wash |
+| Center-based layouts     | Asymmetric, weightless drift    |
+| Dense rows of products   | Diluted generous blank space    |
+| Tight, packed content    | Generous air, hovering content  |
+| Heavy standard navigation | Minimal, translucent nav that floats |
+| Solid bordered containers | Translucent wash sheets, no borders |
+| Several hero elements looming | One elemental moment per scene |

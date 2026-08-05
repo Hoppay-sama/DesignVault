@@ -1,0 +1,79 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Handwritten or humanist — visibly drawn, imperfect |
+| **Examples** | Caveat, Patrick Hand, Kalam, Architects Daughter |
+| **Weight** | 400-700 (medium to bold — ink is confident) |
+| **Tracking** | 0-0.01em (natural, near-zero — handwriting doesn't letter-space) |
+| **Size** | `clamp(1.75rem, 4vw, 3.5rem)` — larger than sans, the headline is the hero mark |
+| **Transform** | Sentence case, NEVER uppercase — handwriting has no caps lock |
+| **Baseline wobble** | Use `rotate(-0.5deg)` or `translateY(±1px)` variance — lines shouldn't sit perfectly straight |
+
+**Why handwritten type:** The display face IS the declaration of human authorship. Caveat and Patrick Hand carry the wobble, the varying stroke weight, the imperfect letterforms of a real hand. The headline should look like it was written on the page, not set on a grid.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Clean, humanist sans-serif — readable, quiet |
+| **Examples** | Nunito Sans, Inter, Public Sans, Source Sans 3 |
+| **Weight** | 400-500 (regular — readable at length) |
+| **Tracking** | 0.01em-0.02em (standard) |
+| **Size** | `clamp(0.9375rem, 1vw, 1.0625rem)` — 15-17px |
+| **Line Height** | 1.6-1.75 (generous, relaxed reading) |
+
+**Why clean sans for body:** Handwritten fonts are exhausting at paragraph length. The body steps back — clean and neutral — so the reader can actually read. The contrast between handwritten display and clean body is the pairing: the hand shouts, the body speaks.
+
+---
+
+## Hand-Drawn / Illustrated Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Type as illustration — lettering drawn for the moment |
+| **Examples** | Custom-drawn words, outlined SVG text, sketched annotations |
+| **Weight** | N/A — drawn, not set |
+| **Size** | Any — whatever the sketch calls for |
+| **Transform** | Uppercase OK here — a stamp, a sketch note, a margin doodle |
+
+**Usage:** For the strongest moments — a single word circled in marker, a sketched "HANDMADE" stamp, a margin note next to a diagram — draw the type itself as an SVG or image. This is the top of the typography system: type as human mark. Use it once or twice per page; it's the exclamation point, not the sentence.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Handwritten, small and quick — like a margin annotation |
+| **Examples** | Caveat, Patrick Hand at small size |
+| **Weight** | 400 |
+| **Tracking** | 0.01em-0.02em (natural) |
+| **Size** | 12-14px |
+| **Transform** | Sentence case — annotations are written, not shouted |
+
+**Usage:** Captions, sketch notes, marginalia, page numbers, "see fig. 3" annotations. These tiny handwritten labels make the page feel like a working sketchbook — a person's notes, not a CMS's metadata.
+
+---
+
+## Type Scale
+
+```
+Display:  clamp(1.75rem, 4vw, 3.5rem)  — handwritten, the hero mark
+Body:     clamp(0.9375rem, 1vw, 1.0625rem) — clean sans, 15-17px
+Micro:    12-14px                       — handwritten annotations
+```
+
+The scale is compact — 12px to 56px. The hierarchy comes from the register change (handwritten → clean) more than from size jumps. A hand-drawn headline at 3rem and an annotation at 12px feel like the same hand on the same page.
+
+---
+
+## Font Pairing Logic
+
+**Two-family approach:** One handwritten face (Caveat or Patrick Hand) for display, labels, and annotations; one humanist sans (Nunito Sans or Inter) for body. The pair mirrors the style's core contrast — human mark vs. clean reading — without either side fighting.
+
+**Never:** Geometric or technical faces (Futura-style — too mechanical), corporate serifs (too polished), comic-book novelty fonts (childish instead of artisanal), or monospace (too digital). The handwritten face must look drawn, not packaged.

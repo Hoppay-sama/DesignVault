@@ -1,0 +1,107 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Swiss Mono Precision is **mechanical and minimal**. Nothing drifts, nothing morphs, nothing floats. Elements appear when the system calls for them — on a grid interval, on a state change — and they are gone the same way. The motion vocabulary is the motion of a drawing instrument: a rule being struck, a stamp hitting the page, a dimension being marked. Every animation must be justifiable as a state transition. No flourish, no parallax theater, no organic easing — motion reports, it does not perform.
+
+---
+
+## Precise Reveals
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Section headers | Clip-path or `width` reveal 0→100% (like a rule being drawn) | 300-500ms | `cubic-bezier(0.4, 0, 0.2, 1)`, once |
+| Block content | Opacity 0→1 with 0px translation (no slide) | 200-300ms | `ease-out`, once |
+| Figure indices | Opacity 0→1 + counter increment display | 150-250ms | `ease-out`, once |
+
+**The reveal is a stamp, not a sweep.** Content appears fully formed, aligned to the grid — there is no entrance choreography. The only sanctioned entrance effect is the *rule draw*: a 1px line extending from 0 to full width, like a hairline being struck across the page. Everything else simply switches on.
+
+---
+
+## Grid-Snap Alignment
+
+| Element | Specification |
+|---------|--------------|
+| Scroll-triggered alignment | Content snaps to grid rows as it enters — no smooth, organic settling |
+| Table / list updates | Values change on a tick (200ms), never fade-dissolve |
+| Column changes | Columns reveal instantly; the layout never animates its structure |
+
+**The grid is static truth.** Layout shifts (column resizing, re-ordering) happen instantly or via a single 200ms snap — the grid never appears to wobble. If a value changes, it changes like a digital readout: old figure out, new figure in, no tween. This is the anti-"smooth scroll theater" stance — precision reads as stillness.
+
+---
+
+## Hairline Transitions
+
+```css
+.hairline-rule {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hairline-rule.is-drawn {
+  transform: scaleX(1);
+}
+```
+
+**Purpose:** The single signature motion — a 1px hairline drawing itself across the page on section entry or hover. It references the drafting-table action of striking a rule. Used only for structural separators and active-column markers; never for decorative underlines.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Section rule | scaleX(0)→1 (rule draw) | 400ms | `cubic-bezier(0.4, 0, 0.2, 1)` | 0ms |
+| Section header | Opacity 0→1 | 200ms | `ease-out` | 100ms |
+| Body content | Opacity 0→1 | 200ms | `ease-out` | 150ms |
+| Figures / indices | Opacity 0→1 + counter | 200ms | `ease-out` | 200ms |
+
+**Key:** All durations are short (200-500ms) and delays are small and systematic (50-100ms steps). This is one of the fastest, most restrained styles in the library — but the speed is not energetic. It is the speed of a machine confirming state: instant, legible, repeatable.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Links | Underline rule draws 0→100% (200ms) | Color flips to Swiss red (0ms) |
+| Buttons | Background flips to solid black, text to paper (100ms) | Background flips to red (0ms) |
+| Table rows | Hairline highlight, row background shifts one step darker (100ms) | — |
+| Figure thumbnails | Border color switches to red (0ms) | Scale 1.0→1.005 (150ms, optional) |
+
+**Hover is state, not theater.** Most interactions are binary flips (on/off, black/white/red) — the red accent marks the active state instantly. The only transitions are the link rule-draw and short 100ms color flips. If an interaction needs more than 200ms to communicate, the UI is failing, not the animation.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- All rule draws: replaced with instant appearance
+- All opacity reveals: instant
+- All transitions: 0ms state flips
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+The style survives reduced motion nearly unchanged — it is already 90% instant state flips.
+
+---
+
+## What NOT to Animate
+
+| Never | Why |
+|-------|-----|
+| Parallax or scroll-linked drift | The page is a drawing, not a scene — nothing moves with the viewport |
+| Bounce or spring physics | Springs are emotional; this system is mechanical |
+| Morphing borders or organic shapes | Organic motion breaks the grid's authority |
+| Staggered, choreographed reveals | Elements appear when the system calls them, not in sequence theater |
+| Auto-advancing carousels | State changes belong to the user's interaction |
+| Hover scale on cards | Geometry is fixed by the grid — scaling breaks alignment |
+| Infinite ambient motion | A static page is a correct page; stillness is a feature |

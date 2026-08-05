@@ -1,0 +1,140 @@
+# Exact Replica Prompt — Monochrome + Single Accent / Signal Line
+
+> Copy this entire prompt and paste it into your AI coding assistant.
+
+---
+
+```
+Build a monochrome page for "SIGNAL" — a fintech dashboard for real-time trading analytics. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `SIGNAL — Precision data, one beacon`.
+
+Vibe: Radical restraint. Full grayscale spectrum with exactly one saturated color used surgically for CTAs, active states, and key data points. The accent becomes a beacon — everything else recedes into sophisticated neutrality. Restraint as design statement.
+
+---
+
+## ANTI-SLOP CONSTRAINTS
+
+- NO multiple accent colors (exactly ONE saturated color on the page)
+- NO colorful palette (zinc grayscale ramp only, plus the single accent)
+- NO gradient backgrounds (flat value control — value does the work)
+- NO rainbow effects (no multi-hue gradients, no decorative color)
+- NO color-coded data (one accent plus value hierarchy must carry it)
+- NO accent on more than 15% of surface area (surgical usage only)
+- NO decorative color — color only when it signals (CTA, active, key data)
+- NO competing textures (clean to subtle grain, nothing busy)
+- NO serif typography (clean sans-serif only)
+- NO color-led hierarchy (weight and size do hierarchy, not hue)
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap
+```
+
+Usage:
+- **Geist 500**: Display headlines — `clamp(1.75rem, 4vw, 3.5rem)`, tight tracking -0.03em
+- **Geist 400**: Body text — `clamp(0.875rem, 1vw, 1rem)`, line-height 1.6
+- **Geist Mono 400**: Technical details, data, labels — 11-12px, uppercase, tracking 0.12em
+- Weight and size do hierarchy — not color
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --zinc-950: #09090B;        /* Ground — near black */
+  --zinc-800: #27272A;        /* Surface elevated */
+  --zinc-600: #52525B;        /* Muted borders */
+  --zinc-400: #A1A1AA;        /* Secondary text */
+  --zinc-200: #E4E4E7;        /* Primary text on dark */
+  --zinc-50: #FAFAFA;         /* Light surface / alternate theme */
+  --accent: #FF5A1F;          /* Signal orange — THE one accent */
+  --accent-soft: rgba(255, 90, 31, 0.12); /* Accent at 12% for active states */
+  --text-muted: rgba(228, 228, 231, 0.55);
+}
+```
+
+Body: `bg-[#09090B] text-[#E4E4E7] antialiased font-body`.
+
+**Accent rules (locked):**
+- ONE accent only — signal orange #FF5A1F (electric blue, emerald, or hot pink are the allowed alternates)
+- Accent on ≤15% of surface area — CTAs, active nav state, live ticker value, primary data point
+- Everything else is zinc grayscale — no tinted neutrals
+
+---
+
+## STRUCTURE
+
+### 1. Navbar
+- Fixed top, `h-16`, bg zinc-950/80 backdrop-blur, bottom border zinc-800
+- Left: wordmark "SIGNAL" — Geist 600, tracking -0.02em
+- Center: nav links (Overview, Markets, Analytics, Reports) — Geist 400 14px, text-muted, hover text-zinc-200
+- Active link: accent text-zinc-200 with 2px accent underline (the only color in the nav)
+- Right: CTA "OPEN TERMINAL" — solid accent bg, zinc-950 text, 13px, font-medium
+
+### 2. Hero Section
+- `min-h-[70vh]`, zinc-950, grid-based
+- Mono eyebrow: "LIVE TRADING ANALYTICS / Q3 2026" — Geist Mono, uppercase, tracking 0.12em, 12px, text-muted
+- Headline: "Precision data. One beacon." — Geist 500, `clamp(1.75rem, 4vw, 3.5rem)`, tracking -0.03em, zinc-50
+- Subtext: "Full grayscale with a single signal color. Restraint as a design statement." — Geist 400, text-muted, max-width 480px
+- Primary CTA: "ENTER TERMINAL" — solid accent, 13px medium, rounded-md; Secondary: "VIEW DOCS" — outline zinc-600, hover:border-zinc-400
+- Key data point (bottom of hero): live index "S&P 500 — 5,842.11 ▲1.2%" where the delta is accent — the only color in the hero
+
+### 3. Metrics Grid Section
+- 6 metric cards, 3-col grid, zinc-900 bg, 1px zinc-800 border, rounded-lg, p-6
+- Each card: mono label (text-muted), big number (Geist 500 2rem zinc-50), delta (zinc-400)
+- The ONE primary metric (e.g. "Portfolio P&L") uses accent for its value — the single colored element in the grid
+- Hover: border-zinc-600, subtle scale(1.01); active/selected card gets 1px accent border
+
+### 4. Chart Section
+- Large line chart (SVG or Recharts), zinc-400 lines, zinc-800 gridlines
+- Chart line in zinc-200; the latest point is an accent dot with accent glow — "the beacon"
+- Axis labels: Geist Mono 11px, text-muted
+- Threshold line in accent dashed — signals the key level
+
+### 5. Pricing / Tiers Section
+- 3 plan cards, zinc-900, 1px zinc-800, rounded-xl
+- Middle plan "PRO" highlighted: 1px accent border + "MOST SIGNALED" mono badge in accent — the only colored card element
+- Feature rows: zinc-400 check marks, prices zinc-50, CTA buttons: gray outline for Basic/Enterprise, solid accent for PRO
+
+### 6. Footer
+- Border-t zinc-800, mono links text-muted, hover text-zinc-200
+- "SIGNAL © 2026 — ONE ACCENT, TOTAL RESTRAINT" — Geist Mono, uppercase, tracking 0.12em, 11px, text-muted
+
+---
+
+## ANIMATIONS
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Hero headline | opacity 0→1 + translateY(12px)→0 | 500ms | `ease-out` (delay 100ms) |
+| Metrics cards | opacity 0→1 + translateY(8px)→0, stagger | 400ms | `ease-out` (delay 150ms per card) |
+| Accent dot (chart) | pulse: opacity 0.4→1 + scale 1→1.15 | 2000ms | `ease-in-out`, infinite |
+| Nav active underline | scaleX 0→1 | 200ms | `ease-out` |
+| Card hover | border-color + scale(1.01) | 150ms | `ease-out` |
+| Accent reveal | color 0→accent on hover of grayscale elements | 150ms | `ease-out` |
+
+Motion is precise and minimal — accent color draws attention to state changes. No drift, no morphing, no breathing backgrounds.
+`prefers-reduced-motion: reduce` → instant entrances, remove pulse.
+
+---
+
+## ANTI-SLOP (LOCKED)
+
+- Full grayscale base (zinc-950 → zinc-50), no tinted neutrals
+- ONE accent color only — ≤15% of surface area
+- Value-based hierarchy — light/dark contrast, not hue
+- Accent reserved for signal: CTA, active state, key data point
+- Weight and size do hierarchy, not color
+- Mono for technical details, clean sans-serif for display
+- Structured, grid-based layout; accent creates visual pathways
+- Clean to subtle grain — no competing textures
+- No multiple accents, no gradients, no rainbow, no decorative color
+
+---
+
+Recreate this page with the exact monochrome + single accent aesthetic, surgical accent usage, and value-led hierarchy above.
+```

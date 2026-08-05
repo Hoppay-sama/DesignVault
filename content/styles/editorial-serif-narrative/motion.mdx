@@ -1,0 +1,100 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Editorial Serif Narrative is **page-turn quiet** — the literal, modest motion of reading a magazine across your lap. Nothing bounces, nothing slides sideways with heavy parallax, and nothing auto-plays. Motion supports the story the way ink spacing does: it arranges the arrangement into a **reading rhythm** rather than a spectacle. Motion axis is deliberately low (3): every animation exists only to get the reader to the next paragraph, not to entertain them.
+
+---
+
+## Scroll-Linked Storytelling
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Chapter lead | Parallax content drifts 8–12% as the section enters | tied to scroll | `ease-out`, once |
+| Drop-cap entrance | Slight fade+rise (0→1, translateY=0.35em) on load/in-view | 600ms | `ease-out` |
+| Pull-quote zone | Fades in as it nears the reading line | 700ms | `ease-out` |
+| Background image | Crossfades through the page-turn break | 900ms | `ease-in-out` |
+
+**The effect is that media reads as narrative.** Scroll should feel like feeding paper through a press: content already in motion when it breaks the fold, nothing bursting in. Rapid scroll just changes page; slow scroll reads the rhythm.
+
+---
+
+## Page-Turn Transitions
+
+Between longform chapters, the page performs a half turn — the content slides slightly up-right (to the next page-deep) while an inward shadow darkens the trailing edge, as the new chapter begins:
+
+```css
+@media (prefers-reduced-motion: no-preference) {
+  .chapter {
+    position: relative;
+    transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1),
+                filter 900ms ease-out;
+  }
+  .chapter.is-active {
+    transform: translate3d(0, 0, 0) rotate(0.00deg);
+  }
+}
+```
+
+**Why a half-turn, not a hard flip:** full 3D page-flips in the middle of an article are gimmicks. A subtle horizontal ledger under new section-tops, combined with the interior shadow shift, reads neatly as "turning page" without a heavy 90-degree flip.
+
+---
+
+## Entrance Rhythm
+
+| Element | Animation | Duration | Delay |
+|---------|-----------|----------|-------|
+| Chapter head | Fade up 24px, accent rule stretches from 0→48px | 800ms | 0ms |
+| Drop cap | Fade in and settle | 600ms | after head |
+| Body columns | Static — the multi-column grid is always present | none | — |
+| Pull quote | Fade + one-scroll-height rise | 700ms | 150ms |
+| Full-bleed image | Opacity 0→1 | 900ms | 120ms |
+
+**Golden rule:** start with content, not the chrome. The headline, the drop, then the story. A `stagger` no farther than ~100ms. Everything gentle — the mind should begin reading before realizing something "animated."
+
+---
+
+## Interaction States
+
+| Element | State | Change | Duration |
+|---------|-------|--------|----------|
+| Links | Hover | Underline draws from ink to accent-oxblood | 250ms |
+| Nav items | Hover | Ink fades to accent-oxblood | 200ms |
+| Scroll indicator | Scroll | fades past the hero | 300ms |
+| Image | Hover | Slight photographic zoom (1.015) — cinematic still frame | 500ms |
+
+All hover behavior stays under 500ms: it's thread-and-needle, not dream. Nav jump, an accent word, a link underline — the interactions help you, they don't applaud.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- All scroll-fades + page-turn: removed (static breaks between chapters)
+- Drop-rise + link underline: replaced by plain state change
+- Chapter parallax: disabled
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+The article still reads well — motion elsewhere comes from type, not from spectacle.
+
+---
+
+## What NOT to Animate
+
+| Don't | Why |
+|-------|-----|
+| Bounce / spring generic | Too comic — this is a serious page |
+| Autoplaying media | Autoplay steals long-form attention |
+| Heavy 3D card tilts | Gimmick behind the serif |
+| Screen-deep parallax on text | Murky long-form readability |
+| Chart-style data entrances | A story section is read, not presented |
+| Instant jarring reveals | Breaks the reading rhythm |
+| Cursor-tracking elements | A magazine doesn't chase the cursor |

@@ -1,0 +1,159 @@
+# Exact Replica Prompt — Typographic Brutalist / STATIC
+
+> Copy this entire prompt and paste it into your AI coding assistant.
+
+---
+
+```
+Build a typographic brutalist page for "STATIC" — an independent music label releasing uncompromising records. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `STATIC — WE ARE THE NOISE`.
+
+Vibe: The aggression of a protest poster translated to the web. Oversized raw type IS the design — monumental letterforms dominate the viewport like they were stamped onto paper. The grid is drawn, then deliberately broken. High-contrast ink on paper with one stark red accent. Design as statement, not decoration.
+
+---
+
+## ANTI-SLOP CONSTRAINTS
+
+- NO Inter, Roboto, or Arial as display fonts (Archivo Black, Anton, or Monument Extended only)
+- NO pure #FFFFFF backgrounds (paper white #F4F3EF only)
+- NO pure #000000 text (near-black ink #111110 only)
+- NO centered hero (left-anchored, edge-bleeding statement only)
+- NO rounded corners above 2px (border-radius: 0 by default)
+- NO gradients of any kind
+- NO drop shadows, glow, or depth effects
+- NO glassmorphism or backdrop-blur
+- NO raw unprocessed photography (threshold, halftone, posterize, or duotone required)
+- NO more than one accent color (one stark accent used like a weapon)
+- NO bounce or spring easing (hard cuts and heavy deceleration only)
+- NO parallax or scroll choreography (one marquee maximum)
+- NO decorative icons, badges, or illustrations
+- NO card-grid feature sections
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500&family=Space+Mono:wght@400;700&display=swap
+```
+
+Usage:
+- **Archivo Black 400**: Display statements — `clamp(4rem, 15vw, 14rem)`, UPPERCASE, tracking -0.03em (tight, stamped)
+- **Archivo 400/500**: Body text — `clamp(0.9rem, 1.2vw, 1.05rem)`, line-height 1.5-1.6, tracking 0
+- **Space Mono 400**: Micro labels — 10-12px, UPPERCASE, tracking 0.15em
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --paper: #F4F3EF;         /* Paper white — never pure #FFF */
+  --ink: #111110;           /* Near-black — never pure #000 */
+  --ink-secondary: #55554F; /* Supporting copy */
+  --ink-muted: #8A8A82;     /* Micro labels and metadata */
+  --accent: #E10600;        /* Signal red — the signature accent */
+  --block: #ECEBE6;         /* Slightly darker paper for panels */
+  --rule: #D8D7D0;          /* Visible grid hairlines */
+}
+```
+
+Body: `bg-[#F4F3EF] text-[#111110] antialiased font-body overflow-x-hidden`.
+
+---
+
+## STRUCTURE
+
+### 1. Hero Statement
+- `min-h-[100dvh]`, flat paper background
+- Micro label: "01 / MANIFESTO" — Space Mono, 12px, uppercase, tracking 0.15em, ink-muted
+- Headline: "WE ARE THE NOISE" — Archivo Black, `clamp(4rem, 15vw, 14rem)`, UPPERCASE, left-aligned, bleeding off the right edge
+- Supporting text: 1-2 sentences, right-aligned, ink-secondary
+- CTA: "LISTEN NOW" — flat near-black button, paper text, border-radius 0, no shadow
+- Headline overlaps the section below (negative margin)
+
+### 2. Overlap Stack Section
+- Full-bleed processed image (threshold or halftone — never raw)
+- Section title overlaps the image via negative margin
+- Mono micro-label + 1-2 sentences as the fine print
+
+### 3. Marquee Divider
+- "NOISE NOISE NOISE NOISE NOISE NOISE" — continuous translateX(-50%) loop, 20-30s linear
+- 2px solid near-black borders top and bottom
+
+### 4. Exposed Grid + Footer
+- Visible column rules (1px #D8D7D0) drawn across the page
+- Footer: 2px top divider, mono micro-labels — "STATIC © 2026 — WE ARE THE NOISE"
+
+---
+
+## STAMPED UI
+
+```css
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee 25s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.stamp-reveal {
+  clip-path: inset(0 0 100% 0);
+  animation: stamp 500ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes stamp {
+  to { clip-path: inset(0 0 0 0); }
+}
+
+.cta {
+  background: #111110;
+  color: #F4F3EF;
+  border-radius: 0;
+}
+
+.cta:hover {
+  background: #E10600; /* instant inversion — no transition */
+}
+```
+
+---
+
+## ANIMATIONS
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Hero display type | Clip-path wipe (top-to-bottom) | 400-600ms | `cubic-bezier(0.16, 1, 0.3, 1)` | 0ms |
+| Secondary type | Hard opacity cut (no fade) | 150ms | `steps(1)` | 150ms |
+| Body text blocks | Opacity fade | 300ms | `ease-out` | 300ms |
+| Micro labels | Hard cut | 100ms | `steps(1)` | 400ms |
+| Marquee strip | Continuous translateX loop | 25s | `linear` | 0ms |
+| CTA button | Background invert (instant) | 0ms | `steps(1)` | — |
+
+`prefers-reduced-motion: reduce` → all entrance animations collapse to instant, marquee freezes in place.
+
+---
+
+## ANTI-SLOP (LOCKED)
+
+- Monumental UPPERCASE display type (`clamp(4rem, 15vw, 14rem)`, 700-900 weight)
+- Archivo Black / Anton / Monument Extended — never Inter or Roboto
+- Paper white `#F4F3EF` ground, near-black `#111110` ink
+- One stark accent maximum (signal red `#E10600`)
+- Broken grid with visible structure (column rules + intentional misalignment)
+- Flat surfaces — no shadows, no gradients, no glass, no glow
+- Processed imagery (threshold, halftone, posterize, or duotone)
+- Hard-cut motion — no bounce, no spring, no parallax
+- Left-anchored hero — never centered
+- One marquee maximum, hover states instant
+- No decorative icons, badges, or illustrations
+- Statement over decoration — every element shouts, supports a shout, or documents a shout
+
+---
+
+Recreate this page with the exact typographic brutalist aesthetic, stamped motion, broken grid, and ink-on-paper palette above.
+```

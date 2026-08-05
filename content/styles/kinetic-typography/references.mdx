@@ -1,0 +1,62 @@
+# Reference Gallery
+
+## Live Sites
+
+### Awwwards Kinetic Typography Winners
+- **What works:** Monumental scroll-driven headlines, split-text reveals, variable font weight scrubbing, pinned GSAP sequences
+- **URL:** awwwards.com.au (search "kinetic typography" / "big type" trends for current Site of the Day examples)
+
+### Locomotive (locomotive.ca)
+- **What works:** Scroll-driven type scale, oversized display faces that grow and shrink with scroll position, pin-and-scrub text sequences
+- **URL:** locomotive.ca
+
+### FWA (thefwa.com) Kinetic Type Category
+- **What works:** The definitive archive of type-in-motion experiments — marquees, letter-by-letter reveals, scramble/decode effects, magnetic text
+- **URL:** thefwa.com (filter awards by "kinetic typography")
+
+### Heresy (heresy.studio)
+- **What works:** Editorial-grade kinetic scroll experiences, split-text reveals, type used as architectural scale
+- **URL:** heresy.studio
+
+## Key Visual References
+
+### Apple Event Keynote Typography
+- **What works:** Massive condensed display type revealing word-by-word, camera-pan pacing, one message per screen. Study the restraint — the reveal timing, not flash.
+- **URL:** apple.com/apple-events/
+
+### Spotify Wrapped
+- **What works:** Word-level choreography at consumer scale, bold moving statement typography, marquee-style shares built to be screenshotted. The annual campaign is a case study in kinetic type with a general audience.
+- **URL:** spotify.com/wrapped (annual)
+
+### Film Title Sequences
+- **What works:** Narrative type choreography — the gold standard. Study: Saul Bass (Anatomy of a Murder — type as a jittering character), Kyle Cooper (Seven — hand-scratched letters as scenery), and the Wes Anderson/Annie Atkins French Dispatch title cards (cut-paper letter-by-letter assembly).
+- **URL:** artofthetitle.com — the reference archive for credits sequences, searchable by designer
+
+## Key Visual References — DNA Notes
+
+### Color References
+- **High-contrast duotone** — near-black #0A0A0A, pure white #FFFFFF, and one single accent. No gradients, no multi-color palettes.
+- **Ghost text** — outline-only or 40% opacity type layered behind the primary headline
+
+### Typography References
+- **Bold condensed display** — Archivo Black, Anton, Bebas Neue (120px+ / `clamp(4rem, 12vw, 12rem)`)
+- **Variable fonts for weight animation** — weight axis 100→900 mapped to scroll
+- **Tight leading** — 0.9-0.95, uppercase, aggressive scale contrast between hero and micro-labels
+
+### Motion References
+- **Split-text reveal** — letter-by-letter stagger (0.05-0.1s), power3.out
+- **Weight scrub** — variable font axis driven by scroll progress, GSAP ScrollTrigger `scrub: 1`
+- **Marquee** — continuous translateX loop, 30-60s, linear, infinite; reverse strip for counterpoint
+- **Scramble/decode** — character swap, 800-1200ms per phrase
+- **Magnetic text** — cursor proximity with spring resistance
+
+## Screenshot Notes
+
+> When capturing references for this style, look for:
+> - The type size (must be monumental — 120px+, viewport-filling)
+> - The animation technique (split-text, weight scrub, marquee — and note the easing, never bounce)
+> - The scroll relationship (pinned sequences, scrub mapping)
+> - The palette (must be high-contrast duotone — B&W or one accent, never multi-color)
+> - The imagery (must be absent or secondary — type carries the weight)
+> - The choreography discipline (one technique per headline, not layering three on one line)
+> - The overall mood (must feel dynamic, bold, slightly theatrical — never static)

@@ -1,0 +1,59 @@
+# Common Mistakes
+
+## Mistake 1: Animating Everything
+
+**What people do:** Every headline, paragraph, button, and icon gets a reveal, a hover wiggle, or a marquee once they discover motion.
+
+**Why it fails:** Kinetic typography works because of contrast — the still parts exist to frame the moving parts. When everything moves at once, there's no hierarchy, no focal point, and the page reads as a panic attack. Unchoreographed motion is noise.
+
+**Fix:** The 90/10 rule — 90% of the page stays still, 10% moves with intent. Choose one hero moment per section. Let the static typography do the work while one element carries the motion.
+
+---
+
+## Mistake 2: Default Easing Everywhere
+
+**What people do:** Use `ease: "linear"` or the default `cubic-bezier(0.4, 0, 0.2, 1)` (or worse, bounce) for text reveals and scroll effects.
+
+**Why it fails:** Letter-by-letter animation is legible precisely because it compresses and decelerates — that's what reads as "choreography." Linear motion on text feels mechanical and unresolved; bounce easing on words reads as comic, not kinetic. The easing is the personality, and default eases have none.
+
+**Fix:** Custom curves — `cubic-bezier(0.16, 1, 0.3, 1)` (expo-out) for reveals, aggressive `power4.out` for weight ramps, and 60–120ms staggers between letters. Test the curve on the word load, not on a dot.
+
+---
+
+## Mistake 3: Unreadable Type in Motion
+
+**What people do:** Scribble-decodes every paragraph, blur-transitions body copy, or runs a whole sentence as a marquee while people are trying to read it.
+
+**Why it fails:** The style is called kinetic typography, not illegible typography. The message still has to be read. If a reader cannot rest their eyes on the text for even a second, they leave. Motion that competes with comprehension defeats the entire point of type.
+
+**Fix:** Reserve distortion, scramble, and rapid animation for display-level short phrases (2-6 words). Body copy animates once, gently — a 400ms clip-path reveal at most — then sits still. Always end in a stable, readable at-rest state.
+
+---
+
+## Mistake 4: Motion Sickness and Vestibular Ignoring
+
+**What people do:** Constant marquees, parallax on every layer, letters that track the cursor across the whole hero, nothing stopping — and no `prefers-reduced-motion` handling.
+
+**Why it fails:** Continuous or cursor-tracked motion is the fastest way to trigger motion sensitivity and nausea. Users on `prefers-reduced-motion` get a dizzying page and no way out. This isn't a niche concern — it's silently losing a large share of your audience.
+
+**Fix:** Cap marquee speed at ~20s per pass and scroll them away from the viewport (never fix them on screen). Only track the cursor on a single decorative word, with spring resistance and a hard fallback. Always branch on `prefers-reduced-motion`: static weight, no scrub, no scramble, no marquee.
+
+---
+
+## Mistake 5: Performance Blindness on Continuous Animation
+
+**What people do:** Animate `font-weight` frame-by-frame on the scroll path, re-trigger GSAP ScrollTriggers on every resize, animate `width`/`top`/`transform` on heavy layout layers — and let all of it run while off-screen.
+
+**Why it fails:** Variable-font weight animation is costly — it re-rasterizes glyphs each frame. Continuous marquees that are GPU-composited incorrectly (or worse, animated on `left`) burn CPU/GPU permanently. On mid-range devices the scroll scrubbing stutters, turns the "kinetic" into "juddery," and the effect dies.
+
+**Fix:** Animate `transform` and `opacity` only — never layout properties. Batch marquees into a single composited track. Pause off-screen animations with `IntersectionObserver` or ScrollTrigger's `toggleActions`. For weight ramps, use `font-variation-settings` with `contain: layout` on the animated layer and keep the scrub area small.
+
+---
+
+## Mistake 6: Static Type in a Kinetic Style
+
+**What people do:** Build the hero, then let the headline sit there motionless while every toolbar, badge, and nav item dangles with a hover effect.
+
+**Why it fails:** The one thing that must move — the type — doesn't, and the things that shouldn't care — the chrome — fidget. The style's entire promise is "type in motion." A static hero headline reads as unfinished, and micro-interactions on nav contradict the monumental stillness the hero should own.
+
+**Fix:** The flagship motion budget goes to the display type first: load-in split reveal, scroll-driven weight ramp, then marquee. UI chrome stays deliberately inert. If the headline has nothing to do, the style has nothing to say.

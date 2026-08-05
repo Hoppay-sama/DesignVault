@@ -1,0 +1,81 @@
+# Color Architecture
+
+## Ground
+
+The ground is a bright, punchy surface — this is a toy, not a gallery. Backgrounds lean toward saturated candy colors and high-contrast pairings that make every element feel like it's popping off the page.
+
+```css
+--color-ground-hot: #FF2D8A;      /* Electric pink — the default playground */
+--color-ground-cobalt: #2345FF;   /* Saturated cobalt — alternate world */
+--color-ground-lime: #C4FF2D;     /* Acid lime — alternate world */
+--color-ground-tangerine: #FF7A00; /* Tangerine — alternate world */
+```
+
+**Why candy grounds:** The ground is one of the saturated polychrome colors, or a segmented fullscreen section switch between them. There is no neutral white or near-black — every section is a new world with its own loud ground. Engagement over conversion: the page must feel like a toy before it feels like a product.
+
+---
+
+## Saturated Polychrome Palette
+
+```css
+--candy-pink: #FF2D8A;        /* Electric pink — energetic, loud */
+--candy-cobalt: #2345FF;      /* Cobalt — punchy contrast */
+--candy-lime: #C8FF30;        /* Lime — electric, acidic */
+--candy-tangerine: #FF7A00;   /* Tangerine — warm pop */
+--candy-yellow: #FFD500;      /* High-voltage yellow — celebration */
+--candy-purple: #8B00FF;      /* Vivid purple — party accent */
+--candy-cyan: #00E5FF;        /* Cyan — gaming accent */
+```
+
+**These are the base colors.** They cover full sections, big shapes, and interactive surfaces. Every color is saturated and capable of carrying the page alone. The polychrome strategy is containment — pick 2-3 hues per section maximum, then let them shout.
+
+---
+
+## High-Contrast Combinations
+
+| Pairing | Usage |
+|---------|-------|
+| Electric pink ground + lime accents | Default hero contrast |
+| Cobalt ground + yellow text | Playful primary CTA |
+| Lime ground + tangerine shapes | Peak nostalgia energy |
+| Tangerine ground + cyan text | Alternate-gaming accent |
+
+**Rule:** Every pairing is high-contrast by luminance OR hue — never adjacent muted tones. Two loud colors can sit together if one carries text-safe contrast. The energy comes from unexpected loud-on-loud combos, not from calm pairings.
+
+---
+
+## Interactive Accents
+
+```css
+--hover-bounce: #FFFFFF;       /* White canister — heavy hover pop */
+--confetti-mix: #FF2D8A, #C8FF30, #00E5FF, #FFD500, #FF7A00; /* Confetti spread palette */
+```
+
+**Usage:** Accents are reserved for interaction responses. Hovers, spins, confetti bursts, and game-feedback states pull from the confetti mix. The white hover accent gives every interactive element a visible, physical "squish" response against the loud ground.
+
+---
+
+## Text
+
+```css
+--color-text-on-hot: #FFFFFF;      /* White — legible on saturated ground */
+--color-text-additional: #182058;  /* Deep ink — for light grounds and panels */
+--color-text-muted: rgba(255, 255, 255, 0.7); /* Muted — for labels */
+```
+
+**Why white text:** Text lives on the loud saturated ground. White at full opacity reads against every hot ground; deep ink is reserved for light ground sections. Never gray-on-gray — muted text stays white but translucent, enough legibility at 70% to read as a label.
+
+---
+
+## Color Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Restrained palettes | Saturated polychrome — electric pink, cobalt, lime, tangerine |
+| Pure #000000 or #FFFFFF-only | Loud candy grounds with visible text contrast |
+| Muted, corporate grays | High-contrast loud-on-loud combinations |
+| Pastel or muted tones | Saturated, candy-value colors |
+| Color reserved for one accent element | Color as space — every section is a saturated world |
+| Mono-color scheme | Two-to-three-hue palettes with a confetti mix |
+
+---

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { buildVocabularyIndex } from '@/lib/vocabulary';
 import { VocabularySearch } from '@/components/VocabularySearch';
+import { SiteHeader } from '@/components/SiteHeader';
 
 export const metadata = {
   title: 'Vocabulary Search — DesignVault',
@@ -13,6 +14,8 @@ export default function VocabularyPage() {
 
   return (
     <main className="min-h-screen pt-24 pb-20 px-6 lg:px-8">
+      <SiteHeader />
+
       {/* Header */}
       <div className="max-w-4xl mx-auto mb-12">
         <div className="flex items-center gap-4 mb-6">

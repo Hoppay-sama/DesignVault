@@ -1,0 +1,122 @@
+# Texture & Surface
+
+## Primary Texture: The Code-Editor / CRT Surface
+
+The texture IS the terminal hardware. The page should feel like a powered machine — scanlines, hairline grids, phosphor glow, subtle grain. No material should look printed or painted; every surface looks *emitted by a monitor*.
+
+| Quality | Description |
+|---------|-------------|
+| **Scan-line effect** | 1px horizontal lines across panels — the CRT refresh |
+| **Hairline grid** | Technical grid background — blueprint/coordinate feel |
+| **Phosphor glow** | Soft radial glow behind accents, like light bleed on glass |
+| **Code-editor chrome** | Panel headers with `● ● ●` dots, status bars, line numbers |
+| **Subtle noise/grain** | Low-opacity grain to kill digital flatness |
+
+**The goal:** Every surface should read as a monitor output or a machine panel — never a flat web page. The texture is the "screen," and the content is what the screen displays.
+
+---
+
+## Scan-Lines
+
+```css
+.scanlines {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.18) 2px,
+    rgba(0, 0, 0, 0.18) 3px
+  );
+  pointer-events: none;
+}
+```
+
+**Purpose:** The CRT refresh pattern — subtle horizontal darkening at 1px intervals. Applied as an overlay (pointer-events: none) above the main surface, never to text areas where it would hurt readability. Opacity stays low (0.18) — it should be felt more than seen.
+
+---
+
+## Technical Grid
+
+```css
+.grid-background {
+  background-image:
+    linear-gradient(rgba(51, 255, 102, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(51, 255, 102, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+```
+
+**Purpose:** A barely-visible coordinate grid anchoring the layout — mission-control blueprint. The grid is the layout's skeleton made visible: 32px cells that match the spacing system. It stays under 6% opacity — the grid structures, it does not decorate.
+
+---
+
+## Phosphor Glow Surfaces
+
+```css
+.glow-surface {
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(51, 255, 102, 0.10) 0%,
+    rgba(51, 255, 102, 0.0) 55%
+  );
+}
+```
+
+**Purpose:** Light bleed — a soft pool of accent light at the top of panels, as if the phosphor is shining up through the screen. Used on hero sections, panel headers, and around the cursor line. The glow is always the accent color and always faint (≤10% at its brightest).
+
+---
+
+## ASCII Art
+
+```
+  ▄▄▄▄▄▄  ▄▄▄▄▄▄  ▄▄▄▄▄▄
+  ██      ██      ██
+  ██ ▄▄▄▄  ██▄▄▄▄  ██▄▄▄
+  ██▄▄▄▄██ ██▄▄▄▄█ ██▄▄▄▄
+```
+
+**Usage:** ASCII art is the terminal's illustration language — used for section dividers, empty states, boot sequences, and decorative headers. It must be rendered in the monospace font at the exact same size as surrounding text (no scaling, no blur — ASCII art must stay pixel-crisp). Every ASCII figure is built from a strict block/line character set, matching the grid.
+
+---
+
+## Image Processing
+
+| Processing | Effect | Parameters |
+|-----------|--------|------------|
+| **Scanline overlay** | CRT refresh | 3px repeating gradient at 0.18 opacity |
+| **Phosphor grade** | Accent-tinted shadows | Teal/green tint in darks, accent in highlights |
+| **Chromatic edge** | Subtle RGB split on glitch states only | 0.5-1px red/blue channel shift |
+| **Contrast** | High — the near-black ground makes accents pop | Contrast +15-20 |
+| **Grain** | Analog noise to kill banding | Opacity 0.03-0.05, overlay |
+
+**The goal:** Imagery looks displayed, not printed — like a frame from a terminal or a mission-control render. High contrast, cool shadows, and a whisper of scanline/grain over everything.
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Near-black ground + 32px technical grid at ≤6% opacity |
+| Panels | Translucent raised surface, hairline phosphor border, header chrome |
+| Text | Direct on ground — no cards, no padding boxes for body text |
+| Data readouts | Code-editor treatment: line numbers, dim separators, mono glyphs |
+| Buttons | Border-only (no filled background) with `>` prompt cursor |
+| Active elements | Soft phosphor glow (≤12%) behind the element |
+| Dividers | `-` repeated characters (like `------------------`) or ASCII rule lines |
+
+**No decorative cards.** Panels only exist where a real terminal would have a window — data blocks, log viewers, input lines. Everything else sits directly on the near-black ground.
+
+---
+
+## Texture Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Blurred/depth-of-field textures | Crisp scanlines, hard-edged grids, sharp glyphs |
+| Organic gradients and blobs | Technical grids, radial phosphor bleed, linear hairlines |
+| Glassmorphism / frosted panels | Opaque terminal chrome with hairline borders |
+| Busy animated backgrounds | Static textures; motion reserved for data and status |
+| Rounded soft corners everywhere | Small radii (2-4px) or square — machine precision |
+| Photographic backgrounds | Near-black ground with grid, scanline, and glow layers |
+| Decorative fonts as texture | ASCII art and monospace glyph blocks |

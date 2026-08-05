@@ -1,0 +1,143 @@
+# Exact Replica Prompt — Dark Tech Terminal
+
+> Copy this entire prompt and paste it into your AI coding assistant.
+
+---
+
+```
+Build a dark tech terminal page for "PHOSPHOR" — a developer observability platform. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `PHOSPHOR — Mission control for your infrastructure`.
+
+Vibe: Near-black backgrounds with precise technical typography. Neon or electric accent colors on interactive elements. Mission control interface crossed with hacker's workstation. Data-dense but controlled — every pixel looks like it belongs inside a running terminal.
+
+---
+
+## ANTI-SLOP CONSTRAINTS
+
+- NO warm colors (near-black + single neon accent only)
+- NO serif fonts (monospace data + geometric sans headlines)
+- NO organic shapes (grid-locked, angular, technical)
+- NO playful motion (typing, caret blinks, glow pulses — mechanical, not playful)
+- NO rounded pill UI (terminal windows have square corners)
+- NO gradient meshes (flat near-black ground with glow accents)
+- NO white page background (ground is #0A0F0F)
+- NO photographic texture (noise/grain + scan-lines only)
+- NO full rainbow of neon (one accent at a time: cyan, electric green, or amber)
+- NO casual sans-serif body copy (body stays monospace — it IS the interface voice)
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Archivo:wght@500;700&display=swap
+```
+
+Usage:
+- **JetBrains Mono 500/700**: All data, code, labels, and body copy — `clamp(0.75rem, 1vw, 0.875rem)`, line-height 1.5
+- **Archivo 700**: Display headlines — `clamp(1.5rem, 3vw, 2.5rem)`, uppercase, tracking 0.05em
+- **JetBrains Mono 400 UPPERCASE**: Terminal labels — 10-12px, tracking 0.15em
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --ground: #0A0F0F;             /* Near-black base */
+  --ground-raised: #0F1616;      /* Terminal window / card surface */
+  --accent-cyan: #00D4FF;        /* Neon cyan accent */
+  --accent-green: #33FF66;       /* Phosphor green (alt) */
+  --accent-amber: #FFB000;       /* Amber (alt) */
+  --text-primary: #E6EDEA;       /* White text */
+  --text-muted: rgba(230, 237, 234, 0.55);
+  --line: rgba(0, 212, 255, 0.15); /* Grid / border lines */
+}
+```
+
+Body: `bg-[#0A0F0F] text-[#E6EDEA] antialiased font-mono overflow-x-hidden`.
+
+---
+
+## STRUCTURE
+
+### 1. Hero Section — Terminal Window
+- `min-h-[100dvh]`, terminal-window framing: title bar with three traffic dots + path `user@phosphor:~/monitor`
+- Scan-line overlay across the full hero (repeating linear-gradient, 3px period, 4% opacity)
+- Left-aligned, technical margins (monospace grid, 12-column)
+- Content:
+  - Status line: `[ OK ] PHOSPHOR OBSERVABILITY v2.4 — UPTIME 99.99%` — JetBrains Mono 400, 12px, text-muted
+  - Headline: "MISSION CONTROL FOR YOUR INFRASTRUCTURE" — Archivo 700, `clamp(1.5rem, 3vw, 2.5rem)`, uppercase, text-primary
+  - Typed line: `> deploying observer agents to 1,284 nodes...` — typed-text effect, 40ms/char, blinking caret (1s block blink) in accent-cyan
+  - Subtext: "Watch every service, log, and latency spike from one near-black console." — JetBrains Mono 400, text-muted, max-width 480px
+  - CTA: "INITIATE MONITORING" — square corners, 1px accent-cyan border, phosphor glow on hover, uppercase mono 12px tracking 0.15em
+
+### 2. Metrics Section — Data Dashboard
+- Grid-locked: 12-column monospace grid, left-aligned with technical margins
+- 3-4 metric cards framed as terminal windows (title bar + dots, `#0F1616` surface, 1px `--line` border, square corners)
+- Each card: label (mono uppercase 10px, tracking 0.15em, text-muted) + live value (mono 500, accent-cyan) + sparkline or ASCII-art bar
+- One card logs entries printing in with terminal-style reveals (staggered, 150ms apart)
+
+### 3. Features Section — Code-Editor Aesthetic
+- Split: code block (left) + feature copy (right)
+- Code block framed as editor: gutter with line numbers, `>` prompt lines, syntax highlighted with accent-cyan on keywords
+- Feature list items prefixed with `[ OK ]` or `>` glyphs — each with 2-3 sentences of mono body copy
+- Headline per feature: Archivo 700, uppercase, text-primary
+
+### 4. ASCII Art Footer
+- ASCII art mark (e.g., `>>-PHOSPHOR-<<` or a small character glyph) as the logo divider
+- `PHOSPHOR © 2026 — MONITOR EVERYTHING` — JetBrains Mono 400, uppercase, tracking 0.15em, 12px, text-muted
+- Subtle glow pulse (2s) on the ASCII mark, near-black ground, grid line top border
+
+---
+
+## TEXTURE & MOTION
+
+```css
+.scanlines {
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.25) 3px
+  );
+}
+
+.glow {
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.7);
+}
+```
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Terminal window | opacity 0→1 + translateY(16px)→0 | 600ms | `ease-out` |
+| Headline | opacity 0→1 | 400ms | `ease-out` (delay 200ms) |
+| Typed line | characters print 40ms each | variable | linear |
+| Caret | opacity 1→0 blink | 1s | `steps(1)`, infinite |
+| Metric values | count-up on view | 800ms | `ease-out` |
+| Log entries | terminal-style reveals | 150ms stagger | `ease-out` |
+| Accent elements | glow pulse (text-shadow/box-shadow) | 2-3s | `ease-in-out`, infinite |
+| Noise/grain overlay | static (no animation) | — | — |
+
+`prefers-reduced-motion: reduce` → instant typing (full text), static caret, no glow pulses.
+
+---
+
+## ANTI-SLOP (LOCKED)
+
+- Near-black ground (#0A0F0F) — never white, never light gray
+- Single neon accent (cyan #00D4FF / electric green / amber) — one at a time
+- Monospace for all data, code, labels, and body copy
+- Geometric sans (Archivo/Aeonik) for headlines only
+- Scan-line and/or subtle noise texture
+- Terminal window framing with title bar + traffic dots
+- Typed-text effects with blinking caret
+- ASCII art as decoration/dividers
+- Grid-locked, dashboard-density layout
+- Phosphor glow on accents, not blurry borders
+- No warm colors, no serif fonts, no organic shapes, no playful motion
+
+---
+
+Recreate this page with the exact dark tech terminal aesthetic, terminal-window framing, monospace data, and neon cyan accent above.
+```

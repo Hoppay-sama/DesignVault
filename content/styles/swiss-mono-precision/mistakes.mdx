@@ -1,0 +1,69 @@
+# Common Mistakes
+
+## Mistake 1: The Fake Grid
+
+**What people do:** Draw a 12-column grid overlay, then place content on it loosely — blocks justified by eye, rules that don't pass through shared rails, margins that land on odd pixel values.
+
+**Why it fails:** The grid is the composition. If content does not actually align to the drawn grid, the structure reads as decoration — a "grid pattern" pasted over a normal layout. The viewer's eye catches misalignments as sloppiness, which is the one thing this style cannot survive.
+
+**Fix:** Every element justifies to a real rail. Check column edges in the browser at 4x zoom; if a block's edge doesn't land on an 8px multiple, it is wrong. If you can't justify an element, don't draw the grid over it — remove the element.
+
+---
+
+## Mistake 2: Grid Rigidity Without Purpose
+
+**What people do:** Conform to the 12-column grid mechanically — every section identical, every block stretched to fill, no asymmetry, no hierarchy. "The grid says so" becomes the entire rationale.
+
+**Why it fails:** Discipline without decision is boredom. The grid is a system for making choices, not a template for avoiding them. A page where every section looks the same has no composition — it has a cage. Swiss work is asymmetric-but-derived, and the derivation is the design.
+
+**Fix:** Use the grid to justify deliberate deviations: an offset block that proves its offset, a column deliberately empty, a red rule that marks the active rail. The grid earns its authority by supporting exceptions that are mathematically justified.
+
+---
+
+## Mistake 3: Decorative Monospace Without a System
+
+**What people do:** Set the site in IBM Plex Mono because "it looks technical" — then use arbitrary sizes, unaligned line lengths, mixed weights, and no scale. The mono is a costume, not a register.
+
+**Why it fails:** Monospace only means precision if the rest of the system is precise. Fixed-width glyphs expose every inconsistency: ragged line lengths, columns that don't line up, hierarchy by size proliferation. Without the grid, scale, and tabular discipline, mono reads as a tech meme, not an instrument.
+
+**Fix:** Build the system first — modular scale, 8px unit, tabular figures, strict line lengths (45-70 characters). Then the mono earns its place. One family at 300/400/500; the grotesque escape only where a human voice is needed.
+
+---
+
+## Mistake 4: Misaligned Hairlines
+
+**What people do:** Add 1px rules as "Swiss details" — placed arbitrarily, not on column edges, sometimes blurry or half-offset.
+
+**Why it fails:** A hairline is a statement of exactness. A rule that misses its rail by 1px is not structure — it is a crack. Hairlines also blur at fractional DPR scales (e.g., 1.25x zoom), turning crisp structure into soft fuzz, which reads as cheap.
+
+**Fix:** Draw rules only on computed positions — column edges, section breaks, table borders. Ensure 1px renders crisply (integer device-pixel alignment; physical-pixel adjustments where needed). The faint blueprint ruling (25% opacity) is the underlay; the strong rule (85%) is content structure — never confuse the two.
+
+---
+
+## Mistake 5: Cold Sterility
+
+**What people do:** Take the restraint so far that the page becomes a beige-on-gray spreadsheet — no accent, no voice change, no moment of contrast. Everything is perfectly aligned and completely dead.
+
+**Why it fails:** Precision without contrast is sterile, not authoritative. The style's power comes from the *difference* between the machine register and the human moments — the single red figure, the grotesque pull quote, the whitespace pause. Without those moments, precision has nothing to be precise *about*.
+
+**Fix:** Engineer at least one human moment per viewport: a functional red accent, a grotesque escape for a quote or metric, an intentionally empty column. Restraint is the baseline, not the ceiling — the design should feel *chosen*, not defaulted.
+
+---
+
+## Mistake 6: Mono Legibility Failures
+
+**What people do:** Set long body copy in monospace without discipline — 90-character lines, no tabular figures, dense blocks with no hierarchy, numeric columns that don't align.
+
+**Why it fails:** Mono body text is harder to read than grotesque — that difficulty is only acceptable when it is the point. Long unbroken lines tire the eye; misaligned numbers make the "precision" claim visibly false; uniform density removes the annotations that give the page its drawing-sheet character.
+
+**Fix:** Strict line lengths (45-70 characters — count real columns). Tabular figures in every numeric column. Line height 1.5-1.6, tight. Demote annotations to the micro register (10-12px, uppercase, wide tracking 0.12em-0.2em). Hierarchy comes from weight, case, and tracking — never from size proliferation.
+
+---
+
+## Mistake 7: Decorative Red
+
+**What people do:** Use the Swiss red everywhere because it's the one allowed accent — red buttons, red borders, red labels, red highlights. The accent becomes a theme.
+
+**Why it fails:** Red is the instrument of *this one thing matters* — an active column, a changed figure, a validated state. If everything is marked, nothing is marked. A page with red scattered across it reads as marketing, not measurement; the single-accent discipline is what makes the accent mean anything.
+
+**Fix:** One red element per viewport maximum, always functional: the active filter, the changed value, the live indicator. If you need a second red, ask what the first one is doing — one of them is decoration. The red rule (`#E4002B`) marks the system's active state; everything else stays black, ink, and paper.

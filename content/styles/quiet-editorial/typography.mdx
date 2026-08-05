@@ -1,0 +1,80 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Refined serif — literary, editorial, quietly confident |
+| **Examples** | Newsreader, Source Serif 4, Spectral, Fraunces (low optical size), Charter |
+| **Weight** | 400-500 (regular to medium — never bold, never thin-display) |
+| **Tracking** | -0.01em to 0.01em (normal, unforced) |
+| **Size** | 32-48px (moderate — `clamp(2rem, 4vw, 3rem)`) |
+| **Line Height** | 1.15-1.25 |
+| **Transform** | Sentence case, never uppercase for display |
+
+**Why refined serif:** Serifs carry the longform editorial register — the same typography as a respected print publication. Fraunces and Newsreader signal "written and edited by people who read", without the loudness of display serifs like Didot. The serif is the one element allowed a touch of personality, because it IS the voice of the content.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Clean sans-serif — invisible, high-legibility workhorse |
+| **Examples** | Inter, Geist, Graphik, Public Sans |
+| **Weight** | 400 (regular — no light weights, this is reading text) |
+| **Tracking** | 0 (normal) |
+| **Size** | 16-18px — `clamp(1rem, 1.25vw, 1.125rem)` |
+| **Line Height** | 1.6-1.8 (generous — the signature of this style) |
+| **Max Width** | 65ch (the other signature — hard limit, never exceeded) |
+
+**Why sans body with serif display:** The pairing is the editorial standard — a confident serif headline pulls the reader in, an invisible sans carries the long read without drawing attention to itself. Light weights are banned: at longform lengths, thin text strains the eye. Regular at 1.7 line height on cream is the Quiet Editorial reading experience.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same sans family as body, small and quiet |
+| **Examples** | Inter Regular, Geist Regular |
+| **Weight** | 400 |
+| **Tracking** | 0.08em-0.12em (slightly open — readable, not theatrical) |
+| **Size** | 11-12px |
+| **Transform** | UPPERCASE, sparingly — only for section rules, bylines, meta |
+
+**Usage:** Article meta, bylines, section labels, page numbers. These labels should look typeset, not designed — like the running heads of a magazine: "ISSUE 04 — SECTION 02". If a label needs explaining, it's too decorative.
+
+---
+
+## Type Scale
+
+```
+Display:  32-48px, serif, weight 400-500   — clamp(2rem, 4vw, 3rem)
+Subhead:  20-24px, serif or sans, 400      — clamp(1.25rem, 1.5vw, 1.5rem)
+Body:     16-18px, sans, weight 400        — clamp(1rem, 1.25vw, 1.125rem)
+Small:    14px, sans                       — captions, footnotes
+Micro:    11-12px, uppercase, wide tracking — meta, labels
+```
+
+**The scale is compact and contiguous.** No jumps larger than 1.5x between steps. Hierarchy comes from size contrast and whitespace — typography is this style's dominant axis (3/6), so it must feel deliberately set, like a page of type, not a dashboard of components.
+
+---
+
+## Typographic Rules
+
+| Rule | Specification |
+|------|---------------|
+| **Line length** | 65ch max — never wider, in any container |
+| **Leading** | 1.6+ for body, always |
+| **Whitespace** | Generous margins; vertical rhythm at 1.5x body size |
+| **Bold** | Only for emphasis inside long text, never for whole headlines |
+| **Readable** | 400 weight floor — no light/ultralight body text |
+
+---
+
+## Font Pairing Logic
+
+**Serif display + sans body:** The serif (Newsreader, Source Serif 4, Spectral) speaks first — headline, pull quote, lede. The sans (Inter, Geist, Graphik) carries everything else. Two voices with a clear hierarchy, both calm, neither decorative.
+
+**Never:** Decorative or script fonts (the page is quiet, not playful), monospace (too technical for editorial), display sans for headlines (loses the literary register), ultra-light weights (breaks longform readability), or more than two families (two is already a lot).

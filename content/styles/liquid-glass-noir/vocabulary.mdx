@@ -1,0 +1,77 @@
+# Vocabulary Bank
+
+## Primary Terms
+
+| Term | Why It Matters |
+|------|---------------|
+| `glassmorphism` | The core visual language — translucent, blurred surfaces over color |
+| `backdrop blur` | The frosted effect itself — `backdrop-filter: blur()` on glass panels |
+| `frosted panel` | A translucent, blurred surface carrying content above the video |
+| `liquid-glass border` | The signature 1px inset gradient border via mask-composite — the edge refraction |
+| `noir lighting` | Hard key light, deep shadows, cinematic darkness — the mood of the ground |
+
+---
+
+## Secondary Terms
+
+| Term | Effect |
+|------|--------|
+| `specular highlight` | The bright glint at the light-facing edge of a glass pane |
+| `refraction` | Light bending through glass edges — simulated by the inset border gradient |
+| `Z-depth` | The distance of a panel above the video, expressed in blur and shadow intensity |
+| `mask-composite` | The CSS technique (mask-composite: exclude) that keeps the border gradient on the 1px edge |
+| `iridescence` | The subtle color shift as light moves across the glass surface |
+| `glass border` | The 1px outer border, `rgba(255,255,255,0.1)` |
+| `glass tint` | The near-invisible panel fill, `rgba(255,255,255,0.05)` — the blur does the work |
+| `scrim layer` | A darkened overlay behind text-heavy panels to guarantee readability |
+| `floating chip` | A small, isolated glass element at high Z-depth — an accent, not a container |
+| `translucent text` | White text at 50-100% opacity on glass — primary, secondary, muted steps |
+
+---
+
+## Context Terms
+
+| Term | Mood |
+|------|------|
+| `noir` | Dark, moody, cinematic — shadows and single light sources |
+| `cinematic video ground` | The dark, slow-moving video the glass floats above |
+| `spatial depth` | Panes visibly floating at different heights over the video |
+| `Vision Pro aesthetic` | The reference point — translucent glass over spatial video |
+| `dark elegance` | Near-black ground + white glass — no purple, no cream |
+| `premium restraint` | The glass is the accent; color is withheld |
+
+---
+
+## Banned Terms
+
+| Term | Why It Breaks the Style |
+|------|------------------------|
+| `purple glow` | The cliché of every AI website — banned explicitly |
+| `cream / warm panels` | Fights the noir cold-dark ground |
+| `heavy blur (40px+)` | GPU-heavy, destroys performance |
+| `flat glass` | Glass without iridescence or light is a gray rectangle |
+| `uniform blur` | Same blur on every panel kills Z-depth |
+| `identical cards` | Repetitive frosted rectangles — template slop |
+| `opaque panels` | Glass is always translucent |
+| `solid color sections` | The video is the background — no solid breaks |
+| `saturated palette` | White and one subtle blue only |
+| `gold accents` | Warm metal against noir glass reads cheap |
+
+---
+
+## Prompt-Ready Phrases
+
+```
+"dark video background — noir atmospherics, smoke, water, slow city light"
+"frosted glass panels with backdrop-filter blur(16-20px) saturate(1.2)"
+"liquid-glass border — 1px inset gradient via mask-composite: exclude"
+"specular highlights at the light-facing edge of each pane"
+"iridescent sheen — slow light sweep across the glass surface (2-4s)"
+"Z-depth layering — near panels blur(24px), far panels blur(12px)"
+"glass tint rgba(255,255,255,0.05) — the blur does the visual work"
+"white text on glass with scrim layers for contrast"
+"clean geometric sans (Inter Tight/Satoshi/Geist) at 500-600 weights"
+"no purple, no cream — pure dark elegance with white glass"
+"asymmetric floating panels — not a uniform card grid"
+"spatial depth — panels cast soft shadows and float over the video"
+```

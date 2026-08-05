@@ -1,0 +1,130 @@
+# Layout Grammar
+
+## Grid System
+
+**No visible grid.** The layout is asymmetric and Z-stacked: floating glass panels over a dark video background. Internally:
+
+- Full-bleed sections: 100vw width, `min-h-[100dvh]`
+- Panel grid: 12-column, but panels deliberately break column lines (offset, overlapping)
+- Text containers: max-width 520-640px on glass
+- Panels: placed at asymmetric offsets — never a symmetric 2×2 card grid
+- Z-depth: 3 layers (back 12px blur / mid 20px blur / front 24px blur)
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | Full viewport — `min-h-[100dvh]` |
+| Background | Dark video (0.85 opacity) over `#0A0A0A`, no light bleed |
+| Glass panel | One large frosted panel, offset left/right, never centered |
+| Text position | Inside the glass panel, asymmetric (bottom-left of the pane) |
+| Headline size | `clamp(2rem, 5vw, 4rem)` — clean geometric sans, 500-600 weight |
+| Accent | A second small glass card floating behind the hero pane (depth) |
+
+```
+┌─────────────────────────────────────────┐
+│   [Dark background video, 0.85 opacity] │
+│   ┌─────────────────────────┐           │
+│   │  ┌──────────────────┐   │  (back    │
+│   │  │  (small glass    │   │   panel,  │
+│   │  │   card, blur 12) │   │   24px    │
+│   │  └──────────────────┘   │   blur)   │
+│   │                         │           │
+│   │  LIQUID GLASS           │           │
+│   │  Frosted panels over    │           │
+│   │  dark cinematic video   │           │
+│   │  [ENTER]                │           │
+│   └─────────────────────────┘           │
+└─────────────────────────────────────────┘
+```
+
+**The hero is a scene, not a section.** One hero pane, one depth card behind it, one light direction. The video moves; the glass floats; text sits calmly inside the glass.
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(5rem, 14vh, 11rem);
+--panel-max-width: 640px;
+--edge-margin: clamp(1.5rem, 4vw, 4rem);
+--panel-gap: clamp(1.5rem, 3vw, 3rem);
+--z-back: 10;    /* blur 12px  */
+--z-mid: 20;     /* blur 20px  */
+--z-front: 30;   /* blur 24px  */
+```
+
+**Spacing is generous and cinematic.** Panels float with dark space between them — the noir void is a feature. Density is balanced (3/6): layered cards, not sparse, but never crowded.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Floating Glass Panel
+```
+┌─────────────────────────────────────────┐
+│  [Dark video background]                │
+│        ┌───────────────────┐            │
+│        │  Glass panel      │            │
+│        │  (blur 20, offset)│            │
+│        │  text inside      │            │
+│        └───────────────────┘            │
+│                    (shadow beneath)     │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 2: Layered Depth (Hero)
+```
+┌─────────────────────────────────────────┐
+│  [Dark video background]                │
+│     ┌────────────────────────┐          │
+│     │  ┌──────────────┐      │          │
+│     │  │ small back   │  front pane     │
+│     │  │ card (12px)  │  (24px blur)    │
+│     │  └──────────────┘      │          │
+│     └────────────────────────┘          │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 3: Offset Panel Row
+```
+┌─────────────────────────────────────────┐
+│  [Dark video background]                │
+│  ┌──────────┐            ┌───────────┐  │
+│  │ Panel A  │            │ Panel C   │  │
+│  │ (offset  │   ┌────┐   │ (offset   │  │
+│  │  left)   │   │ B  │   │  right)   │  │
+│  └──────────┘   └────┘   └───────────┘  │
+│      (12px)     (20px)      (12px)      │
+└─────────────────────────────────────────┘
+```
+
+**Panels overlap or offset — they never align into a strict grid.** Asymmetry (layout axis 3/6) is what keeps this from becoming a template.
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Full floating panel compositions, 3 Z-depths, video full-bleed |
+| **Tablet (768px)** | Panels stack, reduce to 2 Z-depths, keep offset alignment |
+| **Mobile (375px)** | Single panel per section, full-width; panel blur 16px (performance); video dimmed to 0.9 for readability |
+
+**On mobile:** backdrop-filter is expensive — cap blur layers at 2 and keep blur ≤ 16px. Panels become full-width sheets; the offset asymmetry survives through horizontal margins, not overlap.
+
+---
+
+## Layout Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Symmetric card grids | Offset, overlapping floating panels |
+| Centered everything | Asymmetric placement with one dominant pane |
+| Opaque containers | Translucent glass with blur |
+| Flat panels with no depth | 3 Z-layers with varied blur |
+| White/light backgrounds | Dark video over `#0A0A0A` |
+| Panels that touch | Dark void space between panels (shadow + gap) |
+| Uniform panel sizes | One dominant pane + smaller supporting cards |

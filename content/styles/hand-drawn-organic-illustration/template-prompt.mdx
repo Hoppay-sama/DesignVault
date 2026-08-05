@@ -1,0 +1,142 @@
+# Parameterized Template — Hand-Drawn / Organic Illustration / Human Mark
+
+> Use this template to generate a hand-drawn illustration page for YOUR brand.
+
+---
+
+```
+Build a hand-drawn illustration page for "[BRAND_NAME]" — [ONE-LINE DESCRIPTION, e.g., "an independent stationery studio selling hand-printed cards"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: Visible human hand as counter-signal to AI-generated perfection. Wobbly lines, imperfect shapes, visible brush strokes. Not childish — sophisticated illustration with intentional imperfection. A declaration of human authorship.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY)
+
+- NO AI-generated imagery (hand-drawn line art, doodles, and sketches only)
+- NO perfect geometric shapes (every line wobbles, every shape closes imperfectly)
+- NO corporate polish or digital precision (visible media texture everywhere)
+- NO smooth, mechanical motion (gentle wobble and draw-on only)
+- NO grid-bound layouts (illustrations break out of containers)
+- NO flat solid-color fills (pencil grain, watercolor bleed, marker streaks, ink splatter)
+- NO perfectly straight rules and borders (hand-drawn dividers only)
+- NO digital/UI-perfect typography (handwritten or humanist display type)
+
+---
+
+## FONTS
+
+Replace [DISPLAY_FONT] with a handwritten or humanist typeface:
+- Caveat (500-700) — quick, confident pen look
+- Patrick Hand — casual, humanist handwriting
+- Kalam (400-700) — heavier, marker-like
+- Gochi Hand — playful, irregular
+
+Load via Google Fonts. Use the handwritten face for display headlines and subheads, and a clean sans (Inter 400-500) for body. The type hierarchy is: hand-written display, hand-written emphasis, clean body.
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --paper-cream: #FAF6EF;       /* Paper base */
+  --ink-charcoal: #2B2622;      /* Warm charcoal ink */
+  --terracotta: #C65D3B;        /* Warm earthy accent */
+  --ochre: #C98A2D;             /* Earthy gold */
+  --sage: #8A9B7E;              /* Muted green */
+  --cobalt: #2E5F9E;            /* Bold marker accent */
+  --vermillion: #D94F2B;        /* Bold marker accent */
+  --lemon: #E8C531;             /* Bold marker accent */
+  --ink-muted: rgba(43, 38, 34, 0.62);
+}
+```
+
+**Palette guidance:** Choose a warm earthy base (terracotta, ochre, sage, cream, charcoal) and add one or two bold marker accents (cobalt, vermillion, lemon). Keep the background paper-cream with charcoal ink — this is a page drawn on paper.
+
+---
+
+## STRUCTURE
+
+### Hero
+- `min-h-[100dvh]`, cream paper background with subtle grain
+- Large hand-drawn illustration breaking out of its container
+- Text slightly rotated, asymmetric: label + headline + subtext + CTA with hand-drawn underline
+
+### Portfolio (3-4 works)
+- Asymmetric grid — illustrations break out of their cards at different angles
+- Each card: hand-drawn thumbnail + irregular hand-drawn SVG border
+- Hand-drawn dividers (SVG squiggles) between sections
+
+### Process / About
+- Split: hand-drawn sketch or diagram + text
+- Hatched fills and loose line art, not flat graphics
+
+### Footer
+- Cream paper, charcoal text, small hand-drawn doodle beside the copyright line
+
+---
+
+## HAND-DRAWN UI
+
+```css
+.draw-border {
+  border: none;
+  position: relative;
+  filter: url(#wobble); /* SVG turbulence on the stroke */
+  stroke: #2B2622;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  fill: rgba(255, 255, 255, 0);
+}
+
+.wobble {
+  animation: wobble 3s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes wobble {
+  0%, 100% { transform: rotate(-0.6deg) translate(0, 0); }
+  50% { transform: rotate(0.6deg) translate(1px, -1px); }
+}
+```
+
+---
+
+## ANIMATIONS
+
+- Hero illustration: stroke draw-on (stroke-dasharray), 2000ms, ease-out
+- Text: opacity 0→1 + translateY, 900-1200ms, ease-out (staggered delays)
+- Doodles & accents: subtle wobble, 3s, infinite
+- Illustrations: breathing scale(1)→(1.01), 6s, infinite
+- CTAs: wobble on hover, hand-drawn underline draws in
+
+`prefers-reduced-motion: reduce` → disable all wobble/breathing/draw-on, instant entrance.
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- Hand-drawn or illustrated elements throughout (no AI-generated imagery)
+- Visible media texture — pencil grain, watercolor bleed, ink splatter, marker streaks, eraser marks
+- Organic, imperfect shapes with varied line weight
+- Warm earthy palette with bold marker accents
+- Gentle, organic motion — draw-on, wobble, breathing; nothing mechanical
+- Layout follows the illustration, not the grid
+- Handwritten or humanist display type with clean sans body
+- Marginalia and sketch notes as design elements
+- No perfect geometric shapes, no corporate polish, no digital precision
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines:** 4-8 words. Warm, crafted, human. "Made by hand, on purpose" not "Premium Print Products."
+
+**Body text:** 1-2 sentences. Plain-spoken and warm. Write like a maker introducing their work, not a marketing pitch.
+
+**Imagery:** Hand-drawn (SVG line art, Procreate, physical ink scanned in). Wobbly lines, varied line weight, hatching, doodles. Watercolor washes or marker accents in earthy or bold colors. Ink splatter and eraser marks welcome. Paper texture underneath everything.
+```
+
+Replace all [BRACKETED] placeholders, then paste into your AI coding assistant.
+```

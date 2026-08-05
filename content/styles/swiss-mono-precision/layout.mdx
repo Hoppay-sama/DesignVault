@@ -1,0 +1,114 @@
+# Layout Grammar
+
+## Grid System
+
+**The 12-column grid is the composition.** No layout decision exists outside it. Every block, rule, and text column lands on an 8px base unit; every column edge is a shared rail that elements must justify to.
+
+- 12-column grid (16-column permitted for data-dense views), 8px base unit
+- Gutters: 16px (2 × 8px) minimum; margins derived mathematically, never arbitrary
+- Content max-width: 1200px (12 × 72px columns + 11 × 16px gutters, locked to the scale)
+- Hairline rules (1px) drawn exactly on column edges — they quote the grid, they do not decorate it
+- Asymmetry permitted but derived: an offset block must justify to a grid rail, with the justification visible
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | Full viewport — `min-h-[100dvh]` |
+| Background | Paper white `#FAF9F7` or engineering black `#101010` — flat, no imagery |
+| Layout | 12-column grid, content locked to the left rail |
+| Headline size | `clamp(2rem, 5vw, 4.5rem)` — monospace, uppercase identifier |
+| Structure | Hairline rules + a single red accent (active column, coordinates) |
+
+```
+┌───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┬───────┐
+│                                                                                               │
+│  SEC. 01 / GRID SYSTEM          │                        [hairline rule]                      │
+│                                                                                               │
+│  SWISS MONO                      │                                                            │
+│  PRECISION                       │  [red rule — active column]                                │
+│  The grid is the                 │                                                            │
+│  composition.                    │                                                            │
+│                                                                                               │
+│  REF. 001 — 08.05.2026          │  X: 04 / Y: 02                                              │
+│                                                                                               │
+└───────────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+**The hero is the grid made visible.** The headline prints on the paper field, dimension annotations sit in the opposite gutter, one red rule marks the active column. Nothing floats, nothing is centered by eye — every element is at a computable position.
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(4rem, 12vh, 10rem);  /* multiple of 8px, locked */
+--content-max-width: 1200px;                     /* 12 columns + gutters */
+--edge-margin: clamp(2rem, 4vw, 4rem);           /* margin = gutter multiple */
+--base-unit: 8px;                                /* every offset is n × 8px */
+```
+
+**Whitespace is the architectural element.** Generous margins separate sections like panels on a drawing sheet. Spacing never "feels" right — it is computed from the base unit. If an offset is not a multiple of 8px, it is wrong.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Full-Width Document (Spec Sheet)
+```
+┌──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┬──────────┐
+│ 01 │ LABEL          │  HEADLINE TEXT — LOCKED TO COLUMN RAILS                  │  [hairline] │
+│    ├────────────────┼──────────────────────────────────────────────────────────┼─────────────┤
+│ 02 │ Body column    │  Body column    │  Data table with tabular figures       │             │
+│    │ (45-70 chars)  │  (45-70 chars)  │  REF 042 | 0031 | 0008                │             │
+│    └────────────────┴─────────────────┴────────────────────────────────────────┴─────────────┘
+```
+
+### Pattern 2: Split — Annotation + Content
+```
+┌────────────┬────────────────────────────────────────────────────────────────────────────────┐
+│  SEC. 03   │  Content block — justifies to the shared rail                                   │
+│  TYPOGRAPHY│                                                                                │
+│            │  [hairline rule on the rail — the split is structural, not decorative]          │
+│  REF. 042  │                                                                                │
+└────────────┴────────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Pattern 3: Numbered Index (the numbering system made layout)
+```
+┌────────────────────────────────────────────────────────────────────────────────────────────┐
+│  01 ──────── GRID         05 ──────── MOTION         09 ──────── TEXTURE                     │
+│  02 ──────── COLOR        06 ──────── HIERARCHY      10 ──────── RESPONSIVE                  │
+│  03 ──────── TYPE         07 ──────── DENSITY        11 ──────── ACCESSIBILITY               │
+│  04 ──────── LAYOUT       08 ──────── SPACING        12 ──────── REDUCED MOTION              │
+│  [red rule under the active index — 06]                                                      │
+└────────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | 12 columns; side annotations in outer gutters; hairline rules full-width |
+| **Tablet (768px)** | 8 columns (derived from 12 — never re-drawn ad hoc); annotations collapse into the flow |
+| **Mobile (375px)** | 4 columns; margins shrink to one gutter multiple; rules stay 1px |
+
+**On mobile:** The grid collapses, it does not break. Columns halve in a 12→8→4 sequence; the base unit stays 8px. Headlines shrink along the modular scale, not by eye. If a 12-column feature cannot survive at 4 columns, it is demoted or removed — never squeezed.
+
+---
+
+## Layout Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Card grids with shadows | Flat fields separated by hairline rules |
+| Centered, symmetric layouts | Asymmetric but derived — justified to grid rails |
+| Floating, unanchored elements | Every block on a computed grid position |
+| Arbitrary margins | All spacing = multiples of the 8px base unit |
+| Visible decorative rules | Rules that quote structure — column edges, section breaks |
+| Rounded corners above 2px | Hard-edged fields; 2px max on interactive elements |
+| Imagery as background | Flat paper/engineering surfaces; the grid is the visual |

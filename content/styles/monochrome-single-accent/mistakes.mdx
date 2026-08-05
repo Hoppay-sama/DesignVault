@@ -1,0 +1,59 @@
+# Common Mistakes
+
+## Mistake 1: Accent Creep
+
+**What people do:** Start with one accent color, then extend it — tinted links, accent borders, accent icons, accent section backgrounds, until the "accent" is everywhere.
+
+**Why it fails:** An accent is only loud because the field around it is silent. At 30-50% coverage the accent stops signaling and becomes a theme color — the restraint statement collapses, and the page reads as a badly-themed site rather than a disciplined one. The single accent is the entire point of the style.
+
+**Fix:** Enforce the 15% surface budget. Use the accent in three places only: primary CTA, active state, key data point. Audit every colored pixel: if it isn't one of those three roles, make it gray. Links stay grayscale until hover.
+
+---
+
+## Mistake 2: Low-Contrast Gray-on-Gray
+
+**What people do:** Use mid-gray text (zinc-500/400) on mid-gray surfaces, or muted gray labels everywhere "because it's minimal."
+
+**Why it fails:** Contrast is the thesis of this style. When gray-on-gray mush dominates, the page looks foggy and unfinished rather than minimal — and the accent loses its reference point, because nothing else anchors the eye. Minimal doesn't mean low contrast.
+
+**Fix:** Keep text at 92% opacity near-white/near-black. De-emphasize with the zinc ramp itself: muted labels in zinc-400, secondary text in zinc-200 — each a deliberate step, never an accident. Surfaces should sit 2-3 steps apart on the ramp (zinc-950 ground, zinc-800 panels, zinc-600 hairline borders).
+
+---
+
+## Mistake 3: Boring Flatness
+
+**What people do:** Use pure #000000 and pure #FFFFFF, flat surfaces, no texture — "monochrome means dead."
+
+**Why it fails:** Pure black eats contrast and reads as empty digital void; pure white makes accents and text lose separation. With no grain and no lifted values, the page looks like an unfinished wireframe — restraint without craft. Neutrality is not absence; it's control.
+
+**Fix:** Lift the ground to zinc-950 (#09090B) and the light ground to zinc-50 (#FAFAFA). Add a subtle uniform grain to surfaces. Let the grayscale ramp carry depth — panels, borders, and hairlines build structure without a single pixel of hue.
+
+---
+
+## Mistake 4: Losing the Hierarchy
+
+**What people do:** Keep everything grayscale but make every element the same size and weight — or, conversely, use the accent to label everything important until nothing is important.
+
+**Why it fails:** When the accent is everywhere, emphasis is nowhere. When type is uniform, the page has no reading order. The accent marks the single decision point per section; type weight and size mark everything else. Both systems must work together — color for action, value for structure.
+
+**Fix:** Establish a clear type scale: a strong display weight for the headline, regular for body, mono for technical labels. Reserve the accent for exactly one action per viewport. If a section needs two accents, the hierarchy is broken — strengthen the type, don't add color.
+
+---
+
+## Mistake 5: Decorative Accent Elements
+
+**What people do:** Use the accent for decorative details — accent-colored dividers, accent gradient behind a card, accent dots in a logo row, accent highlights in prose.
+
+**Why it fails:** Every decorative accent trains the eye to ignore color. The beacon effect requires scarcity — when the accent appears 20 times as decoration, the one CTA that should be unmissable is just another colored thing. The accent's power is entirely a function of how rarely it appears.
+
+**Fix:** Apply the strict role test: is this element a CTA, an active state, or a key data point? If no — it stays grayscale. The accent must earn its place; decorative intent is disqualifying.
+
+---
+
+## Mistake 6: Busy Motion
+
+**What people do:** Add entrance animations, parallax, bouncing hover effects, and slide-in reveals to "make the page feel alive."
+
+**Why it fails:** This style is about precision and restraint — motion is the same discipline as color. Animation theater fights the signal: the accent's role is to draw attention to state changes, and it can't do that if everything is in motion. A 600ms springy entrance is as jarring here as a second accent color.
+
+**Fix:** Keep transitions 150-300ms with linear or slight ease — no bounce, no overshoot. Small displacements (2-4px). The accent reveals on hover: gray element, accent state. If a section needs a dramatic animation to feel designed, the static design is failing.

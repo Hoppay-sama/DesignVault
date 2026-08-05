@@ -1,0 +1,86 @@
+# Color Architecture
+
+## Ground
+
+The ground is darkness — the interface lives on near-black surfaces so the data is the brightest thing on screen. This is a cockpit: dark instrument panel, luminous readouts.
+
+```css
+--color-ground-dark: #0A0A0A;     /* Deepest black for page backgrounds */
+--color-ground-panel: #111827;    /* Dark slate for data cards and panels */
+--color-ground-panel-raised: #1F2937; /* Slightly lighter, for hovered/active cards */
+```
+
+**Why dark slate:** Pure black (#0A0A0A) reads as cockpit black; #111827 adds a cool slate undertone that keeps the palette from feeling sterile. Data hues render at their best contrast on near-black — the palette is engineered so series colors pop without needing saturation tricks.
+
+---
+
+## Categorical Data Scale
+
+```css
+--series-01: #1F77B4;   /* Tableau 10 blue — primary series */
+--series-02: #FF7F0E;   /* Tableau 10 orange — secondary series */
+--series-03: #2CA02C;   /* Tableau 10 green — growth/positive */
+--series-04: #D62728;   /* Tableau 10 red — decline/negative */
+--series-05: #9467BD;   /* Tableau 10 purple — categorical */
+--series-06: #8C564B;   /* Tableau 10 brown — categorical */
+--series-07: #E377C2;   /* Tableau 10 pink — categorical */
+--series-08: #7F7F7F;   /* Tableau 10 gray — neutral/reference */
+```
+
+**Each series has a distinct hue.** Series identity comes from a categorical scale (Tableau 10 / Okabe-Ito style), never from lightness alone. When more series are needed, the Okabe-Ito alternatives (#D55E00, #0072B2, #009E73, #CC79A7) extend the family while preserving hue discrimination.
+
+**Rule:** Assignment must be stable and semantic. Green is growth, red is decline, blue is the primary series. Reusing the same hue for two series is a data-error, not a style choice.
+
+---
+
+## Gridlines & Axes
+
+```css
+--color-gridline: rgba(148, 163, 184, 0.15);   /* Subtle slate gray — always present, never loud */
+--color-axis: rgba(148, 163, 184, 0.35);       /* Axis lines and ticks — slightly stronger */
+--color-data-ink: rgba(255, 255, 255, 0.92);   /* Near-white for data labels and annotations */
+--color-gridline-strong: rgba(148, 163, 184, 0.3); /* Emphasis gridlines (major intervals only) */
+```
+
+**Why subtle gridlines:** The grid organizes the data; it should never compete with it. Grid values render at 15% opacity — visible enough to read the scale, faint enough that the chart reads as clean lines on dark, not a pattern.
+
+---
+
+## Text
+
+```css
+--color-text-primary: rgba(255, 255, 255, 0.92);  /* Near-white, for headings and data labels */
+--color-text-secondary: rgba(148, 163, 184, 0.9); /* Slate gray, for labels and axis titles */
+--color-text-muted: rgba(148, 163, 184, 0.6);    /* Faded, for secondary axis ticks and captions */
+```
+
+**Why translucent text:** Text sits on dark panels, not on a white canvas. Slightly translucent blue-gray text (slate #94A3B8 at 60-90%) recedes so data colors stay the visual signal. Full-opacity white is reserved for the data itself and primary headings.
+
+---
+
+## Active Data & Glow
+
+```css
+--color-active-point: #FDE047;              /* Amber highlight — the hovered/focused data point */
+--color-glow: rgba(029, 199, 111, 0.35);   /* Subtle glow wash behind the active point */
+}
+
+--color-clicked-series: #FF7F0E;             /* Series highlight on interaction */
+--color-selected-range: rgba(255, 255, 255, 0.12); /* Brush selection tint across the axis */
+```
+
+**Purpose:** One luminous accent — amber for the single active point — signals "read this now." The glow is a soft radial that sits behind the data, never over it. Every other color stays in the neutral-data family so the active point is unambiguous.
+
+---
+
+## Color Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Light backgrounds (white/off-white) | Dark ground #0A0A0A to #111827 panels |
+| Gradients across chart areas | Flat, categorical, distinguishable hues |
+| More than two hues sharing shape/size | One hue per series — stable, distinguishable |
+| Red-green as the only contrast | Colorblind-safe pairs, plus data ink (labels, lumance cues) with encoded value |
+| Thick, heavy gridlines | Subtle gridlines at 15% opacity |
+| Decorative color blocks | Color that carries data meaning — every hue means something |
+| Muted/pastel data series | High-contrast, distinct-hue series — precision over decoration |

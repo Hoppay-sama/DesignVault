@@ -1,0 +1,136 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Bold Anti-Corporate Color is **bouncy, playful, and slightly chaotic**. Nothing glides, nothing fades politely, nothing holds its position with corporate discipline. Elements pop in with elastic overshoot, wobble when disturbed, and bounce when they land. The motion feels physical — rubber, springs, slinkies — never digital and never polite.
+
+---
+
+## Elastic Pops
+
+```css
+:root {
+  --ease-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);  /* overshoot: goes past, comes back */
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes pop-in {
+  0%   { transform: scale(0.4); opacity: 0; }
+  60%  { transform: scale(1.08); opacity: 1; }
+  80%  { transform: scale(0.96); }
+  100% { transform: scale(1); }
+}
+```
+
+**The overshoot is the personality.** Elastic easing (control points beyond 1.0) makes elements overshoot their resting position then snap back. This is the signature motion of the style — every entrance, hover, and state change gets at least a hint of it. The 60% → 80% dip in `pop-in` is the "rubber band" moment.
+
+---
+
+## Wobble
+
+```css
+@keyframes wobble {
+  0%, 100% { transform: rotate(-2deg); }
+  25%      { transform: rotate(2.5deg); }
+  50%      { transform: rotate(-1.5deg); }
+  75%      { transform: rotate(1.5deg); }
+}
+
+.wobble-on-hover:hover {
+  animation: wobble 0.6s ease-in-out infinite;
+}
+```
+
+**Purpose:** Wobble is the disrespectful cousin of hover states. Titles, stamps, and stickers wobble when disturbed — like a sticker that was just slapped on and hasn't settled. Small rotations (±2-3deg) at fast durations. Never applied to body text or anything with reading content.
+
+---
+
+## Bounce
+
+```css
+@keyframes bounce-y {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+
+.bounce-idle {
+  animation: bounce-y 1.8s var(--ease-bounce) infinite;
+}
+```
+
+**Purpose:** Idle bounce on hero accents, arrows, and stickers — the element keeps nudging itself into view. The bounce should feel playful, never hypnotic: 10-15px of travel, 1.5-2s loops, and never on more than one element per viewport at a time. Chaotic is good; seizure-inducing is not.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Display headline | Pop-in (scale 0.4 → overshoot → 1) | 500ms | `--ease-elastic` | 0ms |
+| Color blocks | Slide-in from left + settle (with 1-2deg rotation) | 600ms | `--ease-bounce` | 100ms |
+| Handwritten accents | Stamp: scale(1.6) → 1 + rotate(3deg) | 300ms | `--ease-elastic` | 200ms |
+| Sticker badges | Pop-in with rotation (rotate(20deg) → -3deg → 0) | 450ms | `--ease-elastic` | 300ms |
+| Body text | Slide-up 16px + fade, hard stop at 100% | 400ms | `ease-out` | 350ms |
+
+**Key:** All durations are FAST (300-600ms). The whole section lands in under a second — that's the energy. Staggered delays create the "collage being assembled in front of you" effect: blocks land one at a time, slightly misaligned.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Buttons | Scale 1.0 → 1.06 with `--ease-elastic`, hard offset shadow flips side | Scale 1.06 → 0.94 (stamp press) |
+| Stickers/badges | Wobble 0.6s + brightness 1.1 | Slight shrink + rotate 2deg |
+| Links | Underline slams in (scaleX 0 → 1, 150ms, no easing) + color swap | Opacity 0.7 |
+| Display headlines | Rotate 0 → -1.5deg + slight scale (1.02) | — |
+| Color blocks | Brightness 1.0 → 1.08 + 2px offset | — |
+
+**All hover transitions are quick (150-300ms) and physical.** Fast = playful here. The opposite of restrained slow fades — interactions should feel like flicking a sticker, not breathing.
+
+---
+
+## Collage Assembly
+
+| Effect | Specification |
+|--------|--------------|
+| Section entry | Color blocks fly in from alternating sides, landing slightly rotated and misaligned (1-3deg) |
+| Overlap reveals | Elements land ON TOP of each other — later blocks over earlier ones |
+| Hand-drawn arrows | Draw-in animation: stroke-dashoffset to 0, 400ms |
+| Rotation settle | Everything that lands rotated settles to its FINAL rotated position (never straightens to 0deg) |
+
+**The collage must not straighten.** When an element lands, it stays at its landed angle — 1-3deg off axis is the resting state, not a transition state. This is what separates "playful" from "broken": the misalignment is the design, not an error.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- Elastic pops: instant (opacity only, no scale overshoot)
+- Wobble: disabled
+- Idle bounce: disabled
+- Collage fly-ins: instant opacity, no travel
+- Draw-in animations: instant full stroke
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| Never | Why |
+|-------|-----|
+| Slow, weightless fades | That's the corporate whisper this style exists to reject |
+| Smooth linear drift | Too polished, too designed, no attitude |
+| Parallax gradients | Holographic marketing energy, not punk print energy |
+| Auto-playing carousels | The user's scroll should have the collage's chaos |
+| Continuous heavy rotation | Motion sickness, not playfulness |
+| Animated everything | One wobbling element per viewport maximum — chaos needs contrast |

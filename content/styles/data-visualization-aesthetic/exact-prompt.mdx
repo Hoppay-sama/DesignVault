@@ -1,0 +1,137 @@
+# Exact Replica Prompt — Data Visualization as Aesthetic / Living Dashboard
+
+> Copy this entire prompt and paste it into your AI coding assistant.
+
+---
+
+```
+Build a data-visualization page for "MERIDIAN" — a fintech performance dashboard. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion + recharts. Page title: `MERIDIAN — Portfolio performance, live`.
+
+Vibe: Charts and metrics as primary visual content. Monospace numbers, precise labels, cockpit density. Data is the hero — every element decodes a number, nothing is decorative.
+
+---
+
+## ANTI-SLOP CONSTRAINTS
+
+- NO decorative charts (every mark must decode data)
+- NO imprecise numbers (tabular figures, proper decimal alignment, exact values)
+- NO non-monospace data (all numbers in a tabular monospace font)
+- NO cluttered layout (cockpit density must stay organized)
+- NO fake/random data (coherent series with meaningful trends)
+- NO 3D, glossy, or skeuomorphic charts (flat, precise, clean)
+- NO smooth gradients (categorical flat colors only)
+- NO missing axes or labels (every chart is fully annotated)
+- NO text-heavy sections (data carries the message — text is annotation)
+- NO serif or rounded display fonts (clean sans for labels, mono for numbers)
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap
+```
+
+Usage:
+- **IBM Plex Mono 500**: ALL numbers and data — KPI values, chart labels, table cells, tick values, with `font-variant-numeric: tabular-nums` for decimal alignment
+- **Inter 500/600**: Labels and headings — 10-11px micro-labels, tracking 0.08em, uppercase
+- **Inter 400**: Supporting body text — 12-13px
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --bg-deep: #0A0A0A;          /* Near-black ground */
+  --bg-panel: #111827;         /* Panel background */
+  --gridline: rgba(255, 255, 255, 0.08);
+  --text-primary: #F3F4F6;
+  --text-muted: #9CA3AF;
+  --text-faint: #6B7280;
+
+  --chart-1: #4E79A7;          /* Tableau blue */
+  --chart-2: #F28E2B;          /* Tableau orange */
+  --chart-3: #E15759;          /* Tableau red */
+  --chart-4: #76B7B2;          /* Tableau teal */
+  --chart-5: #59A14F;          /* Tableau green */
+  --chart-6: #EDC948;          /* Tableau yellow */
+  --chart-7: #B07AA1;          /* Tableau purple */
+  --chart-8: #FF9DA7;          /* Tableau pink */
+}
+```
+
+Body: `bg-[#0A0A0A] text-[#F3F4F6] antialiased font-sans`.
+
+---
+
+## STRUCTURE
+
+### 1. Top Bar
+- Sticky, `bg-[#0A0A0A]/95`, 1px bottom `border-[rgba(255,255,255,0.08)]`
+- Left: "MERIDIAN" — Inter 600, uppercase, tracking 0.2em, 12px
+- Center: live ticker — "MARKET: OPEN / S&P 500 5,482.31 +0.62%" — IBM Plex Mono 500, tabular-nums, ticker number pulses on each update (opacity/translateY flicker, 400ms)
+- Right: "LAST SYNC 09:41:07 UTC" — mono, text-faint, 11px
+
+### 2. KPI Metric Row (4 cards)
+- Grid: 4 columns, cards with `bg-[#111827]`, 1px gridline border, rounded-lg, p-4
+- Each card: label (Inter 500, 10px, uppercase, tracking 0.1em, text-muted) + big number (IBM Plex Mono 600, `clamp(1.75rem, 3vw, 2.5rem)`, tabular-nums) + delta chip (+2.4% in --chart-5, −1.1% in --chart-3, mono, 12px) + sparkline at card bottom
+- Numbers animate with count-up on scroll into view
+
+### 3. Main Chart Section (line chart)
+- Panel card: label row "PORTFOLIO VALUE — 12 MONTHS" + legend (chips with --chart-1..--chart-3 swatches)
+- Line chart via recharts: dark bg, subtle gray gridlines (`rgba(255,255,255,0.08)`), tick values in IBM Plex Mono 10px tabular-nums, axis labels Inter 10px uppercase
+- Line draws left-to-right (pathLength animation, 1200ms, `ease-out`) on scroll into view
+- Active data point: 4px dot with subtle glow (`box-shadow: 0 0 12px <series color>`) following cursor
+- Data labels at series end: mono 11px, `fill: #F3F4F6`
+
+### 4. Bar Chart Row (2 panels)
+- Left: "ALLOCATION BY ASSET CLASS" — 8 bars, each a distinct categorical hue (--chart-1..--chart-8), baseline labels mono 10px tabular-nums
+- Bars animate scaleY from 0 with stagger (100ms per bar, `ease-out`, 800ms total)
+- Right: "MONTHLY RETURN" — small multiples strip: 12 sparklines, one per month, each in its own grid cell with mono value below
+
+### 5. Data Table
+- Full-width panel: columns TICKER / PRICE / 24H % / VOLUME / TREND
+- Price & volume cells: IBM Plex Mono 500, tabular-nums, right-aligned
+- % cells: mono with color-coded sign (--chart-5 green, --chart-3 red)
+- Trend column: 16px sparkline per row, animated draw on mount
+- Row hover: `bg-white/5` highlight, no other chrome
+
+### 6. Footer
+- `bg-[#111827]`, mono 10px text-faint: "MERIDIAN © 2026 — DATA UPDATED LIVE · SOURCE: SIMULATED FEED"
+
+---
+
+## ANIMATIONS
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| KPI numbers | count-up 0 → value (tabular-nums, integer+2 decimals) | 900ms | `ease-out` (staggered 100ms) |
+| Line chart | pathLength 0 → 1, draw left-to-right | 1200ms | `ease-out` |
+| Bars | scaleY 0 → 1 from baseline | 800ms | `ease-out` (stagger 100ms) |
+| Sparklines | pathLength draw on scroll into view | 600ms | `ease-out` |
+| Live ticker | number flicker (opacity 1→0.4→1 + translateY 2px→0) | 400ms | `ease-in-out` |
+| Data points | subtle pulse glow on active point | 2s | `ease-in-out`, infinite |
+| Panel entrance | opacity 0→1 + translateY(8px)→0 | 500ms | `ease-out` |
+
+`prefers-reduced-motion: reduce` → skip all count-ups/draws/glows, render charts at final state instantly.
+
+---
+
+## ANTI-SLOP (LOCKED)
+
+- Charts and metrics are the primary visual content
+- Every number in IBM Plex Mono with tabular figures and decimal alignment
+- Data ink maximized — gridlines subtle, zero chart junk
+- Categorical flat palette (Tableau 10-style), one distinct hue per series
+- Cockpit density: organized grid, information-rich but never cluttered
+- Real-time / scroll-triggered animations: count-up, bar growth, line draw
+- Clean sans labels at 10-11px, precise axes on every chart
+- Dark ground #0A0A0A with panel #111827 and subtle gridlines
+- No decorative charts, no imprecise numbers, no non-monospace data
+
+---
+
+Recreate this page with the exact data-visualization aesthetic, cockpit density, monospace tabular numerals, and animated data transitions above.
+```

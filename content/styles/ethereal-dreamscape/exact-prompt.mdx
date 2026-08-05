@@ -1,0 +1,149 @@
+# Exact Replica Prompt — Ethereal Dreamscape
+
+> Copy this entire prompt and paste it into your AI coding assistant.
+
+---
+
+```
+Build an ethereal dreamscape page for "AERIS" — a luxury wellness brand. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `AERIS — A dream sequence, made weightless`.
+
+Vibe: A scene from a dream. Soft pastel gradients — lavender, blush pink, powder blue, cream — bleed into each other as living gradient meshes. Elements float and drift as if weightless, wrapped in mist and soft glow. Aurora effects ripple slowly in the background. Everything is soft: no hard edges, no sharp contrast, no saturated color. Motion is the star (5/5) — slow, continuous, barely perceptible drift.
+
+---
+
+## ANTI-SLOP CONSTRAINTS
+
+- NO hard edges (everything blurs, diffuses, dissolves)
+- NO sharp contrast (soft pastel palette only)
+- NO grid-locked layout (elements float freely in space)
+- NO bold saturated colors (low-saturation pastels only)
+- NO fast, snappy motion (8-12s drift cycles minimum)
+- NO heavy or bold type (light weights only, generous letter-spacing)
+- NO dense, solid blocks (translucent overlapping layers)
+- NO geometric precision (organic, blurred, cloud-like shapes)
+- NO flat, static backgrounds (gradient mesh IS the environment)
+- NO sharp shadows (soft glow and halation instead)
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=Outfit:wght@300;400&display=swap
+```
+
+Usage:
+- **Outfit 300**: Display headlines — `clamp(1.5rem, 3vw, 3rem)`, sentence case, tracking 0.04em
+- **Outfit 400**: Body text — `clamp(0.875rem, 1vw, 1rem)`, line-height 1.6
+- **Outfit 300 UPPERCASE**: Labels — 10-12px, tracking 0.25em
+
+The text should float, not anchor — light weight, airy spacing, floating placement.
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --lavender: #E6E0F2;         /* Soft lavender */
+  --blush-pink: #F5DEE3;       /* Blush pink */
+  --powder-blue: #DCE7F5;      /* Powder blue */
+  --cream: #FFF8EF;            /* Warm cream */
+  --mint: #DFF0E8;             /* Pale mint */
+  --glow-white: rgba(255, 253, 250, 0.55);   /* Soft glow wash */
+  --text-soft: rgba(70, 66, 92, 0.9);        /* Muted plum-gray for text */
+  --text-faint: rgba(70, 66, 92, 0.45);      /* Dimmed labels */
+}
+```
+
+Body: `bg-[#F2EDFA] text-[rgba(70,66,92,0.9)] antialiased font-body overflow-hidden`.
+
+---
+
+## STRUCTURE
+
+### 1. Hero Section
+- `min-h-[100dvh]`, gradient mesh background (lavender → blush → powder blue → cream, blurred blend)
+- Floating elements: 3-4 soft shapes (blurred circles, mist orbs) drifting at different altitudes, `filter: blur(24px)` + slow float animation
+- Aurora sweep: a low-saturation gradient band (lavender ↔ powder blue) slowly shifting across the background, 18-24s cycle
+- Text floating mid-air (not anchored to a corner):
+  - Label: "AERIS / DREAM SEQUENCE 01" — Outfit 300, uppercase, tracking 0.25em, 12px, text-faint
+  - Headline: "A dream sequence, made weightless" — Outfit 300, `clamp(1.5rem, 3vw, 3rem)`, sentence case, text-soft, soft glow behind text (`text-shadow: 0 0 40px rgba(255,255,255,0.6)`)
+  - Subtext: "Soft pastels, floating mist, and light that never quite lands." — Outfit 400, text-soft, max-width 400px
+  - CTA: "DRIFT IN" — pill button, translucent cream surface, soft glow, gentle float bob
+
+### 2. Gallery Section (3 full-bleed dreamscape panels)
+- Each panel: `min-h-[100dvh]`, its own gradient mesh + fog layers
+- Transitions between panels: dreamlike crossfade (2000ms) through a blurred white mist
+- Per panel: 1 label + 1 headline + 1-2 sentences (translucent, floating)
+- Panels alternate color worlds: lavender/cream, powder blue/blush, mint/cream
+
+### 3. About Section
+- Split: gradient-mesh field with floating elements (left) + translucent text (right)
+- Headline: "Weightless by design" — Outfit 300
+- Body: 2-3 sentences about slowness, softness, and atmosphere as wellness
+- Button: "EXPLORE THE DREAMSCAPE" — translucent pill, soft glow
+
+### 4. Footer
+- Gradient mesh bg, faint text
+- "AERIS © 2026 — DRIFT GENTLY" — Outfit 300, uppercase, tracking 0.2em, 12px, text-faint
+
+---
+
+## SOFT GLOW & MIST
+
+```css
+.glow-wash {
+  background: radial-gradient(ellipse at 30% 20%, var(--glow-white), transparent 60%);
+  filter: blur(16px);
+}
+
+.mist-layer {
+  background: linear-gradient(to bottom, rgba(255,253,250,0.6), rgba(255,253,250,0) 70%);
+  animation: mist-drift 22s ease-in-out infinite;
+}
+
+@keyframes mist-drift {
+  0%, 100% { transform: translateX(-2%) scale(1); opacity: 0.5; }
+  50% { transform: translateX(2%) scale(1.06); opacity: 0.8; }
+}
+```
+
+---
+
+## ANIMATIONS
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Hero gradient mesh | hue/position shift (aurora) | 18-24s | `ease-in-out`, infinite |
+| Floating elements | float: translateY + scale bob | 8-12s | `ease-in-out`, infinite, staggered |
+| Display text | opacity 0→1 + translateY(14px)→0 | 2000ms | `ease-out` (delay 600ms) |
+| Body text | opacity 0→1 | 1500ms | `ease-out` (delay 1000ms) |
+| UI elements | opacity 0→1 + scale(0.98)→1 | 1200ms | `ease-out` (delay 1300ms) |
+| Section transitions | dreamlike crossfade through white mist | 2000ms | `ease-in-out` |
+| Mist layers | mist-drift: translateX + opacity breathing | 22s | `ease-in-out`, infinite |
+| CTA | gentle float bob | 6s | `ease-in-out`, infinite |
+
+`prefers-reduced-motion: reduce` → disable all drift/bob/aurora, instant entrance.
+
+---
+
+## ANTI-SLOP (LOCKED)
+
+- Gradient mesh background — the environment, not a decoration
+- Aurora effect — low-saturation color fields, slow shift (18-24s)
+- Floating elements — weightless drift, nothing grid-locked
+- Soft glow and light leaks — halation instead of shadows
+- Mist/fog layers — atmospheric diffusion between sections
+- Pastel palette only — lavender, blush pink, powder blue, cream
+- Translucent overlapping layers — dreamlike stacked depth
+- Light sans-serif (Outfit 300/400) with generous letter-spacing
+- Slow drift motion (8-12s), gentle parallax, breathing
+- Soft grain over the whole page — unifies the fields
+- No hard edges, no sharp contrast, no saturated color, no fast motion
+
+---
+
+Recreate this page with the exact ethereal dreamscape aesthetic, gradient mesh environment, floating elements, and soft drift motion above.
+```

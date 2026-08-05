@@ -1,0 +1,144 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Dark Tech Terminal is **machine-precise and stateful**. Nothing drifts organically and nothing bounces. Elements appear as if typed, revealed as if a command completed, and pulse only to signal life. The motion language borrows from the terminal itself: typed text, blinking cursors, blocky glitch corrections, and glow that breathes when a process is alive. Every animation must feel like a computer responding to input — deterministic, fast, and purposeful.
+
+---
+
+## Typed-Text Effects
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Hero line | Character-by-character typewriter reveal | 30-45ms per char, ~2s total | `steps(1)` |
+| Terminal output blocks | Line-by-line reveal, left-aligned | 40-60ms per line | `steps(1)` |
+| Data readouts | Charset scramble → settle on real value | 500-800ms | `steps(8)` |
+
+**The typewriter is the signature move.** Text appears one character at a time with a visible caret. Line reveals batch by line, like a script executing. Scramble effects briefly flash random characters before settling — the machine "searching" for the value.
+
+---
+
+## Blinking Cursor
+
+```css
+@keyframes caret-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.caret {
+  width: 0.6em;
+  height: 1.1em;
+  background: var(--accent-phosphor-green);
+  animation: caret-blink 1s steps(1) infinite;
+}
+```
+
+**Purpose:** The caret is the terminal's heartbeat — a blocky phosphor cursor blinking at exactly 1s. It anchors focus: the user always knows where "input" would land. Use it beside typed hero lines, inside fake input prompts, and in live status readouts.
+
+---
+
+## Glow Pulse
+
+```css
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 4px rgba(51, 255, 102, 0.25); }
+  50% { box-shadow: 0 0 12px rgba(51, 255, 102, 0.55); }
+}
+
+.glowing {
+  animation: glow-pulse 2.4s ease-in-out infinite;
+}
+```
+
+**Purpose:** Subtle glow pulses on live status indicators — the "REC" dot, the `●` online marker, the running-process bar. The pulse says *this is alive right now*. Slow (2.4s), low amplitude, never strobing. Static elements do NOT glow; glow is reserved for liveness.
+
+---
+
+## Terminal-Style Reveals
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Panel enter | Clip/width sweep like a terminal window opening | 300-400ms | `ease-out` |
+| Command echo | Text reveals after a simulated `> run` prompt | 150ms delay | `steps(1)` |
+| Section transitions | Horizontal wipe, left-to-right, block edge | 400ms | `steps(6)` |
+
+**The wipe is blocky, not smooth.** Terminal reveals are binary — content appears in hard-edged blocks, like a screen refresh or a page redraw. Avoid soft fades; use clip-path wipes and step easing to keep the machine feel.
+
+---
+
+## Blocky Glitch Motion
+
+```css
+@keyframes glitch-shift {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-2px, 1px); }
+  40% { transform: translate(2px, -1px); }
+  60% { transform: translate(-1px, -1px); }
+  80% { transform: translate(1px, 1px); }
+}
+
+.glitch {
+  animation: glitch-shift 0.25s steps(2) 2;
+}
+```
+
+**Purpose:** Rare, short, hard-edged displacement — the terminal momentarily corrupting. Glitch is an error signal, used on: error states, "breach" moments, corrupted data blocks, system transitions. It fires in a burst (2-4 iterations) and stops. Persistent glitch is noise; burst glitch is alarm.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Buttons | Border brightens 0.25 → 0.6 opacity + cursor becomes `>` | Panel dims 10%, accent glow 0.15 → 0.3 (100ms) |
+| Links | Text brightens + `_` underscore caret appears | — |
+| Status indicators | Tooltip line reveals like typed output (200ms) | — |
+| Terminal rows | Background highlight rgba(51,255,102,0.06) (80ms) | — |
+
+**All hover transitions are fast (80-150ms).** A terminal responds instantly — there is no 500ms dream fade. Speed IS the aesthetic; the machine is fast, precise, and never hesitant.
+
+---
+
+## Subtle System Beeps
+
+| Event | Sound |
+|-------|-------|
+| Successful command | Short high blip (880Hz, 60ms) |
+| Error / blocked | Low buzz (220Hz, 200ms) |
+| Data received | Soft tick (1320Hz, 30ms) |
+
+**Usage:** Sounds are optional and muted by default — a toggle marked `AUDIO: OFF` in the corner. When on, beeps are short square-wave blips at low volume. Never loop sounds. If audio is not implemented, replicate the rhythm visually (a flash on the status bar acts as the "beep").
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- Typed-text effects: reveal instantly (no per-char animation)
+- Blinking cursor: static solid caret (blink removed)
+- Glow pulses: static, no animation
+- Glitch bursts: disabled entirely (replace with color shift)
+- Wipe reveals: instant appearance
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| Never | Why |
+|-------|-----|
+| Bounce or spring physics | Terminals don't bounce — machine motion is linear or stepped |
+| Organic drift / floating | Organic motion belongs to a different style; this is a machine |
+| Soft long fades (500ms+) | Terminal responses are instant; fades feel dreamlike |
+| Continuous background motion | Autoplaying scanlines/glitches distract from the data |
+| Marquees / scrolling banners | Uncontrollable motion violates the operator's command |
+| Playful micro-interactions | No wiggle, no wobble — the machine is serious |

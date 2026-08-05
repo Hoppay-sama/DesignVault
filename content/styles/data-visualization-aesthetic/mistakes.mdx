@@ -1,0 +1,69 @@
+# Common Mistakes
+
+## Mistake 1: Decorative Charts
+
+**What people do:** Use charts purely as visual garnish — a bar chart in the hero that displays invented or meaningless numbers, a sparkline that doesn't correspond to anything.
+
+**Why it fails:** This style's entire premise is DATA AS HERO — the charts are the content, and the audience knows when a chart is fake. A decorative chart is the slop signal of this aesthetic: it reads as "we know dashboards look cool, but we have nothing to show." It destroys the trust the cockpit layout is built to convey.
+
+**Fix:** Real data or nothing. Every chart must plot actual values with a visible axis and unit. If you don't have data for a section, don't draw a chart — use a KPI or metric instead.
+
+---
+
+## Mistake 2: Chart Junk
+
+**What people do:** Add 3D bar charts, gradients, drop shadows, glossy reflections, and excessive gridlines to make charts "pop."
+
+**Why it fails:** The style is built on precision and data-ink ratio — every pixel of ink should carry information. 3D effects, gloss, and heavy chrome make charts feel like Excel 97 exports and destroy the clean, analytical cockpit aesthetic. Dense grids of noisy charts are unreadable at a glance, which defeats the whole point.
+
+**Fix:** Flat, clean charts. Hairline gridlines in subtle gray. Maximum 2-3 gridlines per axis. No 3D, no gradients, no shadows on data. Respect the data-ink ratio: remove anything that doesn't communicate data.
+
+---
+
+## Mistake 3: Misleading Scales
+
+**What people do:** Truncate the y-axis to exaggerate a trend, or let bars start from non-zero baselines so small differences look dramatic.
+
+**Why it fails:** This is the style of precision and honesty — "PRECISION IS BEAUTY" applies to the data itself, not just the numerals. A truncated axis is a lie in a page that promises measurement. It's also instantly suspicious: the audience of an analytical aesthetic is the most likely to notice.
+
+**Fix:** Always start bars from zero. Show the full axis range unless the range is explicitly disclosed. Annotate any scale choice on the chart itself — if you must zoom, say so in the label.
+
+---
+
+## Mistake 4: Rainbow Default Palettes
+
+**What people do:** Use the default categorical palette (blue, red, green, purple, orange) for every series, with color as decoration rather than meaning.
+
+**Why it fails:** The style's color rule is "each series distinct hue" — a semantic labeling system, not a rainbow. Default palettes signal templated data-viz software and make series impossible to track consistently across the page. Color loses its meaning when everything is a different color.
+
+**Fix:** Assign a small, curated categorical scale and keep each series' hue consistent across every chart on the page. Fewer, deliberate hues. Color must identify data, not decorate it.
+
+---
+
+## Mistake 5: Unreadable Data Labels
+
+**What people do:** Set numbers in the same proportional sans as the body text, let decimals misalign, use small lightweight numerals, or drop labels below the legibility threshold.
+
+**Why it fails:** Non-tabular figures jitter as they update — the digits don't stack, so count-up animations look broken. Proportional digits make aligned columns impossible, which kills the precision that IS the beauty. Numbers that can't be read at a glance fail the cockpit test: a pilot can't squint at the instruments.
+
+**Fix:** All numbers in monospace (JetBrains Mono, IBM Plex Mono, Geist Mono) with tabular figures. Right-align numerals, align decimals, keep micro-labels at 10-11px minimum with adequate contrast on the dark background.
+
+---
+
+## Mistake 6: Clutter Without Organization
+
+**What people do:** Pile widgets, charts, and metrics everywhere to hit "cockpit density" — overlapping panels, inconsistent gutters, cards at random sizes.
+
+**Why it fails:** Cockpit density is organized density. Random clutter reads as chaos, and in an information-rich page, chaos means the data can't be trusted or found. The grid is what separates a cockpit from a junk drawer.
+
+**Fix:** Fixed 12-column grid, consistent 12-16px gutters, uniform card padding. Every chart gets a defined position and hierarchy. Dense yes — but every element must have a place it always occupies.
+
+---
+
+## Mistake 7: Static, Lifeless Data
+
+**What people do:** Render charts as inert PNG-style images with no animation, or skip the count-up and line-draw entirely.
+
+**Why it fails:** Motion is axis 4 of this style — live data, scroll-triggered chart animations, sparkline micro-animations, number counting. A frozen dashboard is half the aesthetic: the living, updating quality is what makes it a "Living Dashboard." Static charts feel like a screenshot of the style rather than the style itself.
+
+**Fix:** Animate the data: bars grow on scroll, line charts draw themselves, key metrics count up on load, sparklines pulse with new values. Simulate live updates with smooth interpolation. Honor `prefers-reduced-motion` with static, complete charts.

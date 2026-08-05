@@ -1,0 +1,107 @@
+# Motion Principles
+
+## Philosophy
+
+Ethereal Dreamscape is the slowest style in the system (motion axis: 5). Motion is **weightless drift** — nothing snaps, nothing bounces, nothing is mechanical. Elements float as if gravity doesn't apply, the aurora shifts imperceptibly, and transitions feel like falling asleep — gradual, soft, inevitable. Motion should be felt, not noticed. If a visitor can describe the animation, it's too fast.
+
+---
+
+## Drift Motion
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Floating elements | translateY(0) → translateY(-14px) → 0 | 12-20s | `ease-in-out`, infinite |
+| Hero imagery | Subtle scale(1.0) → scale(1.03) + opacity breathing | 15-25s | `ease-in-out`, infinite |
+| Text blocks | translateY(0) → translateY(-6px) → 0 | 10-16s | `ease-in-out`, infinite |
+
+**The drift must be barely perceptible.** Elements appear to hover, not animate. Different elements drift on different durations and offsets so nothing moves in lockstep — a field of petals, each on its own current.
+
+---
+
+## Aurora / Mesh Animation
+
+```css
+@keyframes aurora-shift {
+  0%, 100% { background-position: 0% 50%, 100% 50%, 50% 100%; }
+  50% { background-position: 100% 50%, 0% 100%, 100% 0%; }
+}
+
+.aurora {
+  background: var(--aurora-mesh);
+  background-size: 200% 200%;
+  animation: aurora-shift 30s ease-in-out infinite;
+}
+```
+
+**Purpose:** The gradient mesh IS the environment — it must be alive. The aurora drifts on a 30s+ cycle, slower than any other motion on the page, so the atmosphere moves beneath everything like weather. It should never speed up or feel mechanical.
+
+---
+
+## Gentle Parallax
+
+| Effect | Specification |
+|--------|--------------|
+| Scroll-linked float | Background mesh shifts 1-3% slower than content — layers, not speed |
+| Floating element depth | Foreground elements drift 2-4% faster than background |
+| Section transitions | Translucent layers crossfade through soft blur (600ms+) |
+
+**The parallax is depth, not speed.** No dramatic skews or fast scroll-velocity effects. The visitor should feel like they're moving through still air with things floating at different depths around them.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Hero | Opacity 0 → 1 + translateY(20px) → 0 | 2000-3000ms | `ease-out` | 0ms |
+| Floating elements | Opacity 0 → 1, drift begins on mount | 2500ms | `ease-out` | 300-900ms |
+| Headlines | Opacity 0 → 1 + translateY(14px) → 0 | 1800ms | `ease-out` | 600ms |
+| Body text | Opacity 0 → 1 | 1500ms | `ease-out` | 1000ms |
+
+**Key:** Entrances are fades with a hint of rise — like objects materializing from mist. Durations are 1500ms minimum. Never stagger more than a couple of elements; choreographed reveals feel rehearsed, not dreamlike.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Links | Color shift through pastel hues (800ms) | — |
+| Buttons | Soft glow bloom, radius soften (1000ms) | Glow intensifies (600ms) |
+| Imagery | Brightness 1.0 → 1.04 (1000ms) | — |
+| Floating elements | Drift amplitude increases slightly (1200ms) | — |
+
+**All hover transitions are 600ms+.** Fast hover states are the quickest way to break the spell — this style's interactions should feel like the page responding in its own slow time.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- All drift: disabled (elements rest static)
+- Aurora/mesh animation: static (single gradient frame)
+- Parallax: disabled
+- Entrance animations: instant opacity
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| Never | Why |
+|-------|-----|
+| Fast or snappy transitions | This is the slowest style in the system — speed breaks the dream |
+| Bounce or spring physics | Gravity doesn't apply here — elements float, they don't bounce |
+| Mechanical, linear motion | Everything eases; drift has no beginning or end |
+| Choreographed staggered reveals | Motion is continuous and ambient, not sequenced |
+| Auto-playing carousels or slideshows | The visitor drifts through at their own pace |
+| Particle fields or confetti | Too digital and busy — the atmosphere is enough |
+| Horizontal or diagonal sweeping | Vertical weightless drift only — sweep is directional, drift is ambient |

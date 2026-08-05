@@ -1,0 +1,150 @@
+# Parameterized Template — Typographic Brutalist / Poster
+
+> Use this template to generate a Typographic Brutalist page for YOUR brand.
+
+---
+
+```
+Build a typographic brutalist page for "[BRAND_NAME]" — [ONE-LINE DESCRIPTION, e.g., "a music label releasing uncompromising records"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: The aggression of a protest poster translated to the web. Oversized raw type IS the design — monumental letterforms dominate the viewport. The grid is drawn, then deliberately broken. High-contrast ink on paper with one stark accent. Design as statement, not decoration.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY)
+
+- NO Inter, Roboto, or Arial as display fonts
+- NO pure #FFFFFF backgrounds or pure #000000 text
+- NO centered hero (left-anchored, edge-bleeding statement only)
+- NO rounded corners above 2px (border-radius: 0 by default)
+- NO gradients, drop shadows, glow, or glassmorphism
+- NO raw unprocessed photography
+- NO more than one accent color
+- NO bounce, spring, or parallax motion
+- NO decorative icons, badges, or illustrations
+- NO card-grid feature sections
+
+---
+
+## FONTS
+
+Replace [DISPLAY_FONT] with a heavy grotesk — type with physical presence:
+- Archivo Black (900) — the default choice, poster pedigree
+- Anton (400 condensed) — packs a full sentence into one massive line
+- Monument Extended (800) — sculptural, expanded letterforms
+- Space Grotesk (700) — modern, sharp, geometric
+
+Body: neutral grotesk (Archivo, Space Grotesk, or Public Sans at 400-500) — quiet enough to let display type shout. Micro labels: monospace (Space Mono, IBM Plex Mono, JetBrains Mono) at 10-12px.
+
+Load via Google Fonts. Display weights 700-900 only, UPPERCASE always, tracking tight (-0.03em to -0.05em) or wide (+0.08em to +0.12em) — never default.
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --paper: #F4F3EF;         /* Paper white — never pure #FFF */
+  --ink: #111110;           /* Near-black — never pure #000 */
+  --ink-secondary: #55554F; /* Supporting copy */
+  --ink-muted: #8A8A82;     /* Micro labels and metadata */
+  --accent: #E10600;        /* Signal red */
+  --block: #ECEBE6;         /* Panels */
+  --rule: #D8D7D0;          /* Grid hairlines */
+}
+```
+
+**Accent guidance:** ONE stark accent maximum, used like a weapon:
+- Signal red #E10600 — protest posters, activism, music
+- Electric blue #0047FF — colder, more technical
+- Safety orange #FF4D00 — most aggressive
+
+The accent appears ONLY on the single most important statement, active navigation, and one highlight per section. Everything else is ink on paper.
+
+---
+
+## STRUCTURE
+
+### Hero Statement
+- `min-h-[100dvh]`, flat paper or processed (threshold/halftone) image
+- Monumental headline: [DISPLAY_FONT], `clamp(4rem, 15vw, 14rem)`, UPPERCASE, left-aligned, bleeding off the edge
+- Mono micro-label above (e.g., "01 / MANIFESTO"), supporting text below, CTA as a flat solid button with instant inversion on hover
+- Headline overlaps the section below (negative margin)
+
+### Sections (2-4)
+- Pattern 1: Overlap Stack — full-bleed processed image, section title overlaps via negative margin
+- Pattern 2: Marquee Divider — continuous scrolling text strip with 2px rules
+- Pattern 3: Exposed Grid — visible column rules with content deliberately breaking them
+
+### Footer
+- 2px top divider, mono micro-labels, minimal
+
+---
+
+## STAMPED UI
+
+```css
+.marquee-track {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee 25s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.stamp-reveal {
+  clip-path: inset(0 0 100% 0);
+  animation: stamp 500ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes stamp {
+  to { clip-path: inset(0 0 0 0); }
+}
+```
+
+---
+
+## ANIMATIONS
+
+- Hero display type: clip-path wipe, 400-600ms, `cubic-bezier(0.16, 1, 0.3, 1)` — arrives fast, stops dead
+- Secondary type: hard opacity cut (no fade), 150ms, `steps(1)`
+- Body text: opacity fade, 300ms, ease-out
+- Micro labels: hard cut, 100ms, `steps(1)`
+- Marquee: continuous translateX loop, 20-30s, linear
+- Hover states: instant inversions — no transitions, no easing curves
+
+`prefers-reduced-motion: reduce` → all entrance animations collapse to instant, marquee freezes in place.
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- Monumental UPPERCASE display type (min 4rem, ideally 10vw+)
+- Heavy weights only (700-900) — never Inter, Roboto, or Arial
+- Paper white #F4F3EF ground, near-black #111110 ink
+- One stark accent maximum, used like a weapon
+- Broken grid with visible structure (column rules + intentional misalignment)
+- Flat surfaces — no shadows, no gradients, no glass, no glow
+- Processed imagery (threshold, halftone, posterize, or duotone)
+- Hard-cut motion — no bounce, no spring, no parallax
+- Left-anchored hero — never centered
+- No decorative icons, badges, or illustrations
+- Statement over decoration — every element shouts, supports a shout, or documents a shout
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines:** 4-8 words. Direct declarations and commands. "WE ARE NOT YOUR AESTHETIC" not "Our Design Philosophy." No vague aspirational headlines ("Build the future" is banned).
+
+**Body text:** 1-2 sentences. Specific and direct — facts, dates, demands. No marketing filler words.
+
+**Imagery:** Every image must be processed — threshold (pure B&W), halftone dots, posterize (3-4 tonal levels), or duotone (black + accent). Never raw photography.
+
+---
+
+Replace all [BRACKETED] placeholders, then paste into your AI coding assistant.
+```

@@ -1,0 +1,130 @@
+# Typography System
+
+## Philosophy
+
+Typography is the entire spectacle. Editorial Serif Narrative scores highest on the typography axis (6) precisely because it is barely "visual" anywhere else: the reader's journey is type, whitespace, and the rhythm of the layout — this is a printed-magazine sensibility transplanted into CSS with longform measure, serif display voices, and a clean sans body.
+
+---
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Classic editorial serif — high-contrast, literary, the byline of the story |
+| **Examples** | PP Editorial New, Canela, Domaine (+ Playfair Display, GT Sectra as alternates) |
+| **Weight** | 500-700 — display serif is allowed to be heavy |
+| **Tracking** | -0.02em to 0.01em (tight — serif display thrives tight) |
+| **Size** | `clamp(1.75rem, 4vw, 4.5rem)` — headline, not banner |
+| **Transform** | Sentence case, never all-caps for the lead head |
+
+**Why heavy serif:** A story headline should feel as considered as the masthead of a magazine. Medium-to-bold serif display at sentence case reads as "newsstand, literary, and confident." The y axis snapping down slightly with size keeps them feeling formal.
+
+---
+
+## Body Typeface
+
+| Property | Value |
+|----------|-------|
+| **Register** | Clean sans-serif — neutral, lets the serif display shout |
+| **Examples** | Neue Haas Grotesk, Inter, Satoshi, Aktiv Grotesk |
+| **Weight** | 400 regular, 500 medium for overline labels |
+| **Tracking** | 0.00em–0.01em (tight, comfortable) |
+| **Size** | `clamp(0.95rem, 1vw, 1.05rem)` — ~15-17px |
+| **Line Height** | 1.65–1.75 (generous; slow, longform reading) |
+
+**Why sans body:** the editorial rhythm is built with a serif display high and a clean, low-voice sans body. The sans does not compete with the display serif — the body is the quiet workman of the page, while the serif is its voice.
+
+---
+
+## Micro / Label Type
+
+| Property | Value |
+|----------|-------|
+| **Step** | Small, but never smaller than 10px |
+| **Weight** | 500 (medium) — folios must hold their own |
+| **Tracking** | 0.10em–0.18em |
+| **Size** | 10–12px |
+| **Transform** | Uppercase for folios / section numbering |
+
+**Use cases:** running head (folio), byline, issue number above a chapter, image captions.
+
+---
+
+## The Voice of the Drop
+
+| Property | Value |
+|----------|-------|
+| **What** | The opening paragraph's first character set in the display serif — 3–4 lines tall, aligned to the paragraph's first line |
+| **Weight** | 600–700 (the same display voice) |
+| **Alignment** | `float: left; margin-right: 0.08em;` — the cap hangs into the first two lines, baseline sharing the paragraph |
+| **Color** | `--accent-oxblood` |
+
+**Why a single dropped cap:** This one glyph is the editorial handshake. It demonstrates the voice right away: "This is a story that someone set carefully." One drop per section is enough — multiple drops per visible page starts to feel like a template, not a narrative.
+
+---
+
+## Pull Quotes
+
+| Property | Value |
+|----------|-------|
+| **Size** | 1.7×–2× body size, `clamp(1.5rem, 2vw, 2rem)` — the section's breath break |
+| **Extract** | Center the key phrase, not a full sentence |
+| **Alignment** | Offset by 1 column; centered or right-hung once per long section |
+| **Rules** | Thin `--ink-sepia` hairline above; accent hairline for ornament |
+
+**Why a pull quote works:** the grid is constant (multi-column 60–75 ch), so breaking it once builds a pause that the eye reads as "the thesis, worth a second look," not a decoration.
+
+---
+
+## Measure Sound
+
+| Property | Value |
+|----------|-------|
+| **Measure** | 60–75 characters per line |
+| **Columns** | 2–3 on desktop via `column-width` / grid |
+| **Column indent** | First line of each column 4–6% inset; body leading 1.65–1.75 |
+| **Gutters** | `column-gap: 3rem` (desktop), 1.5rem (smaller) |
+| **Paragraphs** | No blank line between paragraphs — the indent does the separation, not gaps |
+
+**Why measure math matters:** 60–75 chars is the editorial comfort zone — long enough to read as prose, short enough not to cause line-skipping. Reads combine the two worlds of an editorial page: the formal serif energy in display + the quiet comfort of the body sans.
+
+---
+
+## Type Scale
+
+Spec: 12-step scale with serif/sans, mode 1.25 ratio.
+
+```
+Display:   clamp( 1.75rem, 4vw, 4.5rem )  — Featured head
+Headline:  1.5rem – 2rem                    — Section head
+Pull:      clamp(1.5rem, 2vw, 2rem)           — 1.7× body
+Body:      clamp(0.95rem, 1vw, 1.125rem)    — 15-18 px, generous leading
+Caption:   12px                            — issue number, author tag, drop-label
+```
+
+The voice compresses comfortably — a 16px body under a 4.5rem display still feels intimate, because sans stays neutral and measure keeps workable.
+
+---
+
+## Pairing Logic
+
+**One warm serif + one clean sans.** The serif display sets editorial presence; the sans body carries the long reading. The two are used at different sizes in the same editorial architecture, and the pairing is what creates the style.
+
+- **Drop cap** — formed from the display family for a constant voice, at the display weight.
+- **Never use a sans-serif headline** — the contrast of a serif headline over a sans body is the whole point.
+- **Never use a decorative serif**, script, or monospace for text — keep the display serif readable and editorial.
+- **Body voice** — the sans stays at weight 400 with generous leading; a dense, uniform wall of text kills the narrative rhythm.
+
+---
+
+## Typography Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Sans-serif headlines | Serif display belongs on the masthead |
+| Single column only | 2–3 column grid on desktop |
+| No whitespace between paragraphs | Hairline-deep indents: no gaps, but clear group separation |
+| Uppercase display | Sentence case — the tip of the sentence is the lead story |
+| Float drop caps on every second paragraph | One moment of accent, the opening of a story section |
+| Mixed-height text | Consistent 1.65-1.75 leading with responsive widths |
+| Adding video behind text | Any contrast steals the serif's believability |

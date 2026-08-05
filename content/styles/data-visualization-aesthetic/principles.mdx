@@ -1,0 +1,39 @@
+# Design Principles
+
+## 1. DATA AS HERO
+
+Charts and metrics are the primary visual content — not decoration, not filler. The page is a living dashboard: a KPI strip, chart grids, and data cards that tell the real story. If a section doesn't carry data, it doesn't earn its place. The aesthetic elevates data visualization from utility to design language — clean lines, precise labels, elegant scales.
+
+**What it prevents:** Marketing pages where a chart is dropped in as an afterthought. Here, the data IS the content — everything else (headlines, copy, navigation) is supporting infrastructure.
+
+---
+
+## 2. PRECISION IS BEAUTY
+
+Every number is set in monospace with tabular figures, so digits align in vertical columns. Decimal points align. Commas align. Gridlines are hairline and consistent. Labels are micro-precise at 10-11px. The beauty of this style is not in ornament — it's in the exactness: the way `1,284,392` and `92,410` stack their digits perfectly. Precision is the aesthetic; sloppiness is immediately visible.
+
+**What it prevents:** Rounded, decorative treatments of data — non-tabular numerals that jitter, unaligned decimals, hand-wavy "approximately" numbers. If a number isn't precise, it doesn't belong in this style.
+
+---
+
+## 3. COCKPIT DENSITY
+
+Information-rich, but organized. This is the cockpit principle: many instruments, each in its place, each legible at a glance. Dense grids of metrics, charts, and data cards with 12-16px gutters. Density without order is clutter — but order without density is a spreadsheet. The goal is the middle: a page you can scan like an instrument panel, where every element has a fixed position and a clear hierarchy.
+
+**What it prevents:** Both the sparse "one chart per viewport" landing page and the chaotic dump of widgets. Cockpit density is organized density — the layout itself communicates that the data is under control.
+
+---
+
+## 4. LIVE DATA, HONEST MOTION
+
+Motion in this style is animated data: bars growing on scroll, line charts drawing themselves, numbers counting up, sparklines pulsing with new values. The motion is driven by the data — it's the visualization animating, not the UI showing off. Transitions interpolate smoothly between states, simulating real-time updates. Motion is honest: it draws attention to the numbers because the numbers are the point.
+
+**What it prevents:** Decorative UI animation — bouncy cards, swooshing headlines, parallax for its own sake. If the animation isn't illustrating data movement, it's noise in the cockpit.
+
+---
+
+## 5. EACH SERIES ITS OWN HUE
+
+Dark backgrounds (`#0A0A0A` to `#111827`), high-contrast data, and a categorical color scale where every series gets a distinct, consistent hue. Colors are assigned semantically — series A is always its hue across the entire page. Gridlines stay in subtle gray so the data pops. The palette reads like an instrument panel: black glass, glowing traces, and color only where it means something.
+
+**What it prevents:** Rainbow default palettes where color is decoration, or monochrome charts where series can't be told apart. Color in this style is a labeling system — it carries meaning and must stay consistent.

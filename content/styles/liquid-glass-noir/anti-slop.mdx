@@ -1,0 +1,25 @@
+# Anti-Slop Checklist
+
+- [ ] Dark cinematic video backgrounds (0.85 opacity over `#0A0A0A`) — never light or colorful backdrops
+- [ ] Near-transparent glass (`rgba(255,255,255,0.05)`) — the blur does the work, not the background color
+- [ ] Backdrop blur 12-24px, varied per Z-depth (back 12 / mid 20 / front 24)
+- [ ] Liquid-glass border (inset gradient + mask-composite) on every panel
+- [ ] One consistent light direction across all panels (highlight streaks aligned)
+- [ ] Subtle iridescent highlights (white → blue 100,180,255, 10-15% opacity)
+- [ ] Floating glass layers with slow fluid motion (7-16s loops, spring hover)
+- [ ] Liquid reveals — mask wipe + blur-to-sharp, never slide-ins
+- [ ] Clean geometric sans at medium weight (Inter Tight, Satoshi, SF Pro Display, Geist)
+- [ ] White text with verified contrast against frosted surfaces
+- [ ] Asymmetric, Z-stacked layouts — panels offset, never a symmetric grid
+- [ ] Panels separated by dark void and soft shadows (no dividers, no borders between)
+- [ ] Noir restraint — dark, moody, cinematic; no purple, no cream
+- [ ] No default frosted-card template look (identical rounded cards in a grid)
+- [ ] No flat white-glass clichés (solid white gradients, no refraction, no light logic)
+- [ ] No heavy backdrop-blur (>40px) that destroys readability
+- [ ] No colored glass tinting — glass stays neutral/clear
+- [ ] No opaque panels
+- [ ] No uniform blur across layers (collapses the depth illusion)
+- [ ] No fast or bouncy motion (glass is heavy; 300ms+ minimum)
+- [ ] No bright backgrounds — the video must never outshine the glass
+- [ ] No stock-photo-style light backgrounds or rainbow iridescence
+- [ ] `prefers-reduced-motion` honored (static panels, video paused or poster frame)

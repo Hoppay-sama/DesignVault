@@ -1,0 +1,158 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Playful Interactive Maximal is **physical, bouncy, and surprising**. Nothing moves with mechanical precision — everything springs, squishes, wobbles, and pops. The page behaves like a physical toy: press it and it responds with gravity, bounce, and confetti. Motion is the reward system — every interaction triggers a delightful response, and engagement over conversion means the motion IS the product.
+
+---
+
+## Spring / Bounce Motion
+
+```css
+@keyframes pop-in {
+  0% { transform: scale(0); }
+  60% { transform: scale(1.15); }
+  80% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.spring-bounce {
+  animation: pop-in 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+```
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Cards & buttons | Scale 0→1 with overshoot | 400-700ms | Overshoot spring (back ease-out) |
+| Modals & popovers | Pop-in from scale(0) | 500-800ms | Overshoot spring |
+| Hover squish | scale(1)→scale(0.94) on press | 100-150ms | `ease-out`, instant-ish |
+| Click release | scale(0.94)→scale(1.06)→1 | 300ms | Overshoot spring |
+
+**The spring should overshoot.** A button doesn't just appear — it pops in, over-shoots 15% past its size, and settles. This is the signature feel of the style. Never linear easing; every transition carries bounce.
+
+---
+
+## Physics-Based Interactions
+
+| Effect | Specification |
+|--------|--------------|
+| Physics-based hover | Elements tilt, lift, and cast moving shadows as the cursor approaches — magnetic pull toward the cursor |
+| Drag & gravity | Draggable elements fall with gravity, land with bounce, and scatter on release |
+| Momentum scrolling | Scroll-jacking with springy momentum — sections snap with overshoot, like flinging a game card |
+| Cloth / jelly distortion | Buttons and panels wobble like jelly when poked (border-radius + scale oscillation) |
+| Cursor-reactive flocking | Small elements scatter or cluster around the cursor position |
+
+**The cursor is a hand in the toybox.** Everything on the page should react to being poked, grabbed, or flicked. The physics feel — mass, bounce, friction — sells the toy illusion better than any easing curve.
+
+---
+
+## Gamified Hover States
+
+```css
+.hover-gamify {
+  transition: transform 150ms ease-out;
+}
+.hover-gamify:hover {
+  transform: scale(1.06) rotate(-2deg);
+}
+
+.hover-gamify:active {
+  transform: scale(0.94);
+}
+```
+
+| Interaction | Response |
+|-------------|----------|
+| Button hover | Scale 1.06 + tilt + shadow lift — "look at me" |
+| Button press | Scale 0.94 squish — physical press |
+| Card hover | Confetti burst + sticker flip + wobble |
+| Link hover | Letter-spacing snap + color swap + wiggle |
+| Wrong/empty action | Shake + buzzer color flash (game feedback) |
+
+**Every interaction has a response.** There are no dead zones — hovering, pressing, and entering a section all produce feedback. The responses read as game mechanics: press the button, the button squishes; score the section, confetti fires. Surprise is structure, not garnish.
+
+---
+
+## Particle Effects & Confetti
+
+```css
+.confetti-burst {
+  position: absolute;
+  animation: confetti-fly 900ms ease-out forwards;
+}
+
+@keyframes confetti-fly {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) rotate(540deg); opacity: 0; }
+}
+```
+
+| Trigger | Effect |
+|---------|--------|
+| CTA click | 20-40 piece confetti burst in palette colors |
+| Section entry | Particle shower or emoji rain |
+| Milestone / counter pass | Star burst + screen flash |
+| Correct gamified action | Glow pulse + particle ring |
+
+**Confetti is the currency.** Each burst is 900ms-1.2s, uses the confetti-mix palette, and fires on high-value interactions only — oversaturating the effect devalues it. Sound-reactive elements (subtle, user-initiated) can pulse visuals to the beat of an optional audio toggle.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Fullscreen section | Scale(0.96)→1 + color wipe | 800ms | Overshoot spring | 0ms |
+| Display headline | Pop-in with letter-by-letter stagger | 700ms | Overshoot spring | 100ms stagger per letter |
+| Sticker words | Wobble in from rotated -8deg | 500ms | Overshoot spring | 200ms |
+| Cards | Staggered pop-in, 60-80ms apart | 500ms | Overshoot spring | 300ms+ |
+
+**Key:** Entrance is a cascade of pops. Sections enter with springy scale, headlines pop letter-by-letter, cards cascade like a dealt hand. Delays are small (60-300ms) — the energy stays fast and playful, never slow and drifting.
+
+---
+
+## Surprise Interactions
+
+| Moment | Surprise |
+|--------|----------|
+| Scroll milestone | Sticker lands on screen + wobbles |
+| Random Easter eggs | Cursor walks on the page, mascot waves after idle |
+| 404 / empty states | Talking mascot, joke copy, clickable confetti cannon |
+| Completion | Full-screen confetti + fanfare flash |
+
+**Surprise is structural.** The page hides delights the user can discover — every scroll, idle moment, and edge case is a chance to reward attention. The goal is a page that feels like a toy you want to keep playing with.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- All springs: instant (scale changes snap, no overshoot)
+- Particle effects / confetti: replaced with single static badge flash
+- Scroll-jacking: disabled, native scroll
+- Letter stagger: instant full reveal
+- Surprise interactions: kept but non-animated (mascot still appears, doesn't dance)
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| Never | Why |
+|-------|-----|
+| Linear, mechanical easing | Kills the toy illusion — everything must bounce |
+| Slow drift (8-12s ambient loops) | The page is a toy, not an aquarium — motion happens on interaction |
+| Restrained, minimal motion | Banned vocabulary — motion is the product |
+| Predictable interactions | Banned vocabulary — every response should feel earned |
+| Auto-playing audio without toggle | Sound-reactive elements must be user-initiated |
+| Confetti on every click | Devalues the currency — reserve bursts for high-value actions |
+| Motion without feedback | Every animation must respond to user action, not ambient decoration |

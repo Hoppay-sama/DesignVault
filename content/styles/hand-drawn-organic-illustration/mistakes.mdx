@@ -1,0 +1,69 @@
+# Common Mistakes
+
+## Mistake 1: Sloppy Chaos Instead of Intentional Imperfection
+
+**What people do:** Assume "hand-drawn" means "any scribble will do" — overcrowded doodles, random ink splatters everywhere, illegible handwriting, and unreadable layouts.
+
+**Why it fails:** This is sophisticated illustration with intentional imperfection, not a mess. The hand must be visible, but the composition must still be designed. Chaos without craft reads as unfinished, not artisanal. The wobble must look deliberate — a reader should sense the artist, not the accident.
+
+**Fix:** Every mark serves a purpose. Limit doodles and splatters to accent positions (hero, section breaks, buttons). Keep one clear focal illustration per view. Design the layout first, then add the organic looseness — never the reverse.
+
+---
+
+## Mistake 2: Illegible Handwriting
+
+**What people do:** Set headlines, body copy, or even navigation in Caveat or Patrick Hand at small sizes — or worse, use handwriting for long paragraphs.
+
+**Why it fails:** Handwritten faces are display-only. At body sizes they lose legibility fast, and a full paragraph of script is exhausting to read. The style needs a clean sans body (with generous line-height) to carry reading, while the handwriting provides personality at display sizes. Illegibility breaks trust — users can't navigate, can't read, leave.
+
+**Fix:** Handwritten type only for headlines, labels, and short accents — at 2rem+. Body copy always in the clean sans companion at 16px+. Navigation and UI labels should be the sans, with a hand-drawn underline or arrow for flavor. If a word is hard to read, it's too small or too fancy.
+
+---
+
+## Mistake 3: Fake Sketch Filters on a Corporate Design
+
+**What people do:** Build a normal corporate layout (perfect grid, flat color, stock photos) and slap on a "sketch" filter, a paper texture overlay, or a handwriting font for one headline.
+
+**Why it fails:** This is decoration without purpose — the fastest route to generic. The hand-drawn quality is not a texture you add at the end; it's a system that starts with illustration and layout. A filtered screenshot of a corporate hero still reads corporate. Users see through the skin-deep styling instantly, and the design lands in the same uncanny valley as AI-generated "hand-drawn" clip art.
+
+**Fix:** Commit to the system: hand-drawn illustrations as primary imagery, media texture on everything, warm palette, sketchbook layout. If an element wouldn't exist in a physical sketchbook (perfect card grid, stock photo hero, uniform borders), it doesn't belong on the page.
+
+---
+
+## Mistake 4: Sterile Vector-Perfect Line Art
+
+**What people do:** Use clean, uniform-weight vector illustrations — the kind that come from icon libraries — and call it "hand-drawn."
+
+**Why it fails:** Perfectly smooth curves, uniform stroke weights, and closed flawless shapes are the exact opposite of this style's signal. The style exists to counter machine perfection; using machine-perfect line art makes the page feel ironically sterile — AI-generated "hand-drawn" imagery, which is banned vocabulary. The hand's variation IS the message.
+
+**Fix:** Line weight must vary (pressed harder in places), shapes must wobble, ends must be loose — tapered strokes, overlapping edges, breaks where a pen lifts. Draw elements by hand or in an illustration tool with a real brush, and let the media texture (pencil grain, marker streaks) show through. If an SVG path is clean, roughen it.
+
+---
+
+## Mistake 5: Mechanical Motion
+
+**What people do:** Use snappy 200-300ms transitions, spring physics, and standard hover animations because "modern web design is snappy."
+
+**Why it fails:** Nothing in this style moves mechanically. A card that springs into place contradicts a hand-drawn world — it feels like the drawing was Photoshopped onto a corporate site. Motion must feel hand-actuated: lines that draw themselves on, elements that wobble and breathe, gentle 1-2s fades. Mechanical motion breaks the illusion of a living sketchbook.
+
+**Fix:** All transitions 600ms minimum. Draw-on animations (stroke-dasharray) 1.5-3s per element. Wobble/breathing 3-6s loops with organic easing (not linear, not spring). Nothing snaps — everything eases in with a slight over-rotation or sway. Honor `prefers-reduced-motion` with static, no animation.
+
+---
+
+## Mistake 6: Forgetting the Paper
+
+**What people do:** Use pure white `#FFFFFF` backgrounds and flat color sections without any paper or media texture underneath.
+
+**Why it fails:** The paper is the canvas of the entire style — every drawing, every wash, every splatter sits on it. A flat white background makes the hand-drawn elements float like stickers, losing the physicality that makes the style warm. The texture underneath is what ties all the media marks into one believable page.
+
+**Fix:** Always start from a cream/paper base (`#F5F0E1`-family) with visible grain or canvas texture — subtle enough to not distract, present enough to feel like a surface. Let ink and watercolor sit on that surface with a slight shadow or bleed. If the section needs color, use a wash-like fill with visible application, not a flat hex block.
+
+---
+
+## Mistake 7: Decoration Without Purpose
+
+**What people do:** Add doodles, arrows, and splatters because "hand-drawn styles need doodles" — scattered randomly, pointing at nothing, filling space for its own sake.
+
+**Why it fails:** Every marginalia element in a real sketchbook has a job: annotating, connecting, highlighting, noting. Random decoration is noise that dilutes the signal — users learn to ignore all the marks, including the meaningful ones. When everything is highlighted, nothing is.
+
+**Fix:** Every sketch element must earn its place: an arrow that points at a feature, a scribble underline under the headline, a marginal note that adds personality to a stat, a splatter that marks a section change. If a doodle can be removed without losing meaning, remove it.

@@ -1,0 +1,89 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Bold condensed grotesque — heavy, compact, shouting |
+| **Examples** | Anton, Archivo Black, Bebas Neue, Monument Extended |
+| **Weight** | 700-900 (condensed, maximum impact) |
+| **Tracking** | -0.02em to 0em (tight, letters crowd the field) |
+| **Size** | `clamp(3rem, 12vw, 9rem)` — monumental, breaks the layout |
+| **Transform** | UPPERCASE, always. One word per line when possible |
+
+**Why condensed and bold:** Corporate minimalism whispers with generous letter-spacing and light weights. This style screams. Condensed bold type packs more letters per line, letting headlines hit at poster scale. The type is the poster; the page is the wall.
+
+---
+
+## Handwritten & Stencil Accents
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Handwritten marker and stencil stamps, used for annotations |
+| **Examples** | Permanent Marker, Caveat, Shantell Sans (handwritten), stencil letterforms |
+| **Weight** | 400-700 (handwritten at medium, stencil bold) |
+| **Tracking** | 0em (natural hand, no optical spacing) |
+| **Size** | `clamp(1.5rem, 4vw, 3rem)` — annotation scale, never small print |
+| **Transform** | Sentence case, occasional all-caps shout |
+
+**Why mix handwritten with condensed:** The anti-corporate voice breaks the single-family rule on purpose. Handwritten accents are the "scrawl on top" layer — the margin note, the sticker, the vandalized poster. Stencil letters feel stamped. These run simultaneously with the condensed display face, never instead of it.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Plain grotesque — the quietest voice in the system, still not quiet |
+| **Examples** | Inter, Helvetica Now, Akzidenz-Grotesk, Roboto |
+| **Weight** | 400-600 (regular to semibold, never thin) |
+| **Tracking** | 0em-0.01em (standard) |
+| **Size** | `clamp(1rem, 1.2vw, 1.125rem)` — 16-18px, genuinely readable |
+| **Line Height** | 1.4-1.5 (tight, dense like print) |
+
+**Why not thin:** Thin weights read as luxury and restraint — the enemy. Body copy is the only place that reads comfortably, but it still sits on saturated color. It should be dense and honest: paragraph text in a plain grotesque, occasionally bolded mid-sentence for emphasis, never optically light.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Stencil or handwritten stamps, plus tiny grotesque captions |
+| **Examples** | Stencil cuts, Permanent Marker; grotesque 500 weight as alternative |
+| **Weight** | 500-700 |
+| **Tracking** | 0.02em-0.05em (slight — print caption, not luxury tracking) |
+| **Size** | 11-13px |
+| **Transform** | UPPERCASE for stamps, sentence case for handwritten notes |
+
+**Usage:** "NO RULES", "ISSUE #13", "DON'T TRUST" — margin stamps, section labels, page numbers. These feel like marks made by a hand or a machine stamp, not a type system.
+
+---
+
+## Type Scale
+
+```
+Display:  clamp(3rem, 12vw, 9rem)       — monumental, condensed, UPPERCASE
+Accent:   clamp(1.5rem, 4vw, 3rem)      — handwritten/stencil annotations
+Body:     clamp(1rem, 1.2vw, 1.125rem)  — 16-18px, dense grotesque
+Micro:    11-13px                        — stamps and captions
+```
+
+The scale is extreme — 11px to 144px. The contrast is between monumental display type and dense body, with the handwritten layer sitting between them. Nothing is mid-sized and neutral; every size makes a claim.
+
+---
+
+## Font Pairing Logic
+
+**Deliberate incoherence:** Three voices that never merge — condensed grotesque for the shout, handwritten marker for the scrawl, plain grotesque for the small print. They appear simultaneously, overlapping, sometimes colliding on the same line.
+
+**Never:** Thin or light weights (restraint reads corporate), wide-tracked luxury serifs (too quiet), overly rounded friendly fonts (too safe), or a single neutral family doing everything (too clean — this style needs friction).
+
+---
+
+## RULES THAT ARE MEANT TO BE BROKEN
+
+- **Never center perfectly** — headlines set left, or force-ragged right, or rotated 1-3 degrees
+- **Never give headlines breathing room** — they may collide with margins
+- **Never match weights across layers** — the scrawl is a different weight than the shout on purpose
+- **Never set body in the display face** — condensed body is unreadable and lazy, not loud

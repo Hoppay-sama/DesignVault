@@ -1,0 +1,46 @@
+# Texture & Surface
+
+## Primary Texture: Clean, Flat Surfaces
+
+The texture language is **clean**. Normally the ethos of this style — texture scores 2/6 on the axis, the lowest tier alongside color restraint. There are no competing textures, no busy patterns, no decorative materials. Surfaces are engineered, flat, and precise. Everything is defined by value contrast (zinc-950 through zinc-50) and 1px edges, not by texture.
+
+## Texture Don'ts
+
+| Don't | Why |
+|-------|-----|
+| Gradients | Value steps should be flat, not blended |
+| Multiple grain layers | No competing textures — the field stays flat |
+| Decorative patterns | The accent is the only decoration, used sparingly |
+| Heavy shadows | Hierarchy comes from value contrast, not shadow |
+| Texture-heavy material | Restores design statement is neutrality — the texture must stay quiet |
+
+---
+
+## Subtle Grain
+
+```css
+.grain-surface {
+  background-image: url("/noise.svg");
+  background-size: 160px 160px;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+}
+```
+
+**When to use:** Grain is optional — use it sparingly to warm an otherwise clinical grayscale field. Opacity 0.04, barely perceptible. Dead nothing.
+
+**When to skip:** For pure data surfaces, keep it perfectly flat. Restraint says: the cleanest default is best.
+
+---
+
+## Paper / Surface Whites
+
+| Surface | Specification |
+|---------|--------------|
+| **Background zinc** | zinc-950 base, flat, may wear subtle grain |
+| **Foreground surfaces** | zinc-50 / zinc-100 — crisp, flat, untextured |
+| **Borders** | 1px zinc-300 lines, sharp |
+| **Hover echo** | Slight zinc shift — no gradient, no glow |
+| **Elevation** | Two-tone base — white card on gray field |
+
+**The accent decides**: value-only contrast. Depth comes from a light/dark pairing, not from texture.

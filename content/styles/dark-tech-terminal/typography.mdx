@@ -1,0 +1,64 @@
+# Typography System
+
+## Display / Headline Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Geometric sans — structural, engineered, mission-control |
+| **Examples** | Aeonik, Archivo, Space Grotesk |
+| **Weight** | 500-700 (bold enough to command the dark ground, not shout) |
+| **Tracking** | 0.01em-0.03em (slightly tight, technical) |
+| **Size** | `clamp(2rem, 4vw, 3.5rem)` — loud but contained |
+| **Transform** | UPPERCASE for section labels, sentence case for narrative headlines |
+
+**Why geometric sans:** The terminal is monospace; the headlines need to be the *opposite* — engineered, geometric, modular. Aeonik/Archivo reads like a systems diagram label, not a decorative font. Headlines are the machine's nameplates; the mono type is its readout.
+
+---
+
+## Data / Terminal Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Monospace — this IS the terminal voice |
+| **Examples** | JetBrains Mono, IBM Plex Mono, Fragment Mono, Azeret Mono |
+| **Weight** | 400 regular, 500 for data emphasis |
+| **Tracking** | 0em (monospace must stay monospaced — never letter-space it) |
+| **Size** | `clamp(0.875rem, 1vw, 1rem)` — 14-16px, standard terminal size |
+| **Line Height** | 1.5-1.6 (compact, dense — like real terminal output) |
+
+**Why monospace:** All data, metrics, logs, code, coordinates, and technical annotations are monospace. The alignment is the design — numbers stack in columns, log lines form a rhythm, cursor positions align. Mono is not a texture; it is the information architecture made visible.
+
+---
+
+## Micro / System Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same monospace family, lighter or dimmer weight |
+| **Examples** | JetBrains Mono Light, IBM Plex Mono Light |
+| **Weight** | 300-400 |
+| **Tracking** | 0.08em-0.12em (only for uppercase UI labels, never data) |
+| **Size** | 10-11px |
+| **Transform** | UPPERCASE with leading `//` or `::` prefix |
+
+**Usage:** Section labels, timestamps, system status, coordinates. These read as machine metadata — "// STATUS: ONLINE", ":: SECTOR 07", "LOG 02:14:33". The prefix marks the label as system output, not content.
+
+---
+
+## Type Scale
+
+```
+Display:  clamp(2rem, 4vw, 3.5rem)    — geometric sans, uppercase sections
+Data:     clamp(0.875rem, 1vw, 1rem)  — monospace, 14-16px
+Micro:    10-11px                      — mono uppercase system labels
+```
+
+The scale is compact — 10px to 56px. Density is the point: the page is data-dense, so the type hierarchy must do the organizing. Display type for structure, mono for content, micro for system noise. Nothing in between — no 24px semibold paragraphs.
+
+---
+
+## Font Pairing Logic
+
+**Two-family system:** Geometric sans (Aeonik/Archivo) for structure + monospace (JetBrains Mono/IBM Plex Mono) for data. The contrast between engineered sans and technical mono is the pairing — it mirrors a mission-control console where the labels are designed and the readouts are raw.
+
+**Never:** Serif typefaces (editorial, not technical — the index bans them outright), handwritten or organic fonts (breaks the machine aesthetic), script, or playful novelty fonts. Decorative fonts destroy the terminal illusion — every glyph must look like it could have been rendered by a terminal.

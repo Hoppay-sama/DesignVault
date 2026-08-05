@@ -1,0 +1,143 @@
+# Exact Replica Prompt — Generative Algorithmic / Code-Art
+
+> Copy this entire prompt and paste it into your AI coding assistant.
+
+---
+
+```
+Build a generative-algorithmic page for "FLUXFIELD" — an experimental creative studio. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion + a WebGL/Canvas renderer (raw WebGL, three.js, or p5.js). Page title: `FLUXFIELD — Code-as-art, rendered in real time`.
+
+Vibe: Code-as-art. Visuals are procedurally generated — particle systems, noise fields, recursive patterns. The page feels alive and different on every visit. Canvas/WebGL-driven, non-traditional DOM. The viewport IS the canvas; UI floats above a living render.
+
+---
+
+## ANTI-SLOP CONSTRAINTS
+
+- NO static imagery or pre-rendered hero images (visuals must be computed at runtime)
+- NO traditional DOM layout (single full-viewport canvas is the page)
+- NO CSS-only decoration (the generative canvas carries the visual weight)
+- NO stock photography, no SVG illustration sets
+- NO fixed gradients (gradients derive from noise fields)
+- NO static color palette (algorithmically derived, hue from noise)
+- NO text-heavy sections (visuals lead; text is floating metadata)
+- NO decorative serif display type (monospace / technical sans-serif only)
+- NO `overflow-y: hidden` dead pages — the field is interactive, not a wallpaper
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500&display=swap
+```
+
+Usage:
+- **IBM Plex Mono 400/500**: Labels, coordinates, readouts — 10-12px, uppercase, tracking 0.15em, `rgba(255,255,255,0.55)`
+- **Space Grotesk 400/500**: Headlines — `clamp(1.5rem, 4vw, 3.5rem)`, sentence case, tracking -0.01em
+- **Space Grotesk 400**: Body — `clamp(0.875rem, 1vw, 1rem)`, line-height 1.6
+- Typography is secondary to visuals — text never competes with the canvas
+
+---
+
+## COLOR SYSTEM
+
+Algorithmically derived — do not hardcode a flat palette:
+
+```css
+:root {
+  --bg-deep: #05060A;            /* Near-black stage */
+  --particle-base: #7AE7FF;      /* Cyan base hue for particles */
+  --particle-alt: #FF6B9D;       /* Magenta accent hue */
+  --text-on-canvas: rgba(240, 245, 250, 0.85);
+  --text-muted: rgba(240, 245, 250, 0.5);
+}
+```
+
+Per-particle color: `hsl(hue, 80%, 60%)` where `hue = base + noise(particle.x, particle.y) * 120` — the palette breathes with the field.
+
+Body: `bg-[#05060A] text-[rgba(240,245,250,0.85)] antialiased font-body`.
+
+---
+
+## STRUCTURE
+
+### 1. Render Stage (the canvas)
+- Fixed full-viewport WebGL canvas (`position: fixed, inset: 0, z-index: 0`) — the entire page
+- Particle system, 1000-2000 particles:
+  - Each particle: position, velocity, hue, life, size
+  - Motion: Perlin noise field — steering angle = `noise(x * 0.002, y * 0.002, t * 0.02) * TWO_PI * 2`
+  - Trail rendering: alpha-fade previous frames (no clear each frame, additive blending)
+  - Wrap or bounce at viewport edges — never let them die offscreen
+- Seed: `Math.floor(Math.random() * 9999)` printed as a UI readout; regenerate button re-seeds
+- React to pointer: particles within 150px of cursor get a velocity boost away/along the field
+- No extra canvases — one stage, one field
+
+### 2. UI Overlay (floating above canvas)
+- `z-index: 10`, pointer-events none on container, auto on controls
+- Top-left:
+  - Label: "FLUXFIELD / GENERATIVE SYSTEM v2.1" — IBM Plex Mono, 10px, uppercase, tracking 0.15em, text-muted
+  - Headline: "Code-as-art, rendered in real time" — Space Grotesk 500, `clamp(1.5rem, 4vw, 3.5rem)`, text-on-canvas
+  - Subtext: "A procedural system — particle fields, noise-driven motion, emergent behavior. Every visit is a new seed." — Space Grotesk 400, text-on-canvas, max-width 420px
+- Bottom-left readouts (IBM Plex Mono, 10px, text-muted):
+  - `SEED 2847` / `PARTICLES 1,500` / `FPS 60`
+- Bottom-right CTA: "ENTER THE FIELD" — IBM Plex Mono 500, 11px, uppercase, tracking 0.2em, bordered pill, `rgba(255,255,255,0.85)` on `rgba(255,255,255,0.08)` backdrop-blur, hover: hue-shift border to particle-alt
+
+### 3. Overlay Sections (scrollable pages above the stage)
+- Sections: `min-h-[100dvh]`, transparent background, translucent text floating over the live field
+- Section 1 — WORK: 3-4 entries, each a label + headline + 1 sentence, `max-w-xl`
+- Section 2 — METHOD: 3 numbered principles, IBM Plex Mono numerals:
+  1. "CODE IS THE MEDIUM — visuals computed, not designed"
+  2. "ALWAYS ALIVE — continuous procedural animation"
+  3. "CANVAS OVER DOM — WebGL rendering primary"
+- Section 3 — ABOUT: 2-3 sentences on creative coding as practice
+
+### 4. Footer
+- "FLUXFIELD © 2026 — PROCEDURAL / ALIVE / EVER-CHANGING" — IBM Plex Mono, 10px, uppercase, tracking 0.15em, text-muted
+
+---
+
+## FIELD BEHAVIOR (locked)
+
+```ts
+// Perlin flow field — the core of the page
+const angle = noise(
+  p.x * 0.002,
+  p.y * 0.002,
+  performance.now() * 0.00002
+) * Math.PI * 4;
+
+p.velX += Math.cos(angle) * 0.05;
+p.velY += Math.sin(angle) * 0.05;
+p.velX *= 0.98;  // damping — particles glide, never snap
+p.velY *= 0.98;
+p.x += p.velX;
+p.y += p.velY;
+
+// palette from the field
+p.hue = 190 + (noise(p.x * 0.001, p.y * 0.001) * 120);  // cyan → magenta
+```
+
+- Alpha-trail rendering: `ctx.fillStyle = 'rgba(5,6,10,0.08)'` fillRect per frame, additive `lighter` composite for particles
+- Particle count: adaptive — halve if FPS < 45
+- `prefers-reduced-motion: reduce` → freeze at seed + 1 static frame, no pointer interaction
+
+---
+
+## ANTI-SLOP (LOCKED)
+
+- Single full-viewport WebGL canvas — the page IS the render
+- Particle system / noise field, 1000+ particles
+- Continuous procedural animation — never static, never loops
+- Seeded randomness — reproducible, seed shown as UI readout
+- Algorithmic palette — hue derived from noise, not hardcoded
+- Monospace / technical sans-serif — text is metadata
+- Minimal floating UI over the field — no cards, no boxes
+- Emergent behavior — simple rules, complex page
+- No static imagery, no stock, no CSS-only decoration
+- No traditional DOM layout — the viewport is the canvas
+
+---
+
+Recreate this page with the exact generative-algorithmic aesthetic: live particle field, noise-driven motion, seeded randomness, and the algorithmic color system above.
+```

@@ -1,0 +1,79 @@
+# Common Mistakes
+
+## Mistake 1: Wall of Text
+
+**What people do:** Ship a single unwieldy 80ch+ column of prose with no drop caps, no pull quotes, no photo interlude, no chapter markers.
+
+**Why it fails:** Long-form needs wayfinding beats that keep the eye and the interest alive. A wall of text is exhausting to read — the eye has no hooks, the measure feels endless, and readers give up by the second scroll.
+
+**Fix:** Break the story. Set the measure to 60-75ch, split into chapters with drop caps, pull a quote out per section, and let full-bleed photos give the story room to breathe. The pace of the reading IS the design.
+
+---
+
+## Mistake 2: Lost Hierarchy — All Sections Look the Same
+
+**What people do:** Every heading is the same size, every section opens with the same drop-cap + body pattern, so there's no sense of chapter vs. note vs. caption.
+
+**Why it fails:** Without degree of magnitude — big display, deck, body, caption — the page reads flat. Nothing tells you "this is the climax," "this is a sub-note," "this is a pull quote." It becomes a library of similar paragraphs.
+
+**Fix:** Exaggerate the scale ladder deliberately: `clamp(3rem, 8vw, 6rem)` display for chapter opens, `clamp(1.5rem, 3vw, 2.5rem)` for subheads, a quiet caption size, and a kicker that is a size apart from everything. Print magazines maintain that spread — that's what reads as confident.
+
+---
+
+## Mistake 3: Gimmicky Scroll Effects
+
+**What people do:** Every section performs a trick — full-page scrolljacking, parallax layers on the headline paragraph, animation confetti on case-enter — because "long-form sites are interactive."
+
+**Why it fails:** The reader can't follow the story. When everything moves, the narrative is a light show. Scroll-based drama should act like a chapter turn — one discreet reveal per advance — while the text itself says still. This style is 3/6 motion: restraint is the point.
+
+**Fix:** Let scroll advance chapters: change the kicker, increment a running head/folio, reveal one full-bleed photo slowly. Make the motion a page-turn, never a demo. The story is the hero, not the animation.
+
+---
+
+## Mistake 4: Sans-Serif Headlines (And Default Serif Cliches)
+
+**What people do:** Pair a clean sans headline with a serif body "because it's modern," or drop a generic Times/Georgia stack as the display.
+
+**Why it fails:** The voice is the serif. A sans headline instantly reads as a SaaS page, not a magazine; an unconsidered Times default reads as "we didn't pick a serif." Either way the literary, authoritative tone is lost.
+
+**Fix:** The display is a considered serif — PP Editorial New, Canela, Domaine — with contrast to the sans body. When in doubt, keep the serif head and make it a piece of the design system, accented by all-caps letterspaced kickers and proper figure styling.
+
+---
+
+## Mistake 5: Illegible Serif at Small Sizes
+
+**What people do:** Use the display serif at sub-18px for body or captions, kill its weight, or set it on a busy/photo background.
+
+**Why it fails:** Serifs below ~16-18px lose their details — the print feel dissolves into a smudge. Serifs on noisy backgrounds vanish. The warmth becomes mush; the reader can't scan.
+
+**Fix:** Match type size to weight: keep body serif at >=16px with 1.6-1.7 leading, and set captions small but on warm white with sufficient contrast — never over a busy photo. If a caption must be small, it belongs on clean paper, not on imagery.
+
+---
+
+## Mistake 6: Choked White Space
+
+**What people do:** Paragraphs touch; chapters are 16px apart; pull quotes are crammed into the column; the page feels like a newspaper classified column.
+
+**Why it fails:** This style is built on the breath of whitespace. Without the pauses, the layout turns the story into a frantic paragraph dump.
+
+**Fix:** Use generous section padding (`clamp(4rem, 10vh, 8rem)`), real margins between paragraphs, and let pull quotes press outward into the gutter. Let white paper be a character in the layout — it makes the story feel expensive.
+
+---
+
+## Mistake 7: Imagery That Doesn't Speak Editorial
+
+**What people do:** Use generic stock photos — smiling people in conference rooms, stock city skylines — inside the grid text.
+
+**Why it fails:** Editorial photography is composed, atmospheric, breaks the grid with intention. Stock swaps stoic truth for background-filler. It instantly reads as "built this site in a template," which is exactly the slop this style exists to fight.
+
+**Fix:** Direct the photography as part of the design: full-bleed, moody, composed to advance the story. Place images where the narrative calls for a beat — a color field, an abstract, or a moment that carries the tone. If an image doesn't advance the story, cut it.
+
+---
+
+## Mistake 8: Sheet-Of-Paper Suffocation
+
+**What people do:** Pure `#fff` background on every pixel, card panel fills, drop shadows everywhere — the magazine becomes strips of CSS.
+
+**Why it fails:** An editorial paper style is about the warm material — the page being paper. Pure white + cards + shadows = GUI, not edition. The warm paper tone (3/6 texture) keeps the page alive — subtle grain and warm off-white.
+
+**Fix:** Warm off-white page, hairline ink rules, subtle grain at fine opacity, no card treatment on the measure (it's an open page). Trust the whole: the paper is the surface, the serif is the voice, the white is the air — no more.

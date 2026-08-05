@@ -1,0 +1,111 @@
+# Layout Grammar
+
+## Grid System
+
+**Deliberately simple.** The texture is the design — the layout stays out of its way. A restrained, spacious, editorial grid that lets grain, paper tooth, and muted color do the work. Internally:
+
+- Max content width: 1100px, centered, with generous margins
+- Section grid: 12-column structure under the surface, but visually calm and regular
+- Whitespace: generous — `clamp(6rem, 14vh, 12rem)` between sections
+- Texture overlay: fixed, full-viewport, `pointer-events: none`, above everything
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | Full viewport — `min-h-[100dvh]` |
+| Background | Muted, desaturated warm surface (stone/sand) with film grain overlay |
+| Text position | Centered, vertical rhythm — calm and grounded |
+| Headline size | `clamp(2rem, 4vw, 4.5rem)` — substantial, editorial |
+| Text contrast | Reduced — ink on muted stock, not pure black on white |
+
+```
+┌─────────────────────────────────────────┐
+│  (film grain overlay — fixed, subtle)   │
+│                                         │
+│                                         │
+│           WARM PRODUCTS                 │
+│   Printed-on-paper, analog, tactile     │
+│   [ENTER — like turning a page]         │
+│                                         │
+└─────────────────────────────────────────┘
+```
+
+**The texture is the hero.** Headline may sit center-stage, but the grain, paper tooth, and muted palette carry the visual identity.
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(4rem, 14vh, 12rem);
+--content-max-width: 1100px;
+--edge-margin: clamp(1.5rem, 4vw, 4rem);
+```
+
+**Spacing is generous and unhurried.** Whitespace is not empty — it is unprinted paper. Sections feel like printed spreads on uncoated stock. Pacing is slow, editorial, tactile.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Full-Bleed Texture + Centered/Offset Text
+```
+┌─────────────────────────────────────────┐
+│  [Paper/ink surface, grain overlay]     │
+│                                         │
+│        Headline (ink on stock)          │
+│        Body text (muted)               │
+│                                         │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 2: Split — Surface + Text
+```
+┌──────────────────┬──────────────────────┐
+│                  │                      │
+│  [Halftone,      │  Label               │
+│   paper fiber,   │  Headline            │
+│   misregister]   │  Body text           │
+│                  │  (muted ink)         │
+└──────────────────┴──────────────────────┘
+```
+
+### Pattern 3: Texture Sequence (Tactile Blocks)
+```
+┌─────────────────────────────────────────┐
+│  [Grain overlay] — subtle, consistent   │
+├─────────────────────────────────────────┤
+│  [Paper texture block] — deeper grain   │
+├─────────────────────────────────────────┤
+│  [Risograph misregistration panel]      │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Max-width single column, generous whitespace, fixed subtle grain overlay |
+| **Tablet (768px)** | Reduced margin, texture overlay preserved, text blocks widen to full content |
+| **Mobile (375px)** | Single column, gutters tighten, grain overlay at reduced opacity to preserve legibility |
+
+**On mobile:** Texture stays but transparency drops — never allow grain or paper to muddy small text. The tactile feel is maintained through surface color and subtle overlays, not through noise density.
+
+---
+
+## Layout Don'ts
+
+| Don't | Do Instead |
+|------|------------|
+| Cluttered, dense layouts | Generous whitespace — grain needs room to breathe |
+| Heavy borders and boxes | Thin rules, hairlines, open composition |
+| High-contrast full-black sections | Muted ink on warm neutral stock |
+| Aggressive visual hierarchy | Calm, editorial hierarchy — the texture is the drama |
+| Overwhelming texture everywhere | Texture accents — grain, paper, halftone used selectively |
+| Sharp machine-precise edges everywhere | Gently imperfect edges — misregistration, soft tooth |
+| Texture on text backgrounds at full strength | Texture behind UI, light/none behind body copy |

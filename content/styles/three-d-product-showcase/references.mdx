@@ -1,0 +1,82 @@
+# Reference Gallery
+
+## Live Sites
+
+### Apple — Product Pages (apple.com/macbook-pro, /iphone)
+- **What works:** The canonical product-as-sculpture. Product centered, full-viewport, scroll-driven camera moves that reveal edges and materials; whisper-quiet UI; accent colors taken straight from the hardware
+- **URL:** apple.com
+
+### Nike SNKRS — 3D Drops & Product Flips
+- **What works:** 120-second 3D product flips, colorway exploration, exploded-view reveals for sole and construction — direct references for sneaker/footwear versions of this style
+- **URL:** nike.com/snkrs (drop campaigns, product pages)
+
+### Porsche — 3D Car Configurator (porsche.com/en/3d-configurator)
+- **What works:** The automotive configurator template — orbit controls, studio lighting, material swatches (paint/finish/trim), scroll-driven exterior→interior reveal
+- **URL:** porsche.com
+
+### Dyson — Product Pages (dyson.com)
+- **What works:** Consumer-hardware hero — product spins on a light studio stage, spec labels float beside exploded parts, minimal chrome, neutral backdrop
+- **URL:** dyson.com
+
+### BMW / Audi — Online Configurator
+- **What works:** 360° exterior + interior walk, paint/material transitions over consistent studio lighting — reference for finish-swap interactivity
+- **URL:** bmw.com / audi configurator
+
+### holo3 / Spline Showcase (spline.design)
+- **What works:** Real-time WebGL scenes shipped with orbital controls and environment reflections — a directory of what three.js alternatives can achieve at speed
+- **URL:** spline.design
+
+### Rog — Graphic Cards / ASUS Product Pages
+- **What works:** 3D component heroes with exploded views — see how exposed parts (chamber/metal) get mono spec labels floating beside them
+- **URL:** asus.com/rog
+
+---
+
+## Key Visual References
+
+### Staging
+- **Studio stage** — neutral light gray center, dark background only as a material stage
+- **Contact shadow** — soft shadow plane directly under the object, so it "lands"
+- **Vignette** — subtle falloff toward the edges; never a flat fill
+
+### Lighting
+- **Key** (45°, soft, warm) — the dominant shape-defining light
+- **Fill** (hemisphere, 0.08) — lifts shadows without washing out
+- **Rim** (tight spot behind) — separates the silhouette from the stage
+
+### Materials
+- **Brushed metal** — anisotropy, roughness ~0.3, faint scratches
+- **Clearco lacquer** — clearcoat 1.0 + reflection blur
+- **Matte rubber** — roughness 0.85, no specular bounce
+- **Environment reflections** — HDR map, never flat/gray
+
+### Motion
+- **Orbital drift** — auto-rotating at 0.08 rad/s, paused while dragging
+- **Scroll dolly** — camera moves with lerp, not snapping
+- **Exploded view** — 16px offsets, staggered 60ms, 900ms
+- **Material swap** — 500ms lerp of metalness/roughness/color
+
+### Typography
+- **Product name** — a huge light uppercase display (Inter 200), track width
+- **Spec labels** — 11–12px mono (JetBrains Mono), tracking 0.08em
+- **No long body** — captions capped at 340px, 14–16px
+
+---
+
+## Screenshot Notes
+
+> When capturing references for this style, look for:
+> - The object (must be a real-time 3D render, not a flat photo)
+> - The stage (neutral, light-to-dark gradient, never busy)
+> - The lighting (key + fill + rim, soft shadows, contact shadow)
+> - The camera (orbit autopilot, scroll-driven dolly/pan/tilt, exploded view)
+> - The typography (huge light product name; tiny mono spec labels; no walls of copy)
+> - The accent color (taken from the product finish, not invented by the UI)
+> - The overall mood (sculptural, photorealistic, interactive, premium — a showroom)
+
+---
+
+## Notes
+
+- **Best references are product-live sites** allowing the interaction: Apple, Nike, Porsche/BMW/Audi configurators — study the *interaction*, not just the poster frame.
+- **Distinguish from flat site-to-product pages:** in "3D Product Showcase" the 3D model is the canvas, always. A page that uses a video mutation or a static photo is a different style (Luxury Refined Restraint / Dark Cinematic Studio).

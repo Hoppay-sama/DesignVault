@@ -1,0 +1,79 @@
+# Common Mistakes
+
+## Mistake 1: Heavy Backdrop Blur
+
+**What people do:** Crank backdrop-filter blur to 40px+ "so the glass really blurs the background."
+
+**Why it fails:** High blur radii are GPU-hungry. With multiple glass layers over a dark video background, the page drops into laggy, janky scroll — the video ground plus multiple blurred panels force expensive re-renders. Performance breaks before the aesthetic does.
+
+**Fix:** Keep blur between 12-24px (the color architecture specifies 12-24px). Layer the effect instead — more glass panes at a modest blur reads as more premium than one heavily-blurred pane. Add `will-change` and `transform: translateZ(0)` sparingly, only on the panels that truly need it. Test on a mid-range mobile GPU, not your development machine.
+
+---
+
+## Mistake 2: Unreadable Text on Glass
+
+**What people do:** Place white text on top of a light background video with only a 5% white glass tint behind it.
+
+**Why it fails:** The glass background is `rgba(255,255,255,0.05)` — nearly invisible on purpose. When the video behind the panel is bright (light sky, white product, a lit room), frosted glass alone does not lift text to readable contrast. The words wash out into the footage.
+
+**Fix:** Test text contrast against the brightest frame of the background video, not the near-black ground. Darken the glass only where text sits, or add a scrim layer to panels holding copy. Use the contrast ladder — `#FFFFFF` primary, `rgba(255,255,255,0.7)` secondary, `rgba(255,255,255,0.5)` labels — and never place body text at the 0.5 step.
+
+---
+
+## Mistake 3: No Light-Source Consistency
+
+**What people do:** Every glass panel gets the same border gradient pointing the same direction, regardless of where light enters the scene.
+
+**Why it fails:** The liquid-glass border is meant to look like physical refraction — light bending through a pane. If the hero video has key light from the top-left and every card's highlight runs identically down the top edge, the glass stops feeling physical and reads as a CSS trick. The illusion depends on consistent lighting direction across every surface in the shot.
+
+**Fix:** Choose one light direction from the video and commit to it — highlights along the light-facing edges, shadowed edges opposite. Match the inner border's bright stops to the video's key light. Vary the border gradient's orientation per panel position. If the video's light moves, the panes should feel it.
+
+---
+
+## Mistake 4: Overused Frosted Cards
+
+**What people do:** Frosted card after frosted card — 10 identical floating rectangles at the same Z-depth over the same backdrop.
+
+**Why it fails:** The style is named for the glass, and the signature effect — `mask-composite` gradient borders, edge refraction — only registers when the glass is special. A grid of identical frosted cards looks like a generic 2023 SaaS template. Repetition kills the luxury.
+
+**Fix:** Treat each glass pane as a deliberate set-piece. Vary Z-depth and panel shape with asymmetric border-radius. Use fewer, larger panels and let the video breathe between them against the near-black ground. Mix full-width hero panes with small floating chips. When a card is the 6th identical rectangle, replace it with plain text over video.
+
+---
+
+## Mistake 5: Flat, Dead Glass (No Z-Depth)
+
+**What people:** Every panel on the page feels like the same glass pane — same blur, same border, same opacity — copy-pasted at different coordinates.
+
+**Why it fails:** Glass earns its spatial label only from depth. Real panes blur the video behind them at different rates based on distance from the surface. When every panel accepts the same 20px blur and identical border, the floating illusion dies — it becomes stickers on one plane, not glass in space.
+
+**Fix:** Assign each panel a Z value and vary blur and border intensity with depth — `blur(12px)` with a faint border for far planes, `blur(24px)` with the full gradient border for near ones. Add a soft drop-shadow beneath near panels so they visibly hover above the video. A near card and a far card should not be twins.
+
+---
+
+## Mistake 6: Dead Flat Glass (No Iridescence)
+
+**What people do:** Use a single solid white/10 background, a plain border, blur — done.
+
+**Why it fails:** Solid translucent glass with no moving light reads as an industrial window, not "liquid noir." The style's appeal lives in the refraction — specular highlights gliding across the surface, the border gradient catching a slow sheen. Remove the sheen and the material dies into a flat gray rectangle with a blur.
+
+**Fix:** Give every significant glass surface slow light-life. Animate the border gradient sheen (2-4s cycle), place a specular highlight at the light-facing corner, tune the gradient values until the edges feel luminous. Glass that sits perfectly still is not liquid.
+
+---
+
+## Mistake 7: Purple / Cream Tints Creeping In
+
+**What people:** Add purple glow blooms, cream or warm panels, or gold accents "to make it feel premium."
+
+**Why it fails:** Liquid Glass Noir is explicitly no purple, no cream — pure dark elegance with white/light glass surfaces. Warm cream glass fights the noir near-black ground; purple glows land on every overused AI-website cliché. The glass IS the accent — the moment you paint the panel, the depth dies and the style stops being luxury.
+
+**Fix:** Restrain color to white or one subtle cool blue (`rgba(100, 180, 255, 0.8)`). If a section needs warmth, source it from the video — never from the panels. The glass and its 1px refraction border are the palette, and that restraint is the signature.
+
+---
+
+## Mistake 8: Background Video Without Purpose
+
+**What people do:** Use any abstract video as "ambient motion."
+
+**Why it fails:** The ground video is not wallpaper — it builds the physical world the glass floats in, sets the light source, supplies the noir mood, and gives the blur something to affect. Random trippy clips turn noir into novelty; flat corporate footage gives the glass no light to refract.
+
+**Fix:** Choose noir-appropriate video — dark atmospherics, smoke, water, slow city light, hard studio edge lighting. Play it slow, treat it as the canvas you light the glass against, and compose the panels to sit inside its world rather than on top of it.

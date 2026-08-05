@@ -1,0 +1,149 @@
+# Exact Replica Prompt — Hand-Drawn / Organic Illustration / Human Mark
+
+> Copy this entire prompt and paste it into your AI coding assistant.
+
+---
+
+```
+Build a hand-drawn illustration page for "SKETCHPAD" — an indie stationery and print studio. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `SKETCHPAD — Made by hand, on purpose`.
+
+Vibe: Visible human hand as counter-signal to AI-generated perfection. Wobbly lines, imperfect shapes, visible brush strokes. Not childish — sophisticated illustration with intentional imperfection. A declaration of human authorship.
+
+---
+
+## ANTI-SLOP CONSTRAINTS
+
+- NO AI-generated imagery (hand-drawn line art, doodles, and sketches only)
+- NO perfect geometric shapes (every line wobbles, every shape closes imperfectly)
+- NO corporate polish or digital precision (visible media texture everywhere)
+- NO smooth, mechanical motion (gentle wobble and draw-on only, nothing mechanical)
+- NO grid-bound layouts (illustrations break out of containers, layout follows the art)
+- NO flat solid-color fills (pencil grain, watercolor bleed, marker streaks, ink splatter)
+- NO perfectly straight rules and borders (hand-drawn dividers only)
+- NO digital/UI-perfect typography (handwritten or humanist display type)
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Patrick+Hand&family=Inter:wght@400;500&display=swap
+```
+
+Usage:
+- **Caveat 700**: Display headlines — `clamp(2rem, 5vw, 4.5rem)`, sentence case, slightly rotated (-1deg to 1deg), as if penned quickly
+- **Patrick Hand 400**: Subheads and emphasis — handwritten, humanist, uneven baseline
+- **Inter 400/500**: Body text — `clamp(0.875rem, 1vw, 1rem)`, line-height 1.7, charcoal on cream
+- **Inter 500 UPPERCASE**: Labels — 10-12px, tracking 0.15em — but always paired with a small hand-drawn mark (arrow, star, underline)
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --paper-cream: #FAF6EF;       /* Paper base */
+  --ink-charcoal: #2B2622;      /* Warm charcoal ink */
+  --terracotta: #C65D3B;        /* Warm earthy accent */
+  --ochre: #C98A2D;             /* Earthy gold */
+  --sage: #8A9B7E;              /* Muted green */
+  --cobalt: #2E5F9E;            /* Bold marker accent */
+  --vermillion: #D94F2B;        /* Bold marker accent */
+  --lemon: #E8C531;             /* Bold marker accent */
+  --ink-muted: rgba(43, 38, 34, 0.62);
+  --ink-faint: rgba(43, 38, 34, 0.35);
+}
+```
+
+Body: `bg-[#FAF6EF] text-[#2B2622] antialiased font-body` with a subtle paper texture (noise/SVG grain, opacity ~0.04) over the whole page.
+
+---
+
+## STRUCTURE
+
+### 1. Hero Section
+- `min-h-[100dvh]`, cream paper background with subtle grain
+- Large hand-drawn illustration breaking out of its container (line art, watercolor wash accents)
+- Text block, slightly rotated, asymmetric:
+  - Label: "STUDIO / EST. 2019" with a small hand-drawn star next to it — Inter 500, uppercase, tracking 0.15em, 11px, ink-muted
+  - Headline: "Made by hand, on purpose" — Caveat 700, `clamp(2rem, 5vw, 4.5rem)`, charcoal, rotation -1deg
+  - Subtext: "Every card, print, and notebook drawn first in pencil, then inked." — Patrick Hand, ink-muted, max-width 420px
+  - CTA: "SEE THE WORK" — hand-drawn underline, terracotta, Patrick Hand, hover wobble
+
+### 2. Portfolio Section (3-4 works)
+- Asymmetric grid — illustrations break out of their cards' bounds at different angles
+- Each work: hand-drawn thumbnail (line art + one watercolor/marker accent) on a paper card with irregular hand-drawn border (SVG stroke, uneven line weight)
+- Caption per work: Patrick Hand title + one-line note, ink-muted
+- Between works: hand-drawn divider (SVG squiggle) instead of rules
+
+### 3. Process Section
+- Split: hand-drawn diagram (left) + text (right)
+- Diagram: sketch of the process — pencil, ink, watercolor — drawn in line art with hatched fills
+- Headline: "Pencil, then ink, then color" — Caveat 700
+- Body: 2-3 sentences in Patrick Hand about craft and human pace
+
+### 4. Footer
+- Cream paper, charcoal text
+- "SKETCHPAD © 2026 — MADE BY HAND, ON PURPOSE" — Inter 500, uppercase, tracking 0.15em, 11px, ink-muted
+- Small hand-drawn doodle (signature squiggle) beside the text
+
+---
+
+## HAND-DRAWN UI
+
+```css
+.draw-border {
+  border: none;
+  position: relative;
+  filter: url(#wobble); /* SVG turbulence on the stroke */
+  stroke: #2B2622;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  fill: rgba(255, 255, 255, 0);
+}
+
+.wobble {
+  animation: wobble 3s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes wobble {
+  0%, 100% { transform: rotate(-0.6deg) translate(0, 0); }
+  50% { transform: rotate(0.6deg) translate(1px, -1px); }
+}
+```
+
+---
+
+## ANIMATIONS
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Hero illustration | stroke draw-on (stroke-dasharray), opacity 0→1 | 2000ms | `ease-out` |
+| Display text | opacity 0→1 + translateY(12px)→0 | 1200ms | `ease-out` (delay 400ms) |
+| Body text | opacity 0→1 | 900ms | `ease-out` (delay 700ms) |
+| Doodles & accents | subtle wobble rotation | 3s | `ease-in-out`, infinite |
+| Illustrations | breathing scale(1)→(1.01) | 6s | `ease-in-out`, infinite |
+| CTAs | wobble on hover, hand-drawn underline draws in | 400ms | `ease-out` |
+
+`prefers-reduced-motion: reduce` → disable all wobble/breathing/draw-on, instant entrance.
+
+---
+
+## ANTI-SLOP (LOCKED)
+
+- Hand-drawn or illustrated elements throughout (no AI-generated imagery)
+- Visible media texture — pencil grain, watercolor bleed, ink splatter, marker streaks, eraser marks
+- Organic, imperfect shapes with varied line weight
+- Warm earthy palette (terracotta, ochre, sage, cream, charcoal) with bold marker accents (cobalt, vermillion, lemon)
+- Gentle, organic motion — draw-on, wobble, breathing; nothing mechanical
+- Layout follows the illustration, not the grid
+- Handwritten or humanist display type (Caveat, Patrick Hand) with clean sans body
+- Marginalia and sketch notes as design elements
+- No perfect geometric shapes, no corporate polish, no digital precision
+
+---
+
+Recreate this page with the exact hand-drawn aesthetic, visible human mark, media textures, and warm earthy palette above.
+```

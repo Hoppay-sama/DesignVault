@@ -1,0 +1,39 @@
+# Design Principles
+
+## 1. TERMINAL AS AESTHETIC
+
+The interface borrows directly from code editors and command lines — window chrome, prompt strings, typed output, a blinking caret. The page is framed as a terminal window: title bars, status lines, tabular readouts, ASCII art where a hero image would go. Users read the interface like an operator reads a console — every element looks like it could have come from `stdout`.
+
+**What it prevents:** The generic dark-mode dashboard. A terminal is a specific, recognizable artifact — window frame, mono output, caret — not just "dark background with neon text."
+
+---
+
+## 2. NEON AS SIGNAL
+
+Electric accents on near-black ground create the nocturnal mission-control feel. The base is zinc-950/near-black (#0A0F0F), and color is rationed: one accent family (phosphor cyan #00D4FF, electric green, amber) reserved for interactive elements, live data, and status indicators. White text does the reading; neon does the signaling. If everything glows, nothing is signal.
+
+**What it prevents:** Rainbow cyberpunk palettes and gradient-heavy "hacker movie" clichés. The power comes from the contrast between a dead-dark ground and a single luminous accent.
+
+---
+
+## 3. DATA-DENSE, NOT CLUTTERED
+
+High density is the goal — this style carries a lot of information (typography axis 4, density axis 4) — but density is organized through strict grid-locking and monospace discipline. Data lives in aligned columns, tabular readouts, and consistent technical margins. Left-aligned everything, no decoration without a function, whitespace as structure rather than emptiness.
+
+**What it prevents:** Chaos dressed as complexity. Dense layouts that lose the grid collapse into clutter; the mission-control feel requires every datum to have an address.
+
+---
+
+## 4. THE MACHINE MUST WORK
+
+Terminal tropes are only credible when they behave like the real thing. Typing animations should actually type; the caret should blink like a real cursor; scan-lines should read as a CRT, not a texture filter; window framing should imply real content inside. Anything that looks like a terminal but doesn't act like one collapses the illusion immediately.
+
+**What it prevents:** Decorative-only terminal styling — fake prompts that don't respond, scan-lines that exist purely as a pattern, text that types itself in place. Authenticity comes from behavior, not appearance.
+
+---
+
+## 5. MONO IS THE VOICE, SANS IS THE TITLE
+
+Monospace (JetBrains Mono, Fragment Mono, Azeret Mono) carries all data and body-level technical text — it is the style's voice and must stay readable at small sizes. Geometric sans (Aeonik, Archivo) is reserved for headlines, giving the interface its engineered, machine-made hierarchy. Serif fonts and warm colors are excluded entirely.
+
+**What it prevents:** Font soup and unreadable density. If the mono is unreadable or the sans leaks into data, the terminal grammar breaks and the interface reads as decoration.

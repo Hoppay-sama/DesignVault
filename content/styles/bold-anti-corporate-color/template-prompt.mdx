@@ -1,0 +1,138 @@
+# Parameterized Template — Bold Anti-Corporate Color
+
+> Use this template to generate a Bold Anti-Corporate page for YOUR brand.
+
+---
+
+```
+Build a bold anti-corporate page for "[BRAND_NAME]" — [ONE-LINE DESCRIPTION, e.g., "a music events collective for youth culture"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: Saturated primaries, collage layout, elastic easing, risograph texture, punk typography. Zine meets punk poster. Direct rejection of corporate minimalism. Clashing color combinations intentional. Personality over polish.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY)
+
+- NO corporate minimalism
+- NO muted colors (saturated primaries that clash intentionally)
+- NO perfect alignment (overlapping, misaligned, off-grid)
+- NO professional polish (imperfection is the point)
+- NO single-typeface restraint (bold condensed + handwritten + stencil together)
+- NO smooth gradients (flat ink blocks and halftones)
+- NO calm, slow motion (bouncy, elastic, slightly chaotic)
+- NO clean, sterile surfaces (risograph, halftone, grain, hand-drawn marks)
+
+---
+
+## FONTS
+
+Use these three voices TOGETHER (never one alone):
+- [DISPLAY_FONT] — bold condensed (Archivo Black, Anton, Bebas Neue) — oversized display headlines
+- [HAND_FONT] — handwritten (Caveat, Permanent Marker, Gochi Hand) — annotations, accents, scribbles
+- [STENCIL_FONT] — stencil/mono (Special Elite, Courier Prime, JetBrains Mono) — labels, badges, numbers
+
+Load via Google Fonts. Headlines `clamp(3rem, 8vw, 8rem)`, UPPERCASE, tight leading.
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --acid-yellow: #D4FF00;        /* Electric accent */
+  --hot-pink: #FF2D95;           /* Electric accent */
+  --electric-orange: #FF6B00;    /* Electric accent */
+  --cobalt-blue: #1D4ED8;        /* Saturated primary */
+  --lime-green: #A3E635;         /* Saturated primary */
+  --ink-black: #0A0A0A;          /* Ground */
+  --paper-white: #F7F5F0;        /* Print ground */
+}
+```
+
+**Accent guidance:** Pick 3-5 from the electric family (acid yellow #D4FF00, hot pink #FF2D95, electric orange #FF6B00, cobalt blue #1D4ED8, lime green #A3E635, magenta, cyan) and make them CLASH. No quiet harmony. Alternate ink-black and paper-white grounds between sections.
+
+---
+
+## STRUCTURE
+
+### Hero
+- `min-h-[100dvh]`, giant display headline (slight rotation, -2deg), handwritten annotation under it
+- Sticker-bombed badges (rotated, overlapping, accent-filled)
+- CTA: accent block, ink border, offset shadow, elastic hover
+
+### Manifesto / Collage
+- Overlapping panels with intentional misalignment (3-4deg rotations, off-grid)
+- Flat accent fills with halftone shadow strips
+- Headline split across panels, one word per color
+- Hand-drawn arrow/margin notes + sticker tape details
+
+### Content List (events / products / posts)
+- Sticker-like rows: stencil label + bold condensed data + oversized ghost number
+- Alternating slight rotation and off-grid indents
+- Hover: elastic scale + wobble
+
+### Footer
+- Acid yellow (or loud accent) ground, ink-black text
+- Sticker badges with slogans, grain overlay
+
+---
+
+## TEXTURE
+
+```css
+/* Risograph misregistration: offset duplicate layer */
+.riso-duplicate::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 3px; top: -2px;
+  color: #FF2D95;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+```
+
+- Halftone dot fields (CSS radial-gradient dots) behind sections
+- Grain/noise overlay across the whole page (SVG noise, opacity 0.1-0.15)
+- Sticker tape strips (semi-transparent rectangle, slight rotate) on panel corners
+
+---
+
+## ANIMATIONS
+
+- Entrance: scale(0)→1 with overshoot (backOut, 500-700ms, staggered)
+- Elastic hover: scale(1)→(1.05-1.06), 250-350ms, backOut
+- Wobble loop: rotate ±1.5deg oscillation, 4s, infinite (accent blocks, badges)
+- Marquee strip: infinite translateX scroll, 15-25s, linear
+- Panel reveals: translateY + rotate into place, springy
+
+`prefers-reduced-motion: reduce` → disable all wobble/marquee/spring, instant entrance.
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- Flat saturated clashing color blocks
+- Collage layout — overlapping, intentional misalignment
+- Risograph texture with visible misregistration
+- Halftone dots and heavy grain
+- Hand-drawn elements
+- Oversized condensed display typography
+- Mixed type styles used simultaneously
+- Elastic, springy, slightly chaotic motion
+- Sticker/tape physical details
+- No corporate minimalism, no muted colors, no perfect alignment, no professional polish
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines:** 3-6 words. Loud, defiant, imperative. "WE DON'T ASK PERMISSION" not "Our Brand Values."
+
+**Body text:** 1-2 sentences. Irreverent, direct. Write like a punk flyer, not a pitch deck.
+
+**Voice:** Anti-establishment, playful, unpolished. Yell in color; whisper in handwriting.
+
+---
+
+Replace all [BRACKETED] placeholders, then paste into your AI coding assistant.
+```

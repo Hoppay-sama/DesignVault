@@ -1,0 +1,39 @@
+# Design Principles
+
+## 1. THE GRID IS THE COMPOSITION
+
+The grid is not a tool the design uses — it is the design. The 12-column system with its 8px base unit is visible in every measurement, every rule, every margin. Nothing is placed "by eye"; every element occupies a computable position. The beauty is not in the content but in the exactness of its placement. When a viewer looks at the page, the grid is what they are seeing.
+
+**What it prevents:** The tendency to treat the grid as invisible scaffolding and the content as the design. Here the structure IS the aesthetic — content earns its place by justifying to it.
+
+---
+
+## 2. MONOSPACE AS THE INSTRUMENT
+
+The fixed character width of monospace is the typographic echo of the grid — every glyph occupies its own column, every line locks to the same invisible rails. IBM Plex Mono, Space Mono, or JetBrains Mono prints the page like a dimensioned engineering drawing: type is *printed*, not rendered. One family at 300/400/500 across all registers — consistency is the system. A single neo-grotesque (Akkurat, Aeonik, Neue Haas) at Regular weight is the permitted escape: the human voice inside the machine voice.
+
+**What it prevents:** Decorative type choices that break the instrument register. If the type does not align like the grid, the entire contract collapses.
+
+---
+
+## 3. EVERY PIXEL IS JUSTIFIED
+
+Hairline rules, margins, columns, and type sizes — every pixel answers to the base unit. Offsets are multiples of 8px. 1px rules land exactly on column edges. The type scale is computed (1.25x–1.5x modular), never chosen ad hoc. Asymmetry is permitted but derived: an offset block justifies to a rail, and the justification is visible. Precision here is not a mood — it is a measurable property.
+
+**What it prevents:** The "close enough" habit. A layout that is almost aligned reads as sloppy in this style; a layout that is exactly aligned reads as authoritative. There is no in-between.
+
+---
+
+## 4. RED IS AN INSTRUMENT, NOT DECORATION
+
+The palette is monochrome — paper white `#FAF9F7`, engineering black `#101010`, one muted gray `#6E6E6E` — plus one Swiss red `#E4002B`. The red is used sparingly and always functionally: an active column, a validated state, the changed figure, a single underscore on the one thing that matters on the plane. If red appears twice, one of its uses is decoration.
+
+**What it prevents:** The palette carrying the design. Structure carries it; color reports. A second hue is never introduced — a muted desaturation of the red at most.
+
+---
+
+## 5. RESTRAINT IS THE AUTHORITY
+
+Max 2-3 colors. Minimal motion (100-200ms micro-transitions only — and only when they inform state). Flat surfaces. Generous whitespace. The style says *"we did not need more"* — and that restraint is what makes it feel expensive and correct. Authority in Swiss work comes from what is omitted, not what is added. Density is earned: every element must justify its pixels against the whitespace.
+
+**What it prevents:** The instinct to fill. More content, more color, more motion does not make the design better — it makes it louder, and loudness is failure here.

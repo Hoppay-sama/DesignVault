@@ -1,0 +1,79 @@
+# Color Architecture
+
+## Ground
+
+The ground is the paper itself — warm, cream, slightly textured. There is no flat digital background:
+
+```css
+--color-paper: #F6F1E4;          /* Warm cream, like unbleached paper */
+--color-paper-dark: #2E2A24;     /* Charcoal-warm, for inverted sections */
+```
+
+**Why warm cream:** Not pure #FFFFFF — pure white feels printed and digital. A warm cream (#F6F1E4) reads like real paper under hand-drawn ink, giving every element a physical, human surface to sit on.
+
+---
+
+## Warm Earthy Palette
+
+```css
+--terracotta: #C05A33;       /* Burnt clay — the warm anchor */
+--ochre: #C98A2B;            /* Golden earth — sunlit, slightly dusty */
+--sage: #7E8C6E;             /* Muted green — natural, calm */
+--cream: #F5EFE0;            /* Paper tone — the light field */
+--charcoal: #33302A;         /* Warm near-black — ink lines, text */
+```
+
+**These are the primary colors.** They feel like pigments — clay, soil, leaf, fiber — mixed by hand rather than picked from a swatch. Every value is slightly muted (terracotta is not fire-engine red, ochre is not gold) so the palette stays earthy and artisanal, never corporate.
+
+---
+
+## Bold Marker Accents
+
+```css
+--marker-cobalt: #2B4FC4;    /* Marker blue — bold, primary */
+--marker-vermillion: #DC3A24; /* Marker red-orange — urgent, warm */
+--marker-lemon: #F2C230;     /* Marker yellow — bright, happy */
+```
+
+**Usage:** Bold marker colors appear as accents — one highlighted word, an arrow, a circled section, a doodle filling. They read like someone grabbed a Sharpie and emphasized what matters. Use them sparingly: one marker accent per section, never a full marker-palette page.
+
+**Rule:** Warm earthy is the default voice; bold marker is the exclamation point. If everything is marker-bright, the human emphasis is lost.
+
+---
+
+## Ink & Text
+
+```css
+--color-ink: #2A2420;                       /* Warm near-black ink */
+--color-ink-soft: #4A3F36;                  /* Muted brown-gray, for secondary text */
+--color-text-on-dark: rgba(246, 241, 228, 0.92);  /* Cream on charcoal */
+--color-text-muted: rgba(42, 36, 32, 0.6);  /* Faded ink, for labels */
+```
+
+**Why warm ink:** Text is written with a pen, not rendered by a screen — so the black has a warm brown undertone (#2A2420) like fountain-pen ink on paper. Pure #000000 reads digital; warm ink reads handwritten.
+
+---
+
+## Hand-Drawn Accents
+
+```css
+--highlight-marker: #F2C230;   /* Lemon marker over body text */
+--underline-pencil: rgba(192, 90, 51, 0.5);  /* Terracotta pencil underline */
+--splat-ink: #2A2420;          /* Ink splatter, drawn not placed */
+--washi-wash: rgba(126, 140, 110, 0.25);     /* Sage watercolor wash */
+```
+
+**Usage:** These are the non-flat colors — the marker swipe, the pencil underline, the watercolor wash, the ink splatter. They are applied as textures and strokes, never as full fills. They give the page the feel of a marked-up sketchbook page.
+
+---
+
+## Color Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Pure #000000 or #FFFFFF | Warm ink #2A2420 and cream paper #F6F1E4 |
+| Neon or fully saturated palette | Muted earthy pigments with rare marker accents |
+| Corporate blues/grays | Terracotta, ochre, sage, cream, charcoal |
+| Flat digital fills | Pigment-like colors with visible texture |
+| Perfect color transitions | Hand-applied washes with slight bleed and variance |
+| Matching brand-color-perfect palettes | Slightly off register — like pigment mixed by hand |

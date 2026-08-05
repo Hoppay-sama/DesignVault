@@ -1,0 +1,103 @@
+# Texture & Surface
+
+## Primary Texture: Gradient Mesh Atmosphere
+
+The texture IS the atmosphere. Every surface should have the qualities of light passing through something soft:
+
+| Quality | Description |
+|---------|-------------|
+| **Gradient mesh** | Pastel fields that bleed into each other — no seams, no hard boundaries |
+| **Cloud-like diffusion** | Everything passes through soft blur — 1-3px Gaussian, like looking through mist |
+| **Soft glow** | Light halos around elements — luminance instead of shadow |
+| **Light leaks** | Occasional soft flares of warm cream or lavender light crossing a field |
+| **Fine grain** | Nearly invisible film grain (0.01-0.02 opacity) — the texture of memory |
+
+**The goal:** No surface should look manufactured. Every surface should look like it exists inside a dream — lit from within, diffused by atmosphere, soft at every edge.
+
+---
+
+## Soft Glow Surfaces
+
+```css
+.glow-surface {
+  background: radial-gradient(
+    80% 80% at 50% 40%,
+    rgba(245, 221, 227, 0.5),
+    rgba(227, 220, 240, 0.25) 60%,
+    transparent 100%
+  );
+  filter: blur(1px);
+  box-shadow: var(--glow-soft);
+}
+```
+
+**Purpose:** UI elements glow rather than sit. The radial gradient + blur makes every surface look like a soft concentration of atmosphere — a bloom of light, not a panel. Borders are either absent or hairlines at 30% opacity.
+
+---
+
+## Mist & Fog Layers
+
+```css
+.mist-layer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(246, 241, 240, 0) 0%,
+    rgba(246, 241, 240, 0.55) 40%,
+    rgba(220, 233, 242, 0.35) 70%,
+    rgba(246, 241, 240, 0) 100%
+  );
+  filter: blur(12px);
+  mix-blend-mode: screen;
+}
+```
+
+**Purpose:** Fog layers sit between background and content, creating depth through atmosphere rather than shadow. Overlapping translucent layers (design principle: layout is non-grid, layers overlap) are what make the page feel three-dimensional — not elevation, but weather.
+
+---
+
+## Image Processing
+
+Imagery should be processed to live inside the dream:
+
+| Processing | Effect | Parameters |
+|-----------|--------|------------|
+| **Soft blur** | Dreamlike focus | 0.5-2px Gaussian blur |
+| **Low saturation** | Pastel diffusion | Saturation 60-75% |
+| **Brightness lift** | Glowing, ethereal light | Brightness +5 to +10 |
+| **Contrast reduction** | Soft over sharp | Contrast -10 to -15 |
+| **Grain** | Memory-like texture | Opacity 0.01-0.02, overlay |
+| **Light leak wash** | Cream or lavender flare | Soft overlay at 10-15% opacity |
+
+**The goal:** Images look like memories of a place — bright, soft, slightly faded, with color fields that feel larger than the subject.
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Gradient mesh + aurora, alive with slow drift |
+| Cards/panels | None — no hard containers, no borders, no flat fills |
+| Text | Floating directly on atmosphere, translucent |
+| UI elements | Glow surfaces, blurred edges, 30% hairlines at most |
+| Buttons | Glowing bloom, fully rounded (pill or organic blob) |
+| Navigation | Floating, translucent, minimal |
+| Dividers | None — sections melt into each other through fog |
+
+**No cards, no panels, no hard edges.** The style bans hard edges entirely — every boundary diffuses. If a section needs separation, use mist or a change in atmosphere, never a line or a box.
+
+---
+
+## Texture Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Hard edges, sharp borders | Diffused edges, soft blur, fog |
+| Flat solid-color surfaces | Gradient mesh, glow, atmosphere |
+| Shadows and depth via darkness | Glow and light — luminance is the depth cue |
+| Bold saturated textures | Low-saturation pastel washes |
+| Geometric patterns | Cloud-like diffusion, organic fields |
+| Heavy film grain | Nearly invisible grain (0.01-0.02) |
+| Sharp photography | Soft, bright, slightly blurred imagery |

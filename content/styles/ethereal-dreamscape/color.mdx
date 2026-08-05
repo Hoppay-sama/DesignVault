@@ -1,0 +1,80 @@
+# Color Architecture
+
+## Ground
+
+The ground is the atmosphere itself — soft gradient mesh fields bleeding into each other. There is no flat background color. For text areas and transitions:
+
+```css
+--color-ground-light: #F6F1F0;    /* Warm ivory with a blush hint — like cream morning light */
+--color-ground-dark: #1B1624;     /* Deep plum-tinted night — the dark side of a dream */
+```
+
+**Why tinted ground:** No pure #FFFFFF and no pure #000000. Ivory (#F6F1F0) keeps the light side warm and soft, like light through closed eyelids. Plum-tinted night (#1B1624) lets dark sections feel like dusk in a dream — never void-like, never harsh.
+
+---
+
+## Pastel Base
+
+```css
+--pastel-lavender: #E3DCF0;      /* Lavender — soft, calm, primary */
+--pastel-blush: #F5DDE3;         /* Blush pink — tender, warm */
+--pastel-powder-blue: #DCE9F2;   /* Powder blue — airy, sky-like */
+--pastel-mint: #DFF0E6;          /* Mint — fresh but muted */
+--pastel-cream: #F7F0E2;         /* Cream — soft, milky */
+```
+
+**These are the atmosphere.** They never sit flat — they exist as gradient mesh fields, aurora washes, and translucent overlays. The palette is low-saturation by design: bold saturated colors are banned from this style. Everything feels like it was filmed through frosted glass.
+
+---
+
+## Aurora / Gradient Mesh
+
+```css
+--aurora-mesh: radial-gradient(
+  120% 120% at 20% 20%, #F5DDE3 0%, transparent 45%
+), radial-gradient(
+  120% 120% at 80% 30%, #DCE9F2 0%, transparent 50%
+), radial-gradient(
+  100% 140% at 50% 80%, #E3DCF0 0%, transparent 55%
+);
+```
+
+**Usage:** Gradient mesh IS the environment (design principle #2). Aurora effects are the same pastel family animated slowly — the colors breathe, drift, and bleed into one another. The saturation stays low so the effect reads as atmosphere, not decoration.
+
+---
+
+## Text
+
+```css
+--color-text-on-light: rgba(27, 22, 36, 0.78);   /* Plum-tinted dark, translucent */
+--color-text-on-dark: rgba(246, 241, 240, 0.82); /* Warm ivory, translucent */
+--color-text-muted: rgba(27, 22, 36, 0.45);      /* Muted, for labels */
+```
+
+**Why translucent text:** Text floats over the atmosphere — it does not sit on a card. Translucent text (75-85% opacity) keeps the dream intact; opaque text would puncture it.
+
+---
+
+## Glow & Diffusion
+
+```css
+--glow-soft: 0 8px 40px rgba(227, 220, 240, 0.6);        /* Lavender halo */
+--glow-blush: 0 6px 32px rgba(245, 221, 227, 0.55);      /* Blush halo */
+--glow-aurora: 0 0 60px rgba(220, 233, 242, 0.45);       /* Sky halo */
+```
+
+**Usage:** Glow replaces shadows. Shadows imply weight and groundedness; glow implies floating and light passing through. Every elevated element emits light rather than casting darkness.
+
+---
+
+## Color Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Bold saturated colors | Low-saturation pastels — lavender, blush, powder blue, cream |
+| Flat solid backgrounds | Gradient mesh, aurora washes, atmosphere |
+| Pure #FFFFFF | Warm ivory #F6F1F0 |
+| Pure #000000 | Plum-tinted night #1B1624 |
+| Hard color transitions | Colors bleeding into each other, slow shifts |
+| Shadows | Soft glow halos — light, not darkness |
+| High contrast | Soft over sharp — diffused, low-contrast fields |

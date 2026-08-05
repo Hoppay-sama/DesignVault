@@ -1,0 +1,80 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Bold, condensed display face — monumental, architectural |
+| **Examples** | Anton, Archivo Black, Druk, Bebas Neue, Space Grotesk Bold |
+| **Weight** | 700+ (or variable 100–900 animated for the hero) |
+| **Tracking** | -0.02em to 0em (tight — letters touch, form masses) |
+| **Size** | `clamp(8rem, 15vw, 18rem)` — monumental, viewport-filling |
+| **Transform** | UPPERCASE — lowercase loses the poster's mass |
+| **Line Height** | 0.85-0.95 (tight — stacked words overlap and interlock) |
+
+**Why bold condensed:** Condensed faces pack maximum width per letterform, letting text fill the viewport like architecture. A 200px headline of Anton reads as a solid object; the same size in a regular sans reads as a sentence. The type is the layout — it must be structural, not literary.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same family as display, upright and readable — supports, never competes |
+| **Examples** | Space Grotesk Regular/Medium, Inter Regular, Archivo Regular |
+| **Weight** | 400-500 |
+| **Tracking** | 0em-0.02em (standard) |
+| **Size** | `clamp(1rem, 1.4vw, 1.375rem)` — 16-22px |
+| **Line Height** | 1.4-1.5 (tight-but-readable, matches the dense poster grid) |
+
+**Why a supporting sans:** The body is the calm counterweight to the monumental display. It carries the information the headline shouts. It shares the display family's skeleton so the page stays one voice — but drops the condensation so paragraphs are actually legible at length.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same family, light weight, wide tracking |
+| **Examples** | Space Grotesk Light, Inter Light, Archivo Light |
+| **Weight** | 300 |
+| **Tracking** | 0.15em-0.25em (very wide — like technical annotations) |
+| **Size** | 10-14px |
+| **Transform** | UPPERCASE |
+
+**Usage:** Section indexes ("01 — MOTION"), marquee metadata, credits. These tiny labels create the extreme scale contrast the style is built on — 200px against 12px. They feel like the print production notes on a kinetic poster.
+
+---
+
+## Type Scale
+
+```
+Display:  clamp(8rem, 15vw, 18rem)  — monumental, tight, uppercase
+Body:     clamp(1rem, 1.4vw, 1.375rem)  — supporting, readable
+Micro:    10-14px                    — annotations, wide-tracked
+```
+
+The scale is extreme by design — 12px to 288px. The gap between monumental and microscopic IS the energy. There is no middle. If a size lands between body and display, it belongs to the marquee (repeating, 6-12rem, tracked out).
+
+---
+
+## Font Pairing Logic
+
+**Display + one support face:** Never more than two families. Default pairing is one family two roles — Space Grotesk at 300 for micro, 400 for body, 700 for display, weight animated via the variable axis. A condensed display (Anton/Druk) + a clean sans (Inter/Space Grotesk) is the accepted two-family pattern.
+
+**Variable fonts are preferred:** A variable weight axis (100→900) mapped to scroll is the style's signature — static fonts can't achieve the living letterform. Recursive adds weight, width, and slant axes for morphing type.
+
+**Never:** Serif typefaces (too editorial — this is a poster, not a magazine), decorative/handwritten fonts (breaks the mechanical edge), script lettering, or more than two families (the hierarchy collapses into noise).
+
+---
+
+## Kinetic Typography Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Small display type (under 8rem) | Monumental type, 15vw+ |
+| Static headlines | Scroll-driven, animated letterforms |
+| Standard line-height (1.2+) | Tight 0.85-0.95 — stacked, interlocking |
+| Lowercase display | UPPERCASE, wide micro labels |
+| More than 2 families | 1 family, 1 variant, or display + 1 sans |
+| Minuscule self-doubting display | Type that fills the viewport and bleeds off edges |

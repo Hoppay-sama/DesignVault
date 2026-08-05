@@ -1,0 +1,76 @@
+# Vocabulary Bank
+
+## Primary Terms
+
+| Term | Why It Matters |
+|------|---------------|
+| `monumental type` | Oversized display faces (120px+) — the hero of the page |
+| `kinetic letterforms` | Letters as moving objects, not static glyphs |
+| `scroll-driven type scale` | Weight/position mapped to scroll progress |
+| `variable font animation` | Animated font axes (weight 100→900) make letterforms breathe |
+| `split-text animation` | Text split into units (letters/words) and animated staggered |
+| `horizontal marquee` | Continuous scrolling text strip between sections |
+
+---
+
+## Secondary Terms
+
+| Term | Effect |
+|------|--------|
+| `scramble effect` | Characters decode/cycle through random glyphs into the final word |
+| `clip-path reveal` | A mask (wipe, iris, slice) uncovers the text as it enters |
+| `stagger` | Offset delays between animated units — the heart of choreography |
+| `scrub` | Motion driven by scroll position, playable forward and back |
+| `pinned sequence` | GSAP ScrollTrigger pins a phrase while its letters animate |
+| `letter-spacing ramp` | Tracking that widens/narrows toward the word's apex moment |
+| `weight axis` | The variable-font axis (`wght`) — animated live, not static weights |
+| `bleed-overhang` | Letters that cross the viewport edge — type as architecture |
+| `char-freeze` | Characters locked into place once revealed — rest state |
+| `expo-out` | The signature decelerating reveal curve `cubic-bezier(0.16, 1, 0.3, 1)` |
+
+---
+
+## Context Terms
+
+| Term | Mood |
+|------|------|
+| `interruptible` | Motion that can be stopped/scrubbed, never rail-tracked |
+| `type-forward` | Letterforms lead; imagery is secondary or absent |
+| `word-level choreography` | One beat per word — meaning drives the motion |
+| `at-rest state` | The stable, readable position every animation must settle into |
+| `motion budget` | Only a small share of elements may move at once |
+| `duotone contrast` | Two-tone B&W/single-color field the type performs on |
+| `reduced-motion branch` | The static fallback for `prefers-reduced-motion` |
+
+---
+
+## Banned Terms
+
+| Term | Why It Breaks the Style |
+|------|------------------------|
+| `static type` | The style IS type in motion — a still hero is unfinished |
+| `small headlines` | Monumental scale (120px+) is the entire visual weight |
+| `image-dominant layout` | Type is the hero; imagery is secondary or absent |
+| `bounce easing on text` | Comic, unresolved — reveals must decelerate, not bounce |
+| `gratuitous animation` | Motion without hierarchy or intent is noise |
+| `default ease` | `linear` / default bezier reads mechanical, not choreographed |
+| `continuous on-screen motion` | Seizure/motion-sickness risk — marquees must scroll away |
+
+---
+
+## Prompt-Ready Phrases
+
+```
+"monumental 120px display headline, full-bleed, letters bleed past the viewport"
+"split-text reveal — letter-by-letter staggered entry with expo-out ease"
+"scroll-driven variable-font weight ramp, 100 to 900, scrubbed to scroll progress"
+"horizontal marquee strip running continuously between sections"
+"single decorative word tracks cursor on a spring — everything else inert"
+"high-contrast duotone field (B&W or one strong color) behind the type"
+"word-level choreography — one motion beat per word, meaning drives the movement"
+"clip-path reveal with 400ms wipe — body copy moves once, then rests"
+"scramble effect on a 2-to-6-word display phrase, then freeze to the final text"
+"stagger delays of 60–120ms between animated units"
+"custom cubic-bezier easing (0.16, 1, 0.3, 1) — never default or bounce"
+"prefers-reduced-motion: static type, no scrub, no scramble, no marquee"
+```

@@ -1,0 +1,125 @@
+# Layout Grammar
+
+## Grid System
+
+**No traditional DOM grid.** The viewport IS the canvas — a WebGL/Canvas surface that owns the frame. Content is an overlay, not a layout. Internally:
+
+- Canvas layer: fixed inset-0, full viewport — `position: fixed; inset: 0`
+- HUD overlay: absolutely positioned console layer, `pointer-events: none` on non-interactive elements
+- Text containers: narrow (max-width 480px), edge-anchored, never centered
+- Content zones: corners and edges only — the center belongs to the computation
+- Density: low (axis 3) — the field breathes; UI must not crowd the generated surface
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | Full viewport — `min-h-[100dvh]` |
+| Background | Live Canvas/WebGL render — particle system or noise field, running continuously |
+| Text position | Edge-anchored — bottom-left console block, top-right metadata |
+| Headline size | `clamp(1.25rem, 2.5vw, 2.5rem)` — moderate, technical, never monumental |
+| Text opacity | 90% — console layer, readable annotation over the field |
+
+```
+┌─────────────────────────────────────────┐
+│  SEED 1742 · FPS 60 · PARTICLES 4096    │
+│                                         │
+│  [Live particle system]                 │
+│  [Noise field — flows continuously]     │
+│  [Every visit renders differently]      │
+│                                         │
+│  GENERATIVE FIELD                       │
+│  Code-as-art. Computed, not designed.   │
+│  [ENTER]                                │
+└─────────────────────────────────────────┘
+```
+
+**The canvas is the hero.** The computation fills the viewport and runs before, during, and after the text exists. Text is a console overlay — seeds, parameters, coordinates. If the render is removed, there is no page.
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(3rem, 8vh, 6rem);
+--content-max-width: 480px;
+--edge-margin: clamp(1.5rem, 4vw, 4rem);
+--hud-gap: clamp(0.75rem, 1.5vw, 1.5rem);
+```
+
+**Spacing is the negative space of the algorithm.** Sections are separated by transitions in the field (noise re-seed, density shift), not by backgrounds or borders. The pacing is continuous — the render never stops between sections.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Full-Viewport Canvas + Console Overlay
+```
+┌─────────────────────────────────────────┐
+│  [Live canvas render — entire viewport] │
+│                                         │
+│      HUD: seed, params, labels          │
+│      (corners and edges only)           │
+│                                         │
+│  ┌──────────────────────┐               │
+│  │ SEED 1742  FPS 60    │  ← console    │
+│  └──────────────────────┘     block     │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 2: Canvas + Split Content Strip
+```
+┌─────────────────────────────────────────┐
+│  [Canvas render continues behind]       │
+│                                         │
+├──────────────────┬──────────────────────┤
+│  Label           │                      │
+│  Headline        │  [Secondary render:  │
+│  Body text       │   voronoi / flow     │
+│                  │   field detail]      │
+│  SEED 8921       │                      │
+└──────────────────┴──────────────────────┘
+```
+
+### Pattern 3: Iterative Sequence (Parameter Evolution)
+```
+┌─────────────────────────────────────────┐
+│  [Field state A — seed 001]            │
+│  (evolves as you scroll — same seed,    │
+│   new parameters)                       │
+├─────────────────────────────────────────┤
+│  [Field state B — re-seeded]           │
+│  (structure morphs, logic persists)     │
+├─────────────────────────────────────────┤
+│  [Field state C — rule change]         │
+│  (same system, different rules)         │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Full-viewport canvas, HUD in all four corners, console blocks edge-anchored |
+| **Tablet (768px)** | Canvas full-viewport, HUD consolidated to top and bottom edges, reduced particle count |
+| **Mobile (375px)** | Canvas full-viewport, HUD collapses to bottom sheet, particles capped (~25% density), continuous animation preserved |
+
+**On mobile:** The canvas still dominates — it is the entire page. The HUD becomes a single bottom-anchored console block; corner metadata drops to seed + FPS only. Performance is prioritized: particle counts scale down before anything else.
+
+---
+
+## Layout Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Centered content blocks | Edge-anchored, asymmetric console placement |
+| Card grids | A continuous canvas field with floating HUD elements |
+| Boxed/bordered containers | HUD elements that float directly over the render |
+| Solid color section backgrounds | Field transitions — noise re-seeds and density shifts |
+| Dense text areas | Minimal console text — the computation carries the weight |
+| Static hero images | A live render running on every visit |
+| Standard navigation | Minimal HUD nav, mono labels, always on canvas |

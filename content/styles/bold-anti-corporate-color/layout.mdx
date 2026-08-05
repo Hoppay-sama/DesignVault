@@ -1,0 +1,110 @@
+# Layout Grammar
+
+## Grid System
+
+**The grid exists to be broken.** Sections are asymmetric, overlapping, and deliberately misaligned. Content collides with margins, bleeds off edges, and lands anywhere except where a baseline grid would put it. Internally:
+
+- Full-bleed sections: 100vw width, `min-h-[100dvh]`, often layered 2-3 deep with hard edges
+- Text blocks: rotated 1–3 degrees, force-ragged, offset to one side — never centered
+- Overlaps: stickers, stamps, and handwritten notes sit on top of fields as a second layer
+- Crops: type and images run to the viewport edge uncropped — deliberately cut off
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | Full viewport — `min-h-[100dvh]` |
+| Background | Saturated primary block (acid yellow, hot pink, or electric orange) |
+| Text position | Oversized, force-ragged, collides with the margins; rotated 1–3 degrees |
+| Headline size | `clamp(3rem, 12vw, 9rem)` — monumental, condensed, UPPERCASE |
+| Text opacity | 90%+ — hard-stamped, nothing veiled |
+
+```
+┌─────────────────────────────────────────┐
+│  SAY IT LIKE IT'S A                    │
+│  LITTERBOX STICKER                         │
+│                                         │
+│  [ACID YELLOW FIELD]   (handwritten)      │
+│  "no rules"  ✕  "trust nothing"          │
+│  [HOT PINK STAMP]                      │
+│  [ENTER] ────────────────►              │
+└─────────────────────────────────────────┘
+```
+
+**The hero is a poster, not an interface.** One saturated field states the whole loud thesis. Type is the image; the poster is the wall. Nothing floats in whitespace — everything is stamped somewhere.
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(3rem, 8vh, 7rem);
+--content-block-max: clamp(320px, 60vw, 720px);
+--edge-collision: -2vw; /* headlines may push past the margin */
+```
+
+**Spacing is punchy, not airy.** Sections stack hard against each other — two saturated fields separated by a thin ink bar or crop line, not by generous whitespace. The pacing is a wall of posters: each section slams into the next, and the only "pause" is a change of primary color.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Full-Bleed Saturated Field + Giant Type
+```
+┌─────────────────────────────────────────┐
+│  [Acid yellow field]                    │
+│  SCREAM                                    │
+│  (type set to the edge, clamouring)     │
+│  [line of body, dense grotesque]        │
+│  [sticker + hand-drawn note overlapping]│
+│                                         │
++─────────────────────────────────────────+
+```
+
+### Pattern 2: Collage Stack — Fields Overlap
+```
++───────────────┬─────────────────────────+
+│  [COBALT      │  [LIME GREEN FIELD]     │
+│   FIELD]      │  (rotated -2 deg)       │
+│  HEADLINE     │  [hand-drawn arrow ⊙]    │
+│  of the page  │  [sticker w/ ink border]│
++───────────────┴─────────────────────────+
+```
+
+### Pattern 3: Cropped Magnification
+```
++─────────────────────────────────────────+
+│   THEY                          │
+│   TOOK  [an oversized word is cut      │
+│   THE        off the top edge]         │
+│   COLORS                              │
++─────────────────────────────────────────+
+```
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Full collage freedom — overlapping fields, rotated accents, marginal collision |
+| **Tablet (768px)** | Fields stack flat, overlap reduced, type stays huge but leaves the tender page |
+| **Mobile (375px)** | Vertical poster stack; one saturated field per section; rotations kept at 1deg |
+
+**On mobile:** the collage stays — sticker, stamp, and scrawl should still appear — but overlaps are where they can touch without clipping body text on the small screen. The type is still enormous: max-size `clamp(2.5rem, 18vw, 9rem)`, still never centered.
+
+---
+
+## Layout Don'ts
+
+| Don't | Do Instead |
+|------|------------|
+| Centered, grid-based layouts | Asymmetric, force-ragged, rotated blocks |
+| Symmetric hero (type dead center) | Type to one edge, oversized, slightly rotated |
+| Card grids with rounded corners | Saturated fields with harsh crop lines and offset blocks |
+| Generous whitespace "calculated" between sections | Packed poster wall, fields sharing raw edges |
+| Containers with borders everywhere | Hard-crop lines and ink stamps only where they read as print |
+| Aligned/perfect type blocks | Ragged-but-intentional type that hits margins |
+| Dense text areas | Text, but the type plays the role; poster scale never shrunk to hold copy |

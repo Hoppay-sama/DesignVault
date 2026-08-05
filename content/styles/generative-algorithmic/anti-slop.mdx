@@ -1,0 +1,19 @@
+# Anti-Slop Checklist
+
+- [ ] Visuals procedurally generated at runtime (particle system, noise field, voronoi, L-system, flow field)
+- [ ] Canvas or WebGL rendering — not CSS recreations
+- [ ] Seeded randomness — a visible seed value the viewer can reference
+- [ ] Continuous animation — the render never stops
+- [ ] Different on every visit — re-seeded on load
+- [ ] Algorithmic color — values sampled from a neutral ramp, not hand-picked
+- [ ] Saturation earned by signal — accents only where the data is loud, under ~10% of viewport
+- [ ] Noise-field or data-driven texture (Perlin noise, recursive patterns)
+- [ ] Monospace/technical sans typography, secondary to the visuals (Space Grotesk, IBM Plex Mono, JetBrains Mono)
+- [ ] Console layer present — seeds, FPS, parameters as readable metadata
+- [ ] Viewport is the canvas — no traditional DOM-heavy layout
+- [ ] No decorative random dots — every particle must belong to a system
+- [ ] No generic "AI art" gradients — gradients are time-evolving fields, not fills
+- [ ] No static imagery or stock photography
+- [ ] No hand-designed visuals styled to look procedural
+- [ ] Performance matters — 60fps on target hardware, particle counts scaled on mobile
+- [ ] `prefers-reduced-motion` honored (static frame render, no continuous animation)

@@ -1,0 +1,131 @@
+# Parameterized Template — Grain/Noise Texture / Analog Warmth
+
+> Use this template to generate a Grain/Noise Texture page for YOUR brand.
+
+---
+
+```
+Build a grain/noise texture page for "[BRAND_NAME]" — [ONE-LINE DESCRIPTION, e.g., "an artisan coffee roaster"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: Film grain, paper texture, noise overlays. Analog imperfection in digital design. Muted desaturated palettes that feel printed on uncoated stock. Texture is the design — the screen becomes a physical surface.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY)
+
+- NO clinical perfection (deliberate analog imperfection — misregistration, paper tooth, film jitter)
+- NO neon or saturated colors (muted, desaturated palette only)
+- NO sharp digital edges
+- NO glossy surfaces (uncoated paper warmth, never glass)
+- NO pure black on white (reduced text contrast)
+- NO smooth gradients (dither any banding)
+- NO glassmorphism (frosted glass is digital; this is physical)
+- NO snappy motion (gentle only: 24fps grain jitter, slow fades)
+
+---
+
+## FONTS
+
+Replace [DISPLAY_FONT] and [BODY_FONT]:
+- [DISPLAY_FONT]: Source Serif 4 / Fraunces / Newsreader — editorial serif, 300-400
+- [BODY_FONT]: Libre Franklin / Inter / Söhne — warm, neutral sans, 300-400
+
+Load via Google Fonts. Headlines in serif, body in sans. Keep text contrast reduced — nothing pure black on white.
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --stone: #F2EFE8;          /* Warm stone ground */
+  --sand: #E5DFD2;           /* Sand field */
+  --clay: #C2AFA0;           /* Muted clay */
+  --graphite: #3E3A35;       /* Reduced-contrast text */
+  --graphite-soft: #6B655C;  /* Muted text */
+  --chalk-line: #D8D2C6;     /* Hairlines — printed, not crisp */
+  --ink-fade: rgba(62, 58, 53, 0.82); /* Body text — never pure black */
+}
+```
+
+**Palette guidance:** Choose one muted family and stay in it:
+- Warm neutrals — stone, sand, clay (craft, food, wellness)
+- Cool mineral tones — slate, graphite, chalk (editorial, independent publishers)
+- One muted accent at most — oxidized rust, sage, ochre — at low saturation
+
+---
+
+## STRUCTURE
+
+### Hero
+- `min-h-[100dvh]`, generous whitespace
+- Fixed grain overlay (feTurbulence, pointer-events: none, opacity 0.03-0.08)
+- Label (uppercase, tracked) + serif headline + 1-2 sentence subtext + hairline CTA
+
+### Materials / Texture Showcase (3-column)
+- Halftone dots, paper fiber, risograph misregistration fields
+- No cards — hairlines and whitespace only
+
+### Process / About
+- Split: paper-texture field + text
+- 2-3 sentences about deliberate imperfection
+
+### Footer
+- Ground color bg, muted text, minimal
+
+---
+
+## GRAIN OVERLAY
+
+```css
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shimmer 2.4s steps(1) infinite;
+}
+```
+
+Animate with 1px `steps(1)` jitter — 24fps film shimmer, barely perceptible. Fixed, multiply blend, opacity 0.03-0.08.
+
+---
+
+## ANIMATIONS
+
+- Grain overlay: 1px jitter, `steps(1)`, 2.4s, infinite (24fps film feel)
+- Text: opacity 0→1 + translateY(12px)→0, 1000-1200ms, ease-out (staggered delays)
+- Texture fields: opacity fade only, 1000ms, ease-out — no scale, no slick motion
+- Hover: grain opacity eases up on the hovered surface
+- All motion: slow fades only — no spring, no bounce, no snap
+
+`prefers-reduced-motion: reduce` → disable grain shimmer (static overlay), instant entrance.
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- Fixed film grain or noise overlay present (opacity 0.03-0.08, pointer-events: none)
+- Muted, desaturated palette — warm neutrals or cool mineral tones
+- Paper/analog texture — fiber, halftone, misregistration
+- Reduced text contrast — no pure black on white
+- Gentle motion only — 24fps grain shimmer, slow fades
+- Generous whitespace — texture IS the design, layout stays simple
+- No neon, no glossy surfaces, no sharp digital perfection
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines:** 4-8 words. Warm, tactile, declarative. "Made by hand, printed with warmth" not "Premium Quality Products."
+
+**Body text:** 1-2 sentences. Quiet, concrete, sensory. Write like a product note, not a marketing pitch.
+
+**Imagery:** Muted stills — uncoated paper, fiber, clay, linen. No glossy product shots, no neon, no clinical studio lighting. Grain and tooth visible.
+
+---
+
+Replace all [BRACKETED] placeholders, then paste into your AI coding assistant.
+```

@@ -1,0 +1,97 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Monochrome Single Accent is **precise, minimal, and surgical** — like the style's single-accent color strategy. Nothing drifts randomly, nothing bounces, nothing wanders. Every animation has one job: announce a state change, or guide the eye along the accent-led pathway. Durations stay short enough to feel responsive, disciplined enough to never draw attention to themselves. In a neutral base, color is the strongest signal in the system — and motion serves that signal and nothing else.
+
+---
+
+## Accent as Signal
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Primary CTA | Accent revealed via opacity + translateY on hover | 150-200ms | `ease-out` |
+| Active nav state | Accent underline/dot fades in | 180ms | `ease-out` |
+| Key data point | Accent value crossfades between states | 200ms | `ease-in-out` |
+| State indicator | Accent fills 0→100% | 220ms | `ease-out` |
+
+**The rule:** in a grayscale page, color is the single strongest signal. The accent should only *appear* — it marks a change, then returns to gray. When it's visible, something is active; when it leaves, the system is neutral. Motion applies the same restraint as color.
+
+---
+
+## Hover Reveals
+
+```css
+.grayscale-element {
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+.grayscale-element .accent-indicator {
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+.grayscale-element:hover .accent-indicator {
+  opacity: 1;
+  transform: translateY(0);
+}
+```
+
+**Purpose:** Grayscale elements stay neutral until hover, then reveal a surgical accent — a dot, underline, or small mark. The reveal uses a quick translate+opacity transition so the grayscale field is never polluted at rest. Hover is the moment the beacon switches on.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Hero display | Opacity 0→1 + translateY(8px)→0 | 400ms | `ease-out` | 0ms |
+| Body text | Opacity 0→1 | 300ms | `ease-out` | 80ms |
+| Cards / panels | Opacity 0→1 + translateY(12px)→0 | 350ms | `ease-out` | 160ms |
+| Accent element | Opacity 0→1 + accent color fill | 300ms | `ease-out` | 240ms |
+
+**Key:** All durations stay under 400ms. Entrances are quick, clean reveals — content snaps into place without drama. The accent enters exactly once per viewport and is never re-animated; everything else arrives in grayscale.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Primary button | Fills with accent; label → zinc-950 (180ms) | Press scale(0.98) (100ms) |
+| Cards / panels | Border zinc → gray, lift translateY(-2px) (180ms) | Press translateY(0) (100ms) |
+| Links | Accent underline fades in (160ms) | — |
+| Data points | Accent value shifts (160ms) | — |
+
+**Precision over polish:** Hovers are 150-180ms — fast enough to feel responsive, slow enough to feel engineered. Only one accent response exists per interaction; secondary elements respond with grayscale value changes only.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- Entrance animations: instant opacity (no translate)
+- Hover reveals: instant accent (no transition)
+- State changes: instant fills
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| Never | Why |
+|-------|-----|
+| Bounce or spring physics | Too energetic — this is disciplined, not playful |
+| Continuous drift / ambient motion | Distracts — the gray field must stay calm |
+| Staggered multi-element reveals | The accent enters once; rest is one quiet point |
+| Color / gradient transitions | Violates the single-accent rule |
+| Autoplaying carousels | The user controls pace through scroll and click |
+| Heavy parallax layers | Breaks the precise, grid-based composition |
+| Micro-interaction spams | Every animation must be earned by the accent or states |

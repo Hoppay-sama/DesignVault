@@ -1,0 +1,74 @@
+# Vocabulary Bank
+
+## Primary Terms
+
+| Term | Why It Matters |
+|------|---------------|
+| `PBR materials` | Physically based rendering — the material language (metal, glass, plastic) that makes surfaces believable |
+| `orbital rotation` | Camera orbiting the product — the core interaction, exploration via viewpoint |
+| `studio lighting` | Soft key, subtle fill, controlled rim — lighting is the aesthetic |
+| `exploded view` | Product parts separated in space — reveals construction and craft |
+| `scroll-driven camera` | Scroll controls dolly/pan/tilt — the product is revealed through the journey |
+
+---
+
+## Secondary Terms
+
+| Term | Effect |
+|------|--------|
+| `WebGL` | The rendering API powering real-time 3D in the browser |
+| `viewport` | The camera's visible frame — full-viewport scenes for maximum product presence |
+| `orbit controls` | Drag-to-rotate camera with inertia, damping, and zoom limits |
+| `environment map` | Pre-baked reflections that give metal and glass their believable sheen |
+| `depth of field` | Subtle photographic focus — product sharp, backdrop soft |
+| `tone mapping` | Filmic response that grades raw render output into a photographic frame |
+| `LOD` | Level of detail — reduced geometry at distance for performance |
+| `camera dolly / pan / tilt` | Camera moves that choreograph scroll-driven sequences |
+
+---
+
+## Context Terms
+
+| Term | Mood |
+|------|------|
+| `showroom` | Quiet, premium, everything serves the object |
+| `object theater` | The product is the sole performer on a neutral stage |
+| `product as sculpture` | The model is art-directed like a sculpture in a gallery |
+| `photorealistic` | Indistinguishable from studio photography |
+| `hero product` | The single object the page is built around |
+| `photography shoot` | Lighting, angle, and backdrop chosen like a camera setup |
+| `sculptural` | The product's form is the content |
+
+---
+
+## Banned Terms
+
+| Term | Why It Breaks the Style |
+|------|------------------------|
+| `flat product photos` | Live 3D replaces photography — static 2D images are the fallback, never the primary |
+| `2D imagery only` | The style is defined by real-time 3D rendering |
+| `busy backgrounds` | The neutral studio backdrop exists to catch reflections, not attention |
+| `text-heavy layouts` | Typography is minimal (axis 2) — large name, small specs |
+| `default 3D asset look` | Grey-box materials and placeholder lighting are the generic signature to kill |
+| `gimmicky rotation` | Rotation without purpose is a tech demo, not a showcase |
+| `unlit scene` | Lighting IS the aesthetic — an unlit scene is unfinished |
+| `product carousel` | Autoplay rotation replaces exploration with a slideshow |
+| `broken canvas` | No WebGL fallback — the hero must render for every user |
+
+---
+
+## Prompt-Ready Phrases
+
+```
+"real-time 3D product model (Three.js/React Three Fiber) with orbital controls"
+"studio lighting — soft key, subtle fill, controlled rim light"
+"PBR materials with environment-map reflections (metal, glass, matte plastic)"
+"scroll-driven camera — dolly, pan, tilt across scroll sequences"
+"exploded-view animation revealing internal construction"
+"neutral studio backdrop (light gray to dark) with soft shadow plane"
+"subtle depth of field and filmic tone mapping (ACES)"
+"minimal UI — large product name, specs in mono in side panels"
+"product-centered full-viewport layout — product as sculpture"
+"LOD and pixel-ratio caps for 60fps; static photorealistic fallback for low-end devices"
+"drag to explore with inertia and damping; reduced-motion users get a static hero"
+```

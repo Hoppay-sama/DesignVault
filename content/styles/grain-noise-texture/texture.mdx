@@ -1,0 +1,99 @@
+# Texture & Surface
+
+## Primary Texture: Film Grain Overlay
+
+The grain IS the design. Per index.mdx, the texture layer is a full-viewport overlay that never leaves the page:
+
+| Property | Specification |
+|----------|--------------|
+| **Technique** | SVG noise via `feTurbulence` (baseFrequency ~0.9-1.1, fractalNoise) |
+| **Placement** | `position: fixed; inset: 0; pointer-events: none; z-index` above content |
+| **Opacity** | 0.03-0.08 (index.mdx Texture) — enough to feel, not enough to disturb |
+| **Blend** | `mix-blend-mode: overlay` or soft-light over the muted palette |
+| **Motion** | 24fps-style jitter via `steps(2)` — see motion.mdx |
+
+**The goal:** The screen surface must read as physical — uncoated paper, projected film, or a litho print. The grain layer is the equivalent of the paper tooth in print; it is never optional and never decorative-only.
+
+```css
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+```
+
+---
+
+## Paper & Analog Textures
+
+| Texture | Application | Parameters |
+|---------|-------------|-----------|
+| **Paper fiber** | Page backgrounds, section backdrops | Subtle repeat, opacity 0.03-0.05, warm tint |
+| **Halftone dots** | Image areas, featured panels | Screen 8-12% dot, varying radius with darkness |
+| **Risograph misregistration** | Multicolor accents, overlapping type | Offset 1-2px misaligned color plates (cyan/magenta/olive) |
+| **Scan artifacts** | Full-bleed imagery | Slight horizontal banding, sensor noise, 1-2px chroma shift at edges |
+| **Chromatic aberration** | Display type accents, hero imagery | 1-2px RGB channel offset on edges only |
+
+**Misregistration is a feature, not a bug.** Two-color overlaps should visibly misregister by 1-2px, exactly like an imperfect risograph run. That imperfection is what makes the palette feel printed. The Banned list in index.mdx (clinical perfection, sharp digital edges, glossy surfaces) is the inverse of every row in this table.
+
+---
+
+## SVG Noise Filters (feTurbulence)
+
+```css
+.svg-noise {
+  filter: url(#grain-noise);
+}
+/* Definition placed in the SVG defs block:
+   feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4"
+   feColorMatrix type="saturate" values="0"  (desaturate the noise) */
+```
+
+**Usage:** feTurbulence powers both the full-page overlay and per-element noise (buttons, cards, image masks). Keep the noise desaturated and coarse — fine, colorful noise reads digital; coarse neutral noise reads film.
+
+---
+
+## Image Processing
+
+| Processing | Effect | Parameters |
+|-----------|--------|------------|
+| **Grain** | Film texture over imagery | Overlay blend, opacity 0.04-0.07 |
+| **Slight blur** | Softens digital sharpness | 0.3-0.5px Gaussian on edges |
+| **Muted grade** | Print-like color | Saturation 75-90%, lifted blacks (not pure black) |
+| **Paper tooth** | Bokeh-free matte finish | Noise-based texture under images |
+| **Chromatics** | Analog lens feel | 1-2px chromatic aberration at edges |
+
+**The goal:** Imagery should look scanned or projected, not photographed by a phone and uploaded. If a viewer could tell the image was captured this decade with a retina display, the treatment is too clean.
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Page background | Paper fiber texture over the warm neutral ground |
+| Grain overlay | Full-viewport, fixed, pointer-events none, 0.03-0.08 opacity |
+| Cards / panels | Flat paper surfaces — hairline printed borders, no drop shadows |
+| Buttons | Ink-filled flat, or two-tone misregistered; grain intensifies on hover |
+| Navigation | Sticky bar with paper backdrop and hairline bottom rule |
+| Dividers | Hairlines, not gradients — like print rules |
+| Imagery | Grain overlaid, slightly blurred, muted, chromatic-edged |
+
+**No glossy, no glass, no depth-heavy shadows.** Shadows are synthetic here; the analog surface reads flat with texture, like uncoated stock. If a shadow is unavoidable, keep it a tight 2-4px warm gray at low opacity — never a diffuse 20px glow.
+
+---
+
+## Texture Don'ts
+
+| Don't | Do Instead |
+|-------|-----------|
+| Clinical flat surfaces | Paper fiber, halftone, uncoated stock |
+| Clean digital gradients | Ink-toned flat fills and hairlines |
+| Neon glow effects | Muted ink accents with grain on top |
+| Pure white backgrounds | Warm uncoated off-white (stone/sand) |
+| Sharp pixel-perfect borders | Slight misregistration, halftone edges |
+| Hidden artifacts | Featured scan lines, film jitter, chromatic edges |
+| Glossy reflections | Matte, tactile, print-like surfaces |

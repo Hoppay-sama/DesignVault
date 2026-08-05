@@ -1,0 +1,64 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Technical sans-serif or monospace — secondary to the visuals |
+| **Examples** | Space Grotesk, IBM Plex Mono, JetBrains Mono, Archivo, Roboto Mono |
+| **Weight** | 400-500 (regular — utilitarian, not elegant) |
+| **Tracking** | 0.01em-0.03em (slightly open, legible at small sizes) |
+| **Size** | `clamp(1.25rem, 2.5vw, 2.5rem)` — moderate, never monumental |
+| **Transform** | Sentence case; UPPERCASE only for console labels |
+
+**Why technical type:** The visuals are computed — the type should read as instrumentation, not editorial voice. Monospace and technical sans (Space Grotesk, IBM Plex Mono) share the code's DNA: geometric, uniform, mechanical. The type is secondary to the canvas; it annotates the artwork without competing with it.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same family as display — the type system is one instrument |
+| **Examples** | Space Grotesk Regular, IBM Plex Mono 400, JetBrains Mono 400 |
+| **Weight** | 400 (regular — no elegance, no weight games) |
+| **Tracking** | 0.01em-0.02em (standard) |
+| **Size** | `clamp(0.875rem, 1vw, 1rem)` — 14-16px |
+| **Line Height** | 1.5-1.6 (compact, code-like) |
+
+**Why monospaced rhythm:** Body text in monospace inherits the grid of the code that generated the page. Fixed-width glyphs create a visible algorithmic rhythm — every line aligns to the same column grid, like source code rendered as prose.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Monospace, regular weight, tight tracking |
+| **Examples** | IBM Plex Mono 400, JetBrains Mono 400 |
+| **Weight** | 400 |
+| **Tracking** | 0.05em-0.1em (moderate — machine annotation, not luxury spacing) |
+| **Size** | 10-11px |
+| **Transform** | UPPERCASE |
+
+**Usage:** Seed values, coordinates, iteration counts, FPS readouts, parameter labels. These are the console layer — "SEED 1742", "FPS 60", "PARTICLES 4096", "NOISE 0.62". They should read like terminal output: fixed-width, dimmed, factual.
+
+---
+
+## Type Scale
+
+```
+Display:  clamp(1.25rem, 2.5vw, 2.5rem)  — moderate, technical
+Body:     clamp(0.875rem, 1vw, 1rem)     — 14-16px, regular weight
+Micro:    10-11px                        — console annotations, UPPERCASE
+```
+
+The scale is compact — 10px to 40px. Typography never dominates; the page hierarchy is carried by the visuals, not the type. The type scale exists to be readable and precise, like a readout under a visualization.
+
+---
+
+## Font Pairing Logic
+
+**Single instrument approach:** One technical family — monospace (IBM Plex Mono / JetBrains Mono) for interface and labels, optionally paired with one geometric sans (Space Grotesk / Archivo) for display only. The pairing is minimal: sans for the headline, mono for everything computational. Two voices max — the canvas is the third, loudest voice.
+
+**Never:** Serif typefaces (editorial elegance contradicts the computational register), script or decorative fonts (personality competes with the algorithm), oversized display type (the artwork is the hero — type must stay annotation-sized).

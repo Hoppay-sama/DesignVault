@@ -1,0 +1,139 @@
+# Parameterized Template — Dark Tech Terminal
+
+> Use this template to generate a Dark Tech Terminal page for YOUR brand.
+
+---
+
+```
+Build a dark tech terminal page for "[BRAND_NAME]" — [ONE-LINE DESCRIPTION, e.g., "a developer observability platform"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: Near-black backgrounds with precise technical typography. Neon or electric accent colors on interactive elements. Mission control interface crossed with hacker's workstation. Data-dense but controlled — every pixel looks like it belongs inside a running terminal.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY)
+
+- NO warm colors (near-black + single neon accent only)
+- NO serif fonts (monospace data + geometric sans headlines)
+- NO organic shapes (grid-locked, angular, technical)
+- NO playful motion (typing, caret blinks, glow pulses — mechanical, not playful)
+- NO rounded pill UI (terminal windows have square corners)
+- NO gradient meshes (flat near-black ground with glow accents)
+- NO white page background (ground is #0A0F0F)
+- NO photographic texture (noise/grain + scan-lines only)
+- NO full rainbow of neon (one accent at a time)
+
+---
+
+## FONTS
+
+Replace [MONO_FONT] and [DISPLAY_FONT]:
+
+**Monospace (data, code, labels, body):**
+- JetBrains Mono (400-700) — classic developer default
+- Fragment Mono (400-500) — sharp, modern terminal
+- Azeret Mono (400-700) — geometric mono, techy
+
+**Geometric sans (headlines only):**
+- Aeonik (500-700) — premium, technical
+- Archivo (500-700) — free Google Fonts alternative
+
+Load via Google Fonts. Body copy stays monospace — it IS the interface voice.
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --ground: #0A0F0F;             /* Near-black base — do not lighten */
+  --ground-raised: #0F1616;      /* Terminal window / card surface */
+  --accent: [ACCENT_HEX];        /* Single neon accent */
+  --text-primary: #E6EDEA;       /* White text */
+  --text-muted: rgba(230, 237, 234, 0.55);
+  --line: rgba(0, 212, 255, 0.15); /* Grid / border lines */
+}
+```
+
+**Accent guidance — pick ONE:**
+- Cyan #00D4FF — electric, modern, default (matches --line tint)
+- Electric green #33FF66 — classic phosphor P1, most "terminal"
+- Amber #FFB000 — warm neon, cockpit/military readout feel
+- When swapping accents, retint `--line` with the same hue at 15% opacity
+
+---
+
+## STRUCTURE
+
+### Hero — Terminal Window
+- `min-h-[100dvh]`, terminal-window framing: title bar with three traffic dots + path `user@[HOST]:~/[PROJECT]`
+- Scan-line overlay across the full hero
+- Left-aligned, technical margins (monospace grid, 12-column)
+- Status line: `[ OK ]` prefix — mono 12px, text-muted
+- Headline: [DISPLAY_FONT] 700, `clamp(1.5rem, 3vw, 2.5rem)`, uppercase
+- Typed line: `> [SHORT COMMAND-STYLE TAGLINE]` — typed-text effect, 40ms/char, blinking caret
+- CTA: "[CTA_LABEL]" — square corners, 1px accent border, phosphor glow on hover
+
+### Metrics / Data Section
+- Grid-locked 12-column layout, left-aligned with technical margins
+- Metric cards framed as terminal windows (title bar + dots, raised surface, 1px line border, square corners)
+- Each: mono uppercase label (10px, 0.15em tracking) + live value (mono 500, accent) + sparkline/ASCII bar
+- Log entries print in with terminal-style reveals (150ms stagger)
+
+### Features — Code-Editor Aesthetic
+- Split: code block (left) + copy (right)
+- Code block: gutter line numbers, `>` prompts, accent-colored keywords
+- Feature list items prefixed with `[ OK ]` or `>` glyphs
+- Headlines: [DISPLAY_FONT] 700, uppercase
+
+### Footer
+- ASCII art mark as logo divider (character-based, e.g. `>>-[BRAND]-<<`)
+- Copyright line — mono 400, uppercase, 12px, tracking 0.15em, text-muted
+- Grid line top border, subtle glow pulse (2-3s) on the mark
+
+---
+
+## MOTION & TEXTURE
+
+- Typed-text effects: 30-50ms per character
+- Blinking caret: 1s `steps(1)` blink
+- Terminal-style reveals: staggered 150ms
+- Glow pulses on accent elements: 2-3s `ease-in-out` infinite (text-shadow/box-shadow)
+- Scan-lines: repeating-linear-gradient, ~3px period, low opacity
+- Subtle noise/grain overlay (static)
+- Metric count-up: 800ms ease-out
+
+`prefers-reduced-motion: reduce` → instant typing (full text), static caret, no glow pulses.
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- Near-black ground (#0A0F0F) — never white, never light gray
+- Single neon accent (cyan / electric green / amber) — one at a time
+- Monospace for all data, code, labels, and body copy
+- Geometric sans for headlines only
+- Scan-line and/or subtle noise texture
+- Terminal window framing with title bar + traffic dots
+- Typed-text effects with blinking caret
+- ASCII art as decoration/dividers
+- Grid-locked, dashboard-density layout
+- Phosphor glow on accents, not blurry borders
+- No warm colors, no serif fonts, no organic shapes, no playful motion
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines:** 3-6 words, UPPERCASE, imperative or operational. "MISSION CONTROL FOR YOUR INFRASTRUCTURE" not "We Help You Monitor Servers."
+
+**Body text:** 1-2 sentences. Precise, technical, machine-voice. Write like a system readout, not a marketing pitch.
+
+**Typed line:** A command-style phrase, lowercase with `> ` prefix: "> deploying observer agents to 1,284 nodes..."
+
+**Status readouts:** Uptime, latency, node counts, log lines — decorative data that reinforces the terminal frame.
+
+---
+
+Replace all [BRACKETED] placeholders, then paste into your AI coding assistant.
+```

@@ -1,0 +1,118 @@
+# Layout Grammar
+
+## Grid System
+
+**Visible, structured grid.** Unlike free-floating styles, this system is built on a disciplined grid — restraint applies to structure as much as color. Internally:
+
+- Content column: 12-col grid, max-width 1200px
+- Vertical rhythm: 8px baseline, consistent section heights
+- Alignment: strict left-edge and baseline alignment — nothing floats
+- Visual pathways: accent elements placed on grid intersections so the eye traces a line through the composition
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | 90-100vh — `min-h-[90dvh]` |
+| Background | Flat grayscale (zinc-950) with subtle grain |
+| Text position | Left-aligned, baseline-anchored — never centered |
+| Headline size | `clamp(2.5rem, 6vw, 5rem)` — large, weight-driven |
+| Accent usage | One element max — the CTA (or one key data figure) |
+
+```
+┌─────────────────────────────────────────┐
+│                                         │
+│  MONOCHROME SIGNAL                      │
+│  One accent. Full restraint.            │
+│  The beacon through neutrality.         │
+│                                         │
+│  [Get started — accent-filled button]   │
+│  [grain: subtle, uniform]               │
+└─────────────────────────────────────────┘
+```
+
+**The hero is the typographic statement.** One accent element — the CTA — is the only color on the entire first viewport. Everything else is zinc-950, zinc-50, and the type ramp.
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(4rem, 10vh, 8rem);
+--content-max-width: 1200px;
+--grid-gutter: clamp(1rem, 2.5vw, 2.5rem);
+--baseline: 8px;
+```
+
+**Spacing is regular and predictable.** Uniform rhythm communicates precision. White space is the second accent — it separates, groups, and breathes without ever adding color.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Full-Width Data Band
+```
+┌─────────────────────────────────────────┐
+│  Section label (mono, uppercase)        │
+│                                         │
+│  12-col grid                            │
+│  ┌───────┬───────┬───────┬───────┐      │
+│  │ data  │ data  │ data  │ data  │      │
+│  │ value │ value │ value │ value │      │
+│  │ [key] │ [key] │ [key] │ [key] │      │
+│  └───────┴───────┴───────┴───────┘      │
+│  (one accent value per band max)        │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 2: Split — Content + Accent Rail
+```
+┌──────────────────┬──────────────────────┐
+│  Headline        │  [Accent key data]   │
+│  Body text       │  12,847              │
+│  Link (gray)     │  (label in mono)     │
+│                  │                      │
+└──────────────────┴──────────────────────┘
+```
+
+### Pattern 3: Alternating Rows (Visual Pathway)
+```
+┌─────────────────────────────────────────┐
+│  Row 1 — grayscale content block        │
+│  Row 2 — [accent CTA] positioned on     │
+│           grid intersection             │
+│  Row 3 — grayscale content block        │
+│  Row 4 — [accent CTA] positioned on     │
+│           the same grid column           │
+└─────────────────────────────────────────┘
+```
+
+**The accent column is the pathway.** Repeating the accent position from section to section creates a visible line the eye follows down the page — a path through neutrality.
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Full 12-col grid, accent pathway visible, side-by-side splits |
+| **Tablet (768px)** | 8-col grid, splits stack, accent rail moves inline |
+| **Mobile (375px)** | Single column, baseline rhythm preserved, accent budget unchanged |
+
+**On mobile:** The accent budget (≤15% of surface) is preserved — one accent CTA per viewport, not one per section. Hierarchy shifts to size and weight because the wide-field contrast of desktop is reduced.
+
+---
+
+## Layout Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Floating, asymmetric placement | Strict grid alignment — nothing floats |
+| Multiple accent elements per section | One accent element per section, three per page max |
+| Centered hero text | Left-aligned, baseline-anchored |
+| Decorative background blocks | Flat grayscale surfaces |
+| Bento/gradient panels | Uniform gray panels, hairline borders (zinc-200/600) |
+| Accent as border on containers | Accent only on CTA, active state, key data |
+| Dense, uneven spacing | Consistent 8px-baseline rhythm |

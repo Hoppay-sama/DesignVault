@@ -1,0 +1,69 @@
+# Common Mistakes
+
+## Mistake 1: Low-Contrast Near-Black Grounds
+
+**What people do:** Use #0A0F0F backgrounds with dark gray text at 60-70% opacity, or a zinc-900 base instead of near-black, because "dark mode should be subtle."
+
+**Why it fails:** The entire aesthetic is built on one high-contrast hierarchy: near-black ground (#0A0F0F), white text, and a single neon accent (cyan #00D4FF, electric green, or amber). When the ground drifts lighter and the text dims, the terminal loses its phosphor CRT character and becomes a generic dark theme. The style's legibility is its signature — dimming it kills both.
+
+**Fix:** Keep the base at true near-black (#0A0F0F). White text stays white (or #E5E5E5 at most). Reserve the neon accent exclusively for interactive elements, data highlights, and the caret — never for body copy. If a section needs hierarchy, modulate size and weight, not brightness.
+
+---
+
+## Mistake 2: Neon Everywhere
+
+**What people do:** Color every heading, border, button, and label in cyan #00D4FF because "the neon looks cool."
+
+**Why it fails:** The style works on scarcity — one single neon accent on a near-black field reads as signal, like a lit indicator on mission control hardware. When everything glows, nothing is signal; the page becomes a light show and the data hierarchy collapses. The banned list exists for a reason: the accent is a noun, not an adjective.
+
+**Fix:** Choose ONE accent (cyan #00D4FF, electric green, or amber — never mix two). Apply it to: the active state, the blinking caret, key data values, and one accent element per viewport. Everything else is white or near-black gray. If a section has more than ~10% neon surface, strip it back.
+
+---
+
+## Mistake 3: Gimmick Overload
+
+**What people do:** Add typing animations to every headline, blinking carets everywhere, ASCII art headers, marquee data tickers, and a scanline overlay on top — because "it's a terminal, it should look alive."
+
+**Why it fails:** The style's axis scores are typography 4 and density 4 — data density and precise type are the stars, not motion (3) or texture (3). Typed-text effects and blinking carets are accents that should appear once or twice per page. When every element animates, the page feels like a screensaver, the eye has no resting point, and the motion stops meaning "this is live data" and starts meaning "this is noise."
+
+**Fix:** Budget the effects. One typed-text intro line (or section headline) per page. One blinking caret total — attached to the typed line or the active input. Scanlines as a subtle full-page texture at low opacity, never an animated storm. ASCII art only as a hero or section divider, not repeated in the footer. Everything else is static, precise, and grid-locked.
+
+---
+
+## Mistake 4: Fake Terminal Chrome Without Function
+
+**What people do:** Add fake window chrome (three dots, title bars saying `root@designvault:~$`), a prompt symbol, and command-style text — but the elements do nothing and nothing is interactive.
+
+**Why it fails:** Terminal-window framing works when it frames real content: a live log stream, a copyable command, a filterable data table. Fake chrome is costume — the window dots promise a window and the prompt promises input. Users who notice feel patronized; the aesthetic reads as decoration rather than interface, which violates the "mission control" principle where every element earns its place.
+
+**Fix:** Only use terminal framing where a terminal behavior is genuine. Window chrome frames a real component (a code block with copy, a live-updating status panel, a prompt that accepts input). If the content behind the chrome is static marketing text, drop the chrome and use plain grid-locked panels instead. The prompt symbol must be followed by something real.
+
+---
+
+## Mistake 5: Unreadable Mono at Small Sizes
+
+**What people do:** Set JetBrains Mono or Fragment Mono at 11-12px for body text because "monospace data should be small and dense."
+
+**Why it fails:** Monospace glyphs are wider and less differentiated than proportional fonts — at small sizes, lowercase `l`, `1`, and `I` blur together, and the wide character advance makes body text feel cramped and slow. The density score (4) comes from grid organization, not from shrinking the font. Unreadable mono defeats the style's core purpose: displaying data you're supposed to read.
+
+**Fix:** Minimum 14-15px for monospace body and data text (16px for anything longer than a sentence), with generous line-height (1.6-1.7) to compensate for the tight mono rhythm. Use monospace for data, labels, and code — use it sparingly for long-form prose. Reserve the geometric sans (Aeonik, Archivo) for headlines at any size, and never render display headlines in mono smaller than 24px.
+
+---
+
+## Mistake 6: Breaking the Grid for "Edginess"
+
+**What people do:** Tilt panels, overlap cards at odd angles, offset the layout, or center everything because "a terminal page should feel dynamic and break the rules."
+
+**Why it fails:** This is one of the most grid-locked styles in the taxonomy (layout 2, density 4). The mission-control feel comes from strict alignment — data aligned to a technical column system, left-aligned with technical margins, everything sitting on the grid like instrumentation in a rack. Broken, tilted, or centered layouts read as playful, and playful is banned. The structure IS the aesthetic.
+
+**Fix:** Keep everything left-aligned and grid-locked. Express dynamism through content (live data, typed text, status indicators) rather than through layout tricks. If a section needs visual distinction, change the panel treatment — a border, a header row with monospace labels, a scanline band — not the geometry.
+
+---
+
+## Mistake 7: Mixing in Warm Colors or Serifs
+
+**What people do:** Add a warm amber-orange accent for CTAs, or a serif font for the hero headline, because "it adds warmth and sophistication."
+
+**Why it fails:** The banned list is explicit: `warm colors`, `serif fonts`, `organic shapes`, `playful motion`. Warm accents and serifs are from a different design language entirely — they soften the cold, nocturnal, technical character that makes this style what it is. One serif headline or a gold CTA instantly reads as "portfolio site," not "mission control."
+
+**Fix:** Cold palette only: white, near-black gray, and a single cold neon accent (cyan #00D4FF, electric green, or amber used as a cold signal color). Monospace for data, geometric sans for headlines — no serifs anywhere. If a warm color is genuinely required for a client, choose a different style rather than breaking this one.

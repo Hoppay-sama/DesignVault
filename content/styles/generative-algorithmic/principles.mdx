@@ -1,0 +1,39 @@
+# Design Principles
+
+## 1. CODE IS THE MEDIUM
+
+Visuals are computed, not designed. Every particle, noise field, and voronoi cell is the output of a program — the page is a program running, not an artifact finished. Nothing is placed by eye; everything is derived from a rule. The aesthetic is not "what the algorithm looks like" but the act of computation itself made visible.
+
+**What it prevents:** Treating generative output as decoration, or hand-placing "generative-looking" elements. If the visual isn't produced by an actual algorithm at runtime, it's just a static image wearing a costume.
+
+---
+
+## 2. ALWAYS ALIVE
+
+The page is never still. Continuous procedural animation is the baseline state — particles drift, noise fields flow, the render re-seeded on load so every visit differs. This is high-motion (axis 6) design: movement isn't an enhancement, it's the existence condition of the page. A paused render is a dead page.
+
+**What it prevents:** Static hero images styled to look algorithmic. The aliveness is the difference between generative art and a screenshot of generative art.
+
+---
+
+## 3. CANVAS OVER DOM
+
+WebGL/Canvas is the primary rendering layer; traditional DOM layout (axis 6 — non-traditional) is secondary. The viewport is the canvas. Structure, texture, and motion come from the render layer first — the DOM provides only the console overlay: seeds, parameters, labels. If a visual can be computed, it should be computed, not built in CSS.
+
+**What it prevents:** CSS-only recreations of generative effects — gradients standing in for noise fields, marquee standing in for particle drift. The medium defines the style.
+
+---
+
+## 4. SIGNAL-PROPORTIONAL SATURATION
+
+The base palette is a neutral monochrome ramp (`#0A0C10` → `#F2F1EE`). Saturated accents — cyan `#22D3EE`, green `#34D399`, amber `#FBBF24`, magenta `#E879F9` — are **earned, not applied**: they appear only where the algorithm is loud. Color is a function of computed signal: `color = lerp(mono, accent, signal)`. Saturation above ~10% of the viewport means the signal is fake.
+
+**What it prevents:** Saturated gradients and rainbow palettes that encode nothing. Every color must map to a computed value, or the color is lying about the data.
+
+---
+
+## 5. THE CONSOLE IS PART OF THE DESIGN
+
+Seeds, FPS, iteration counts, coordinates — the machine metadata is a first-class UI layer. Monospace labels (`SEED 1742`, `FPS 60`, `PARTICLES 4096`, `NOISE 0.62`) read like terminal output. Text is annotation, not editorial voice — it makes the computation legible and invites the viewer into the system rather than passive consumption.
+
+**What it prevents:** Opaque, mysterious "art" with no entry point. The console layer turns the page from a spectacle into a system the viewer can read and, ideally, perturb.

@@ -1,0 +1,160 @@
+# Parameterized Template — 3D Product Showcase / Object Theater
+
+> Use this template to generate a 3D Product Showcase page for YOUR product.
+
+---
+
+```
+Build a 3D product showcase page for "[PRODUCT]" — [ONE-LINE DESCRIPTION, e.g., "a flagship mechanical keyboard"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + three.js / React Three Fiber + @react-three/drei. Motion: framer-motion + scroll animator. Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: The product as a sculptural object in a virtual studio. Photorealistic real-time 3D, orbital + scroll-driven camera, studio lighting. The interface is minimal — the product carries 95% of the weight.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY)
+
+- NO flat 2D product photos as primary imagery (real-time 3D model is the hero)
+- NO 2D-only imagery (a true WebGL three.js/Spline scene must render)
+- NO busy backgrounds (neutral studio backdrop — light gray to dark)
+- NO text-heavy layouts (minimal labels; product is the focus)
+- NO card clutter around the product (minimal chrome, floating spec labels)
+- NO harsh top-down lighting (use key / fill / rim kit + soft shadows)
+- NO flat opaque colors (PBR materials with metalness, roughness, clearcoat, env reflections)
+- NO snappy/kicky motion (orbital easing, scroll-spring camera, no snapping)
+- NO decorative UI flourishes (grids, rules, ornament) near the object
+
+---
+
+## FONTS
+
+Typography is quiet — it sits behind the product. Use:
+- [DISPLAY_FONT], light weight (200–300): Product name, uppercase, `clamp(2.5rem, 7vw, 6rem)`, tracking 0.02em
+- Inter 400 (or [DISPLAY_FONT] 400): body captions, 14–16px, max-width 340px
+- [MONO_FONT] (JetBrains Mono / IBM Plex Mono): spec labels, 11–12px, uppercase, tracking 0.08em
+
+Load via Google Fonts. Two families maximum: one clean sans for the name, one mono for specs.
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --studio-light: #FAFAF9;  /* light studio canvas */
+  --studio-panel: #E4E5E4;  /* hairline panels */
+  --studio-ink: #1C1917;    /* text on light */
+  --studio-dark: #0A0A0B;   /* dark stage for materials section */
+  --text-muted: rgba(28, 25, 23, 0.55);
+  --text-on-dark: rgba(250, 250, 249, 0.9);
+}
+```
+
+**Stage:** default light studio `#FAFAF9`; add one dark-stage section `#0A0A0B` to dramatize reflections on your material section.
+**Accent:** take it from the product itself — [ACCENT_COLOR] (the product's finish: metal tone, anodized color, leather). Never introduce a free accent that isn't in the product.
+
+---
+
+## STRUCTURE
+
+### Hero — Full-Viewport Object
+- `min-h-[100dvh]`, full-viewport Three.js canvas, product centered, 150%–250% scale
+- Orbit drag (auto-drift when idle), scroll = gentle dolly-in
+- Bottom-left overlay: product name (huge, light) + one-liner + label `[PRODUCT] / 01`
+- CTA: "EXPLORE" — minimal underline chip
+
+### Scroll Camera Sequence (3+ shots)
+- Shot 1: dolly-in from 4m to ~1.6m
+- Shot 2: tilt/arc to a signature angle (e.g. 45° top-down)
+- Shot 3: exploded view with staggered part offsets + rotating parts
+- Spec labels float beside each exposed part (mono, uppercase)
+
+### Specs
+- Left: persistent mini three.js canvas, slow self-orbit
+- Right: spec list in mono, hairline separators, max-width ~280px
+
+### Materials / Finishes (dark stage)
+- Swap backdrop to `#0A0A0B`, product close-up
+- Swatch list: [MATERIAL_A], [MATERIAL_B], [MATERIAL_C] — PBR values lerp on click
+
+### Footer
+- Minimal, one line: `[BRAND] © 2026 — [TAGLINE]`, centered
+
+---
+
+## LIGHTING KIT (reuse for any product)
+
+- **Key:** area light, 45° above-front, intensity 1.0, warm — dominant soft light
+- **Fill:** hemisphere behind-left, 0.08 — lifts shadows without flattening
+- **Rim:** tight spot, behind-top-left, ~0.5 — definition against the stage
+- **Environment:** HDR env map for reflections (metalness 0.5–1.0, roughness 0.1–0.4, clearcoat on lacquer surfaces)
+- **Shadows:** soft contact shadow + blurred shadowMap (PCFSoft); no hard drop shadows
+
+Replace [LIGHT_SETUP] with your tuning: e.g. `low-key spot heavy` for dramatic, `high-key fill heavy` for commercial clean.
+
+---
+
+## CAMERA
+
+- [CAMERA_MOVE]: choose the scroll-driven script —
+  - `dolly-in` (push from wide to close-up)
+  - `orbit_arc` (lateral 45° arc and settle)
+  - `explode` (exploded-view reveal)
+  - `flythrough` (interior/for component-level products)
+- Idle: auto-orbit at ~0.08 rad/s, paused while dragging.
+- `prefers-reduced-motion: reduce` → no auto-orbit, no scroll dolly, exploded view only on click.
+
+---
+
+## ANIMATIONS
+
+- Product entrance: camera dolly-in 4s, ease-out-cubic
+- Scroll camera: values lerped by scroll progress (spring 0.08–0.12)
+- Exploded view: parts offset 16px + lift, stagger 60ms, 900ms total
+- Material swap: lerp PBR values 500ms ease-out
+- Spec labels: fade + 8px rise on viewport enter, 700ms
+- Auto-orbit: pause on drag, resume after 1.5s idle
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- Real-time 3D model (three.js / R3F / Spline) hero — never a flat photo
+- Orbital + scroll-driven camera; interaction is exploration
+- Studio lighting rig: key / fill / rim, soft shadows
+- PBR materials with environment reflections
+- Minimal UI, neutral background
+- Quiet typography — huge light product name, tiny mono spec labels
+- Accent color comes from the product, not the UI
+
+---
+
+## CONTENT GUIDANCE
+
+**Product name:** one word, 4–8 letters, uppercase, huge and light. "AURA", "SQUARE", "VERA" — not a sentence.
+
+**One-liner:** 4–8 words, tactile and quiet. "Wireless headphones, sculpted for quiet." not "Our headphones feature advanced noise cancellation."
+
+**Spec labels:** 3–5 uppercase mono details per section. Exact and physical: battery, weight, driver size, codec, material.
+
+**Material names:** 3–6 short swatches (e.g. MATTE, BRUSHED, GLOSS, MILK, NOIR). Each gets a 1-phrase finish descriptor at most.
+
+---
+
+Replace all [BRACKETED] placeholders, then paste into your AI coding assistant.
+```
+
+---
+
+## Placeholder Reference
+
+| Placeholder | Meaning | Example |
+|-------------|---------|---------|
+| `[PRODUCT]` | The product (single object) | "AURA X" |
+| `[BRAND]` | Company name | "Aüra Audio" |
+| `[TAGLINE]` | One-line value prop | "The product of sound" |
+| `[DISPLAY_FONT]` | Huge light-weight product name font | "Inter" |
+| `[MONO_FONT]` | Spec/metadata font | "JetBrains Mono" |
+| `[ACCENT_COLOR]` | A finish color from the product | "#5B88C4" |
+| `[LIGHT_SETUP]` | Key-light character | "high-key soft" |
+| `[CAMERA_MOVE]` | Scroll camera script | "explode" |
+| `[MATERIAL_LIST]` | Swatches for the finish section | "MATTE, BRUSHED, GLOSS" |

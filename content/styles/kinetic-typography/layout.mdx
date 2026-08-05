@@ -1,0 +1,111 @@
+# Layout Grammar
+
+## Grid System
+
+**The type is the grid.** Oversized letterforms run edge-to-edge and define the spatial structure — baseline rows, cap-height lines, and descender overhangs replace conventional columns. Internally:
+
+- Full-bleed type: 100vw width, letters bleed past the viewport edge (negative indent on display text)
+- Headline scale: monumental, `clamp(4rem, 12vw, 12rem)` and up (120px+) — never small
+- Variable font weight: animated across the type-face grid, not per element
+- Margins: tight — type dominates, whitespace is a pause, not a frame
+- Marquee strips: full-width horizontal tracks running continuously between sections
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | Full viewport — `min-h-[100dvh]` |
+| Background | Flat high-contrast duotone (single color or B&W) — no imagery |
+| Hero | Oversized headline (120px+) that animates on load and responds to scroll |
+| Text position | The text IS the hero — full-width, edge-to-edge, no container |
+| Animation | Split-text reveal with staggered letter entry, then scroll-driven weight scaling |
+
+```
+┌─────────────────────────────────────────┐
+│  T H E   W O R D                         │
+│  B E C O M E S                          │
+│  T H E   S T A G E                     │
+│  (letters animate in, one by one)       │
+│                                         │
+│  [marquee strip runs below]             │
+└─────────────────────────────────────────┘
+```
+
+**The hero is the headline.** Every pixel of the viewport belongs to the type. Image content is absent — letterforms carry 100% of the visual weight.
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(4rem, 12vh, 10rem);
+--display-type-max: clamp(4rem, 12vw, 12rem);
+--marquee-speed: 20s;
+--marquee-track-gap: 4rem;
+```
+
+**Spacing choreographs the motion.** Sections are separated into clear bands so each animated reveal has its own stage. Moving type needs room — a cramped section collapses the kinetic effect into noise. Whitespace between sections is the "rest" between beats.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Full-Bleed Type + Marquee
+```
+┌─────────────────────────────────────────┐
+│                                         │
+│  W O R D S   A S   A R C H I T E C T U R E
+│  (monumental type, edge-to-edge)        │
+│                                         │
+│  ▓ NEXT ▓ WATCH ▓ MOVE ▓ READ ▓ NEXT ▓  │  ← marquee
+└─────────────────────────────────────────┘
+```
+
+### Pattern 2: Scrub-Driven Split Text
+```
+┌──────────────────┬──────────────────────┐
+│  W O R T         │  (scrub-controlled)  │
+│  H S P L I T     │  words reveal with   │
+│  A C R O S S     │  scroll progress     │
+│  S C R O L L     │  weight 100→900      │
+│                  │                      │
+└──────────────────┴──────────────────────┘
+```
+
+### Pattern 3: Overlapping Type Layers
+```
+┌─────────────────────────────────────────┐
+│        D E P T H (behind, tate 6%)      │
+│    S C A L E   (behind, larger)         │
+│  C O N T R A S T  (front, filled)       │
+│  (stacked letterforms, mixed opacities) │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Full monumental headline, edge-to-edge type, continuous marquees, rich scroll choreography |
+| **Tablet (768px)** | Headline scales down (8vw), marquees slow, scroll-driven effects simplified |
+| **Mobile (375px)** | Headline at 6rem nesting per word, letter-per-line stacking, marquees halved in speed and pause on reduced-motion |
+
+**On mobile:** One word per line. Split-text effects collapse to word-level rather than letter-level — letter-by-letter animation at 375px is hard to read and can trigger motion sensitivity. The kinetic character survives through scroll-driven weight changes alone.
+
+---
+
+## Layout Don'ts
+
+| Don't | Do Instead |
+|------|------------|
+| Contained headline boxes | Full-bleed type that bleeds past viewport edges |
+| Small headlines (under 60px) | Monumental display type — 120px+ |
+| Image hero sections | Type-only heroes — letterforms carry the weight |
+| Card grids | Full-width type bands and marquee strips |
+| Bordered containers | No borders — type defines its own edges |
+| Dense multi-column text | One choreographed statement per section |
+| Center-column alignment | Edge-to-edge type with intentional overhang |

@@ -1,0 +1,146 @@
+# Exact Replica Prompt — Grain/Noise Texture / Analog Warmth
+
+> Copy this entire prompt and paste it into your AI coding assistant.
+
+---
+
+```
+Build a grain/noise texture page for "SEED & STONE" — an artisan home-goods brand. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `SEED & STONE — Made by hand, printed with warmth`.
+
+Vibe: Film grain, paper texture, noise overlays. Analog imperfection in digital design. Muted desaturated palettes that feel printed on uncoated stock. A reaction against clinical retina perfection — the screen becomes a physical surface.
+
+---
+
+## ANTI-SLOP CONSTRAINTS
+
+- NO clinical perfection (deliberate analog imperfection — misregistration, paper tooth, film jitter)
+- NO neon or saturated colors (muted, desaturated palette only)
+- NO sharp digital edges (edges feel pressed, not cut)
+- NO glossy surfaces (uncoated paper warmth, never glass)
+- NO pure black on white (reduced text contrast throughout)
+- NO smooth gradients (dither any banding — don't hide it)
+- NO glassmorphism (frosted glass is digital; this is physical)
+- NO snappy motion (gentle only: 24fps grain jitter, slow fades)
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500&family=Source+Serif+4:opsz,wght@6..72,300;400&display=swap
+```
+
+Usage:
+- **Source Serif 4 400**: Editorial headlines — `clamp(2rem, 4vw, 3.5rem)`, sentence case, letter-spacing 0.01em, color slightly reduced from pure black
+- **Libre Franklin 300**: Body text — `clamp(0.875rem, 1vw, 1rem)`, line-height 1.7
+- **Libre Franklin 400 UPPERCASE**: Labels — 10-12px, tracking 0.2em
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --stone: #F2EFE8;          /* Warm stone ground */
+  --sand: #E5DFD2;           /* Sand field */
+  --clay: #C2AFA0;           /* Muted clay */
+  --graphite: #3E3A35;       /* Reduced-contrast text */
+  --graphite-soft: #6B655C;  /* Muted text */
+  --chalk-line: #D8D2C6;     /* Hairlines — printed, not crisp */
+  --ink-fade: rgba(62, 58, 53, 0.82); /* Body text — never pure black */
+}
+```
+
+Body: `bg-[#F2EFE8] text-[rgba(62,58,53,0.82)] antialiased font-body`.
+
+---
+
+## STRUCTURE
+
+### 1. Hero Section
+- `min-h-[100dvh]`, generous whitespace, texture-forward
+- Full-viewport fixed grain overlay: SVG `feTurbulence` noise, `pointer-events: none`, opacity 0.05
+- Paper fiber + halftone dot texture layered beneath content
+- Text (left-aligned, top-left of a centered column):
+  - Label: "SEED & STONE / EST. 2019" — Franklin 400, uppercase, tracking 0.2em, 12px, graphite-soft
+  - Headline: "Made by hand, printed with warmth" — Source Serif 4, `clamp(2rem, 4vw, 3.5rem)`, sentence case, ink-fade
+  - Subtext: "Grain, fiber, and honest imperfection. Home goods that feel like they were made yesterday." — Franklin 300, ink-fade, max-width 480px
+  - CTA: "SHOP THE COLLECTION" — serif, 1px chalk-line border, reduced contrast, hover: grain opacity eases up
+
+### 2. Materials Section (texture showcase)
+- 3-column grid on generous whitespace — no cards, no borders beyond hairlines
+- Each item: halftone dot field, risograph misregistration on an overlapping color plate, paper tooth texture
+- Text per item: label + 2-3 sentences (Franklin 300, ink-fade)
+- Headline: "Texture is the design" — Source Serif 4
+
+### 3. Process Section
+- Split: full-bleed paper-texture field (left) + text (right)
+- Headline: "Analog warmth, digital craft" — Source Serif 4
+- Body: 2-3 sentences about deliberate imperfection — misregistration, film jitter
+- CTA: "OUR PROCESS" — hairline button, reduced contrast
+
+### 4. Footer
+- Stone bg, graphite-soft text, minimal
+- "SEED & STONE © 2026 — MADE BY HAND" — Franklin 400, uppercase, tracking 0.15em, 12px, graphite-soft
+
+---
+
+## GRAIN OVERLAY
+
+```css
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shimmer 2.4s steps(1) infinite;
+}
+
+@keyframes grain-shimmer {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-1px, 1px); }
+  50%  { transform: translate(1px, -1px); }
+  75%  { transform: translate(-1px, -1px); }
+  100% { transform: translate(0, 0); }
+}
+```
+
+The grain animates like projected film — 24fps steps, 1px displacement, barely perceptible.
+
+---
+
+## ANIMATIONS
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Grain overlay | 1px jitter, `steps(1)` — 24fps film shimmer | 2.4s | `steps(1)`, infinite |
+| Hero text | opacity 0→1 + translateY(12px)→0 | 1200ms | `ease-out` (delay 300ms) |
+| Body text | opacity 0→1 | 1000ms | `ease-out` (delay 600ms) |
+| Texture fields | opacity 0→1, no scale — texture must not feel slick | 1000ms | `ease-out` (delay 400ms) |
+| Hover (CTA) | grain opacity 0.05→0.12 on the button surface | 300ms | `ease-out` |
+| All motion | slow fades only — no spring, no bounce, no snap | 1000ms+ | `ease-out` |
+
+`prefers-reduced-motion: reduce` → disable grain shimmer (static overlay at 0.05), instant entrance.
+
+---
+
+## ANTI-SLOP (LOCKED)
+
+- Fixed film grain overlay (0.05 opacity, multiply, pointer-events: none)
+- Muted, desaturated palette — stone, sand, clay
+- Paper fiber + halftone dot + risograph misregistration textures
+- Reduced text contrast — no pure black on white
+- Serif editorial type for headlines, warm sans for body
+- 24fps grain shimmer — barely perceptible film jitter
+- Slow fades only, 1000ms+ — no snappy motion
+- Generous whitespace — layout stays simple, texture IS the design
+- No neon, no glossy surfaces, no sharp digital edges
+- No clinical perfection anywhere
+
+---
+
+Recreate this page with the exact analog-warmth aesthetic, feTurbulence grain overlay, and muted printed-paper palette above.
+```

@@ -1,0 +1,147 @@
+# Parameterized Template — Swiss Mono Precision
+
+> Use this template to generate a Swiss Mono Precision page for YOUR brand.
+
+---
+
+```
+Build a Swiss Mono Precision page for "[BRAND_NAME]" — [ONE-LINE DESCRIPTION, e.g., "a developer tools company shipping a precision terminal product"]. Stack: React + Vite + TypeScript + Tailwind CSS v4. Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: Ruthlessly systematic — monochromatic palette, rigid grid, mathematical spacing. Swiss International Style for the digital age. The page reads like an engineering drawing: grid discipline, numbered systems, hairline rules, mono annotations.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY)
+
+- NO decorative elements — everything must have a function
+- NO gradients, NO drop shadows, NO background imagery
+- NO rounded corners above 2px
+- NO asymmetric layout without grid derivation — every position mathematically locked
+- NO more than 2-3 colors (black, white, one accent)
+- NO serif or decorative type (neo-grotesque sans + monospace only)
+- NO bouncy/decorative motion (150-200ms utilitarian transitions max)
+- NO placeholder text — write real copy in the voice of a spec sheet
+- NO image-led hero (a typographic lockup on the grid IS the hero)
+- NO arbitrary spacing — all values derived from the 8px base unit
+
+---
+
+## FONTS
+
+Replace [DISPLAY_FONT] with a neo-grotesque sans:
+- Neue Haas Grotesk — the Swiss original, premium
+- Akkurat — the modern Swiss workhorse
+- Aeonik — clean, contemporary
+
+Replace [MONO_FONT] with a technical monospace:
+- IBM Plex Mono — engineering pedigree, variable weights
+- JetBrains Mono — developer-native, precise
+- Space Mono — distinctive, slightly quirky
+
+Load via Google Fonts (or self-host for Neue Haas/Akkurat). Use [DISPLAY_FONT] for headlines and body, [MONO_FONT] for data, numbers, labels, and annotations. Mono at small sizes (11-13px) with wide tracking for labels.
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --ink: #000000;        /* Pure black — the ground */
+  --paper: #FFFFFF;      /* Pure white — the surface */
+  --gray: #666666;       /* Secondary text, annotations */
+  --hairline: rgba(0, 0, 0, 0.15);  /* 1px structural rules */
+  --accent: [ACCENT_HEX]; /* Swiss red #FF0000 by default — one accent only */
+}
+```
+
+**Accent guidance:** One muted accent max. Swiss red #FF0000 is the heritage choice; for calmer brands use a desaturated red (#C8102E), signal orange (#FF4B00), or a flat blue (#0057FF). Never introduce a second accent.
+
+---
+
+## STRUCTURE
+
+### Header
+- Fixed top bar: [BRAND_NAME] left, section links right, 1px hairline bottom border
+- Height on the 8px grid; mono type 12px, wide tracking
+
+### Hero
+- Typographic lockup: oversized [DISPLAY_FONT] headline, tight leading
+- Underneath: [MONO_FONT] annotation line — e.g., `NO. 01 / SYSTEM OVERVIEW`
+- A hairline rule + `[MONO_FONT]` coordinates/figures as a caption row
+- No image, no gradient — type, rules, and whitespace only
+
+### Spec Sections (3-5)
+- Each prefixed with a mono index number: `01 — [SECTION TITLE]`
+- Content locked to the [GRID_COLUMNS]-column grid (12 or 16), 8px base spacing
+- Data presented as tables or numbered lists with tabular figures
+- Hairline rules between sections, generous mathematical margins
+
+### Footer
+- Top hairline rule, mono annotations (`[BRAND_NAME] / EST. [YEAR] / COORDINATES`)
+- Plain text links — no icon soups
+
+---
+
+## HAIRLINE UI
+
+```css
+.rule {
+  height: 1px;
+  background: var(--hairline);
+}
+.spec-row {
+  display: grid;
+  grid-template-columns: 64px 1fr 200px;
+  border-bottom: 1px solid var(--hairline);
+}
+.label {
+  font-family: [MONO_FONT];
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+```
+
+---
+
+## ANIMATIONS
+
+- Entrance: opacity 0→1, 200ms, ease-out (staggered 40ms) — functional, not theatrical
+- Hover: color shifts and underline reveals only, 150ms
+- Tabular/number changes: immediate or 120ms crossfade — numbers don't animate for fun
+- No parallax, no scroll-triggered reveals beyond a single fade
+
+`prefers-reduced-motion: reduce` → disable all transitions, instant states.
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- 12-column grid (or 16-column), 8px base unit — every element locked
+- Neo-grotesque type at systematic scale (1.25x or 1.5x)
+- Hairline rules (1px) for structure
+- Black/white base with one muted accent
+- Monospace for data, numbers, labels — tabular figures everywhere
+- Numbered systems (01/02/03) — the page reads like a spec sheet
+- Engineering-drawing feel — dimension lines, datum marks, annotations
+- Asymmetric but derived — free-looking, mathematically locked
+- Proper micro-typography — dashes, quotes, hanging punctuation
+- Flat surfaces — no gradients, no shadows, no texture
+- Generous whitespace as an architectural element
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines:** 4-8 words. Direct, objective, system-voiced. "Precision Instruments for Engineers" not "Discover the Future of Tools."
+
+**Body text:** 2-3 sentences. Factual, spec-like. Write like a technical document, not a marketing pitch.
+
+**Annotations:** Mono labels everywhere — `NO. 01`, `FIG. A`, `Q3 / REV. 2`, coordinates. The page should be understandable as a drawing.
+
+**Numbers:** Tabular figures, right-aligned in columns, ISO-style formatting. Numbers are content, not decoration.
+
+---
+
+Replace all [BRACKETED] placeholders, then paste into your AI coding assistant.
+```

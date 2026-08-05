@@ -1,0 +1,133 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Hand-Drawn Organic is **gentle, organic, and hand-made**. Nothing snaps, nothing slides with mechanical easing, nothing moves like a component library. Elements move like a drawing coming to life — lines draw themselves on, shapes wobble like they're held by a hand, everything breathes at a human rhythm. The motion should feel like watching a sketch animate: the hand is still visible in every movement.
+
+---
+
+## Draw-On Animation (stroke-dasharray)
+
+```css
+.draw-on path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw-on 2s ease-out forwards;
+}
+
+@keyframes draw-on {
+  to { stroke-dashoffset: 0; }
+}
+```
+
+**Purpose:** SVG line art draws itself onto the page — the pen moves, the line appears. This is THE signature motion of the style. The line should draw in a natural, slightly varying speed (2s is a comfortable pen stroke; adjust dasharray to match each path's length). Lines appear like someone is drawing the page in front of you.
+
+---
+
+## Wobble / Hand Tremble
+
+```css
+@keyframes wobble {
+  0%, 100% { transform: rotate(-1deg) translateY(0); }
+  25% { transform: rotate(1.5deg) translateY(-1px); }
+  50% { transform: rotate(-1.5deg) translateY(1px); }
+  75% { transform: rotate(1deg) translateY(0); }
+}
+
+.wobble {
+  animation: wobble 4s ease-in-out infinite;
+  transform-origin: 50% 50%;
+}
+```
+
+**Purpose:** The hand tremble — small rotation and position variance, like a held pen. Applied to doodles, stamps, badges, drawn containers. The wobble is small (±1.5deg) and slow (4s), never a shake. It says "this is held, not placed."
+
+---
+
+## Breathing / Ink Settling
+
+```css
+@keyframes breathe {
+  0%, 100% { opacity: 0.92; transform: scale(1.0); }
+  50% { opacity: 1.0; transform: scale(1.015); }
+}
+
+.breathe {
+  animation: breathe 5s ease-in-out infinite;
+}
+```
+
+**Purpose:** Subtle breathing on illustrated elements and watercolor washes — like ink settling into paper. Barely perceptible: a 1.5% scale change over 5 seconds. The page feels alive, gently, at a human pace.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Draw-on line art | stroke-dashoffset 1000 → 0 | 2000ms | `ease-out` | 0ms |
+| Headline | Opacity 0→1 + translateY(10px)→0 + tiny rotate(-1deg)→0 | 900ms | `ease-out` | 300ms |
+| Illustrated elements | Opacity 0→1 + scale(0.95)→1 (like being set down) | 800ms | `ease-out` | 600ms |
+| Body text | Opacity 0→1 | 700ms | `ease-out` | 800ms |
+
+**Key:** Durations are human-paced — 700-2000ms, matching the speed of a pen stroke or a hand setting something down. Elements enter like they're being drawn or placed, not rendered.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Buttons | Ink fill grows — background spreads like a marker (300ms) | Pressed: scale(0.97) + rotate(-0.5deg), like pushing a paper button |
+| Links | Underline draws on via stroke-dashoffset (400ms) | Color shifts to terracotta |
+| Doodles | Wobble amplitude increases (rotate ±1°→±2.5°) | — |
+| Illustrations | Slight scale 1.0 → 1.03 (400ms) | — |
+
+**All hover transitions are hand-paced (300-500ms).** Quick mechanical hovers feel digital and break the drawn illusion. Hovering should feel like the illustration noticing you.
+
+---
+
+## Scroll-Triggered Drawing
+
+| Effect | Specification |
+|--------|--------------|
+| Draw-on reveal | Line art draws itself as it enters the viewport (IntersectionObserver + dashoffset) |
+| Paper movement | Sections shift 3-6px vertically, like pages settling |
+| Margin notes | Marginalia slides in from the edge (translateX(12px)→0) with a slight rotate |
+| Wash reveal | Watercolor washes fade in with opacity 0→1 + slight blur(2px)→0 |
+
+**The scroll should feel like turning pages of a sketchbook.** Each section reveals its drawn elements the moment they enter view — nothing is pre-drawn, everything appears by hand.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- All draw-on animations: show line art fully drawn (dashoffset 0)
+- Wobble: disabled (static)
+- Breathing: disabled
+- Scroll reveals: instant appearance, no transitions
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .draw-on path { stroke-dashoffset: 0 !important; }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| Never | Why |
+|-------|-----|
+| Mechanical linear slides | Motion must feel hand-driven, not machine-driven |
+| Bounce or spring physics | Too energetic — this is gentle and organic |
+| Fast snappy transitions (<300ms) | Hands don't move that fast |
+| Staggered choreographed reveals | Motion should feel spontaneous, not rehearsed |
+| Auto-playing carousels | The user turns the pages |
+| Particle effects / confetti | Too digital — the texture is ink and paper |
+| Perfectly synced simultaneous animations | Real hands draw one thing at a time |

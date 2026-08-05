@@ -1,0 +1,110 @@
+# Texture & Surface
+
+## Primary Texture: Paper
+
+The paper is the foundation — everything sits on paper, never on a flat digital background:
+
+| Quality | Description |
+|---------|-------------|
+| **Tooth** | Subtle grain — like cold-press watercolor paper or sketchbook stock |
+| **Warm tone** | Cream (#F6F1E4), not white — paper has a color |
+| **Edge** | Slightly irregular — torn paper edges or rough masks for section breaks |
+| **Fade** | Slight vignette — paper darkens toward the edges like a real sheet |
+
+**The goal:** The page should feel like you could touch it. Every element sits ON paper — the paper texture is the ground truth, visible behind all drawings, text, and washes.
+
+---
+
+## Media Textures
+
+Visible media marks are the texture system — each is a distinct material, applied deliberately:
+
+| Media | Description | Application |
+|-------|-------------|-------------|
+| **Pencil grain** | Fine graphite noise, light gray, low contrast | Underlines, shading, filled areas |
+| **Watercolor bleed** | Soft, blurred color edges that spread unevenly | Washes, background fields, section tints |
+| **Ink splatter** | Random small ink dots near line work | Accents near headings, stamps, margin corners |
+| **Marker streaks** | Slightly uneven parallel strokes with lighter gaps | Highlight swipes, badge fills, underlines |
+| **Eraser marks** | Faint lighter smudges in shaded areas | Behind pencil shading, at line ends |
+| **Crayon grain** | Chunkier, waxy uneven coverage | Bold accent fills, large doodle areas |
+
+**The rule:** Media texture is visible or it doesn't count. No flat fills — every filled area should show its material (streaks, grain, bleed). The texture IS the human mark.
+
+---
+
+## Paper Texture (CSS)
+
+```css
+.paper-surface {
+  background-color: #F6F1E4;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(51, 48, 42, 0.03) 0%, transparent 60%),
+    url("data:image/svg+xml,..."); /* fine noise SVG at 2-3% opacity */
+  background-size: 200px 200px, 140px 140px;
+}
+```
+
+**Purpose:** A two-layer paper — a faint uneven warm-darkening (the vignette) plus a fine noise overlay at 2-3% opacity (the tooth). The grain must be subtle: visible only when you look for it, never dominating the drawn content.
+
+---
+
+## Watercolor Bleed (CSS)
+
+```css
+.watercolor-wash {
+  background: radial-gradient(
+    ellipse at 60% 40%,
+    rgba(192, 90, 51, 0.18) 0%,
+    rgba(192, 90, 51, 0.06) 45%,
+    rgba(246, 241, 228, 0) 70%
+  );
+  filter: blur(2px) contrast(0.98);
+}
+```
+
+**Purpose:** A color field with a soft, irregular edge — like pigment bleeding into wet paper. The blur (2px) and the uneven radial falloff create the bleed. Real watercolor never has a hard edge; neither should this.
+
+---
+
+## Ink Splatter (SVG Filter)
+
+```svg
+<filter id="splatter">
+  <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="noise"/>
+  <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.13  0 0 0 0.8 -0.25" result="dots"/>
+  <feComposite in="dots" in2="SourceGraphic" operator="in"/>
+</filter>
+```
+
+**Purpose:** Add speckled ink dots along drawn lines and around stamps. The turbulence generates random dot placement — every render is a slightly different splatter, like real ink. Apply at low opacity (0.4-0.6) so it reads as flung ink, not noise.
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Cream paper with tooth and vignette |
+| Illustration areas | Full media texture — ink lines, washes, splatter |
+| Buttons | Hand-drawn border (wobbled path), marker fill or ink outline |
+| Badges / stamps | Marker streak fill, slight rotation, splatter near edges |
+| Dividers | Hand-drawn squiggles, dotted lines, or ink underlines — never straight rules |
+| Cards / panels | Drawn containers with irregular borders — hand-sketch outlines, not box shadows |
+| Text highlights | Lemon marker swipe behind text (rotated, uneven) |
+| Navigation | Minimal — margin annotations and doodled arrows |
+
+**No flat panels, no box shadows, no glass, no gradients.** Every surface shows its material — drawn, painted, or written. If a border exists, it wobbles; if a fill exists, it streaks.
+
+---
+
+## Texture Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| AI-generated imagery | Hand-drawn illustration with visible human mark |
+| Perfect geometric shapes | Wobbly, imperfect, organic shapes |
+| Flat digital fills | Media textures — pencil grain, marker streaks, watercolor bleed |
+| Box shadows for depth | Hand-drawn outlines, ink underlines, slight rotation |
+| Glassmorphism / blur panels | Paper and ink surfaces |
+| Smooth digital gradients | Watercolor washes with uneven edges |
+| Noise-free cleanliness | Visible media texture — grain, splatter, eraser marks |

@@ -1,0 +1,89 @@
+# Color Architecture
+
+## Ground
+
+The ground is warm paper — never pure white, never pure black. The color axis is deliberately low (2/6): the palette stays quiet so the typography and editorial layout carry the piece. Color behaves like a well-printed magazine page: cream stock, dark ink, one restrained accent.
+
+```css
+--color-ground-light: #F7F2E9;   /* Warm ivory — main reading surface */
+--color-ground-dark: #1B1712;    /* Warm near-black ink, never #000 */
+```
+
+**Why warm paper:** Pure #FFFFFF feels digital and sterile. A warm ivory (#F7F2E9) reads as cream publication stock — the page is invited to be handled, not scrolled.
+
+---
+
+## Warm Paper Palette
+
+```css
+--paper-ivory: #F7F2E9;    /* Main background — body text sits here */
+--paper-porcelain: #FCF9F3; /* Brightest paper — highlighted/quote zones */
+--paper-flax: #EDE2CC;      /* Deeper aging stock — secondary surfaces */
+--paper-sand: #E0D2B8;      /* Deepest paper — pull-quote backdrops */
+```
+
+**These are the only light tints used.** They layer like uncoated offset paper — each step deeper reads as ink build-up, not as a new color. Never introduce digital neons or true grays; the whole reading surface stays inside the ivory→sand band.
+
+---
+
+## Ink Palette
+
+```css
+--ink-black: #1B1715;        /* Primary text — warm black */
+--ink-charcoal: #2E2A26;     /* Secondary text — softened headline registers */
+--ink-sepia: #4A3F30;        /* Muted body-level text */
+--ink-felt: #6B5D49;         /* Faintest readable text — captions, folios */
+```
+
+**Ink verbs:** All ink colors carry a warm brown/sepia cast. Pure gray type on warm paper looks pasted-on; warm ink looks printed. Reserve the fullest black for body text at resting size; use the felt tone for running heads and captions so the page breathes.
+
+---
+
+## Editorial Accent
+
+```css
+--accent-oxblood: #8A3D23;    /* Drop caps, opening rules, links */
+--accent-gold: #A9832F;       /* Rare — pull-quote ornament, numbered sections */
+```
+
+**One accent at a time.** The accent appears in exactly three places, chosen deliberately: the body of the drop cap, the opening rule under a section head, and (optionally) the hang in a pull quote. It reads like the red ink a magazine saves for the rare flourish — sparse, intentional, expensive-feeling.
+
+---
+
+## Text
+
+```css
+--color-text-on-light: rgba(27, 23, 21, 0.92);  /* Ink on paper */
+--color-text-on-dark: rgba(247, 242, 233, 0.9); /* Paper on ink (photo overlays) */
+--color-text-muted: rgba(108, 93, 73, 0.85);    /* Captions, folios */
+```
+
+**Why full-strength ink on paper:** Unlike floating, dreamlike styles, editorial text is meant to be read. Legibility is the top priority — 0.92 opacity near-black on warm ivory matches the ink-to-paper contrast of a printed magazine and keeps reading effortless for long stretches.
+
+---
+
+## Applied Color Map
+
+| Element | Color |
+|---------|-------|
+| Body text | `--ink-black` on `--color-ground-light` |
+| Headline / deck | `--ink-black` |
+| Captions, folios | `--ink-faded` |
+| Drop-cap initial | `--accent-oxblood` |
+| Section opening rules | `--accent-oxblood`, 48px long, 2px tall |
+| Pull-quote zone | `--paper-porcelain` band, `--ink-charcoal` type |
+| Image overlays | `--color-text-on-dark` |
+| Link hover underline | `--accent-oxblood` |
+
+---
+
+## Color Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Pure #FFFFFF background | Warm ivory #F7F2E9 paper |
+| Cold gray text | Warm sepia-tinged ink |
+| Full saturated palette | Keep the accent to one surprise per page |
+| Blue/digital links | Accent-oxblood editorial underline (sites are a magazine) |
+| Solid gradient bands full of color | Paper-toned zonings that read as "stock" |
+| Pure #000 ink | Warm near-black #1B1715 |

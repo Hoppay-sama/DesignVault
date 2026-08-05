@@ -1,0 +1,129 @@
+# Parameterized Template — Editorial Serif Narrative
+
+> Use this template to generate an Editorial Serif Narrative page for YOUR brand.
+
+---
+
+```
+Build an editorial serif narrative page for "[BRAND_NAME]" — [ONE-LINE DESCRIPTION, e.g., "a literary journal publishing long-form essays on design"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: Magazine-quality layout with serif headlines, drop caps, pull quotes, and long-form storytelling rhythm. Feels like reading a New Yorker feature, but interactive.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY)
+
+- NO sans-serif headlines (editorial serif display only)
+- NO single-column-only layout (multi-column grid on desktop)
+- NO wall-to-wall paragraphs (generous whitespace between sections)
+- NO glassmorphism / heavy drop shadows (flat, print-like planes)
+- NO neon or saturated accents (warm paper tones only)
+- NO card-based layouts (editorial sections, not UI cards)
+- NO snappy motion (slow, scroll-driven, deliberate)
+- NO stock photography (full-bleed editorial photography only)
+- NO all-caps sans-serif tag spam (elegant serif type everywhere)
+
+---
+
+## FONTS
+
+Display — pick ONE editorial serif (replace [DISPLAY_FONT]):
+- PP Editorial New — contemporary, sharp, literary
+- Canela — warm, graceful, high-fashion editorial
+- Domaine — confident, newspaper-gravity
+- Load via Fontsource/Google Fonts (or self-host the .woff2).
+
+Body — clean humanist sans (replace [BODY_FONT]):
+- Inter / Source Sans / Public Sans — readable at length
+- Pairing rule: serif display for headlines, sans body for legs.
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --paper-warm: #F5F1E8;      /* Warm cream paper */
+  --paper-bright: #FBF8F1;    /* Lighter paper for sections */
+  --ink-black: #1A1A18;       /* Softened ink, not pure #000 */
+  --ink-muted: #4A4843;       /* Secondary text, ink gray */
+  --rule-line: #D8D2C4;       /* Hairline rules between sections */
+  --accent-brick: #9C3D2E;    /* Rare muted accent (optional) */
+}
+```
+
+**Accent guidance:** Color is deliberately scarce (axis score 2/6) — warm paper base, ink text, one muted accent maximum.
+
+---
+
+## STRUCTURE
+
+### Chapter Opener (Hero)
+- `min-h-[90vh]`, warm paper background, oversized serif headline
+- Headline: [DISPLAY_FONT], `clamp(2.5rem, 6vw, 5rem)`, sentence case
+- Standfirst: 1-2 sentences at 1.25x body size
+- Folio/issue label: small-caps or italic serif micro-text
+
+### Story Sections (3-4 chapters)
+- Each: chapter number (roman numeral), oversized drop cap on first paragraph
+- Multi-column body: `columns: 2` (desktop), measure 60-75ch
+- Pull quote at 2x body size between sections, centered or offset
+- Full-bleed editorial photography between chapters (single image per break)
+
+### About / Colophon
+- Single column at 60-75ch, generous line height (1.6-1.7)
+- 2-3 paragraphs of narrative voice, not feature list
+
+### Footer
+- Paper-toned, hairline top rule, running head + folio styling
+
+---
+
+## SCROLL-DRIVEN STORYTELLING
+
+```css
+.chapter {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 900ms ease, transform 900ms ease;
+}
+```
+
+- Chapters fade/rise into view as they enter the viewport (900-1200ms, ease-out)
+- Pull quotes: scale 0.96→1 + opacity, 1000ms
+- Photography: opacity 0→1 + slight parallax, 1200ms
+- Drop caps: static print styling — no entrance animation (they're ink, not UI)
+
+`prefers-reduced-motion: reduce` → disable all reveal motion, instant sections.
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- Editorial serif display headlines (no sans-serif headlines)
+- Multi-column body at 60-75ch measure
+- Drop cap on opening paragraph of each section
+- Pull quote at least once per long section
+- Body line height 1.6-1.7
+- Warm paper tones + ink text (color is scarce — max one muted accent)
+- Full-bleed editorial photography between chapters
+- Folio/running head styling like a magazine
+- Flat print-like surfaces (no shadows, no glass, no cards)
+- Scroll-driven storytelling — the scroll is the page-turn
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines:** 6-12 words. Authoritative, literary. "The Quiet Craft of the Long Read" not "Our Blog Features Essays."
+
+**Standfirsts:** 1-2 sentences. Invites the read — a lede, not a pitch.
+
+**Body:** Write like a magazine feature. Paragraphs 2-4 sentences. Let whitespace breathe — never wall-to-wall text.
+
+**Imagery:** Editorial photography (not stock): portraits, environments, still life — full-bleed, art-directed, one mood per image.
+
+---
+
+Replace all [BRACKETED] placeholders, then paste into your AI coding assistant.
+```

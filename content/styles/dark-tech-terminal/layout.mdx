@@ -1,0 +1,121 @@
+# Layout Grammar
+
+## Grid System
+
+**Strict grid, terminal-framed.** The layout behaves like a mission-control interface — everything is locked to a visible technical grid, left-aligned with deliberate margins. Internally:
+
+- Page container: near-black ground `#0A0F0F`, max-width `clamp(64rem, 92vw, 96rem)`
+- Grid columns: `repeat(12, minmax(0, 1fr))` with `gap: 1.5rem` (mono-aligned)
+- Text containers: left-aligned, `max-width: 68ch` (measured in mono character units)
+- Terminal frames: consistent chrome — a 1px border, a title-bar strip (`bg-[#111618]`), a 3-dot accent at top-left
+- Baseline rhythm: all vertical spacing knocks to `--mono-line` (1.7 × font-size), keeping text grid-registered
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | `min-h-[100dvh]` — full viewport |
+| Background | Near-black `#0A0F0F`, subtle grid or noise, faint scan-line overlay |
+| Text position | Left-aligned, top-left — like a fresh prompt, not a centered billboard |
+| Headline size | `clamp(1.75rem, 4vw, 4rem)` — bold, mono or sharp geometric sans |
+| Accent | One neon (cyan `#00D4FF` default), used on the prompt symbol and interactive labels |
+| Caret | Real blinking caret (`caret-blink 1s steps(1)`) at the end of the last typed line |
+
+```
+┌─────────────────────────────────────────┐
+│  ~ $ mkproject dark-tech-terminal       │
+│  █ loading design protocol... ok        │
+│                                         │
+│  SYSTEM ONLINE                          │
+│  Near-black mission-control interface   │
+│  monospace data · neon signal           │
+│                                         │
+│  > npx init --brand [ENTER]  █          │
+└─────────────────────────────────────────┘
+```
+
+**The hero is a terminal session.** The window frame, the prompt, the caret, and the boot/load lines do the staging — the product statement types in under them. If the frame is removed, the near-black ground and mono type must still read as terminal on their own.
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(3rem, 8vh, 7rem);
+--content-max-width: 68rem;      /* mono-aligned grid lock */
+--text-max-width: 30ch;          /* inline data, mono */
+--edge-margin: clamp(1.5rem, 4vw, 4rem);
+--terminal-border: 1px solid #1E2829;
+--space-x: 0.25rem;              /* mono half-space */
+```
+
+**Spacing is dense but governed.** Sections breathe on dark ground, but the rhythm is mechanical — even padding, grid-registered, no free-floating whitespace. A mission-console dashboard compresses information into a confident, ordered surface; empty space is used to isolate data, not to relax.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Terminal Window + Data Panel
+
+```
+┌─────────────────────────────────────────┐
+│  $ tail -f deploy.log                   │
+│  2026-08-05 09:41:01 build   ✔ ok       │
+│  2026-08-05 09:41:02 deploy  ✔ ok       │
+│  2026-08-05 09:41:03 probe   ✔ ok       │
+│             ...                         │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 2: Split — Metrics Table + Glows Callout
+
+```
+┌──────────────────┬──────────────────────┐
+│  LATENCY         │  STATUS              │
+│  p99 42ms        │  ● all systems       │
+│  p50 18ms   ▬▬   │    operational       │
+│  p10 3ms         │  neon cyan on black  │
+└──────────────────┴──────────────────────┘
+```
+
+### Pattern 3: ASCII Signal / Architecture Map
+
+```
+┌─────────────────────────────────────────┐
+│  ┌───────┐   ┌───────┐   ┌───────┐     │
+│  │ edge  │──▶│ core  │──▶│ data  │     │
+│  │ nodes │   │ cache │   │ store │     │
+│  └───────┘   └───────┘   └───────┘     │
+└─────────────────────────────────────────┘
+```
+
+Use box-drawing diagrams only when they encode real relationships — routes, states, data flow. An ASCII diagram with no logic is decoration, not terminal.
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Full dashboard grid, terminal frames in-line, type renders at comfortable mono sizes (≥14px) |
+| **Tablet (768px)** | Grid drops to 6 columns, windows stack, scan effects simplified, data tables scroll horizontally |
+| **Mobile (392px)** | 1-2 columns, mono body on NOTE nested at 16px minimum to preserve legibility on near-black, caret hidden, accent carries weight |
+
+**On mobile:** legibility is the deal-breaker first. Dedicated backgrounds flatten, box corners simplify, and the mono set. CRTs -- small-cap. Choose visible-cap fine typefaces (Azeret Mono survives aliasing) — never shrink below 12.75px on near-black.
+
+---
+
+## Layout Don'ts
+
+| Don't | Do Instead |
+|------|------------|
+| Centered, bounce-locked hero | Left-aligned prompt with a blinking caret |
+| Decorative-only scanline overlays | Scan lines that real CRT artifact (moving raster, subtle roll) |
+| Bento/card soup with inconsistent gaps | Strict 12-col data grid, terminal-bearing borders |
+| Purple-blue "hacker movie" gradients | Near-black + one neon accent (green #33-F2F2 / cyan #00D4FF / amber #F59E0B-amber) |
+| Fake window chrome everywhere | Terminal frames only on surfaces that hold real output (logs, stats, prompt) |
+| Text knocked to base layer | Legible white/k-zinc cascades on near-black ground |
+| Ornamental glyphs and icons | ASCII box-drawing, `>` prompts, tooling glyphs only where they mean something |
+| Warm grays, serif headers, organic shapes | Banned palette shapes — see Vocabulary in index.mdx |

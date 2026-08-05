@@ -1,0 +1,75 @@
+# Color Architecture
+
+## Ground
+
+The ground is a near-black terminal well — never pure #000000. It carries a faint teal/green tint so it reads as a powered-on CRT or dark console, not a digital void.
+
+```css
+--color-ground-dark: #0A0F0F;     /* Near-black with green phosphor tint */
+--color-ground-raised: #11191A;   /* Raised panel — terminal chrome, slightly lighter */
+--color-ground-light: #12120F;    /* Amber-leaning variant when amber is the accent */
+```
+
+**Why tinted black:** Pure #000000 feels like a void. A tinted near-black (#0A0F0F) carries a whisper of the phosphor accent, so the whole page feels lit from within — like light bleeding into a dark room from a monitor.
+
+---
+
+## Terminal Accent Base
+
+```css
+--accent-phosphor-green: #33FF66;  /* Primary phosphor green — terminal truth */
+--accent-cyan: #00D4FF;            /* Signal cyan — interactive, navigation */
+--accent-amber: #FFB000;           /* Amber — warnings, blocked states, emphasis */
+```
+
+**These are the only saturated colors.** The palette is strictly-limited neon on near-black ground. One accent governs the page; the others are reserved for specific signal states — cyan for interactive elements, amber for warnings or blocked operations. Using all three arbitrarily turns a terminal into a neon sign.
+
+**Rule:** Pick ONE primary accent (default: phosphor green). The others appear only where their meaning demands them. If every element is neon, nothing is signal.
+
+---
+
+## Data / Text
+
+```css
+--color-text-primary: #E6F7E9;      /* Near-white with cool tint — primary readout */
+--color-text-dim: rgba(230, 247, 233, 0.6);   /* Secondary data, faded lines */
+--color-text-muted: rgba(230, 247, 233, 0.35); /* System log, labels, help text */
+```
+
+**Why translucent dim levels:** Terminal output layers — fresh input is bright, older logs fade. Muted text (35% opacity) reads as background noise or stale output. This creates the visual hierarchy of a scrolling session: the cursor line is always the brightest.
+
+---
+
+## Warning / Distress
+
+```css
+--color-alert: #FF3333;            /* Error red — only for actual errors */
+--color-blocked: rgba(255, 176, 0, 0.85); /* Amber overlay — blocked/warning states */
+```
+
+**Usage:** Red is a scarce signal reserved for errors, not decoration. Amber is the default "stop/block" state. These never appear as page accents — they interrupt the calm monochrome the way a real terminal alarms.
+
+---
+
+## Terminal Surfaces
+
+```css
+--surface-panel: rgba(17, 25, 26, 0.85);        /* Translucent terminal chrome */
+--surface-panel-border: rgba(51, 255, 102, 0.25); /* Hairline phosphor border */
+--surface-focus-glow: rgba(51, 255, 20, 0.12);  /* Glow behind focused element */
+```
+
+**Usage:** Panels, buttons, and headers. The border is a hairline (0.25 opacity) phosphor line — enough to define the panel against near-black, not enough to feel like a neon sign. Focus glow is a soft halo that makes active controls feel lit from within.
+
+---
+
+## Color Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Pure #000000 background | Tinted near-black #0A0F0F |
+| Pure #FFFFFF white text | Cool translucent white #E6F7E9 at reduced opacity |
+| Multi-accent palettes | One phosphor accent + scarce secondary signal colors |
+| Warm colors (orange 500, brown, pastel) | Cool teal/green terminal hues |
+| High-saturation everywhere | Saturation reserved for accent + signal only |
+| RGB rainbow gradients | Single-neon color grading with dark glow |

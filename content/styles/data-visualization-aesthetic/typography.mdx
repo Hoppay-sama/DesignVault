@@ -1,0 +1,90 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Clean, neutral sans-serif — labels and structure, no personality |
+| **Examples** | Geist, Inter, IBM Plex Sans, Söhne |
+| **Weight** | 500-600 (medium — confident but not heavy) |
+| **Tracking** | 0.01em-0.03em (slightly closed, dense) |
+| **Size** | `clamp(1.25rem, 2.5vw, 2.25rem)` — big but bounded by the dashboard frame |
+| **Transform** | Sentence case for section titles, UPPERCASE for panel headers |
+
+**Why neutral sans:** The numbers are the hero. Display type must be structurally clear and quiet so it acts as a label system, not a voice. A high-personality display face competes with the data — use a dependable sans that reads instantly at dashboard scale.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same sans family as display, regular weight |
+| **Examples** | Geist Regular, Inter Regular, IBM Plex Sans Text |
+| **Weight** | 400 |
+| **Tracking** | 0.005em-0.015em (standard) |
+| **Size** | `clamp(0.875rem, 1vw, 1rem)` — 14-16px |
+| **Line Height** | 1.4-1.5 (compact — dense cockpit text) |
+
+**Why regular weight:** Body text in a dashboard is contextual — descriptions, annotations, callouts. Regular weight keeps it legible at small sizes on dark panels without the noise of a light weight receding into the background.
+
+---
+
+## Data & Numbers Typeface (THE DATA)
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Monospace — every number, everywhere, always |
+| **Examples** | JetBrains Mono, IBM Plex Mono, Geist Mono |
+| **Weight** | 400 (mid) / 600 (headline metrics) |
+| **Size** | `clamp(1rem, 1.5vw, 1.5rem)` for primary metrics; 12-13px for data-point labels |
+| **Feature** | Tabular figures, fixed-width digits, zero `0` with slash or clear forms |
+| **Transform** | Numeric values only — never uppercase/transform on a number |
+
+**Why monospace everywhere:** Numbers align vertically. Sums, decimals, and counters must have identical digit widths regardless of content — this is the tabular-figures rule. JetBrains Mono and IBM Plex Mono both ship true tabular forms; do not fall back to a proportional font for "prettier" metrics. A chart with proportional digits reads as imprecise even when the values are exact.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|-------------|
+| **Register** | Same sans family, regular weight, medium tracking |
+| **Examples** | Geist Sans, Inter Regular |
+| **Weight** | 400 |
+| **Tracking** | 0.04em-0.08em (roomy, tick-label friendly) |
+| **Size** | 10-11px |
+| **Transform** | UPPERCASE for axis/category labels |
+
+**Usage:** Axis values, legend labels, data-point captions, tooltip keys. The tight 10-11px labels are the texture of the cockpit — dense, precise, and legible only because their tracking and case are controlled.
+
+---
+
+## Type Scale
+
+```
+Display:   clamp(1.25rem, 2.5vw, 2.25rem)  — section titles
+Body:      clamp(0.875rem, 1vw, 1rem)       — 14-16px, annotations
+Metric:    clamp(1rem, 1.5vw, 1.5rem)       — monospace headline values
+Data:      12-13px                           — monospace point labels
+Micro:     10-11px                           — axis ticks, legend, captions
+```
+
+The scale is flat and precise — 10px to 36px. The range is deliberately narrow so every numerical value on screen is readable at a glance. Hierarchy comes from weight and monospace vs. sans, not from loud size jumps.
+
+---
+
+## Font Pairing Logic
+
+**The two-voice system:** A clean sans for labels and prose + a monospace for every number. The pairings below are the sanctioned combinations.
+
+| Role | Face |
+|------|------|
+| Sans (all structure/labels) | Geist Sans, Inter, IBM Plex Sans |
+| Mono (all data/numbers) | JetBrains Mono, IBM Plex Mono, Geist Mono |
+
+**Why this pairing:** Sans provides readability and modern neutrality; mono provides alignment and precision. They are the two registers of an instrument panel — letterforms describe, digits measure.
+
+**Never:** Display serifs (too editorial), decorative/display gimmick fonts (compete with data), proportional-gap numerals without tabular features (breaks digit alignment), or mixing more than one mono family.
+
+---

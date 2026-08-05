@@ -1,0 +1,82 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Quiet Editorial is **nearly absent**. The style's axis score is 1/6 — the lowest possible. Silence is the design: no parallax, no bounce, no springs, no choreography. Where motion exists, it serves one purpose — orienting the reader in a long document without drawing attention to itself. The page should feel like turning pages of a book: steady, immediate, calm.
+
+---
+
+## The Motion Budget
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Content fade-in on scroll | Opacity 0→1 (no transform) | 400-600ms | `ease-out` |
+| Inline images | Opacity 0→1, once, as they enter view | 500ms | `ease-out` |
+| Links | Color change | 150-200ms | `ease-out` |
+| Everything else | No animation | — | — |
+
+**The budget is the rule.** Four allowed cases. Fade-in only — never translate, scale, or slide. A fade of 400-600ms is slow enough to be calm, fast enough to not delay reading. If an element can enter without motion, it should.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Delay |
+|---------|-----------|----------|-------|
+| Headline | Opacity 0→1 (no transform) | 400ms | 0ms |
+| Body paragraphs | Opacity 0→1 | 400ms | 0-50ms stagger max |
+| Figures / images | Opacity 0→1 | 500ms | 0ms |
+
+**Key:** No transforms, no stagger choreography. Elements fade into place, independently. Any movement beyond opacity — sliding, scaling, blur-in — signals "designed" and breaks the trust this style trades on.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Links | Ink darkens (color change, 150-200ms) | Same |
+| Buttons | Border darkens or underline appears (200ms) | Slight press — no scale |
+| Cards (rare) | Nothing, or a 1px border color shift (200ms) | — |
+
+**All hover states are color-only.** No translate, no scale, no lift — hover effects that move elements belong to playful styles. A link that darkens is enough feedback for a reader moving through text.
+
+---
+
+## Reduced Motion
+
+Reduced motion is the default temperament:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+And for this style specifically — fades are already optional:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  .fade-in { opacity: 1; }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| Never | Why |
+|-------|-----|
+| Parallax | The defining "no" of this style — depth motion is spectacle |
+| Bounce or spring physics | Playful — silence is the point |
+| Staggered reveals | Choreography signals design; content should just be there |
+| Scroll-linked progress bars | Chrome noise on a long read |
+| Hover scale / lift on cards | Movement breaks the flat, paper-like calm |
+| Auto-playing carousels | The reader sets the pace |
+| Marquee / ticker text | Loud, promotional, anti-editorial |
+| Animated page transitions | Pages should swap like printed ones — instantly |
+
+**The test:** If you can imagine the animation on a lifestyle-brand site, it's banned here. Motion is a budget, not a toolset — spend nearly nothing.

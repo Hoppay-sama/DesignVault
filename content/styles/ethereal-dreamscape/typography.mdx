@@ -1,0 +1,66 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Airy, weightless sans-serif — floats like the atmosphere |
+| **Examples** | Outfit Light, Satoshi Light |
+| **Weight** | 300 (light — the type itself feels weightless) |
+| **Tracking** | 0.08em-0.15em (generous — letters spaced like drifting particles) |
+| **Size** | `clamp(2rem, 5vw, 4.5rem)` — large but airy |
+| **Transform** | Sentence case — never bold, never loud |
+
+**Why airy sans:** The style is weightless composition — the type must float with the elements, not anchor them. Outfit Light and Satoshi Light have open, gentle forms. Generous letter-spacing makes headlines feel like they're suspended in the mist rather than printed on the page.
+
+**Delicate serif alternative:** For editorial accents on wellness or luxury positions, a delicate serif (Cormorant Garamond, Italiana) at 300 weight works for a single hero word — used rarely, never for full headlines.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same family as display, light weight |
+| **Examples** | Outfit Light (300), Satoshi Light |
+| **Weight** | 300 (light — drifting, not grounded) |
+| **Tracking** | 0.02em-0.05em (slightly open, breathable) |
+| **Size** | `clamp(0.9375rem, 1.2vw, 1.125rem)` — 15-18px |
+| **Line Height** | 1.8-2.0 (very generous — slow, dreamlike reading) |
+
+**Why light weight and open line height:** Heavy type reads as solid, anchored, real. Light type at 300 with a 1.8+ line height reads as a thought drifting through the page. The reading pace should match the motion pace — slow.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same family, light weight, wide tracking |
+| **Examples** | Outfit Light, Satoshi Light |
+| **Weight** | 300 |
+| **Tracking** | 0.2em-0.35em (very wide — whispered annotations) |
+| **Size** | 10-12px |
+| **Transform** | UPPERCASE |
+
+**Usage:** Section labels, captions, timestamps. These feel like dream annotations — "DRIFTING", "AURORA", "WEIGHTLESS". The wide tracking spreads them out like dust motes in light.
+
+---
+
+## Type Scale
+
+```
+Display:  clamp(2rem, 5vw, 4.5rem)   — airy, generous tracking
+Body:     clamp(0.9375rem, 1.2vw, 1.125rem) — 15-18px, light, open leading
+Micro:    10-12px                    — wide-tracked whispers
+```
+
+The scale is tall (10px to 72px) but every level is light weight. The hierarchy comes from size and spacing, never from weight contrast — the page should feel uniformly soft, with no type that shouts.
+
+---
+
+## Font Pairing Logic
+
+**Single family approach:** One airy sans (Outfit or Satoshi) at light weights throughout. Consistency is the dream — one voice, floating at different sizes. Optionally pair with a delicate serif for a single hero word (see Display above) — never more than one accent per viewport.
+
+**Never:** Bold or black weights (weight is gravity — this style is weightless), tight tracking (letters must breathe), decorative display fonts (personality competes with the atmosphere), or uppercase display headlines (too forceful).

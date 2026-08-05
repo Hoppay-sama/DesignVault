@@ -1,0 +1,119 @@
+# Texture & Surface
+
+## Primary Surface: Frosted Glass
+
+The texture IS the glass. Panels are near-transparent (5% white) and the blur does the visual work — never the background color. Every surface must read as a physical pane with thickness, refraction, and edge light.
+
+| Surface | Specification |
+|---------|--------------|
+| **Glass background** | `rgba(255, 255, 255, 0.05)` — nearly transparent |
+| **Backdrop blur** | `blur(20px) saturate(1.2)`, range 12-24px by Z-depth |
+| **Outer border** | `1px solid rgba(255, 255, 255, 0.1)` |
+| **Inner refraction edge** | The liquid-glass gradient border (below) |
+
+**Key:** The glass background is nearly transparent (5% white). The blur does the visual work, not the background color.
+
+---
+
+## The Liquid-Glass Border
+
+This is the signature effect — an inset gradient border created with mask-composite that simulates light refracting through the edge of a glass pane:
+
+```css
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.3) 0%,
+    rgba(255,255,255,0.05) 30%,
+    rgba(255,255,255,0) 50%,
+    rgba(255,255,255,0) 70%,
+    rgba(255,255,255,0.05) 90%,
+    rgba(255,255,255,0.3) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+```
+
+**The gradient border creates the illusion of light refracting through the edge of a glass pane** — brightest at top and bottom edges, fading through the middle, like light catching the rim. The technique is complex to implement correctly (difficulty 4/5); the reward is depth that reads as physical, not decorative.
+
+---
+
+## Iridescent Highlights
+
+```css
+.glass-highlight {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.12) 45%,
+    rgba(100, 180, 255, 0.08) 55%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+```
+
+**Purpose:** A soft, diagonal light streak across the glass surface — the sheen you see on a real pane under directional light. It must be subtle (10-15% opacity), white-to-blue (100, 180, 255), and static or drifting very slowly. The highlight is what separates "glass" from "gray translucent box."
+
+---
+
+## Noir Lighting Logic
+
+| Property | Rule |
+|----------|------|
+| Light source | One consistent direction (top-left / top-right) across ALL panels |
+| Edge brightness | Top edge brightest (`rgba(255,255,255,0.3)`), bottom dimmer |
+| Highlight alignment | All streaks share the same angle — one studio light, not many |
+| Shadow | Panels cast soft shadows beneath (black, 0.4-0.5 opacity, 20-30px blur) |
+| Video exposure | Keep the video dark (0.85 opacity over `#0A0A0A`) so glass edges stay visible |
+
+**Glass without light logic looks flat.** Every panel must agree on where the light comes from — inconsistent highlights are the fastest tell of a fake glassmorphism.
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Dark video (0.85 opacity) over `#0A0A0A` ground |
+| Glass panels | `rgba(255,255,255,0.05)` + blur + liquid-glass border |
+| Cards | 12-16px radius, floating, spring hover lift |
+| Buttons | Glass surface, border brightens on hover (white/0.3 → white/0.5) |
+| Navigation | Glass bar with 20px blur, sits at the top Z-layer |
+| Dividers | None — panels separated by Z-depth and shadow, not lines |
+| Text | White `#FFFFFF`; near-black `#1A1A1A` only where glass floats over light areas |
+
+**Vary blur per Z-depth.** Back panels 12px, mid panels 20px, front panels 24px. Uniform blur = flat stack of stickers, not a glass scene.
+
+---
+
+## Texture Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Pure black glass backgrounds | `rgba(255,255,255,0.05)` with blur |
+| Heavy backdrop-blur (>40px) | 12-24px blur for readability |
+| Multiple glass layers with same blur | Vary blur per Z-depth |
+| Colored glass tinting | Keep glass neutral/clear |
+| Opaque panels | Always translucent |
+| Flat white-glass clichés (white gradient cards, no refraction) | Liquid-glass border + directional highlight |
+| Random iridescent colors | White highlight with a single subtle blue (100, 180, 255) |

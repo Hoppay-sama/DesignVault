@@ -1,0 +1,89 @@
+# Color Architecture
+
+## Ground
+
+The ground is a full grayscale spectrum — zinc-950 through zinc-50. There is no color in the base; hierarchy comes entirely from value, not hue.
+
+```css
+--color-ground-dark: #09090B;    /* zinc-950 — near-black */
+--color-ground-mid: #27272A;     /* zinc-800 — panels, borders */
+--color-ground-light: #FAFAFA;   /* zinc-50 — off-white, never pure #FFFFFF */
+```
+
+**Why zinc over pure black:** #000000 is dead — it eats contrast and feels digital. A slightly lifted zinc-950 (#09090B) keeps deep black presence while letting light values breathe. The light ground is zinc-50, not #FFFFFF, so text and accents hold a hair of separation.
+
+---
+
+## Grayscale Base
+
+```css
+--mono-950: #09090B;   /* Ground, deep bg   */
+--mono-800: #27272A;   /* Raised surfaces   */
+--mono-600: #52525B;   /* Borders, dividers */
+--mono-400: #A1A1AA;   /* Disabled, muted   */
+--mono-200: #E4E4E7;   /* Hairlines         */
+--mono-50:  #FAFAFA;   /* Light ground      */
+```
+
+**These carry all structure.** Hierarchy, grouping, separation, and emphasis are expressed through the grayscale ramp. If two elements differ in importance, they differ in lightness or weight — never because one is tinted and the other is not. Value does the work; color stays quiet.
+
+---
+
+## One Surgical Accent
+
+```css
+--accent-electric-blue: #3B82F6;  /* Signal — default recommendation */
+--accent-emerald:       #10B981;  /* Financial / positive data        */
+--accent-signal-orange: #F97316;  /* Urgency, warnings, high energy    */
+--accent-hot-pink:      #EC4899;  /* Distinctive, brand-forward         */
+```
+
+**Choose exactly one.** Electric blue reads most neutral for developer tools and premium SaaS. Emerald suits fintech and positive/negative data states. Signal orange is for products where action urgency matters. Hot pink is the most assertive — use it when the brand wants to feel loud, not reserved.
+
+**Rule: the accent is a beacon, not a palette.**
+- Accent on ≤15% of total surface area
+- Use it in three places only: CTA, active state, key data point
+- Everything else stays grayscale
+
+**Why the 15% budget:** an accent is only loud because the field around it is silent. The instant coverage grows, the accent becomes a theme color and the restraint statement collapses. The accent earns attention precisely because the eye scans gray and meets color rarely.
+
+---
+
+## Accent Usage
+
+| Surface | Treatment |
+|---------|-----------|
+| Primary CTA | Accent-filled, dark, and white on only the one button |
+| Active nav / selected state | Accent underline or sliver — never a filled block |
+| Key data point | Accent value, grayscale label — number carries the emphasis |
+| Links (if unneeded) | Grayscale; accent only on hover |
+| Focus ring | Accent (accessibility-forward) |
+
+**Never:** accent-bordered containers, accent headers, accent-on-accent, or accent used to "decorate." If a detail is decorative, it stays gray.
+
+---
+
+## Text
+
+```css
+--color-text-on-dark: rgba(250, 250, 250, 0.92);  /* Near-white, high contrast */
+--color-text-on-light: rgba(9, 9, 11, 0.92);      /* Near-black, high contrast */
+--color-text-muted: rgba(250, 250, 250, 0.55);    /* Muted, for labels on dark */
+--color-text-muted-light: rgba(9, 9, 11, 0.55);   /* Muted, for labels on light */
+```
+
+**Why high-contrast tokens:** unlike dreamlike or translucent styles, this system is crafted around legibility — contrast is the thesis. Use 92% opacity text, not 85%. De-emphasize through the grayscale ramp (muted gray labels), not through transparency alone.
+
+---
+
+## Color Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Multiple accent colors | ONE surgical accent, ≤15% of surface |
+| Colorful / saturated palettes | Full grayscale base, accent reserved |
+| Gradient backgrounds | Flat grayscale surfaces |
+| Rainbow or brand-multicolor effects | Monochrome with a single signal color |
+| Pure #000000 ground | zinc-950 (#09090B) |
+| Pure #FFFFFF surfaces | zinc-50 (#FAFAFA) |
+| Accent applied as decoration | Accent for CTA, active states, key data only |

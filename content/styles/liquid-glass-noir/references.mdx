@@ -1,0 +1,72 @@
+# Reference Gallery
+
+## Live Sites
+
+### Liquid Glass Noir Reference Implementation
+- **What works:** Frosted translucent panels over dark video backgrounds, liquid-glass edge refraction, floating glass cards, near-black ground (#0A0A0A), white glass surfaces, slow choreographed drift
+- **URL:** Reference implementation — the canonical example of this style
+
+### Apple Vision Pro (apple.com/vision-pro)
+- **What works:** The definitive liquid-glass language — frosted translucent panels floating over video, edge refraction on glass borders, spatial depth, parallax as you scroll, glass that bends light at its edges
+- **URL:** apple.com/vision-pro
+
+### Linear (linear.app)
+- **What works:** Dark-mode glassmorphism done with restraint — translucent surfaces with backdrop blur, hairline 1px borders, subtle top-edge light gradient, precise typography on glass, glow states on hover
+- **URL:** linear.app
+
+### Arc Browser (arc.net)
+- **What works:** Dark cinematic surfaces with fluid, rounded organic shapes; translucent panels layered over blurred imagery; iridescent edge lighting; playful but premium spatial depth
+- **URL:** arc.net
+
+### Lusion (lusion.co)
+- **What works:** The gold standard for liquid motion — fluid WebGL shapes flowing over dark backgrounds, light refracting through volumetric forms, slow choreographed camera drift, noir lighting on reflective surfaces
+- **URL:** lusion.co
+
+### Acne Studios (acnestudios.com)
+- **What works:** Dark luxury fashion — moody noir lighting, near-black grounds, glossy reflective surfaces, editorial restraint, the "expensive darkness" mood Liquid Glass Noir lives in
+- **URL:** acnestudios.com
+
+### Applied AI (applied.ai)
+- **What works:** Dark AI product site with glassy floating panels, backdrop blur over ambient video, subtle white-on-dark hierarchy, frosted cards that feel physical and weightless
+- **URL:** applied.ai
+
+### Awwwards Dark Glassmorphism Winners
+- **What works:** Curated examples of dark glass over video backgrounds — floating panels, Z-depth stacking, liquid-glass border treatments, spring hover physics
+- **URL:** awwwards.com (search "dark" and "glassmorphism" trends)
+
+## Key Visual References
+
+### Glass Material References
+- **Liquid-glass edge** — 1px inset gradient border (white 0.3 → transparent → white 0.3) that reads as light bending through glass
+- **Frosted panels** — backdrop-filter blur(20px) saturate(1.2) over video; blur 12-24px only, never heavy
+- **Iridescent highlights** — subtle blue tint (rgba(100, 180, 255, 0.8)) at edges or hover, white/30 top-edge light
+- **Fluid shapes** — organic, liquid forms; avoid sharp geometric corners
+
+### Color References
+- **Ground** — near-black #0A0A0A, visible only at video edges or during load
+- **Glass surfaces** — rgba(255, 255, 255, 0.05) primary, 0.08 hover, 0.1 outer border; the blur does the visual work, not the fill
+- **Text on glass** — pure white #FFFFFF primary, rgba(255,255,255,0.7) secondary, rgba(255,255,255,0.5) labels
+- **Accent** — white (the glass IS the accent) or one subtle blue rgba(100, 180, 255, 0.8); no purple, no cream
+
+### Typography References
+- **Inter Tight (500/600)** — clean geometric sans, medium-semibold weights
+- **Alternates** — Satoshi, SF Pro Display, Geist (keep the same family for display and body)
+- **Tracking** — -0.02em to 0, tight on headlines
+- **Sizes** — display `clamp(2rem, 5vw, 4rem)`, headline `clamp(1.25rem, 2.5vw, 2rem)`, micro 0.7rem labels on glass
+
+### Motion References
+- **Choreographed drift** — floating layers, 8-12s, barely perceptible, ease-in-out, infinite
+- **Spring hovers** — glass cards lift and glow with spring physics, not linear transitions
+- **Parallax** — panels at different Z-depths move at different rates over the video
+- **Blur transitions** — focus shifts as elements enter/leave the glass layer
+
+## Screenshot Notes
+
+> When capturing references for this style, look for:
+> - The glass (must be frosted/translucent — backdrop blur over visible video or imagery)
+> - The border (must show the liquid-glass edge refraction gradient, not a flat stroke)
+> - The ground (must be near-black or dark video — no light backgrounds)
+> - The lighting (must be noir/cinematic — moody, directional, not flat)
+> - The motion (must be slow, fluid, choreographed — not snappy)
+> - The text (must be clean geometric sans, medium weights, readable on frosted glass)
+> - The overall mood (must feel premium, spatial, darkly elegant)

@@ -1,0 +1,136 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Kinetic Typography **is** the content. The type does not appear and then animate — it exists as animation. Weight, scale, position, and opacity are all mapped to scroll position, so the user scrubs the page like a film reel. Nothing moves without a reason: every transform communicates hierarchy, pacing, or meaning. The page is hyper-kinetic — marquees run continuously, letterforms morph, headlines reconstruct themselves — but always choreographed, never random.
+
+---
+
+## Scroll-Driven Type Weight
+
+| Element | Animation | Scroll Map | Easing |
+|---------|-----------|-----------|--------|
+| Hero display | Variable font weight 100→900 | Scroll progress 0→100vh | `cubic-bezier(0.22, 1, 0.36, 1)` |
+| Hero scale | Type grows `scale(1.0)→scale(1.25)` + fades | Scroll progress 0→100vh | `ease` scrub |
+| Section headlines | Opacity 0.2→1.0 + weight 300→700 | Into viewport, scrubbed | `cubic-bezier(0.22, 1, 0.36, 1)` |
+
+```css
+/* Hero: weight lifts as the user scrolls */
+.film-hero {
+  font-variation-settings: 'wght' 300;
+  transform: scale(1);
+  transition: none; /* driven by scroll, not time */
+}
+```
+
+**Purpose:** The scroll position IS the animation timeline. A hero at weight 300 and scale 1.0 at the top of the page arrives at weight 900 and scale 1.25 as the user scrolls. This is the signature move — the type responds to the user, not to the clock. Use `useScroll` + `useTransform` (framer-motion) or `gsap` ScrollTrigger with `scrub`.
+
+---
+
+## Horizontal Marquee
+
+```css
+.marquee-track {
+  display: flex;
+  gap: 0;
+  width: max-content;
+  animation: marquee 20s linear infinite;
+  will-change: transform;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+```
+
+**Purpose:** Continuous, unbroken horizontal scroll strips. The track duplicates its content and translates -50% for a seamless loop. Tracks run at 15-25s per loop, always `linear` — never ease. Marquee text is 6-12rem wide-tracked uppercase, often inverted (white band on a black section). One marquee per viewport max — two competing strips read as noise.
+
+---
+
+## Split-Text Reveals
+
+| Trigger | Pattern | Stagger | Easing |
+|---------|---------|---------|--------|
+| Into view | Each word lifts `translateY(24px)→0` + opacity 0→1 | 0.06s-0.1s per word | `cubic-bezier(0.22, 1, 0.36, 1)` |
+| Into view | Each character scales `scale(0.7)→1` + opacity | 0.04s per character (headlines only) | `cubic-bezier(0.22, 1, 0.36, 1)` |
+| Scramble/decode | Characters resolve random → final over 600ms | Per word, sequenced | `ease-out` |
+
+**Purpose:** Text reveals word-by-word or letter-by-letter with staggered delays — the headline "reassembles" as it enters. Word-level stagger for long copy, character-level cascade for short monumental headlines (under 6 words). Scramble/decode effects make characters land one by one from gibberish — reserved for one statement per page, never all headings.
+
+---
+
+## Scroll-Driven Type Movement (Density & Layout)
+
+| Effect | Specification |
+|--------|--------------|
+| Pinned sequences | Text pinned while the next line formats beneath (`ScrollTrigger` pin + scrub) |
+| Horizontal scroll-hijack | Section slides sideways as the user scrolls vertically |
+| Magnetic text | Letters/words track the cursor with spring resistance, snap back on leave |
+| Bleed-off type | Headlines scale past viewport edges — type never fully fits the frame |
+| Reversed words | One key word flips/inverts as you pass it — a reveal not a decoration |
+
+**The type is the director.** Layout shifts come FROM the type moving — sections are divided by giant words sliding across, not by background changes. Pin sequences with `scrub` so the motion is scrubbable, never a one-shot that plays and forgets. Magnetic text uses spring physics (stiffness ~150, damping ~15) — the letters chase, they do not bounce.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Hero display | Weight 300→900 + clip-path reveal top-to-bottom | 900ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 0ms |
+| Marquee band | Slide in from right `translateX(20%)→0` | 700ms | `ease-out` | 200ms |
+| Body text | Opacity 0→1 + `translateY(12px)→0` | 500ms | `ease-out` | 300ms |
+| Micro labels | Opacity 0→1, no movement | 400ms | `ease-out` | 500ms |
+
+**Key:** Entrances are fast (400-900ms) and confident — this is a kinetic style, not a slow reveal. The hero never fades in thinly; it wipes or clips open at full weight. Everything after the hero is scroll-driven, so entrance animations belong to the first viewport only.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Marquee | Speed 20s → 8s (or pauses) — the strip imitates attention | — |
+| Magnetic type | Letters pull toward cursor, spring snap-back | — |
+| Links | Underline sweeps in 300ms left-to-right | — |
+| Buttons | Background inverts (ink ↔ paper) in 200ms | Scale 0.96 press |
+
+**Hover states are instant (200-300ms).** This style is mechanical and direct — a hover that takes a second reads as dead. The one exception is scroll-linked motion, which by nature matches the user's scroll speed.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- All scroll-driven transforms: disabled, type renders at its settled (end) state — full weight
+- Marquee: paused, content shown once in full
+- Split-text/stagger reveals: instant, no per-word delay
+- Magnetic text: disabled (static)
+- Scramble effects: final characters shown immediately
+- Entrance animations: instant opacity
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+```
+
+**Reduced motion must never orphan content.** A marquee that's paused must still show its full text. A scramble that's skipped must still render legible words. The static page — type at heavy weight, full visibility — must be a complete design, not an empty shell.
+
+---
+
+## What NOT to Animate
+
+| Never | Why |
+|-------|-----|
+| Bounce or overshoot easing on text | The signature ban — type lands, it does not ricochet |
+| Time-based ambient motion | Every animation must be scroll-driven or interaction-driven |
+| Auto-playing carousels | The user scrubs the film, it doesn't play itself |
+| Animating imagery over type | Type is the star — imagery sits back or is absent |
+| Color/gradient animation | The duotone holds still; only letterforms move |
+| Confetti, particles, floating elements | This is typographic choreography, not decoration |
+| Two marquees competing | One strip per viewport, at one speed |

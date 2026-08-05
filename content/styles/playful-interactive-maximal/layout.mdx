@@ -1,0 +1,127 @@
+# Layout Grammar
+
+## Grid System
+
+**No quiet grid.** The layout is fullscreen, segmented, and game-like — each section is a complete world with its own candy ground. Internally:
+
+- Fullscreen sections: 100vw width, `min-h-[100dvh]`, one saturated candy ground per section
+- Section switching: full-color wipe between worlds (never fade-to-white)
+- Content: dense, collage-style composition — stickers, badges, and cards scattered with rotation
+- Navigation: unexpected — floating pill, game-style menu, or progress dots that snap with bounce
+- Scroll: springy momentum with section snap (scroll-jacking for storytelling), never linear
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | Full viewport — `min-h-[100dvh]` |
+| Background | Flat saturated candy ground — `--color-ground-hot: #FF2D8A` |
+| Text position | Centered or slightly offset — the headline IS the hero |
+| Headline size | `clamp(3rem, 8vw, 8rem)` — monumental, screaming |
+| Interaction | Entrance pops: headline letter-stagger pop-in, sticker words wobble in, 3D mascot bounces |
+
+```
+┌─────────────────────────────────────────┐
+│  [Saturated candy ground — #FF2D8A]     │
+│                                         │
+│  ✦    W O W   ✦                          │
+│  (letter-by-letter pop-in)              │
+│  "A toy you keep playing with"          │
+│                                         │
+│  [PLAY ▶]          (squish on press,    │
+│   confetti burst on click)              │
+│  [3D clay mascot, bobbing gently]       │
+│  ✦ sparkle doodles sprinkled on edges ✦ │
+└─────────────────────────────────────────┘
+```
+
+**The hero is a game title screen.** The headline lands like a logo — chunky display sans at monumental scale — and the ground carries the saturation. CTA is the first toy: squish, tilt, and confetti on press.
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(3rem, 8vh, 6rem);
+--content-max-width: 1100px;
+--edge-margin: clamp(1.5rem, 4vw, 4rem);
+--section-gap: 0; /* sections are continuous worlds, separated by color wipes */
+```
+
+**Spacing is dense but deliberate.** Unlike calm styles, gaps here are small — the page reads as packed, layered, collage-like. Breathing room comes from the color wipes between sections, not from whitespace inside them. Density is the aesthetic; chaos is the failure mode.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Fullscreen World (Default)
+```
+┌─────────────────────────────────────────┐
+│  [Candy ground — one saturated hue]     │
+│                                         │
+│  ✦  HEADLINE (screaming display)       │
+│  [sticker]  body text  [sticker]        │
+│                                         │
+│  [3D props + doodles, sparse]           │
+│                                         │
+│  [TAP TO PLAY] ← bouncing CTA          │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 2: Gamified Card Scatter
+```
+┌─────────────────────────────────────────┐
+│  [Ground — cobalt #2345FF]              │
+│  [SCORE 0420] [LEVEL 03] ← HUD labels  │
+│                                         │
+│  ┌──────┐  ┌──────┐  ┌──────┐           │
+│  │ card │  │ card │  │ card │  ← tilted │
+│  │ -3°  │  │ +2°  │  │ +4°  │   stickers│
+│  └──────┘  └──────┘  └──────┘           │
+│    (hover: confetti burst + wobble)     │
+│                                         │
+│  [PLAY NEXT] ← squish button            │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 3: Scroll-Jacked Story Sequence
+```
+┌─────────────────────────────────────────┐
+│  [World 1 — pink ground]                │
+│  (snaps with springy overshoot)         │
+├─────────────────────────────────────────┤
+│  [World 2 — lime ground #C8FF30]        │
+│  (color wipe + particle shower)         │
+├─────────────────────────────────────────┤
+│  [World 3 — tangerine ground #FF7A00]   │
+│  (sticker lands on scroll milestone)    │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Fullscreen worlds, scroll-jacking snap, 3D tilt cards, cursor-reactive flocking |
+| **Tablet (768px)** | Scroll-jacking off (native scroll), cards stack in 2 columns, hover effects downgraded to tap effects |
+| **Mobile (375px)** | Single column, HUD labels shrink, particle effects reduced 50%, tap = press (no hover states) |
+
+**On mobile:** The toy feel must survive without a cursor. Hovers become press states (squish + confetti on tap), scroll-jacking is disabled in favor of native scroll, and fullscreen sections become stacked with smaller padding. Never ship hover-only interactions — every delight must have a tap equivalent.
+
+---
+
+## Layout Don'ts
+
+| Don't | Do Instead |
+|------|------------|
+| Neutral white/gray page background | Saturated candy ground per section |
+| Uniform grid of identical cards | Rotated sticker cards, varied sizes, scattered placement |
+| Plain horizontal section dividers | Doodle zigzags, wavy lines, star separators |
+| Standard hamburger + static nav | Floating pill nav, game-style menu, snap-dot progress |
+| Linear, predictable page flow | Scroll-jacked story sequence with section worlds |
+| Generous whitespace everywhere | Dense collage density with color-wipe pacing |
+| Same ground color for the whole page | Section worlds — each one a new candy hue |

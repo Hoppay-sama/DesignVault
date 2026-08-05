@@ -1,0 +1,69 @@
+# Common Mistakes
+
+## Mistake 1: Flat Corporate Playfulness
+
+**What people do:** Add rounded corners, a bright accent color, and an emoji to a standard corporate layout and call it playful.
+
+**Why it fails:** Playfulness isn't a coat of paint — it's structural. If the layout is a centered corporate grid with a muted palette and one animated button, the rounded corners read as decoration, not identity. The style needs saturated candy grounds, chunky display type, sticker variety, and interaction responses working together. One accent color is restraint, and restraint is the banned vocabulary.
+
+**Fix:** Commit fully — saturated polychrome grounds per section, monumental chunky headlines, gamified interactions on every element. If the page wouldn't feel out of place in a corporate boardroom, it isn't playful enough.
+
+---
+
+## Mistake 2: Motion Sickness
+
+**What people do:** Animate everything constantly — ambient bouncing, perpetual wobble, nonstop particles, and aggressive scroll-jacking all at once.
+
+**Why it fails:** Motion in this style is a reward for interaction, not an ambient condition. Perpetual motion creates vestibular discomfort, drowns the actual interaction feedback, and makes the page exhausting within seconds. The toy metaphor dies when the toy never stops moving on its own — a real toy sits still until you touch it.
+
+**Fix:** Motion happens on interaction. Idle states are calm and static; only hover, press, scroll-milestone, and click trigger motion. Keep the high-energy moments short (500-800ms), never loop ambient animations, and cap particle effects per burst.
+
+---
+
+## Mistake 3: Density Chaos
+
+**What people do:** Fill every pixel — stickers everywhere, ten colors per section, doodles on doodles, cards at every rotation.
+
+**Why it fails:** Density without containment is noise. The style's energy comes from the contrast between dense, packed composition and the clean saturated grounds it sits on. When everything shouts, nothing is readable, the HUD labels get lost, and the playfulness collapses into a visual wall. Polychrome containment (2-3 hues per section) exists for exactly this reason.
+
+**Fix:** One ground color per section, 2-3 hues max per world, and the confetti mix reserved for feedback. Layer stickers and doodles deliberately — each one should be discoverable, not buried. If a section can't be scanned in one second, it's too dense.
+
+---
+
+## Mistake 4: Gimmick Fatigue
+
+**What people do:** Confetti on every click, mascot dancing constantly, a surprise interaction on every scroll pixel.
+
+**Why it fails:** Confetti is currency. When every action pays out the same burst, the reward devalues to background noise — the surprise becomes expected, and expected surprise is just animation. The user stops noticing the delights because they're all the same volume. Scarcity is what makes a surprise a surprise.
+
+**Fix:** Reserve confetti for high-value actions only (CTA click, milestone, completion). Space out Easter eggs — one mascot moment, one 404 joke, one hidden sticker. Escalate the reward scale: small pops for small actions, full-screen confetti only for the finale. The rarity is the delight.
+
+---
+
+## Mistake 5: Accessibility Failures
+
+**What people do:** Ship the full confetti carnival with no reduced-motion support, gray-on-gray text, or interactions that require a cursor.
+
+**Why it fails:** The style is the highest-motion, highest-saturation style in the system — which means it has the most to get wrong. Users with vestibular disorders get physically sick from scroll-jacking and overshoot springs. Hover-only interactions (tilt, flocking, magnetic pull) are dead zones for touch users and keyboard users. Low-contrast loud-on-loud pairings fail WCAG even though they look intentional. A toy that hurts people is not playful.
+
+**Fix:** Honor `prefers-reduced-motion` fully — springs snap instantly, confetti becomes a static badge flash, scroll-jacking becomes native scroll, letter stagger becomes instant reveal. Keep mascots but stop the dancing. Every hover interaction needs a tap and keyboard equivalent. Check contrast on every loud-on-loud pairing — white `#FFFFFF` and deep ink `#182058` are the text-safe anchors.
+
+---
+
+## Mistake 6: Predictable Interactions
+
+**What people do:** One hover animation (scale 1.05) applied to every element, because it's consistent.
+
+**Why it fails:** Uniform responses are as dead as no responses. The style's vocabulary bans "predictable interactions" — the delight comes from variety: buttons squish and tilt, cards burst confetti and wobble, links snap letter-spacing and wiggle, wrong actions shake with a buzzer flash. When every element does the same thing, the game mechanic disappears and it's just CSS.
+
+**Fix:** Build a response vocabulary — map interaction type to response type: press = squish, card = confetti + wobble, link = wiggle + color swap, error = shake + buzzer flash, completion = full-screen burst. Every response should read as a distinct game mechanic.
+
+---
+
+## Mistake 7: Auto-Playing Sound
+
+**What people do:** Add sound effects on every click and auto-play music to maximize the party energy.
+
+**Why it fails:** Audio without user initiation is hostile — it's a browser red flag, an immediate tab-close, and the fastest way to break engagement. The style's own motion spec forbids auto-playing audio: sound-reactive elements must be user-initiated via an explicit toggle. An uninvited party is not a party.
+
+**Fix:** Ship a clearly labeled sound toggle, off by default. Sound-reactive visuals (pulsing to a beat) only activate when the user enables audio. Keep effects subtle and short — a pop, a chime, a fanfare — never a continuous soundtrack.

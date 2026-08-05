@@ -1,0 +1,112 @@
+# Texture & Surface
+
+## Primary Texture: Risograph / Screen-Print
+
+The texture IS the print. The dominant surface language is risograph and screen-print — ink that looks stamped through a mesh, slightly rough, slightly misaligned. Cheap print energy, not expensive finish.
+
+| Quality | Description |
+|---------|-------------|
+| **Slight misregistration** | Color plates don't align perfectly — a hot pink field's edge sits 1-2px off its black outline |
+| **Ink grain** | Denser visible grain in saturated fills, like ink that didn't fully cover |
+| **Paper tooth** | The cream ground has paper grain, never smooth vector flats |
+| **Crushed shadows** | Deep color goes near-black at the edges — ink pooling |
+| **Stamps & marks** | Ink stamps, crop marks, screw/organizing lines printed on top |
+
+**The goal:** Every surface should feel like it came off a noisy machine — not a gradient in Figma. The misregistration is the texture.
+
+---
+
+## Halftone Dots
+
+```css
+.halftone {
+  background-image:
+    radial-gradient(circle at center, rgba(17,17,17,0.35) 1.2px, transparent 1.3px);
+  background-size: 6px 6px;
+  filter: contrast(1.4);
+}
+```
+
+**Purpose:** Halftone dot screens are the risograph signal. Use them as:
+- Panel backgrounds at low density (dots become a gray field)
+- Image treatments — posterize an image to hard threshold + halftone overlay
+- Texture stamps that read as "this was printed" instantly after contact
+
+The acute challenge: dense dots on saturated color create moiré. Keep the dot period large enough (5-8px) and the alpha moderate (0.25-0.35) so flats stay flat.
+
+---
+
+## Grain / Film Weirdness
+
+```css
+.grain {
+  position: relative;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,..."); /* feTurbulence noise */
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+```
+
+**Purpose:** A fine animated-free film grain over every saturated block. It gives the color physical weight — removes the "digital flat gradient" quality that makes bold color feel manufactured. The grain is always on top of backgrounds, never over body text (preserving readability). Opacity 0.04-0.06, fill nowhere near the eye.
+
+---
+
+## Sticker & Tape Effects
+
+| Effect | Implementation |
+|--------|---------------|
+| **Sticker badge** | Irregular border-radius (slightly bubbled corners), 2px ink border, hard offset shadow (4px 4px 0 black) |
+| **Paper tape** | Semi-transparent cream band at a 3-5deg rotation, slight paper grain, overlapping a corner |
+| **Washi sliver** | Handwritten class labels on a translucent white plate |
+| **Torn edge** | `clip-path` polygon with feather points on paper elements |
+
+**Purpose:** Stickers are the collision layer of the collage — they sit on top of everything, slightly rotated, signed by a hand. A badge that says "CUT THIS" or "ISSUE #" is the style speaking. The drop shadows are HARD offsets (4px 4px 0), never soft Gaussian: soft shadows read "modern SaaS", hard offsets read "sticker slapped on a zine."
+
+---
+
+## Image Treatments
+
+| Processing | Effect | Parameters |
+|-----------|--------|------------|
+| **Posterize** | Crush gradients to 2-4 tonal steps — flat and vintage | Levels crush, index color |
+| **Halftone** | Screen-dot overlay after posterizing | 5-8px dots, 0.25-0.35 alpha |
+| **High contrast** | Crush midtones to pure ink/cream | Contrast +40 to +65 |
+| **Saturation** | Pin forward the primaries, bleach the rest | Sat 120-140% on hue, -40% others |
+| **Rough crop** | Irregular/deckle crop edges | Radial mask feather, 5-10% |
+
+**The goal:** Imagery should read as a photocopied poster, not a photograph. Circles become rough, colors block out, edges tear. If an image looks smooth and photographic, it's been under-treated.
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Saturated primary block + grain + (optionally) halftone dots |
+| Color blocks | Hard offset shadows, 1-2% rotation, misregistered black outlines |
+| Buttons | Bright fill, 2-3px ink border, hard 4px offset shadow |
+| Stickers/badges | Texture stamps, hard shadow, squircle radius, rotation |
+| Titles | Overlap grain + occasional paper-tape attachment |
+| Dividers | Deep horizontal ink rules, hard crop-mark stamps |
+
+**No soft shadows. No gradients for depth** — gradient = sneaky corporate sheen. Depth is made with hard offset shadows, crops, and rotation, like offset printing plates stacked on top of each other.
+
+---
+
+## Texture Don'ts
+
+| Don't | Do Instead |
+|-------|-----------|
+| Clean, vector-smooth surfaces | Grain, halftone, misregistration in every surface |
+| Soft Gaussian shadows | Hard offset ink shadows (4px 4px 0) |
+| Layers of depth fading to nothing | Flat stacks with crisp crop lines |
+| Subtle, tasteful gradients | Flats that stay flat; the surface texture does the work |
+| Photographic realism | Posterized, high-contrast, grain-crushed imagery |
+| Unified gloss/glass | Mixed materials — paper, tape, stamp, ink stacks |
+| "Realistic" shadows and depth | Deliberate, printable-looking depth constructions |

@@ -1,0 +1,135 @@
+# Parameterized Template — Playful Interactive Maximal
+
+> Use this template to generate a Playful Interactive Maximal page for YOUR brand.
+
+---
+
+```
+Build a playful interactive maximal page for "[BRAND_NAME]" — [ONE-LINE DESCRIPTION, e.g., "a campaign microsite for a game-toy launch"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: A toy you want to pick up and shake. Saturated polychrome — electric pink, cobalt, lime, tangerine. Every hover, click, and scroll triggers a surprise: confetti, morphing shapes, springs, particle trails. Browsing earns points, badges, and delight moments. Engagement over conversion.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY)
+
+- NO restrained or muted palettes (saturated polychrome only)
+- NO minimal motion (springs, particles, morphs everywhere)
+- NO corporate seriousness (playful, loud, reward-driven copy)
+- NO predictable interactions (every element hides a surprise)
+- NO flat hover states (hovers must transform, tilt, or trigger)
+- NO slow fades or subtle drifts (snap, bounce, burst)
+- NO uniform card grids (fullscreen sections, unexpected layouts)
+- NO quiet CTAs (buttons pop, morph, and celebrate)
+
+---
+
+## FONTS
+
+Replace [DISPLAY_FONT] with a chunky, bold, uppercase display face:
+- Anton — free via Google Fonts, condensed and loud (default)
+- Big Shoulders Display — free via Google Fonts, tall and heavy
+- Druk — premium commercial, loudest of the three (self-host)
+
+Load Anton + Big Shoulders Display via Google Fonts. Use [DISPLAY_FONT] for all headlines, uppercase, tight leading 0.95. Use a chunky sans (system stack, weight 600-700) for body and UI.
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --electric-pink: #FF2E93;
+  --cobalt: #2050FF;
+  --lime: #D6FF3D;
+  --tangerine: #FF7A00;
+  --ink: #141210;
+  --paper: #FFF7E8;
+  --white: #FFFFFF;
+}
+```
+
+**Palette guidance:** Keep the saturated polychrome base — pink + cobalt on cream. Adjust hues to your brand only if they stay equally loud:
+- Hot pink #FF2E93 — primary energy color
+- Cobalt #2050FF — contrast pair for pink
+- Lime #D6FF3D — highlights and points only (never a background)
+- Tangerine #FF7A00 — badges, celebration accents
+
+---
+
+## STRUCTURE
+
+### Hero
+- `min-h-[100dvh]`, full-bleed saturated composition with giant 3D-rendered shapes
+- Giant [DISPLAY_FONT] headline, uppercase, `clamp(2.5rem, 6vw, 6rem)`
+- Morphing CTA with spring hover and confetti burst on click
+- Floating stickers with idle bobbing
+- Live score badge in a corner: "SCORE 0 — EARN POINTS BY EXPLORING"
+
+### Interactive Worlds (2-4 fullscreen sections)
+- Each: `min-h-[100dvh]`, its own saturated background color
+- One hero interactive element per world (spring-press button, drag-toss with particle trail, click-to-morph shape)
+- Interactions award points — score counter ticks up
+
+### How It Works
+- 3-4 chunky tilted step cards with big numbers and sticker collage
+- Card hover: lift with spring, tilt, reveal a hidden badge
+- Playful step copy: "STEP 1 — [ACTION]", "STEP 2 — [ACTION]"
+
+### Badge Wall (optional gamified payoff)
+- Fullscreen on lime: grid of badge tiles that pop with confetti on reveal
+- Unearned badges grayscale + "LOCKED", earned ones saturated with spring scale-in
+
+### Footer
+- Ink background, white uppercase text, confetti-burst hover on links
+- "[BRAND_NAME] © 2026 — [TAGLINE]"
+
+---
+
+## SPRING & MOTION SYSTEM
+
+```ts
+const spring = { type: "spring", stiffness: 300, damping: 15, mass: 0.8 };
+const snappy = { type: "spring", stiffness: 500, damping: 22 };
+const bouncy = { type: "spring", stiffness: 260, damping: 12 };
+```
+
+- Buttons: tilt + scale(1.08) on hover; squash + stretch + confetti on click
+- Cards: spring lift + tilt on hover
+- Section entry: scale(0.85)→1 with overshoot, scroll into view
+- Badges: pop in with overshoot + confetti
+- Score counter: scale pulse on gain
+- Optional scroll-jacking: scroll scrubs the story sequence (0.8s per section)
+
+`prefers-reduced-motion: reduce` → disable particles, scroll-jacking, idle bobbing; hovers become simple scale; entrance is instant.
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- Saturated polychrome palette (electric pink, cobalt, lime, tangerine)
+- Chunky rounded display type, uppercase, tight leading
+- Physics-based hover — springs, tilt, squash-and-stretch
+- Confetti and particle effects on interaction
+- Delight moment on every click, hover, and scroll
+- Gamified elements — score, badges, points for exploring
+- Fullscreen immersive sections (min-h-[100dvh])
+- Playful, energetic copy
+- No restrained palettes, no minimal motion, no corporate seriousness
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines:** 4-7 words, loud, uppercase. "PLAY HARD. CLICK HARDER." not "Explore Our Products."
+
+**Body text:** 1-2 sentences, playful and inviting. Write like a game tutorial, not a marketing pitch.
+
+**Copy tone:** Reward-driven. Frame every action as earning something: "EARN POINTS BY EXPLORING", "COLLECT THE BADGES". Use exclamation energy sparingly — let the motion do the shouting.
+
+**Interactions:** At least one delight moment per section. Confetti on clicks, particle trails on drag, morphs on hover. Never let an element respond the boring way.
+
+---
+
+Replace all [BRACKETED] placeholders, then paste into your AI coding assistant.
+```

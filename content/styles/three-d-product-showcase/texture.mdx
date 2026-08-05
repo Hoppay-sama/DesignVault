@@ -1,0 +1,111 @@
+# Texture & Material
+
+## Primary Texture: Photorealistic PBR Material Language
+
+The texture IS the material. Every surface should read as a physical substance under studio lighting — the product must look like it could be picked up, weighed, and photographed:
+
+| Quality | Description |
+|---------|-------------|
+| **Metal** | Sharp, high-contrast reflections; crisp environmental highlights that slide as the camera orbits |
+| **Glass** | Transmission, refraction, and caustics; the environment map distorts through the body |
+| **Plastic** | Soft specular highlight, low-contrast reflection — matte sheen rather than mirror |
+| **Rubber / matte** | Purely diffuse; no specular peak; light falls off softly across the surface |
+| **Ceramic** | Glossy but not mirror-like — a single clean, slightly blurred highlight |
+
+**The goal:** Materials are the story. A metal body reflects the studio; a matte surface absorbs it. Users should be able to read the material at a glance, the way they would from a product photograph.
+
+---
+
+## Studio Backdrop
+
+```css
+.studio-backdrop {
+  background: linear-gradient(
+    160deg,
+    #F5F4F2 0%,
+    #E4E2DE 55%,
+    #D6D3CE 100%
+  );
+  background-size: 100% 100%;
+}
+
+.studio-backdrop--dark {
+  background: radial-gradient(
+    ellipse at 50% 35%,
+    #2A2A2A 0%,
+    #1A1A1A 65%,
+    #111111 100%
+  );
+}
+```
+
+**Purpose:** The product lives in a virtual photo studio — a seamless gradient sweep from light gray to dark. Neutral backgrounds (light gray to dark) let the product's own colors carry the accent. The backdrop is never busy; it exists to catch reflections on the product's surfaces.
+
+---
+
+## Shadow Softness
+
+```css
+.soft-shadow {
+  box-shadow:
+    0 24px 60px -20px rgba(20, 20, 20, 0.35),
+    0 8px 24px -8px rgba(20, 20, 20, 0.18);
+}
+
+.product-ground-plane {
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(0, 0, 0, 0.28) 0%,
+    rgba(0, 0, 0, 0.10) 45%,
+    transparent 75%
+  );
+  filter: blur(6px);
+}
+```
+
+**Purpose:** Soft shadows ground the product in space. In the 3D scene, shadow softness comes from a large, soft key light with `shadow.radius` and `shadow.bias` tuned so contact shadows fall off gently. A blurred gradient plane under the product sells "it sits here" without harsh occlusion.
+
+---
+
+## Image Processing / Post-Processing
+
+The render pipeline is part of the texture — the final image is graded like a photograph:
+
+| Processing | Effect | Parameters |
+|-----------|--------|------------|
+| **Tone mapping** | Filmic response, rolled-off highlights | ACES Filmic curve |
+| **Depth of field** | Subtle photographic focus | 0.1-0.3 blur radius, product in focus |
+| **Vignette** | Soft edge falloff, showroom intimacy | Opacity 0.15-0.25 |
+| **Grain** | Subtle filmic texture on glass/metal | Opacity 0.02-0.03 |
+| **Exposure** | Controlled studio exposure, no blown highlights | 1.0-1.2 |
+
+**The goal:** The rendered frame should look like a photograph taken in a studio — not a raw engine output. Tone mapping and depth of field are subtle (texture axis 5, but restraint keeps it premium).
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Neutral studio gradient (light gray to dark), never busy |
+| Product | PBR materials with environment-map reflections |
+| Ground | Soft blurred shadow plane under the product |
+| Text overlays | Minimal — product name large, specs in mono, small details |
+| UI elements | Translucent, floating panels; glass-like, low opacity |
+| Dividers | None — scroll sequences change camera angle instead |
+
+**The product is the hero; every other surface exists to serve it.** The backdrop catches light for reflections, the ground catches shadow, and the UI stays out of the way.
+
+---
+
+## Texture Don'ts
+
+| Don't | Do Instead |
+|------|------------|
+| Default grey placeholder materials | Art-directed PBR materials with env-map reflections |
+| Flat 2D product photos as primary | Live 3D model in a studio scene |
+| Busy, patterned backgrounds | Neutral studio gradient that catches reflection |
+| Harsh, unshadowed lighting | Soft key, subtle fill, controlled rim |
+| Sharp contact shadows | Soft shadows with gradual falloff |
+| Chrome-everything (mirror metal abuse) | Metal only where the product would use metal |
+| Text-heavy overlays on the product | Minimal UI, translucent panels around it |

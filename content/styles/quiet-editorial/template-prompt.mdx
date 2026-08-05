@@ -1,0 +1,120 @@
+# Parameterized Template — Quiet Editorial
+
+> Use this template to generate a Quiet Editorial page for YOUR brand.
+
+---
+
+```
+Build a quiet editorial page for "[BRAND_NAME]" — [ONE-LINE DESCRIPTION, e.g., "a longform publication for essays and research"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: Silence as design. Generous whitespace, restrained typography, content that breathes. The page feels like a well-edited print publication. Motion nearly absent — the design trusts the reader to engage without spectacle.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY)
+
+- NO decorative animations (fade-in only, 600-900ms)
+- NO busy layouts (single column, simple 2-column at most)
+- NO loud colors (near-monochrome; one muted accent at most)
+- NO spectacle over substance (content is the hero)
+- NO parallax, no scroll effects
+- NO bouncy animations (no springs, no overshoot)
+- NO bento grids or card grids
+- NO gradients (flat color only)
+- NO grain or depth effects (clean, paper-like)
+- NO bold/display extremes (moderate sizes, restrained weights)
+
+---
+
+## FONTS
+
+Replace [DISPLAY_FONT] with an elegant, editorial serif:
+- Newsreader — classic editorial, warm, readable
+- Source Serif 4 — neutral, refined
+- Fraunces — soft, characterful
+
+Replace [BODY_FONT] with a clean, neutral sans-serif:
+- Inter (400-500) — invisible, versatile
+- Geist (400-500) — modern, minimal
+
+Load via Google Fonts. Display at 400 weight (500 max) — `clamp(2rem, 4vw, 3rem)`, sentence case. Body at 1rem / 1.7 leading, measure max-w-[65ch].
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --paper: #FAF9F6;        /* Warm off-white */
+  --paper-alt: #F3F1EC;    /* Deeper off-white for alt sections */
+  --ink: #1C1B19;          /* Warm near-black */
+  --gray: #6E6A63;         /* Warm gray — secondary text */
+  --line: #E4E1DA;         /* Hairline divider */
+  --accent: [ACCENT_COLOR]; /* Muted accent — links & highlights only */
+}
+```
+
+**Accent guidance:** choose ONE muted, desaturated accent:
+- Muted terracotta #9A6B4F — warm, editorial
+- Dusty olive #7A7352 — understated, grounded
+- Deep slate blue #5A6B7A — cool, restrained
+- Faded burgundy #7A4A4A — classic print
+
+---
+
+## STRUCTURE
+
+### Hero
+- `min-h-[85dvh]`, centered, max-w-[65ch], generous padding
+- Kicker: uppercase 11px, tracking 0.2em, gray
+- Headline: [DISPLAY_FONT] 400, `clamp(2rem, 4vw, 3rem)`, sentence case
+- Standfirst: 1-2 sentences, gray, max-w-[48ch]
+
+### Longform Article
+- Single column, max-w-[65ch], space-y-8
+- Drop cap on first paragraph (display serif, ~3em, float-left)
+- Pull quote mid-article: [DISPLAY_FONT] italic, `clamp(1.5rem, 3vw, 2rem)`
+
+### Editorial Grid (simple 2-column)
+- Essay links separated by hairline 1px rules — no cards, no backgrounds
+
+### Footer
+- Hairline top border, minimal, uppercase gray text
+
+---
+
+## ANIMATIONS
+
+- Hero: opacity 0→1 + translateY(8px)→0, 700ms, ease-out
+- Sections: fade-in on scroll, 700ms, ease-out
+- Pull quote: fade + subtle rise, 800ms, ease-out
+- Hairlines: opacity 0→1, 500ms, ease-out
+
+`prefers-reduced-motion: reduce` → instant entrance, no transitions.
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- Generous whitespace — at least 40% empty space per viewport
+- Restrained typography — no bold or display extremes
+- Minimal motion — slow fades only, no springs, no parallax
+- Longform readable — max-w-[65ch], 1.6+ line height
+- Near-monochrome palette — one muted accent at most
+- Clean paper-like texture — no grain, no depth effects
+- Content-forward, design-invisible
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines:** 4-8 words. Quiet, declarative. "The quiet power of the well-set page" not "Revolutionizing Content With Our Platform."
+
+**Body text:** Written for sustained reading. Editorial, measured tone. Essays, research, thought leadership — not marketing copy.
+
+**Structure:** Longform columns with generous vertical rhythm. Drop caps, pull quotes, hairline rules. The words carry the page.
+
+---
+
+Replace all [BRACKETED] placeholders, then paste into your AI coding assistant.
+```

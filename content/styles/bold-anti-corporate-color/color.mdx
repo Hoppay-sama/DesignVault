@@ -1,0 +1,89 @@
+# Color Architecture
+
+## Ground
+
+There is no neutral ground. The "background" IS a saturated color block — the design is the palette stated at full volume. Ink black and warm paper appear only as supporting plates, never as the default surface.
+
+```css
+--color-ground-dark: #111111;     /* Ink black — anchoring text, borders, crops */
+--color-ground-light: #FFF3D6;    /* Hot cream — risograph paper warmth, not sterile white */
+```
+
+**Why no pure #000000 / #FFFFFF:** Pure black reads as corporate print; pure white reads as a sterile SaaS canvas. Ink black is reserved for text plates and hard outlines. Warm cream is available for "paper" moments but the default surface is always one of the saturated primaries below.
+
+---
+
+## Saturated Primaries
+
+```css
+--color-acid-yellow:  #D4FF00;   /* Acid yellow — the screamiest, loudest color in the system */
+--color-hot-pink:     #FF2D95;   /* Hot pink — punk, electrified */
+--color-electric-orange: #FF5400; /* Electric orange — heat, warning-tape energy */
+--color-cobalt-blue:  #0049FF;   /* Cobalt blue — saturated primary, electric dielectric */
+--color-lime-green:   #B6FF00;   /* Lime green — battery acid, sibling of acid yellow */
+```
+
+**These ARE the base colors.** Full sections sit on solid primary fields. Text overlays, buttons, cards, and strokes sit directly on the color. The saturation is never dialed down for "taste" — the entire point is a palette that refuses to whisper.
+
+---
+
+## Clashing Combinations
+
+Clashes are intentional and load-bearing. The guiding rule: never pick two colors that "go together." Always pair fields so the adjacent colors physically hurt in a good way.
+
+| Combination | Purpose |
+|-------------|---------|
+| Acid yellow field + hot pink text | The most electrified pairing in the system |
+| Cobalt blue field + lime green text | Print-register clash, high-voltage |
+| Electric orange field + cobalt text | Warning-tape contrast, highway impact |
+| Lime green field + hot pink text | Zine cover energy, absurd and loud |
+
+**No split-complementary optimizations, no muted hedges, no white-gray background behind color.** If two colors read as "balanced," the pairing is wrong — push them further apart.
+
+---
+
+## Text Color Strategy
+
+```css
+--color-text-on-dark:  rgba(17, 17, 17, 0.92);  /* Ink black, high contrast, loud */
+--color-text-on-light: rgba(255, 243, 214, 0.92); /* Cream on saturated ink, reading */
+--color-text-direct:   #1A1A1A;                 /* Hard ink text for acid/cream grounds */
+```
+
+**Alpha is near-strong, not translucent.** This style prints at 90%+ opacity. Unlike softer styles that float translucent text to feel airy, these blocks are stamped hard. Text sits clearly ON the color; nothing is softly veiled.
+
+---
+
+## Overprint / Ink Stamps
+
+```css
+--color-in-ink: #111111;              /* Full black for stamps, crops, hard borders */
+```
+
+**Purpose:** Saturated color blocks read as "screen tone" and "corporate gradient" unless they carry print artifacts — stamps, crop marks, hard borders. Ink black supplies that: block outlines, hairline rules, halftone dot tints. When used in contrast against the primaries, it makes the palette feel printed and industrial rather than digital.
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Saturated primary color block (or layered 2-3 stack with hard edges) |
+| Text fields | Warm cream or ink, at 90%+ opacity — hard-stamped |
+| Buttons | Bright ink fill, 2-3px black border, hard offset satin shadow |
+| Cards/panels | Saturated color fill with harsh crop lines and corner stamps |
+| Nav | Sticky saturated bar with ink sticky labels |
+| Dividers | Hard-crop black or contrasting color rules — deep ink bars |
+
+---
+
+## Color Don'ts
+
+| Don't | Do Instead |
+|-------|-----------|
+| Muted, corporate palette | Saturated primaries with intentional clashes |
+| Gradient-to-white softening | Hard edges between fields, offset blocks |
+| Negative-dark backdrops everywhere | One saturated field per section informs the next |
+| Soft shadows on primary fills | Hard offset black, crop marks, subtle ink crush |
+| 2 colors that "click" | Force clashing pairs — loudness is the point |
+| Any pastel | The primaries — never dilute them into "branded" |

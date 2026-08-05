@@ -1,0 +1,129 @@
+# Parameterized Template — Generative Algorithmic / Code-Art
+
+> Use this template to generate a generative-algorithmic page for YOUR brand.
+
+---
+
+```
+Build a generative-algorithmic page for "[BRAND_NAME]" — [ONE-LINE DESCRIPTION, e.g., "an experimental design studio — code-as-art, procedural visuals, real-time rendering"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion + a WebGL/Canvas renderer (raw WebGL, three.js, or p5.js). Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: Code-as-art. Visuals procedurally generated — particle systems, noise fields, recursive patterns. The page feels alive, different on every visit. Canvas/WebGL-driven, non-traditional DOM. The viewport IS the canvas.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY)
+
+- NO static imagery or pre-rendered hero images (visuals computed at runtime)
+- NO traditional DOM layout (single full-viewport canvas is the page)
+- NO CSS-only decoration (the generative canvas carries the visual weight)
+- NO stock photography, no SVG illustration sets
+- NO fixed gradients (gradients derive from noise fields)
+- NO text-heavy sections (visuals lead; text is floating metadata)
+- NO decorative serif display type (monospace / technical sans-serif only)
+
+---
+
+## FONTS
+
+Choose a monospace + technical sans-serif pairing:
+
+- [MONO_FONT]: IBM Plex Mono, JetBrains Mono, or Space Mono — labels, readouts, coordinates (400/500)
+- [SANS_FONT]: Space Grotesk, Inter, or Geist — headlines + body (400/500)
+
+Load via Google Fonts. Use [MONO_FONT] for all small uppercase metadata (10-12px, tracking 0.15em) and [SANS_FONT] for everything readable. Text is secondary — it never competes with the canvas.
+
+---
+
+## COLOR SYSTEM
+
+Algorithmically derived — replace the base stage, but derive all palette variation from the field:
+
+```css
+:root {
+  --bg-deep: [STAGE_HEX];            /* Near-black stage */
+  --particle-base: [BASE_HUE_HEX];   /* Field base hue */
+  --particle-alt: [ACCENT_HEX];      /* Contrast hue for the far side of the palette */
+  --text-on-canvas: rgba(240, 245, 250, 0.85);
+  --text-muted: rgba(240, 245, 250, 0.5);
+}
+```
+
+Per-particle color: `hsl(hue, 80%, 60%)` where `hue` interpolates from [BASE_HUE] to [ACCENT_HUE] via noise — the palette breathes, never flat.
+
+**Accent guidance** (choose a base + accent toward opposite ends of the wheel):
+- Cyan #7AE7FF → magenta #FF6B9D — neon, data-viz, field/simulation feel
+- Lime #B8F04B → violet #8B5CF6 — bio, generative, organic data
+- Amber #FFC24B → teal #2DD4BF — warmth + cool, editorial
+
+---
+
+## STRUCTURE
+
+### Render Stage
+- Fixed full-viewport WebGL canvas — the entire page
+- Particle system, [PARTICLE_COUNT] particles (1000-2000)
+- Motion: Perlin noise field — steering angle from `noise(x,y,time)`; velocity damping 0.98; particles glide, never snap
+- Trail rendering: alpha-fade previous frames + additive blending
+- Seed: random 4-digit seed printed as UI readout; [RESEED_CONTROL] (button / click canvas / keypress)
+- Pointer interaction: particles within 150px of cursor get a velocity boost
+
+### UI Overlay (z-index 10, pointer-events-none container)
+- Top-left: code-list label + headline (1-6 word narrative) + 1-2 sentence subtext, `max-w-md`
+- Bottom-left readouts: `SEED`, `PARTICLES`, `FPS` — [MONO_FONT] 10px
+- Bottom-right CTA: [CTA_LABEL] — bordered pill, backdrop-blur, hue-shift on hover
+
+### Overlay Sections (`min-h-[100dvh]`, transparent, text floats over the field)
+- [SECTION_1_TITLE]: 3-5 entries — label + headline + 1 sentence
+- [SECTION_2_TITLE]: numbered principles, monospace numerals
+- [SECTION_3_TITLE]: split or column of translucent body text
+
+### Footer
+- "[BRAND_NAME] © 2026 — [DESCRIPTOR, e.g., PROCEDURAL / ALIVE / EVER-CHANGING]" — [MONO_FONT] 10px uppercase
+
+---
+
+## FIELD BEHAVIOR (DO NOT MODIFY)
+
+```
+flow-field steering: angle = noise(x, y, time) * 2; velocity boost 0.05; damping 0.98
+trail rendering: rgba(bg, 0.08) fillRect + additive particle composite
+particle hue: interpolated base→accent via noise — algorithmic palette
+particle count: halve if FPS < 45; wrap or bounce at edges
+prefers-reduced-motion: freeze to seed + 1 static frame, no pointer interaction
+```
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- Single full-viewport WebGL canvas — the page IS the render
+- Particle system / noise field, 1000+ particles
+- Continuous procedural animation — never static, never looping
+- Seeded randomness — reproducible, seed shown in UI
+- Algorithmic palette — hue from noise, not hardcoded
+- Monospace / technical sans-serif text as metadata
+- Minimal floating UI — no cards, no boxes over the canvas
+- Emergent behavior — simple rules, complex page
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines:** 4-8 words. Credible, system-flavored, non-buzzword. "Code-as-art, rendered in real time" not "We are a cutting-edge digital agency."
+
+**Body text:** 1-2 sentences. Read like system copy or a method note, not a marketing pitch. Reference the algorithm honestly.
+
+**Visuals:** No imagery to source — the field IS the content. If a section must show documented work, offer it as list entries inside the overlay, never as images over the canvas.
+
+---
+
+## CONTENT
+
+- [BRAND_NAME]:
+- [TAGLINE]:
+- [SEED]:
+- [PARTICLE_COUNT]:
+- [SEEDED_SEED_PLACEHOLDER]:
+
+Replace all [BRACKETED] placeholders, then paste into your AI coding assistant.
+```

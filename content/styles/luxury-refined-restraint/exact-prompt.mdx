@@ -1,0 +1,129 @@
+# Exact Replica Prompt — Luxury Refined Restraint
+
+> Copy this entire prompt and paste it into your AI coding assistant.
+
+---
+
+```
+Build a luxury refined-restraint page for "MAISON" — a luxury fashion house. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `MAISON — Refined essentials in muted tones`.
+
+Vibe: Extreme restraint signals expense. Vast whitespace, refined serif typography, museum-quality photography, gallery spacing. The design disappears to let the subject speak — whispered confidence, nothing accidental.
+
+---
+
+## ANTI-SLOP CONSTRAINTS
+
+- NO loud colors (muted, desaturated warm neutrals only)
+- NO busy layouts (single-column focus, extreme whitespace)
+- NO decorative motion (slow crossfades and gentle reveals only)
+- NO cheap stock photography (museum-quality photography only)
+- NO card-based layouts (flat editorial sections, gallery spacing)
+- NO gradients, glossy effects, or 3D gimmicks
+- NO saturated palette (one rich accent maximum)
+- NO generic system fonts (refined serif + elegant sans only)
+- NO text-heavy walls (small body text, generous leading)
+- NO animation on every scroll (motion is a rare whisper)
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap
+```
+
+Usage:
+- **Cormorant Garamond 300/400**: Display headlines — `clamp(2rem, 4vw, 4rem)`, sentence case, tracking 0.02em
+- **Inter 300 UPPERCASE**: Labels — 11-12px, tracking 0.25em
+- **Inter 400**: Body text — `clamp(0.75rem, 1vw, 0.9rem)`, line-height 1.9, generous leading
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --ivory: #F7F3EC;          /* Warm ivory ground */
+  --champagne: #EDE4D3;      /* Champagne beige */
+  --warm-stone: #C9BFB0;     /* Warm stone */
+  --cool-silver: #A9AEAD;    /* Cool silver */
+  --espresso: #2E2622;       /* Espresso brown */
+  --charcoal: #1E1B19;       /* Deep charcoal */
+  --accent-oxblood: #6E2530; /* Single rich accent */
+  --accent-emerald: #1E4D3B;
+  --accent-deep-gold: #A8874E;
+  --text-primary: rgba(46, 38, 34, 0.92);
+  --text-muted: rgba(46, 38, 34, 0.55);
+}
+```
+
+Body: `bg-[#F7F3EC] text-[rgba(46,38,34,0.92)] antialiased font-body`.
+
+Use at most ONE accent color per page. Accent coverage: labels, hairlines, small details only — never backgrounds.
+
+---
+
+## STRUCTURE
+
+### 1. Hero Section
+- `min-h-[100dvh]`, centered composition, extreme whitespace (`py-48`+)
+- Museum-quality editorial photograph (single subject, muted tones, soft light)
+- Text stack (centered, below or beside the image):
+  - Label: "MAISON / COLLECTION 26" — Inter 300, uppercase, tracking 0.25em, 11px, text-muted
+  - Headline: "Refined essentials in muted tones" — Cormorant Garamond 300, `clamp(2rem, 4vw, 4rem)`, sentence case, text-primary
+  - Subtext: "Considered pieces for the unhurried." — Inter 400, text-muted, max-width 420px, line-height 1.9
+  - CTA: "EXPLORE THE COLLECTION" — hairline border (1px, text-primary/30), text-primary, uppercase, tracking 0.25em, 11px, transparent background
+
+### 2. Collection Section (3 pieces)
+- One piece per row, separated by extreme gallery spacing (py-48+ between rows)
+- Museum-style image presentation: centered, generous margins, no cards, no borders
+- Per piece: label (uppercase, 11px, tracking 0.25em) + Cormorant Garamond headline + 1-2 sentence body, max-width 480px, centered or edge-aligned
+- Alternate alignment: centered → edge-left → edge-right, like hanging artwork
+
+### 3. Atelier Section
+- Split: full-bleed photograph (left, 60%) + generous whitespace with text (right, 40%)
+- Headline: "Quiet craftsmanship" — Cormorant Garamond 300
+- Body: 2-3 sentences, Inter 400, line-height 1.9, text-muted
+- Hairline divider (1px, espresso/10) above the footer
+
+### 4. Footer
+- Ivory bg, hairline top border
+- "MAISON © 2026 — REFINED ESSENTIALS" — Inter 300, uppercase, tracking 0.25em, 11px, text-muted
+
+---
+
+## MOTION
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Hero imagery | opacity 0→1 + scale(1.03)→1 | 1200ms | `ease-out` |
+| Display text | opacity 0→1 + translateY(16px)→0 | 900ms | `ease-out` (delay 400ms) |
+| Body text | opacity 0→1 | 800ms | `ease-out` (delay 700ms) |
+| Section crossfades | opacity 0→1 on scroll into view | 600-1000ms | `ease-out` |
+| Image reveals | opacity 0→1 + translateY(24px)→0 | 1000ms | `ease-out`, once per view |
+
+No infinite, looping, or decorative animations. Nothing moves unless the user scrolls.
+
+`prefers-reduced-motion: reduce` → disable all animations, instant entrance.
+
+---
+
+## ANTI-SLOP (LOCKED)
+
+- Extreme whitespace (py-48+ sections, gallery spacing)
+- Refined serif display type (Cormorant Garamond / Canela / Domaine)
+- Small, well-leaded body text
+- Muted, desaturated warm-neutral palette (ivory, champagne, espresso)
+- At most one rich accent (oxblood, emerald, deep gold)
+- Museum-quality photography — never stock
+- Single-column focus, centered or edge-aligned
+- Minimal motion: slow crossfades (600ms+), gentle reveals only
+- Hairline borders and uppercase micro-labels
+- No loud colors, no busy layouts, no decorative motion, no cards
+- The design disappears to let the subject speak
+
+---
+
+Recreate this page with the exact luxury refined-restraint aesthetic, museum spacing, muted palette, and slow elegant motion above.
+```

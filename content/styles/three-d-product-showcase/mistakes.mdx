@@ -1,0 +1,59 @@
+# Common Mistakes
+
+## Mistake 1: Heavy WebGL Performance
+
+**What people do:** Load a dense, high-poly scene with 4K textures, heavy post-processing, and full-resolution rendering on every device.
+
+**Why it fails:** A showcase that runs at 12fps destroys the premium, sculptural feel — the product stutters, the camera fights the user, and the page feels broken rather than expensive. Motion is the style's leading axis (5/6); janky motion is the style's death.
+
+**Fix:** Set a performance budget before building — LOD levels, capped device pixel ratio (1.5-2), compressed textures (ASTC/WebP), and limited draw calls. Profile with the GPU panel; target 60fps on mid-range hardware. Post-processing like bloom and DOF should be optional quality tiers, not required.
+
+---
+
+## Mistake 2: No Fallback for Low-End Devices
+
+**What people do:** Assume WebGL works everywhere; ship a single heavy canvas and nothing else.
+
+**Why it fails:** Older phones, weak GPUs, and software-rendering environments can't run the scene. The user gets a black square or a frozen frame where the hero product should be — and the entire page is built around that hero.
+
+**Fix:** Detect WebGL support and device tier. Fall back to a static photorealistic render (from the same scene, pre-rendered) with the same studio lighting, or a simplified scene with reduced geometry and no post-processing. The fallback should still look art-directed — never a broken canvas.
+
+---
+
+## Mistake 3: Unclear Affordance for Interaction
+
+**What people do:** Ship orbit controls silently — the product spins on a timer and nothing hints that the user can drag, zoom, or scroll the camera.
+
+**Why it fails:** Interaction is exploration (principle #2), but users won't explore what they can't discover. A self-rotating product reads as a video, not an interactive object. The showcase's whole value — handling the product — goes unused.
+
+**Fix:** Visible affordance: a drag cursor on hover, a subtle "Drag to explore" hint that fades after first interaction, a scroll cue for the camera sequence. Rotation should be user-driven (with damping and inertia) rather than a constant gimmick.
+
+---
+
+## Mistake 4: The Product Gets Lost in Effects
+
+**What people do:** Add floating particles, fog, lens flares, dramatic camera swoops, and background scenery — because "3D should be spectacular."
+
+**Why it fails:** The style is object theater: the product IS the show. Extra effects compete with the sculpture, slow the frame, and dilute the premium, showroom mood. When the user remembers the effects but not the product, the showcase has failed.
+
+**Fix:** Restraint — the studio backdrop, soft shadows, and lighting exist to serve the product. Every effect must answer "what does this reveal about the product?" If it doesn't, cut it. The most premium showcases are the quietest.
+
+---
+
+## Mistake 5: Gimmicky Rotation Without Purpose
+
+**What people do:** Set the model spinning on a loop because "3D products should rotate."
+
+**Why it fails:** Constant auto-rotation is motion without information — it's the 3D equivalent of a carousel. It reads as a tech demo, not a showcase, and it's actively hostile to reduced-motion users. Rotating the product tells the user nothing they can't see in one static frame.
+
+**Fix:** Rotation must reveal: a material finish, an exploded view, a port, a hinge, a detail at a specific angle. Either the user drives the rotation (orbit controls with inertia), or the camera moves with scroll to tell a story — never mindless spinning.
+
+---
+
+## Mistake 6: Unlit, Untreated Default Scenes
+
+**What people do:** Import a model, drop a directional light on it, and ship the raw render with default tone mapping.
+
+**Why it fails:** Without studio lighting (soft key, subtle fill, controlled rim) and photographic post-processing, the model looks like a grey-box placeholder — exactly the "default 3D asset look" this style exists to kill. Lighting is the texture: metal reflects, glass refracts, and matte absorbs because the light tells them to.
+
+**Fix:** Art-direct the lighting like a photoshoot: key light that sculpts the form, fill that lifts shadows, rim that separates from the backdrop. Add an environment map for believable reflections, filmic tone mapping, and subtle depth of field. If the render wouldn't pass as a product photograph, it isn't done.

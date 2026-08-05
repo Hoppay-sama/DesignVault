@@ -1,0 +1,99 @@
+# Texture & Surface
+
+## Primary Texture: Engineering Flatness
+
+The texture of Swiss Mono Precision is **flatness itself** — the material truth of a drafting surface, not a digital glow. Where other styles build texture from imagery or material imitations, this style builds it from the drawing tools themselves:
+
+| Quality | Description |
+|---------|-------------|
+| **Flat, clipped color fields** | Solid black, paper white, and red shapes with hard edges — no inner shadow, no emboss |
+| **Matte grounds** | Paper-white and engineering-black surfaces with zero gloss or bloom |
+| **Hairline structure** | 1px rules doing the work of what other styles do with shadows |
+| **Blueprint underlay** | Faint grid ruling (12/16 columns) visible at low opacity — the drawing exists on ruled paper |
+| **Fabricated artifacts** | Simulated print imperfections are banished; this is a clean vector drawing, not a scan |
+
+**The goal:** Every surface should read as *drawn* — generated on a clean drafting plane, aligned to the grid, dimensioned. Where a softer style would add texture to feel alive, this style withholds texture to feel *authoritative*. The richness is in the precision of the edges, not the depth of the material.
+
+---
+
+## Hairline Rules
+
+```css
+.hairline {
+  height: 1px;
+  background: rgba(16, 16, 16, 0.85);
+}
+
+.hairline--underlay {
+  height: 1px;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(16, 16, 16, 0.25) 0,
+    rgba(16, 16, 16, 0.25) 1px,
+    transparent 1px,
+    transparent 24px
+  );
+}
+```
+
+**Purpose:** The hairline is the primary surface element — 1px rules as borders, section separators, table structures, and column markers. The underlay variant repeats the 8px base-unit rhythm so the ruling itself becomes texture. Hairs are kept at crisp 1px (never `0.5px` blur); on high-DPI they render as a sharp physical line.
+
+---
+
+## Grid Ruling System
+
+```css
+.grid-underlay {
+  background-image: linear-gradient(rgba(16, 16, 16, 0.08) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(16, 16, 16, 0.08) 1px, transparent 1px);
+  background-size: 64px 64px;  /* 8px base unit · 12/16 columns · 64px module */
+}
+```
+
+**Purpose:** Make the mathematical grid materially present. Sections can optionally show their column structure as a faint ruled underlay — like the printed grid on a technical pad. This is the only "pattern" the system permits, and it is always an honest quote of the actual grid, never a decorative motif. When it appears, it appears as surface truth, not ornament.
+
+---
+
+## Image / Asset Processing
+
+Assets (figures, thumbnails, technical imagery) are processed to hold the drawing-plane register:
+
+| Processing | Effect | Parameters |
+|-----------|--------|------------|
+| **B&W or single-tone** | Keep images monochrome or bi-tone (B&W, or B&W with red tint) | Desaturate 100%; optional red channel remap |
+| **Crisp edges** | No blur, no glass, no glow | `filter: none` on outputs; hard clipping at grid bounds |
+| **Flatten contrast** | Stable, even contrast — no HDR bloom | Contrast within ±10% of source |
+| **Hairline framing** | Every asset sits behind a 1px rule frame | `outline: 1px solid rgba(16,16,16,0.85)` |
+| **Overlay charts / annotations** | Dimension lines, index markers on top of assets | 1px rules + mono micro-type |
+
+**The goal:** no asset may break the flat, measured plane. Imagery is treated as a technical figure in a manual — framed by hairs, annotated in mono, clipped to the grid. If an image can't be flattened to this register, it does not belong in the system.
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Paper white or engineering black ground — flat, unlit |
+| Text overlays | Near-solid ink, no background plate — type sits on the plane |
+| UI elements | Flat fills with hairline frames; no shadows, no borders beyond 1px |
+| Buttons | Solid black fill (paper text); active state solid red |
+| Navigation | Flat bar locked to the top grid band, hairline rule below |
+| Dividers | 1px hairlines — the only sanctioned separation |
+| Cards (optional) | Flat field with 1px frame + top hairline accent; no radius above 2px, no shadow |
+
+**Everything is on the plane.** No elevation, no float, no depth stack. Hierarchy is encoded in weight, rule density, and the red accent — never in shadow or layering.
+
+---
+
+## Texture Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Drop shadows / elevation | 1px hairlines and flat color fields |
+| Noise, grain, or paper scans | Clean vector flatness — a drawing, not a scan |
+| Glassmorphism or translucency | Solid, near-opaque fills |
+| Blur gradients or glows | Hard edges and crisp 1px rules |
+| Rounded corners above 2px | Geometric corners (grids stay rectangular) |
+| Organic or abstract textures | Grid ruling and ruled lines only |
+| 3D depth / perspective | Flat projection — the front elevation of the page |

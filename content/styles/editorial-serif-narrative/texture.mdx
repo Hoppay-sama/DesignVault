@@ -1,0 +1,96 @@
+# Texture & Surface
+
+## Primary Texture: Ink on Uncoated Paper
+
+The texture axis is low-moderate (3) and the surface is **paper**. Every surface should feel like a printed sheet — visible grain, matte finish, readable contrast. There are no glossy panels, no glass, no plastic: the site is a printed story you happen to be reading on a screen.
+
+| Signal | Manifestation |
+|--------|---------------|
+| **Paper grain** | A subtle, barely-there noise overlay across the background |
+| **Warm aging** | Shadows and pull-quote zones slightly deepened — never hard scuff or fake "dirty paper" |
+| **Ink bleed** | Drop caps and display type carry a 0.5px soft edge — ink sinking into uncoated stock |
+| **Flat matte** | No reflective gradients, no glassy highlights on any surface |
+
+**The goal:** a reader should be able to imagine touching the page — the drop cap pressed into paper, the sheet warming under a thumb. The texture exists to make the reading feel physical, never decorative.
+
+---
+
+## Paper Grain
+
+```css
+.grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("/images/textures/paper-grain.png");
+  mix-blend-mode: soft-light;
+}
+```
+
+**Usage:** A single low-opacity grain overlay (0.02–0.035) over the whole canvas. It removes the sterile burn of a plain screen and gives the ivory paper a printed surface. Keep it uniform — variation belongs to the photography, not the grain. Never let grain sit over body text at a strength that reads as noise.
+
+---
+
+## Editorial Photography
+
+| Rule | Specification |
+|------|---------------|
+| **Register** | Documentary, narrative — never generic stock |
+| **Placement** | Full-bleed chapter breaks that interrupt the text flow |
+| **Tone** | Warm shadows, muted film grain, slight contrast compression |
+| **Mood** | Quiet, human, in-world — a photographed story, not a product shot |
+| **Breath** | At least one full-bleed image per two screens of text |
+
+Photography should feel pre-shot for the issue, not generated per use. Full-bleed blocks of image alternate with blocks of type the way a magazine alternates text and photography — the image is the pause, the type is the resume.
+
+---
+
+## Typographic Textures
+
+**Drop caps and rules are surface details with real ink weight:**
+
+- **Drop cap** — the opening glyph is set in the display serif at 600–700 weight, flush left, baseline aligned to the paragraph's first line. It reads as letterpress: accent ink, slight edge softness, no shadow.
+- **Opening rule** — a 2px `--accent-oxblood` rule, 48px long, beneath each section head. It is the "article starts here" mark — a bit of the printing press, engraved into the page.
+- **Pull quotes** — set on the `--paper-porcelain` band, bounded above and below by fine 0.5px `--ink-sepia` rules. The band must stay **flat** — no blur, no drop shadow — so it reads as a sheet of stock, not a card.
+
+---
+
+## Thin Rules & Hairs
+
+| Element | Treatment |
+|---------|-----------|
+| Section opening | 2px `--accent-oxblood` rule, 48px long |
+| Pull-quote hairlines | 0.5px `--ink-sepia` above and below the band |
+| Folio separators | Thin `--ink-sepia` line at 30% opacity under running heads |
+| Image captions | 0.5px hairline above the caption text |
+
+Fine rules do the binding — they hold the page together the way a magazine's grid does. Every rule should look printed: crisp, thin, and un-blurred.
+
+---
+
+## Image Processing
+
+| Processing | Effect | Parameters |
+|-----------|--------|------------|
+| **Warm grade** | Lift shadows toward warm brown | +5–8% warmth in shadows |
+| **Film grain** | Gentle analog texture | Opacity 0.02, overlay blend |
+| **Contrast compression** | Flat, paper-like print feel | Contrast −5 to −10 |
+| **Sharpening** | Keeps editorial photography crisp | Modest, no halos |
+
+Warm development is what makes photography feel shot for the issue rather than pulled from a stock library. Edges of photography may run full-bleed to the paper edge — never float a photo in a white card.
+
+---
+
+## Texture Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Glossy reflections, 3D glass panels | Matte paper + grain |
+| Generic stock photography | Editorial, narrative, in-world imagery |
+| Hard drop shadows, heavy borders | Fine hairlines and soft ink bleed |
+| Glassmorphism UI | Flat paper surfaces with print rules |
+| Photos framed in thin white cards | Full-bleed editorial photography |
+| Whole-page blur or haze overlays | Localized grain and warm grade |
+| Digital gradients on surfaces | Paper tones layered like ink build-up |
+| "Dark mode grey push" on editorial | Keep paper as the light, deepen the ink |

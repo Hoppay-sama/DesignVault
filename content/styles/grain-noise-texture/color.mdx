@@ -1,0 +1,77 @@
+# Color Architecture
+
+## Ground
+
+The ground is warm and tactile — like uncoated, lightly aged paper. The palette is muted and desaturated so the grain can actually be seen, and so the screen surface reads as a physical sheet rather than a glowing panel.
+
+```css
+--color-ground-dark: #171512;     /* Warm near-black — like graphite rubbed on linen */
+--color-ground-light: #EAE4DA;    /* Warm off-white — uncoated paper, stone */
+```
+
+**Why tinted warm:** Both ends carry a warm cast (never pure #000000 or #FFFFFF). Pure neutrals read clinical; warm tints read printed. The ground should feel like it absorbed ink, not like it emits light.
+
+---
+
+## Warm Neutral Base
+
+```css
+--neutral-stone: #D6CEC1;     /* Stone — dry, chalky */
+--neutral-sand: #CBB79D;      /* Sand — warm, sun-baked */
+--neutral-clay: #B08968;      /* Clay — terracotta, grounded */
+--neutral-slate: #8A8580;     /* Slate — cool, mineral contrast */
+--neutral-graphite: #4A4643;  /* Graphite — deep, carries ink */
+```
+
+**These are the base colors.** The palette stays within a tight warm band — stone, sand, clay — with one cooler counterpoint (slate) so the warmth never flattens. Everything is muted toward gray; nothing flies up from the page.
+
+---
+
+## Muted Accents
+
+```css
+--accent-rust: #9C5A3C;       /* Rust — burnt, faded by light */
+--accent-olive: #6B7052;       /* Olive — dusty, botanical */
+--accent-mustard: #C9A227;     /* Mustard — faded print yellow */
+--accent-ink: #3B3632;         /* Ink — soft black-brown for strong type */
+```
+
+**Usage:** Accents appear at mid saturation — strong enough to read as part of the palette, muted enough to sit under the grain. They behave like ink colors on paper (rust, olive, mustard) rather than like screen colors. The grain should be visible across them.
+
+**Rule:** No accent may be pushed to pure saturation. If a color survives as a bright neon spot, it breaks the tactile illusion — grain only reads against muted fields.
+
+---
+
+## Text
+
+```css
+--color-text-on-dark: rgba(234, 228, 218, 0.88);  /* Warm off-white, slightly translucent */
+--color-text-on-light: rgba(74, 70, 67, 0.92);    /* Soft ink, not pure black */
+--color-text-muted: rgba(74, 70, 67, 0.55);      /* Muted, for labels and metadata */
+--color-text-link: rgba(107, 112, 82, 0.9);      /* Olive link — print-like */
+```
+
+**Text is slightly reduced contrast by design.** Body copy is ~92% opaque ink rather than pure black; headings sit in the same range. The 8-12% drop keeps the contrast feeling physical, matching the Anti-Slop checklist (no pure black, warm reduced contrast).
+
+---
+
+## Ink / Gradient Usage
+
+```css
+--ink-gradient: linear-gradient(105deg, #3B3B38 0%, #5A5650 55%, #3B3B38 100%);
+```
+
+**No polished white-to-black UI gradients.** If a gradient is needed, it runs across warm neutral ink tones — like the sheen of ink on paper — never a modern blue-to-purple or a glossy specular blend.
+
+---
+
+## Color Don'ts
+
+| Don't | Do Instead |
+|-------|-----------|
+| Neon or saturated colors | Muted warm accent colors (rust, olive, mustard) |
+| Pure black / pure white | Warm tinted neutrals (stone, sand, clay, slate) |
+| Glossy, screen-like gradients | Ink-tone gradients, flat muted fills |
+| Corporate cool palettes | Warm printed stock — uncoated paper warmth |
+| High-contrast pure black text | Soft ink at 92% opacity |
+| Color that hides the grain | Color light enough over the overlay to show it |

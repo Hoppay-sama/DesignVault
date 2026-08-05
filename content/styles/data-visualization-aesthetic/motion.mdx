@@ -1,0 +1,120 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Data Visualization Aesthetic is **informational and precise**. Every animation exists to show a change in data — nothing moves for decoration. Bar heights grow, lines draw themselves, numbers count up — each transition encodes the story the data is telling. The motion is fast enough to feel live, smooth enough to read, and never theatrical. This is a living dashboard: the data is always arriving, and motion is how the eye is told it arrived.
+
+---
+
+## Data Transitions (The Core)
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Bar growth | Height scale from baseline `scaleY(0)→1`, transform-origin bottom | 400-600ms | `cubic-bezier(0.22, 1, 0.36, 1)` |
+| Line draw | Stroke-dashoffset from full to 0 (or `pathLength` draw) | 700-900ms | `ease-in-out` |
+| Count-up | Integer rolls from previous value to new value | 500-900ms | `ease-out`, single tick at end |
+| Area fill | Opacity 0→1 + clip-path reveal | 500ms | `ease-out` |
+| Point pop-in | Scale 0→1 on data points, after line arrives | 200ms each, 50-80ms stagger | `ease-out` |
+
+**The rules of data motion:** Animate the data, not the chart chrome. The transform should be driven by the value — a bar grows from zero, a line draws along its path, a number counts toward its target. Never animate a chart element to an arbitrary position; the motion must mirror the data change. Easing follows the "snappy but smooth" band: nothing slower than 900ms for a transition, nothing bouncy — spring overshoot reads as measurement error.
+
+---
+
+## Real-Time Updates
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Live series append | New point slides in from the right edge, path redraws | 300-400ms | `ease-out` |
+| Value change | Crossfade + count-up roll on the metric | 400ms | `ease-out` |
+| New data flash | Panel border or glow pulse, single beat | 300ms | `ease-in-out` |
+| Disconnect / stale | Slow opacity fade to 60% | 1500ms | `ease-in-out` |
+
+**Purpose:** When live data arrives, the change must be noticed but not alarming. A single subtle pulse on the panel that received data — never a full-screen flash, never a shake. The count-up roll is the signature move: the number visibly counts from its previous value to the new one, so the user perceives the magnitude of the change, not just its existence.
+
+---
+
+## Scroll-Triggered Chart Animations
+
+| Element | Animation | Trigger |
+|---------|-----------|---------|
+| Bar chart | Bars grow from baseline (staggered 60ms per bar) | 25% of section visible |
+| Line chart | Path draws left-to-right | 25% of section visible |
+| Scatter plot | Points pop in (staggered 40ms) | 25% of section visible |
+| Metrics row | Count-up + opacity 0→1 | 25% of section visible |
+| Axis/grid | Fade in after data settles | 200ms after data animation |
+
+**Key:** Charts animate **once**, on first scroll into view — a chart that redraws on every scroll is a nausea generator, not a dashboard. After the entrance pass, the chart is static (or live-updating, if it's a real-time panel). Entrance should read as "this chart is being rendered," not "this chart is showing off."
+
+---
+
+## Sparkline Micro-Animations
+
+```css
+.sparkline-path {
+  stroke-dasharray: var(--path-length);
+  stroke-dashoffset: var(--path-length);
+  transition: stroke-dashoffset 800ms ease-in-out;
+}
+
+.sparkline-value {
+  font-variant-numeric: tabular-nums;
+  transition: color 300ms ease-in-out;
+}
+```
+
+| Effect | Specification |
+|--------|--------------|
+| Sparkline draw | Path draws over 800ms on view, then idles |
+| Value update | Tabular number swaps instantly (no count-up at micro scale) |
+| Trend color | Green/red swap at 300ms when the sign of the trend flips |
+| Live tick | 2px dot pulses on the latest point, every new data tick |
+
+**Purpose:** Sparklines live in dense card grids where motion must be economical. The draw-once entrance keeps the cockpit calm; only the live tick repeats. At micro scale, count-up animation is noise — the value just updates, and the color change carries the trend information.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Data point | Scales 1→1.25, glow appears, crosshair guides snap to point | — |
+| Bar / column | Brightness up 5%, value label fades in | — |
+| Panel / card | Border brightens to gridline-strong, shadow lifts | Press: scale 0.99 |
+| Legend item | Opacity 0.6→1; dims all other series | Click: toggles series visibility with 400ms fade |
+| Axis labels | No hover motion — labels are static | — |
+
+**Key rules:** Hover states are fast (100-200ms) and precise — a crosshair that snaps to a point is the correct "tooltip" motion. Hovering a legend item should fade the **other** series to 30% opacity so the hovered series stands out; dim the rest, never animate the target.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- Bar growth, line draw, count-up: jump to final value (no transition)
+- Live update pulse: disabled
+- Sparkline draw: instant
+- Hover scale: disabled (brightness/color change only)
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+**Data integrity note:** Reduced motion must never change the data itself — the chart still shows the correct final values, just without the animated journey. The information is preserved; only the theater is removed.
+
+---
+
+## What NOT to Animate
+
+| Never | Why |
+|-------|-----|
+| Decorative chart animations (bouncing bars, spinning donuts) | Motion encodes data; decoration lies about it |
+| Bounce or spring overshoot on data | Overshoot past the true value reads as imprecision |
+| Auto-rotating carousels of charts | The user reads at their own pace; a rotating chart forces a pace |
+| Continuous idle motion on charts | Idle motion fakes "live data" when nothing changed |
+| Animation on every scroll re-entry | Charts animate once on first view, then stay put |
+| Camera/depth parallax | The dashboard is a flat instrument panel, not a scene |

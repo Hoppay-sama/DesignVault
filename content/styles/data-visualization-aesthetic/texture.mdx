@@ -1,0 +1,108 @@
+# Texture & Surface
+
+## Primary Texture: Data Ink & Grid
+
+The texture IS the chart system itself — gridlines, tick marks, axis rulers, and data marks. Texture comes from the visual grammar of measurement, not from decorative materials:
+
+| Quality | Description |
+|---------|-------------|
+| **Gridline rhythm** | Repeating 1px gridlines on dark panels — the texture of the coordinate plane |
+| **Tick marks** | Small 4-6px ticks along axes — the texture of measurement |
+| **Data marks** | Dots, bars, and line segments — the texture of the data itself |
+| **Panel borders** | 1px hairlines, slightly brighter than gridlines — the texture of instrument panels |
+| **Monospace digits** | Tabular numerals repeating in aligned columns — the texture of precision |
+
+**The goal:** Every surface should feel like it was machined from a coordinate system — as if the interface is the inside of a measuring instrument. The grid is the ground, and the data sits on top of it.
+
+---
+
+## Grid Backgrounds
+
+```css
+.grid-panel {
+  background-color: #111827;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+```
+
+| Scale | Use |
+|-------|-----|
+| 24px grid | Full-bleed chart backgrounds and hero metric panels |
+| 12px grid | Dense data cards where finer measurement is implied |
+| No grid | Text/content panels — grid only where data lives |
+
+**Why grid backgrounds:** A faint Cartesian grid is the signature surface of the style — it makes every element on top of it read as a data element. Keep gridlines at 15% opacity; the grid should be felt more than seen.
+
+---
+
+## Chart Element Surfaces
+
+```css
+.data-point {
+  fill: var(--series-01);
+  filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.4));
+}
+
+.axis-line {
+  stroke: rgba(148, 163, 184, 0.35);
+  stroke-width: 1px;
+}
+```
+
+| Surface | Treatment |
+|---------|-----------|
+| Data points | Flat fills + subtle glow (`drop-shadow` 0 0 6px, 40% series color) |
+| Bars/columns | Flat fill, 2-4px corner radius, no gradient |
+| Lines | 2px stroke, crisp joins, no drop shadow |
+| Gridlines | 1px, rgba slate at 15% |
+| Axis rulers | 1px, rgba slate at 35% |
+| Active point | Amber fill + stronger glow + white halo ring |
+
+**Purpose:** The glow is the only "soft" surface in the style, and it is reserved for data — the active point and hovered series. Bars and lines stay flat and hard-edged: precision is communicated by clean geometry, not material rendering.
+
+---
+
+## Panel & Card Surfaces
+
+| Panel | Treatment |
+|-------|-----------|
+| Page background | Flat #0A0A0A |
+| Data card | #111827, 1px border rgba(148, 163, 184, 0.15), 8px radius |
+| Raised/hovered card | #1F2937, border brightens to 0.3 |
+| Metric header | 1px bottom hairline, 12px padding, mono value below |
+| Tooltip | #1F2937 solid, 1px border, 6px radius, mono values |
+| Divider | 1px hairline at 15% opacity — never a shadow |
+
+**No gradients, no glass, no skeuomorphic materials.** Panels are flat, hairline-bordered, slightly separated by tone (#111827 on #0A0A0A). Depth is expressed by value (lighter panel = closer) and by border brightness — exactly how an instrument panel is layered.
+
+---
+
+## Surface Rules
+
+| Rule | Specification |
+|------|---------------|
+| Hairlines everywhere | All borders and dividers are 1px — never thicker chrome |
+| Radius ceiling | 8px max; charts and data marks stay at 2-4px |
+| Glow budget | Glow only on active data points, hovered series, live-update pulse |
+| No shadows | Panels separate by tone and hairline, not drop shadows |
+| No gradients | Flat fills — gradients suggest uncertainty in the value |
+| Monospace alignment | All numeric surfaces use tabular figures, right-aligned in columns |
+
+**The texture is the data.** If a surface has no information on it — no number, no grid, no tick — it should be almost invisible. The interface is a set of measuring instruments, and the chrome should never out-shine the measurement.
+
+---
+
+## Texture Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Decorative backgrounds (noise, grain, gradients) | Clean #0A0A0A with faint gridlines where data lives |
+| Thick borders and heavy chrome | 1px hairlines, tone-separated panels |
+| Rounded card blobs (16px+ radius) | 8px max radius, chart marks at 2-4px |
+| Glassmorphism / frosted panels | Flat, opaque dark panels — precision reads on opaque |
+| Drop shadows for depth | Tone steps (#0A0A0A → #111827 → #1F2937) |
+| Embellished chart elements (3D bars, glossy pies) | Flat, precise 2D data marks |
+| Subtle patterns competing with data | Gridlines at 15% — felt, never loud |

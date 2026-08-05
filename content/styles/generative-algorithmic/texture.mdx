@@ -1,0 +1,94 @@
+# Texture & Surface
+
+## Primary Texture: Procedural Patterns
+
+The texture IS the computation. Every surface is generated from code — there are no image assets, no stock photography, no baked textures:
+
+| Pattern | Description | Generator |
+|---------|-------------|-----------|
+| **Perlin / simplex noise** | Smooth, continuous value fields — the base texture of the page | `noise()` sampled per-pixel or per-vertex |
+| **Voronoi cells** | Polygonal cell divisions — cellular structure, growth boundaries | Distance-field Voronoi |
+| **Particle residue** | Trails and marks left by moving particles | Particle system history buffer |
+| **L-system growth** | Recursive branching structures — plants, crystals, fractals | L-system string rewriting |
+| **Flow fields** | Directional vectors rendered as strand/line texture | Noise field sampled along paths |
+
+**The goal:** Every visible surface must be derivable from a function. If you can't describe the texture as an algorithm, it doesn't belong on the page. The texture is data-driven — it changes when the seed, the parameters, or the time step change.
+
+---
+
+## Cellular Noise / Voronoi Surfaces
+
+```js
+// Conceptual — voronoi cell rendering
+function voronoi(p, cells) {
+  let nearest = Infinity, cell = 0;
+  for (let i = 0; i < cells.length; i++) {
+    const d = dist(p, cells[i].pos);
+    if (d < nearest) { nearest = d; cell = i; }
+  }
+  return cell;
+}
+```
+
+```css
+.voronoi-layer {
+  background: transparent;  /* computed per-frame on canvas */
+  filter: contrast(1.05) brightness(0.98);
+}
+```
+
+**Purpose:** Voronoi cells give surfaces a cellular, organic-but-computed quality — crackle patterns, cell membranes, territory maps. Cell borders shimmer as the seed points drift. Voronoi is the texture of *structure emerging from randomness* — the signature generative-algorithmic surface.
+
+---
+
+## Digital Noise Textures
+
+| Texture | Technique | Parameters |
+|---------|-----------|------------|
+| **Perlin noise field** | Smoothed value noise, 2-4 octaves | Frequency 0.005-0.02, octaves 3, persistence 0.5 |
+| **Value noise grain** | Raw random values, smoothed | Cell size 1-3px |
+| **FBM (fractal Brownian motion)** | Layered noise octaves | 4-6 octaves, lacunarity 2.0 |
+| **Domain warp** | Noise sampling noise | Displacement 20-80px |
+
+**The grain is real data.** Unlike a film grain overlay, generative noise is a live field — it ripples, warps, and responds to the cursor. The texture looks like static because it IS a computed signal, not a flattened effect.
+
+---
+
+## Recursive & Data-Driven Surfaces
+
+| Surface | Treatment |
+|---------|-----------|
+| **L-system branching** | Recursive growth lines — trunk → branch → twig, 4-8 iterations |
+| **Fractal subdivisions** | Self-similar sub-patterns at every scale (diamond-square, midpoint displacement) |
+| **Data-driven texture** | Texture maps to live data: FPS, time, mouse position, scroll velocity |
+| **Grain from randomness** | Seeded random placement — deterministic per seed, unique per seed |
+
+**The texture must be honest:** if it's data-driven, the data must be real. A texture that claims to visualize the system but is actually a static overlay is the worst kind of fake. Texture density is derived from the density axis (3/6) — moderate: present everywhere, dominant nowhere.
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Full-viewport canvas — noise field, particle trails, procedural pattern |
+| Text overlays | Near-opaque (90%), console-layer annotation over the field |
+| UI elements | Minimal frames, hairline borders, translucent fills |
+| Buttons | "Generate" / "Re-seed" — mono labels, thin outlines, hover = field reaction |
+| Navigation | Compact technical strip — coordinates-style links |
+| Dividers | None — the field itself separates sections |
+
+**No cards, no panels, no solid backgrounds.** The only surfaces are the generated field and thin instrumentation over it. The UI is a HUD on top of a live simulation — flat, thin, monospaced, and secondary.
+
+---
+
+## Texture Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Stock photography | Procedurally generated patterns — Perlin, voronoi, L-systems |
+| Static grain overlays | Live noise fields — sampled per frame |
+| Baked raster textures | Code-generated vector/field textures |
+| Random decorative patterns | Seeded, deterministic randomness |
+| CSS gradient "noise" | Real algorithmic texture — canvas/WebGL computed |
+| Flat solid backgrounds | The generated field IS the background |

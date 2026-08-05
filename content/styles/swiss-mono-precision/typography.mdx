@@ -1,0 +1,66 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Monospace — engineered, technical, the "drawing instrument" register |
+| **Examples** | IBM Plex Mono, Space Mono, JetBrains Mono |
+| **Weight** | 400-500 (regular/semibold — the display voice is confident, not loud) |
+| **Tracking** | 0.02em-0.05em (slightly open; mono already demands more air) |
+| **Size** | `clamp(2rem, 5vw, 4.5rem)` — large but measured, locked to the grid |
+| **Transform** | UPPERCASE for section identifiers, sentence case for headlines |
+
+**Why monospace:** The fixed character width is the typographic echo of the grid — every glyph occupies its own column, every line aligns to the same invisible rails. IBM Plex Mono or JetBrains Mono gives the page the feel of a dimensioned engineering drawing: the type is *printed*, not rendered. This is the register the style is named for — precision must be visible in the letterforms themselves.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same monospace family, lighter weight — the annotation voice |
+| **Examples** | IBM Plex Mono Light (300), Space Mono Regular, JetBrains Mono Light |
+| **Weight** | 300-400 |
+| **Tracking** | 0em-0.02em (mono at body size needs no added tracking) |
+| **Size** | `clamp(0.875rem, 1vw, 1rem)` — 14-16px |
+| **Line Height** | 1.5-1.6 (tight-ish; mono is tall-bodied and needs discipline) |
+
+**Why monospace at body size:** Mono body text is harder to read than grotesque — that difficulty is the point. It forces the reader into the technical register, like reading a spec sheet. Keep line lengths strict (45-70 characters — i.e. a real column count) and the line height tight. The reading experience is dense and precise, not airy.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same family, with letter-spacing to widen the fixed width |
+| **Examples** | IBM Plex Mono Light, JetBrains Mono Light |
+| **Weight** | 300-400 |
+| **Tracking** | 0.12em-0.2em (very wide — makes mono feel like stamping) |
+| **Size** | 10-12px |
+| **Transform** | UPPERCASE with tabular figures |
+
+**Usage:** Section labels, figure indices, coordinates, timestamps, dimension annotations. These labels are the numbering system of the page — "SEC. 02 / GRID SYSTEM", "REF. 042", "X: 64 / Y: 128". Tabular figures are mandatory so columns of numbers align precisely.
+
+---
+
+## Type Scale
+
+```
+Display:  clamp(2rem, 5vw, 4.5rem)  — monospace, uppercase identifiers
+Body:     clamp(0.875rem, 1vw, 1rem) — 14-16px, mono light
+Micro:    10-12px, uppercase, wide tracking
+```
+
+The scale is a **systematic ratio (1.25x-1.5x modular scale)** built on an 8px base unit, so every size in the system lands on a grid interval. Sizes are few and locked — the hierarchy comes from weight, case, and tracking, not from size proliferation. A display size is never chosen ad hoc; it is computed from the scale.
+
+---
+
+## Font Pairing Logic
+
+**Monospace system with one grotesque escape:** Use a single mono family (IBM Plex Mono recommended) at 300/400/500 across all registers — the consistency is the system, one instrument at different pressures. Where a change of voice is needed (a quote, a pull fact, a metric callout), switch to a neo-grotesque sans (Akkurat, Aeonik, Neue Haas) at Regular weight only — the grotesque is the *human* voice inside the *machine* voice.
+
+**Never:** Serif typefaces (too literary — this is a spec, not a magazine), script or display novelty fonts (breaks the instrument register), or mixing multiple mono families (each mono has its own proportions — the alignment discipline collapses).
+
+**Micro-typography is mandatory:** proper en/em dashes, hanging punctuation, tabular figures, and single quotes. Sloppy dashes break the precision contract faster than any layout mistake.

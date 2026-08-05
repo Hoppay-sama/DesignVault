@@ -1,0 +1,80 @@
+# Color Architecture
+
+## Ground
+
+The ground is warm paper — never pure white. Every surface sits on an off-white base that reads as uncoated stock, the way a well-printed magazine page feels under light.
+
+```css
+--color-ground-light: #FAF7F2;    /* Warm cream — primary page ground */
+--color-ground-card: #F4F0E9;     /* Stone — secondary surfaces, quiet panels */
+--color-ground-dark: #1A1917;     /* Warm near-black — for dark sections only */
+```
+
+**Why warm, not pure white:** Pure `#FFFFFF` reads digital and sterile. Warm cream (#FAF7F2) has the subtle cast of paper and connects the interface to print. Near-black is tinted warm (#1A1917), never pure #000000 — pure black feels harsh against cream, warm near-black feels like ink.
+
+---
+
+## Near-Monochrome Base
+
+```css
+--stone-50:  #FDFBF7;   /* Bare cream — brightest surface */
+--stone-100: #FAF7F2;   /* Warm cream — page ground */
+--stone-200: #F4F0E9;   /* Stone — panels, subtle fills */
+--stone-300: #EDE8E1;   /* Warm grey — borders, hairlines */
+--stone-400: #D8D2C8;   /* Warm grey — disabled, secondary lines */
+--stone-600: #6B6459;   /* Warm grey — muted text */
+--stone-800: #3A362F;   /* Warm charcoal — body text */
+--stone-900: #1A1917;   /* Warm near-black — headlines */
+```
+
+**These are the palette.** Everything else is decoration. The near-monochrome range is what carries the "quiet" in Quiet Editorial — the interface is a single warm neutral scale, and nothing in it competes with content.
+
+---
+
+## Minimal Accent
+
+```css
+--accent-umber: #9C6B4F;   /* Muted umber — the only color allowed */
+```
+
+**Usage:** One muted accent, used sparingly. A hairline underline beneath a key phrase, a small label, an active nav state, the cursor in a search field. The accent should appear rarely enough that readers notice it once and then stop noticing it — it's a pencil mark in a margin, not a highlight.
+
+**Rule:** Never more than one accent in view. If a page reads as "colored", the accent is overused. The accent is a whisper in a silent room.
+
+---
+
+## Text
+
+```css
+--color-text-on-light: rgba(26, 25, 23, 0.92);   /* Warm near-black, near-solid */
+--color-text-muted: rgba(58, 54, 47, 0.6);       /* Warm charcoal, muted */
+--color-text-faint: rgba(58, 54, 47, 0.4);       /* For captions, meta, page numbers */
+```
+
+**Why near-solid text:** Text must be effortless to read at length. No translucency games, no overlay blends — this style's trust comes from crisp, calm readability. Muted and faint are reserved for metadata and captions, where hierarchy is needed without shouting.
+
+---
+
+## Color Rules
+
+| Rule | Specification |
+|------|---------------|
+| **Monochrome first** | 95% of the page is the warm neutral scale |
+| **One accent max** | A single muted umber, sparingly placed |
+| **No gradients** | Flat color only — gradient = spectacle |
+| **No saturation** | No vivid hues anywhere, including imagery |
+| **Dark mode optional** | If dark, use warm near-black #1A1917 ground, cream text — never pure black/white |
+
+---
+
+## Color Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Pure #FFFFFF background | Warm cream #FAF7F2 — paper, not screen |
+| Pure #000000 text or background | Warm near-black #1A1917 — ink, not void |
+| Gradients of any kind | Flat, solid color |
+| Multiple accents | One muted accent, used sparingly |
+| Saturated palettes | Warm near-monochrome scale |
+| Color-coded sections | Hierarchy through type size and whitespace |
+| High-contrast dark mode | Warm charcoal on cream, comfortable for long reads |

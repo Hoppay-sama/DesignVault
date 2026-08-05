@@ -1,0 +1,121 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Generative Algorithmic is **computed, continuous, and alive**. Nothing animates on a timeline; everything is driven by a running system — particles, noise fields, emergent behavior. The page is never idle and never static: if the render loop stops, the page is dead. Motion is not an effect applied to content — it IS the content. Continuous procedural animation, particle systems, noise-driven movement, real-time rendering — the motion axis is the highest-scoring axis in this style (6/6).
+
+---
+
+## Continuous Particle Flow
+
+```js
+// Conceptual — particle systems run on the render loop
+function updateParticle(p, time, noise) {
+  const angle = noise(p.x * 0.001, p.y * 0.001, time * 0.05) * TWO_PI;
+  p.x += Math.cos(angle) * p.speed;
+  p.y += Math.sin(angle) * p.speed;
+  p.alpha = Math.max(0, 1 - p.age / p.lifetime);
+}
+```
+
+| Element | Behavior | Lifespan |
+|---------|----------|----------|
+| Particles | Flow along noise field vectors — drift, swirl, converge | 3-8s, then respawn |
+| Trails | Fade with age, leave residue | 1-2s fade |
+| Count | 500-4000 particles, adaptive to device | — |
+| Speed | 0.2-1.5 px/frame, field-scaled | — |
+
+**The flow should never repeat.** A noise field re-sampled each frame guarantees unique trajectories — no two particles follow the same path. The motion feels alive because it is genuinely unscripted.
+
+---
+
+## Noise-Driven Field Distortion
+
+```css
+@keyframes field-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(0.5%, 0.5%, 0) scale(1.005); }
+}
+```
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Background field | Noise offset drift + scale breathing | 12-20s | `ease-in-out`, infinite |
+| Voronoi cells | Cell boundary displacement via noise | 8-15s | `ease-in-out`, infinite |
+| Procedural geometry | Vertex displacement, sin/noise waves | 6-10s | `ease-in-out`, infinite |
+
+**The field should feel like it's computing.** Every frame re-samples the noise at a slightly different offset — the texture of the page slowly distorts, stretches, relaxes. Like heat shimmer over a grid, the movement is continuous and never completes.
+
+---
+
+## Emergent Behavior
+
+| Effect | Specification |
+|--------|--------------|
+| Particle convergence | Particles occasionally cluster into recognizable forms, then dissolve |
+| Attractor / repeller fields | Cursor acts as a force — particles scatter or collect around it |
+| Lifecycle events | Rare emergent moments: bursts, synchronized pulses, cascade flips |
+| State resets | Algorithm re-seeds every N seconds or on interaction |
+
+**The page should surprise itself.** Emergent behavior is what separates algorithmic motion from animated CSS: the system occasionally produces something nobody scripted — a spiral, a wave, a flock. These moments are rare (seconds apart), unpredictable, and are the entire point of code-as-art.
+
+---
+
+## Canvas / WebGL Render Loop
+
+| Parameter | Specification |
+|-----------|--------------|
+| Renderer | Canvas 2D or WebGL — full-viewport, viewport IS the canvas |
+| Frame rate | 60fps target, capped; never CSS-transitioned background |
+| Redraw | Continuous — no idle state |
+| Interaction | Cursor position feeds the noise field (attract/repel) |
+| Scroll | Scroll position re-seeds or re-samples the field |
+
+**The page never sleeps.** A CSS-animated page has a finite animation; a procedural canvas is a live system. If the tab is visible, it renders. Real-time rendering is a hard requirement — degrade to a still frame only on `prefers-reduced-motion`.
+
+---
+
+## Interaction States
+
+| Element | Hover / Focus State | Active State |
+|---------|--------------------|--------------|
+| Cursor | Acts as force field — particles react within radius | Drag = attract, release = scatter |
+| UI controls | Parameter readouts update live (seed, count, speed) | Re-seed the field on click |
+| Links | Mono text brightness 0.7 → 1.0 (150ms) | — |
+| Buttons | "Generate" / "Re-seed" trigger new seed, visual burst | Immediate — the system responds |
+
+**Interactions are computational.** Hovering a control shouldn't just style it — it should affect the field (a repeller force, a live readout). Every click is a system event: re-seed, toggle layer, adjust parameter.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- Particle systems: static frame (render once, no loop)
+- Field distortion: disabled
+- Emergent events: disabled
+- Scroll-driven re-seeding: disabled
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  canvas, .field-layer {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+```
+
+Render a single composed frame at the current seed instead of looping. The static frame must be a *good* still — the algorithm still produces the artwork, it just doesn't run it.
+
+---
+
+## What NOT to Animate
+
+| Never | Why |
+|-------|-----|
+| CSS-only decorative animation | The style's core is canvas/WebGL — CSS-only design is banned vocabulary |
+| Scripted, repeating loops | Scripted loops are timelines; this style computes, not choreographs |
+| Staggered scroll reveals | DOM choreography contradicts "viewport IS the canvas" |
+| Bounce / spring physics | Physical comedy is not procedural beauty |
+| Auto-playing media | The page itself is the media — it never stops |
+| Static imagery with CSS hovers | Static imagery is banned — motion must be generative |

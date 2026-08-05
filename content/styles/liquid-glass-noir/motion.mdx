@@ -1,0 +1,124 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Liquid Glass Noir is **slow and fluid, like light moving through liquid glass**. Nothing snaps, nothing slides mechanically, nothing jitters. Panels float and settle with the weight of physical glass; the background video provides constant ambient motion underneath. The motion should feel cinematic — noir lighting, a slow camera push, glass panes drifting in darkness.
+
+The style is **choreographed** (motion axis 5/6): layers move at different speeds and depths, hover reactions use spring physics, and reveals feel staged — but always slow and weighty. Fast motion breaks the glass illusion.
+
+---
+
+## Ambient Background Video
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Background video | Continuous play, muted, looped | — | — |
+| Video scale | Subtle scale(1.0)→scale(1.03) drift | 20-30s | `ease-in-out`, infinite |
+| Video darkness | Opacity 0.85 over `#0A0A0A` ground | static | — |
+
+**The video is the light source.** Panels float above it; their blur reacts to what passes beneath. The video must never be brighter than the glass above it — the glass is the subject, the video is atmosphere.
+
+---
+
+## Floating Glass Layers
+
+```css
+@keyframes float-glass {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.glass-panel {
+  animation: float-glass 9s ease-in-out infinite;
+  will-change: transform;
+}
+```
+
+| Layer | Animation | Duration | Easing |
+|-------|-----------|----------|--------|
+| Back panels (closest to video) | Drift 3-4px, blur 12px | 12-16s | `ease-in-out`, infinite |
+| Mid panels (primary content) | Float -10px vertical, blur 20px | 9s | `ease-in-out`, infinite |
+| Front panels (overlays, dialogs) | Float -6px + slight rotation 0.5deg | 7s | `ease-in-out`, infinite |
+
+**Z-depth determines blur, speed, and amplitude.** Deeper panels are more blurred, move slower, and drift less. Front panels move faster and float higher. If all panels share the same blur and motion, the depth illusion collapses — this is the #1 motion mistake in glassmorphism.
+
+---
+
+## Liquid Distortion
+
+```css
+@keyframes distort-edge {
+  0%, 100% { filter: blur(0px) brightness(1); }
+  50% { filter: blur(0.5px) brightness(1.05); }
+}
+```
+
+| Effect | Specification |
+|--------|--------------|
+| Edge refraction shimmer | The liquid-glass gradient border subtly shifts opacity 0.3→0.4 along its top edge | 6-8s |
+| Glass ripple | On scroll or hover, a 1-2px border-radius wave passes across a panel | 900ms, once |
+| Liquid reveal | New panels emerge via a mask wipe (bottom→top, 1.2s) + blur 8px→0 | 1.2s |
+| Iridescent highlight drift | A soft light streak moves across the glass surface, 20% opacity | 10-14s, infinite |
+
+**Liquid reveals, not slide-ins.** Panels should materialize like glass rising out of liquid — a mask wipe with an unblur feels like the pane condensing into focus. No bounce, no overshoot; glass settles once.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Background video | Fade in from black (noir iris-open feel) | 1500ms | `ease-out` | 0ms |
+| Hero glass panel | Mask wipe bottom→top + blur 8px→0 + translateY(20px)→0 | 1200ms | `ease-out` | 200ms |
+| Display text | Opacity 0→1 + translateY(8px)→0 | 900ms | `ease-out` | 500ms |
+| Secondary panels | Same liquid reveal, staggered by Z-depth (front first) | 1200ms | `ease-out` | 300ms + 150ms per layer |
+
+**Key:** Durations are long (900ms+). Panels enter in Z-depth order — front-most first — so the eye reads the composition as light settling, not content stacking.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Glass card | Slight lift translateY(-4px) + blur 20px→24px, spring | TranslateY(-2px), spring |
+| Buttons | Border gradient brightens (white/0.3 → white/0.5), 400ms | Slight scale(0.98), 300ms |
+| Links | Text color white→accent blue (100, 180, 255), 300ms | — |
+| Panels with liquid border | Ripple wave passes along the edge once | 900ms |
+
+**Hover uses spring physics** (stiffness ~120, damping ~14) — the panel should feel weighted, like nudging a real glass pane. Keep transitions at 300ms+; anything faster reads as cheap web, not glass.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- All floating: disabled (panels static)
+- Video: pauses or switches to a static poster frame
+- Liquid distortion: disabled
+- Liquid reveals: instant opacity
+- Hover lift: reduced to blur/opacity change only
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  video { display: none; }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| Never | Why |
+|-------|-----|
+| Fast, snappy transitions | Glass is heavy — it moves slowly |
+| Bounce or exaggerated spring | Overshoot looks like plastic, not glass |
+| Slide-in panels (horizontal) | Liquid glass rises or condenses, it doesn't slide |
+| Continuous border animation | The refraction border is a light effect, not a marquee |
+| Particle effects / confetti | Breaks the noir restraint |
+| Auto-playing carousels | The background video already provides ambient motion |
+| Animated gradients on solid backgrounds | There are no solid backgrounds — only video and glass |

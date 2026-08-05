@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { StyleEntry, StyleAxis } from '@/lib/types';
 
 interface AxisRange {
@@ -60,6 +61,19 @@ export function StyleFilters({ styles, onFilteredStyles }: StyleFiltersProps) {
   const [showAxisFilters, setShowAxisFilters] = useState(false);
   const [showAllTags, setShowAllTags] = useState(false);
 
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  // Latest state snapshot for URL round-trip comparison.
+  const stateRef = useRef({ tag: activeTag, axes: axisFilters });
+  useEffect(() => {
+    stateRef.current = { tag: activeTag, axes: axisFilters };
+  }, [activeTag, axisFilters]);
+
+  // Set when WE push a URL (router.replace) so the searchParams effect
+  // can tell "our own navigation" apart from back/forward.
+  const pendingRef = useRef<string | null>(null);
+
   // Compute tags sorted by frequency from the styles data
   const { topTags, allTagsByFrequency, tagCounts } = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -107,29 +121,103 @@ export function StyleFilters({ styles, onFilteredStyles }: StyleFiltersProps) {
     [styles, onFilteredStyles]
   );
 
+  // ---- URL state (PRD §5.4): filter state lives in the URL ----
+
+  const serializeState = useCallback(
+    (tag: string | null, axes: AxisFiltersState): string => {
+      const params = new URLSearchParams();
+      if (tag) {
+        params.set('tag', tag);
+      }
+      for (const key of AXIS_KEYS) {
+        const range = axes[key];
+        if (range.min !== DEFAULT_RANGE.min || range.max !== DEFAULT_RANGE.max) {
+          params.set(key, `${range.min}-${range.max}`);
+        }
+      }
+      return params.toString();
+    },
+    []
+  );
+
+  const parseSearchParams = useCallback(
+    (sp: URLSearchParams | null): { tag: string | null; axes: AxisFiltersState } => {
+      const axes = createDefaultAxisFilters();
+      if (sp) {
+        for (const key of AXIS_KEYS) {
+          const raw = sp.get(key);
+          const match = raw?.match(/^(\d)-(\d)$/);
+          if (match) {
+            const min = Math.min(6, Math.max(1, Number(match[1])));
+            const max = Math.min(6, Math.max(1, Number(match[2])));
+            axes[key] = { min: Math.min(min, max), max: Math.max(min, max) };
+          }
+        }
+      }
+      const tag = sp?.get('tag') ?? null;
+      return { tag, axes };
+    },
+    []
+  );
+
+  // URL → state. Skips our own pushed URLs (they round-trip identical
+  // to stateRef and are consumed via pendingRef).
+  useEffect(() => {
+    const parsed = parseSearchParams(searchParams);
+    const parsedKey = serializeState(parsed.tag, parsed.axes);
+
+    if (pendingRef.current === parsedKey) {
+      pendingRef.current = null;
+      return;
+    }
+
+    const currentKey = serializeState(stateRef.current.tag, stateRef.current.axes);
+    if (parsedKey !== currentKey) {
+      setActiveTag(parsed.tag);
+      setAxisFilters(parsed.axes);
+    }
+  }, [searchParams, parseSearchParams, serializeState]);
+
+  // State → filtered results. Single place where filtering happens.
+  useEffect(() => {
+    applyFilters(activeTag, axisFilters);
+  }, [activeTag, axisFilters, applyFilters]);
+
+  const commitUrl = useCallback(
+    (tag: string | null, axes: AxisFiltersState) => {
+      const qs = serializeState(tag, axes);
+      const currentParsed = parseSearchParams(searchParams);
+      const currentQs = serializeState(currentParsed.tag, currentParsed.axes);
+      if (qs === currentQs) {
+        return;
+      }
+      pendingRef.current = qs;
+      router.replace(qs ? `/?${qs}` : '/', { scroll: false });
+    },
+    [router, searchParams, serializeState, parseSearchParams]
+  );
+
   const handleTagClick = (tag: string | null) => {
     setActiveTag(tag);
-    applyFilters(tag, axisFilters);
+    commitUrl(tag, axisFilters);
   };
 
   const handleAxisChange = (axis: keyof StyleAxis, bound: 'min' | 'max', value: number) => {
-    setAxisFilters((prev) => {
-      const updated = {
-        ...prev,
-        [axis]: {
-          ...prev[axis],
-          [bound]: value,
-        },
-      };
-      applyFilters(activeTag, updated);
-      return updated;
-    });
+    const updated = {
+      ...axisFilters,
+      [axis]: {
+        ...axisFilters[axis],
+        [bound]: value,
+      },
+    };
+    setAxisFilters(updated);
+    commitUrl(activeTag, updated);
   };
 
   const handleResetAxes = () => {
     const newState = createDefaultAxisFilters();
     setAxisFilters(newState);
-    applyFilters(activeTag, newState);
+    commitUrl(activeTag, newState);
   };
 
   const hasActiveAxisFilter = AXIS_KEYS.some(

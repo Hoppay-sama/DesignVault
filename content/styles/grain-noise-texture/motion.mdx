@@ -1,0 +1,108 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Grain/Noise Texture is **analog and gentle**. Nothing slides mechanically, nothing snaps, nothing bounces with digital spring physics. Elements behave like physical media — film frames shimmer, paper barely settles, ink dries in place. The motion should feel like the surface is alive at 24 frames per second, not like a UI library running a default easing.
+
+The center of gravity is low: the film-grain jitter is always running, and everything else fades in and out slowly around it.
+
+---
+
+## Film Grain Shimmer (The Signature)
+
+```css
+@keyframes grain-jitter {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-2%, 1%); }
+  30% { transform: translate(1%, -2%); }
+  50% { transform: translate(-1%, 2%); }
+  70% { transform: translate(2%, 1%); }
+  90% { transform: translate(-2%, -1%); }
+}
+
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;                    /* 0.03–0.08 — see index.mdx Texture */
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,..."); /* feTurbulence noise */
+  animation: grain-jitter 0.16s steps(2) infinite; /* 24fps-style jitter */
+}
+```
+
+**Purpose:** The grain itself is the design layer. It must move the way projected film grain does — a fast, imperfect, frame-edge jitter, not a smooth CSS translate. Use `steps()` so the displacement happens in discrete 24fps-style hops, never a linear glide.
+
+**Intensity guidance (index.mdx):** opacity between 0.03 and 0.08. The overlay is `position: fixed`, full viewport, `pointer-events: none`. When the page is mostly still, keep the jitter at the low end; when a hero wants more film feel, raise toward 0.08.
+
+---
+
+## Gentle Shimmer / Flicker
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Photographic blocks | Very slight opacity breathing (1.00 → 0.97) | 4-6s | `ease-in-out`, infinite |
+| Display-text glow | Slight brightness lift in the ink | 3-5s | `ease-in-out`, infinite |
+| UI tint overlays | Micro-offset (1-2px) alongside the grain jitter | 4-8s | `steps(2)` |
+
+**The flicker should read as film-age artifacts, not as loading skeleton.** If a visitor does not consciously notice the shimmer but sees the whole page feel "alive," the effect is calibrated right. Nothing should be sharper than the grain. (Banned: clean, linear luminance sweeps.)
+
+---
+
+## Slow Fades (Not Slides)
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Sections | Opacity 0 → 1 | 1200-2000ms | `ease-in-out` | 0ms |
+| Imagery on scroll | Crossfade between textures | 1500ms | `ease-out` | — |
+| Embedded frames | Fade in with a shadow "film flash" | 1400ms | `ease-in-out` | 150ms |
+
+**Key:** The page should fade in and out like slides in a projector — never slide horizontally, never stack with a spinner. Fades are slower than the AI-Surreal baseline (1000ms+ here too), and always use `ease-in-out`.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Links | Underline grows with a print-style ink fade (300ms) | — |
+| Buttons | The grain across the button intensifies 1.05× (400ms) | Slight press — 1px translateY |
+| Imagery | Grain jitter speed up slightly (like a reel braking) | pause the flicker |
+
+**All state changes are slow (300ms+).** Even hover stays analog: a thickish ink underline drawing on, a grain field tightening. Nothing should pop, glow, or bloom at 120ms, and no box-shadow on state changes — shadows are synthetic here.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- Film-grain jitter: frozen to a still overlay (same opacity, no transform)
+- Shimmer/flicker: disabled
+- Slow fades: instant opacity
+- Scroll-linked fades: disabled
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  .grain-overlay { animation: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+**The grain overlay stays visible** (it's texture, part of the design) but stops moving — accessibility over ambience.
+
+---
+
+## What NOT to Animate
+
+| Never | Why |
+|-------|-----|
+| Spring / bounce physics | Physics libraries feel digital — this style is analog |
+| Parallax scrolling    | Scroll-linked drift fights the "static sheet" feel |
+| Horizontal slides | Has nothing to do with film/projector fades |
+| Auto-playing carousels | User controls pace through scroll |
+| Morphing borders | Organic morph belongs to other styles — here surfaces are paper-flat |
+| Fast snaps (<300ms) | Grain-led sites are patient, not punchy |
+| Glossy shine sweeps   | A glossy sheen contradicts tactile, matte surfaces |

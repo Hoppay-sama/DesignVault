@@ -1,0 +1,125 @@
+# Parameterized Template — Luxury Refined Restraint
+
+> Use this template to generate a Luxury Refined Restraint page for YOUR brand.
+
+---
+
+```
+Build a luxury refined-restraint page for "[BRAND_NAME]" — [ONE-LINE DESCRIPTION, e.g., "a high-end real estate firm selling museum-quality residences"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: Extreme restraint signals expense. Vast whitespace, refined serif typography, museum-quality photography, gallery spacing. The design disappears to let the subject speak — whispered confidence, nothing accidental.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY)
+
+- NO loud colors (muted, desaturated warm neutrals only)
+- NO busy layouts (single-column focus, extreme whitespace)
+- NO decorative motion (slow crossfades and gentle reveals only)
+- NO cheap stock photography (museum-quality photography only)
+- NO card-based layouts (flat editorial sections, gallery spacing)
+- NO gradients, glossy effects, or 3D gimmicks
+- NO saturated palette (one rich accent maximum)
+- NO generic system fonts (refined serif + elegant sans only)
+- NO text-heavy walls (small body text, generous leading)
+- NO animation on every scroll (motion is a rare whisper)
+
+---
+
+## FONTS
+
+Replace [DISPLAY_FONT] with a refined serif and [BODY_FONT] with an elegant sans:
+- Cormorant Garamond (300-400) — Google Fonts, high-contrast luxury serif
+- Canela (300-400) — premium, warm, editorial (licensed)
+- Domaine (300-400) — premium, confident serif (licensed)
+- Söhne (300-400) — premium neutral sans
+- Inter (300-400) — invisible fallback sans
+
+Load via Google Fonts where available. Display in 300, body in 400. Small body text with generous leading.
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --ivory: #F7F3EC;          /* Warm ivory ground */
+  --champagne: #EDE4D3;      /* Champagne beige */
+  --warm-stone: #C9BFB0;     /* Warm stone */
+  --cool-silver: #A9AEAD;    /* Cool silver */
+  --espresso: #2E2622;       /* Espresso brown */
+  --charcoal: #1E1B19;       /* Deep charcoal */
+  --text-primary: rgba(46, 38, 34, 0.92);
+  --text-muted: rgba(46, 38, 34, 0.55);
+}
+```
+
+**Accent guidance:** Choose ONE accent, use it sparingly (labels, hairlines, details — never backgrounds):
+- Oxblood #6E2530 — for warm ivory/champagne palettes
+- Emerald #1E4D3B — for stone/silver palettes
+- Deep gold #A8874E — for candlelit, heritage palettes
+
+---
+
+## STRUCTURE
+
+### Hero
+- `min-h-[100dvh]`, centered composition, extreme whitespace (py-48+)
+- Museum-quality editorial photograph
+- Text stack: label (uppercase, 11px, tracking 0.25em) + [DISPLAY_FONT] headline + 1-2 sentence subtext
+- CTA: hairline border (1px), transparent background, uppercase, wide tracking
+
+### Collection (3 pieces)
+- One piece per row, gallery spacing (py-48+ between rows)
+- Museum-style image presentation: centered, generous margins, no cards, no borders
+- Alternate alignment per piece: centered → edge-left → edge-right
+
+### About / Atelier
+- Split: full-bleed photograph (60%) + generous whitespace with text (40%)
+- 2-3 sentences, [BODY_FONT] 400, line-height 1.9, muted
+
+### Footer
+- Ground bg, hairline top border, minimal, uppercase micro-labels
+
+---
+
+## MOTION
+
+- Hero imagery: opacity 0→1 + scale(1.03)→1, 1200ms, ease-out
+- Display text: opacity 0→1 + translateY(16px), 900ms, ease-out (400ms delay)
+- Section crossfades: opacity 0→1 on scroll into view, 600-1000ms, ease-out
+- Image reveals: opacity 0→1 + translateY(24px), 1000ms, ease-out, once per view
+
+No infinite or looping animations. Nothing moves unless the user scrolls.
+
+`prefers-reduced-motion: reduce` → disable all animations, instant entrance.
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- Extreme whitespace (py-48+ sections, gallery spacing)
+- Refined serif display type with generous leading
+- Small, well-leaded body text
+- Muted, desaturated warm-neutral palette
+- At most one rich accent (oxblood, emerald, deep gold)
+- Museum-quality photography — never stock
+- Single-column focus, centered or edge-aligned
+- Minimal motion: slow crossfades (600ms+), gentle reveals only
+- Hairline borders and uppercase micro-labels
+- The design disappears to let the subject speak
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines:** 4-8 words. Quiet, declarative. "Refined essentials in muted tones" not "Buy Our Premium Collection."
+
+**Body text:** 1-2 sentences. Restrained, understated. Write like a gallery caption, not a marketing pitch.
+
+**Imagery:** Museum-quality photography. Single subjects, soft natural light, muted desaturated tones, generous negative space around the subject. One rich accent per image maximum. Avoid stock-photography clichés (white teeth, blue skies, fake smiles).
+
+---
+
+Replace all [BRACKETED] placeholders, then paste into your AI coding assistant.
+```

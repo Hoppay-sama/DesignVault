@@ -1,48 +1,15 @@
+import { Suspense } from 'react';
 import Link from 'next/link';
 import { getAllStyles } from '@/lib/content';
 import { StyleGallery } from '@/components/StyleGallery';
+import { SiteHeader } from '@/components/SiteHeader';
 
 export default function Home() {
   const styles = getAllStyles();
 
   return (
     <main className="min-h-screen">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm bg-ground/80 border-b border-border">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <Link href="/" className="font-display text-lg tracking-tight">
-              Design<span className="text-text-secondary">Vault</span>
-            </Link>
-            <nav className="flex items-center gap-8">
-              <a
-                href="#gallery"
-                className="text-sm text-text-primary hover:text-accent transition-colors"
-              >
-                Gallery
-              </a>
-              <Link
-                href="/vocabulary"
-                className="text-sm text-text-secondary hover:text-text-primary transition-colors"
-              >
-                Vocabulary
-              </Link>
-              <a
-                href="#"
-                className="text-sm text-text-secondary hover:text-text-primary transition-colors"
-              >
-                Guide
-              </a>
-              <a
-                href="#"
-                className="text-sm text-text-secondary hover:text-text-primary transition-colors"
-              >
-                Map
-              </a>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       {/* Hero */}
       <section className="pt-32 pb-20 px-6 lg:px-8">
@@ -74,7 +41,9 @@ export default function Home() {
       </section>
 
       {/* Interactive Gallery (filters + grid) */}
-      <StyleGallery styles={styles} />
+      <Suspense fallback={null}>
+        <StyleGallery styles={styles} />
+      </Suspense>
 
       {/* Footer */}
       <footer className="border-t border-border px-6 lg:px-8 py-12">

@@ -1,0 +1,83 @@
+# Color Architecture
+
+## Ground
+
+The ground is near-black — the void against which monumental type shouts. Pure black is forbidden; the ground must carry the same urgency as the type:
+
+```css
+--color-ground-dark: #0A0A0A;    /* Near-black — the poster void */
+--color-ground-light: #F2F1EC;   /* Warm paper white for light-mode sections */
+```
+
+**Why near-black:** #0A0A0A (not pure #000000) lets black letterforms and shadows separate from the background instead of disappearing into it. The ground is not decorative — it is the stage, and it stays out of the type's way.
+
+---
+
+## High-Contrast Duotone Base
+
+```css
+--duotone-ink: #0A0A0A;       /* Black — the letterform */
+--duotone-paper: #F2F1EC;     /* White — the space between letters */
+```
+
+**These are the primary colors.** Kinetic Typography is a duotone system: black type on white, or white type on black. The palette is the contrast — no mid-tones, no gradients, no color where the type needs to be loudest. Motion provides the color's animation; the color itself stays binary and brutal.
+
+**Rule:** If a section has two backgrounds, it alternates — never blends. The cut between black and white sections is a hard edge, like a poster fold.
+
+---
+
+## Single-Accent Systems
+
+When a project demands one color, it replaces one side of the duotone — it does not join it:
+
+```css
+--accent-ink: #FF4D00;       /* Signal orange — the loudest available */
+--accent-paper: #F2F1EC;     /* White stays, ink swaps to accent */
+```
+
+| System | Combination | Vibe |
+|--------|-------------|------|
+| **Mono-ink** | Accent type on white | Screen-print poster energy |
+| **Mono-paper** | White type on accent ground | Hazard-stripe warning |
+| **Accent-split** | Black type on accent field, one element inverted | Editorial punch |
+
+**Rule:** One accent color, used for type or for one structural element (a marquee band, a line, a highlight) — never for gradients, never for imagery, never more than 30% of any viewport.
+
+---
+
+## Text
+
+```css
+--color-text-on-dark: #F2F1EC;             /* Full-opacity paper on dark ground */
+--color-text-on-light: #0A0A0A;            /* Full-opacity ink on light ground */
+--color-text-muted: rgba(242, 241, 236, 0.55);  /* Muted, for captions on dark */
+--color-text-muted-dark: rgba(10, 10, 10, 0.55); /* Muted, for captions on light */
+```
+
+**Why full-opacity text:** Unlike soft styles, Kinetic Typography never whispers. Display type is 100% opaque — translucency reads as weakness at 200px scale. Only micro labels (12px captions) may drop to 55% so the monumental type keeps all contrast.
+
+---
+
+## Marquee & Band Colors
+
+```css
+--band-ink: #0A0A0A;         /* Reversed marquee band on light sections */
+--band-paper: #F2F1EC;       /* Reversed marquee band on dark sections */
+--band-accent: #FF4D00;      /* Accent band — the one loud moment */
+```
+
+**Usage:** Horizontal marquees and full-width bands are the palette's third element. A black section shows a white band; a white section shows a black band. The band is the only surface that inverts — it reads as the page's "tape" running behind the type.
+
+---
+
+## Color Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Multi-color palettes | High-contrast duotone (black + white, or black/white + one accent) |
+| Gradients behind type | Flat, solid grounds — motion creates the depth |
+| Pure #000000 background | Near-black #0A0A0A so black type stays visible |
+| Gray mid-tones | Jump straight black ↔ white — no steps in between |
+| Muted, desaturated text | Full-opacity text (55% max only for 12px captions) |
+| Color-coded sections | One accent for emphasis, duotone everywhere else |
+| Soft shadows and glows | Hard-edged type, no blur behind letterforms |

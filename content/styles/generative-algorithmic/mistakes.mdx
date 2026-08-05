@@ -1,0 +1,49 @@
+# Common Mistakes
+
+## Mistake 1: Gimmick Overload
+
+**What people do:** Stack every generative effect onto one page — particles, a noise field, voronoi, L-systems, flow fields, all at once, animating simultaneously.
+
+**Why it fails:** The generative density (axis 3) is deliberately low. One coherent system is legible; six competing systems is noise. When every effect vies for attention, none of them mean anything — the page is effectively static because nothing can be read from it.
+
+**Fix:** Pick one generative system per page and let it be the whole story. Iterate a single system (seed, parameters, structure) rather than introducing new ones. Less computation, more meaning.
+
+---
+
+## Mistake 2: Performance Death
+
+**What people do:** Render 10,000 particles with dozens of post-processing passes, ignoring framerate, battery, and mobile GPUs. The hero fills the viewport with a long-running heavy render.
+
+**Why it fails:** A generator that stutters at 15fps destroys the illusion of aliveness — the style's entire premise. High-end WebGL chokes mid-tier laptops and phones, and continuous animation on mobile is a battery killer. Performance IS part of the aesthetic: smooth motion is what makes it feel alive.
+
+**Fix:** Target 60fps on mid-range hardware. Cap particle counts by device (density ~25% on mobile), use `requestAnimationFrame` with delta-time clamping, budget the pixel-shader work, and degrade gracefully between breakpoints before degrading the concept.
+
+---
+
+## Mistake 3: Meaningless Randomness
+
+**What people do:** Use `Math.random()` everywhere — scattered dots, arbitrary colors, chaotic particle directions — because "it's generative."
+
+**Why it fails:** Pure randomness encodes nothing. The style's power is that visuals map to **computed values**: a particle's color is a signal, a noise field is a structure, a voronoi partition is a relation. Random dots with no governing rule are just noise — the generic "AI art" look this style exists to escape.
+
+**Fix:** Drive everything from a seed and deterministic rules. Prefer Perlin/simplex noise over `Math.random()`, structure over scatter, and make every visual decision traceable to a parameter. If the viewer can't infer the rule, there is no rule.
+
+---
+
+## Mistake 4: No Art Direction
+
+**What people do:** Let the raw algorithm output stand unfiltered — whatever the shader renders is the page, with no curated composition, no readable hierarchy, no intentional reading.
+
+**Why it fails:** Algorithms produce fields; art direction produces pages. Raw output has no focal point, no narrative, no entry point — it's instrumental soup. The console layer exists specifically to give the viewer something to read and grasp, but it only works if the composition is directed.
+
+**Fix:** Curate the parameters, seed, and camera to a composition someone would hang on a wall. Add a focal structure — a bright cell, a particle cluster, a region where the field resolves — and let the console labels guide the eye. The algorithm is the artist's brush, not the artist's decision.
+
+---
+
+## Mistake 5: Treating Generativity as a Theme
+
+**What people do:** Use generative visuals as a decorative skin over a conventional site — a static "procedural-looking" hero image and a normal grid layout beneath it.
+
+**Why it fails:** This is stock photography in algorithmic clothing. When the generation is simulated, the page loses its honest core — it becomes a screenshot of an aesthetic instead of being that aesthetic. The banned vocabulary exists for this: `static imagery`, `traditional DOM layout`, `CSS-only design`.
+
+**Fix:** Commit to the medium. The canvas owns the frame; the DOM is a console overlay. If the page can't be generative, don't fake it — a truthful minimal design beats a dishonest algorithmic costume.

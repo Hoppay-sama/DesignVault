@@ -1,0 +1,156 @@
+# Exact Replica Prompt — Bold Anti-Corporate Color
+
+> Copy this entire prompt and paste it into your AI coding assistant.
+
+---
+
+```
+Build a bold anti-corporate page for "RIOT ZINE" — a youth culture & music events collective. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `RIOT ZINE — Saturated. Clashing. Unpolished.`
+
+Vibe: Saturated primaries, collage layout, elastic easing, risograph texture, punk typography. Zine meets punk poster. Direct rejection of corporate minimalism. Clashing color combinations intentional. Collage-like with intentional misalignment. The design is loud, defiant, unpolished — personality over polish.
+
+---
+
+## ANTI-SLOP CONSTRAINTS
+
+- NO corporate minimalism (this is its direct rejection)
+- NO muted colors (saturated primaries that clash intentionally)
+- NO perfect alignment (overlapping, misaligned, off-grid)
+- NO professional polish (imperfection is the point)
+- NO neutral/serif-only typography (mixed weights and styles — bold condensed, handwritten, stencil — used simultaneously)
+- NO smooth gradients (flat ink blocks and halftones)
+- NO calm, slow motion (bouncy, playful, slightly chaotic — elastic easing)
+- NO clean, sterile surfaces (risograph, halftone, screen-print texture, hand-drawn marks)
+- NO quiet, tasteful voice (loud, irreverent, punk)
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo+Condensed:wght@700;900&family=Caveat:wght@700&family=Special+Elite&display=swap
+```
+
+Usage:
+- **Archivo Black / Archivo Condensed 900**: Display headlines — `clamp(3rem, 8vw, 8rem)`, UPPERCASE, tight leading, letterspacing -0.02em, oversized
+- **Caveat 700 (handwritten)**: Accent phrases, annotations, scribbles — tilted slightly, inline with display type
+- **Special Elite (stencil)**: Section labels, badges, numbered notes — 12-14px, tracking 0.1em
+- Mixed styles used simultaneously on the same surface — that's the point
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --acid-yellow: #D4FF00;        /* Electric accent */
+  --hot-pink: #FF2D95;           /* Electric accent */
+  --electric-orange: #FF6B00;    /* Electric accent */
+  --cobalt-blue: #1D4ED8;        /* Saturated primary */
+  --lime-green: #A3E635;         /* Saturated primary */
+  --ink-black: #0A0A0A;          /* Ground */
+  --paper-white: #F7F5F0;        /* Print ground */
+  --text-on-dark: #F7F5F0;
+  --text-on-light: #0A0A0A;
+}
+```
+
+Body: `bg-[#0A0A0A] text-[#F7F5F0] antialiased font-body`.
+
+Accent rule: **clash intentionally.** Pair acid yellow text on hot pink blocks, electric orange borders against cobalt fills, lime green on ink black. No two accents should "harmonize" quietly. Max 4-5 accents per viewport, but they must fight.
+
+---
+
+## STRUCTURE
+
+### 1. Hero Section
+- `min-h-[100dvh]`, ink-black ground
+- Giant display headline (Archivo Black, `clamp(5rem, 12vw, 12rem)`, UPPERCASE, acid yellow on black, slight -2deg rotation)
+- Under it, handwritten annotation in Caveat (hot pink): "the grid is a suggestion"
+- Sticker-bombed badges cluster (rotated, overlapping, border 2px, offset shadow): "EST. 1998", "NO RULES", "100% LOUD" — each with different accent color and rotation (-6deg to 8deg)
+- CTA: "GET IN THE RIOT" — hot pink block, white text, border 3px ink-black, offset shadow, elastic hover
+- Background: halftone dot field (lime green, low opacity) + grain overlay
+
+### 2. Manifesto Section (collage)
+- `min-h-[100dvh]`, paper-white ground, ink-black text
+- Overlapping panels with intentional misalignment: one panel rotated 3deg, one -4deg, one off-grid by 12px
+- Panels: flat accent fills (electric orange, cobalt blue) with halftone shadow strips
+- Headline: "WE DON'T ASK PERMISSION" — Archivo Condensed 900, uppercase, split across two panels, one word per color
+- Hand-drawn arrow (Caveat) pointing from a margin note to a phrase
+- Sticker tape strip holding one panel corner
+
+### 3. Events Section (list)
+- Ink-black ground, events as sticker-like rows
+- Each event row: stencil label (Special Elite, "EVT 042"), bold condensed date in electric orange, name in paper-white, index number oversized behind text at low opacity
+- Rows misaligned: alternating slight rotation, off-grid indents
+- Hover: elastic scale(1.02) + wobble, background flashes to a random accent
+
+### 4. Footer
+- Acid yellow ground, ink-black text
+- "RIOT ZINE © 2026 — SCREAM LOUDER" — Archivo Black, uppercase
+- Sticker badges: "NO BORING", "PRINTED WITH ANGER", "SCREEN-PRINTED BY HAND"
+- Grain overlay across the whole footer
+
+---
+
+## TEXTURE & MOTION
+
+```css
+/* Risograph misregistration: offset duplicate layer */
+.riso-duplicate {
+  position: relative;
+}
+.riso-duplicate::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 3px; top: -2px;
+  color: #FF2D95;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+```
+
+```css
+/* Grain overlay */
+.grain {
+  background-image: url("data:image/svg+xml,..."); /* noise SVG, opacity 0.12 */
+  pointer-events: none;
+}
+```
+
+---
+
+## ANIMATIONS
+
+| Element | Animation | Duration | Easing |
+|---------|-----------|----------|--------|
+| Hero headline | opacity 0→1 + rotate(-2deg)→(-2deg) + translateY(40px)→0 | 500ms | `ease-out` (delay 100ms) |
+| Sticker badges | scale(0)→1 with overshoot | 700ms | `backOut` (stagger 120ms) |
+| CTA hover | scale(1)→(1.06) | 300ms | `backOut` |
+| Panels | translateY(60px)→0 + rotate into place | 600ms | `backOut`, springy |
+| Event rows | opacity 0→1 + translateX(-20px)→0 | 400ms | `ease-out` (stagger 80ms) |
+| Accent blocks | wobble: rotate ±1.5deg oscillation | 4s | `ease-in-out`, infinite |
+| Marquee strip | translateX loop (infinite scroll) | 20s | `linear`, infinite |
+
+`prefers-reduced-motion: reduce` → disable all wobble/marquee/spring, instant entrance.
+
+---
+
+## ANTI-SLOP (LOCKED)
+
+- Flat saturated clashing color blocks (acid yellow, hot pink, electric orange)
+- Collage layout — overlapping panels, intentional misalignment
+- Risograph texture with visible misregistration
+- Halftone dots and heavy grain
+- Hand-drawn elements (marker/pen/scribble)
+- Oversized condensed display typography
+- Mixed type styles used simultaneously
+- Elastic, springy, slightly chaotic motion
+- Sticker/tape physical details
+- No corporate minimalism, no muted colors, no perfect alignment, no professional polish
+
+---
+
+Recreate this page with the exact bold anti-corporate aesthetic, saturated clash palette, collage layout, and elastic motion above.
+```

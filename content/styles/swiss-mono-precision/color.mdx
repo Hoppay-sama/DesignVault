@@ -1,0 +1,76 @@
+# Color Architecture
+
+## Ground
+
+The ground is the Swiss paper field — a controlled, neutral canvas that lets the grid and type do the talking. Two light ground states and one dark, all strictly off-pure to keep the page architectural rather than glowing:
+
+```css
+--color-ground-light: #FAF9F7;    /* Paper white — cold, matte, like blueprint stock */
+--color-ground-dark: #101010;     /* Engineering black — flat, no blue/no purple tint */
+```
+
+**Why paper white and engineering black:** Pure #FFFFFF reads as a screen, not a surface. A cold paper tone (#FAF9F7) feels like drafting paper; #101010 is the flat black of a darkroom, not the glowing black of a UI skin. The two grounds are the anchors the grid locks against.
+
+---
+
+## Monochrome Neutrals
+
+```css
+--neutral-black: #101010;       /* Structural black — rules, type, blocks */
+--neutral-ink: #1A1A1A;         /* Body text black (slightly lifted, never pure #000) */
+--neutral-gray: #6E6E6E;        /* Muted gray — secondary labels, captions */
+--neutral-line: #DCDBD9;       /* Hairline gray — muted rule color */
+```
+
+**These are the base colors.** Black, near-black, and one muted gray are the entire chromatic range of the system. The gray only appears where information is demoted — figure numbers, timestamps, secondary measurements. Everything structural is black. Nothing decorative exists in the neutral ramp: every value maps to a job (rule, body, label, margin).
+
+---
+
+## Swiss Red Accent
+
+```css
+--accent-red: #E4002B;          /* Swiss red — the single permitted accent */
+--accent-red-active: #C40025;   /* Pressed / active state of the same red */
+```
+
+**Usage:** One red, used sparingly and always meaningfully — a highlighted grid intersection, a validated state, the active filter in a numbered system, a single underscore below a figure that changed. It performs the function a hairdresser's marker would on a drawing: it says *"this is the one thing that matters on this plane."*
+
+**Rule:** Max 2-3 colors in the entire composition (black, paper white, one red). If a second accent is unavoidable, it must be a muted desaturation of the red — never a new hue. The red is an instrument, not decoration.
+
+---
+
+## Text
+
+```css
+--color-text-on-light: rgba(16, 16, 16, 0.92);  /* Ink black on paper — near solid */
+--color-text-on-dark: rgba(250, 249, 247, 0.92); /* Paper white on engineering black */
+--color-text-muted: rgba(16, 16, 16, 0.55);     /* Muted gray — captions, measure labels */
+```
+
+**Why near-solid text:** Unlike soft, floating styles, Swiss Mono Precision sets text at near-solid opacity (92%). The type is an instrument of the grid — it must print sharply against the ground. Muted text is reserved for the small technical annotations (dimensions, indices, run numbers) where demotion is part of the information hierarchy.
+
+---
+
+## Hairline / Structural Colors
+
+```css
+--color-rule: rgba(16, 16, 16, 0.85);   /* 1px hairline rule — structure, not decoration */
+--color-rule-muted: rgba(16, 16, 16, 0.25); /* Faint grid ruling — the blueprint underlay */
+--color-rule-red: #E4002B;            /* Accent rule — marks the active column */
+```
+
+**Usage:** Hairs are the Swiss structural element. They separate, align, and quote the grid. The faint ruling (#25 opacity) is the *underlay* — the invisible 12-column scaffold made barely visible; the strong rule (#85) is actual content structure — table borders, definition lines, section breaks. The red rule marks the system's active state.
+
+---
+
+## Color Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Pure #FFFFFF background | Cold paper white #FAF9F7 |
+| Pure #000000 everywhere | Engineering black #101010 with lifted ink #1A1A1A |
+| Multiple accent colors | One Swiss red #E4002B, used functionally |
+| Gradients or color ramps | Flat, clipped color fields — no blending |
+| Rounded-corner colored blocks | Hard-edged black/white/red fields |
+| Soft, muted neon palette | High-contrast monochrome with one red against paper |
+| Color carries the design | Structure (grid, type, rule) carries it — color reports |

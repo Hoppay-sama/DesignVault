@@ -1,0 +1,71 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Editorial serif or warm grotesque — feels set in metal, not rendered by software |
+| **Examples** | Fraunces, GT Maru, STIX Two Text, Space Grotesk, DMs Serif Display |
+| **Weight** | 400-600 (moderate — the texture is the personality, not the type) |
+| **Tracking** | 0em-0.02em (loose, classic print tracking) |
+| **Size** | `clamp(2rem, 4.5vw, 4.5rem)` — assertive, editorial |
+| **Transform** | Sentence case, or title case at smaller sizes |
+
+**Why serif or a warm grotesque:** The texture and analog warmth carry the emotion; the type should feel tangible. A serif (Fraunces, STIX) reads like letterpress or ink on uncoated stock; a warm grotesque (Space Grotesk) reads like a well-printed poster. Display type should feel like it was set in metal, not laid out in a design tool.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same family as display, or a quiet humanist sans |
+| **Examples** | Fraunces Regular, Source Serif Regular, Inter Regular |
+| **Weight** | 400 |
+| **Tracking** | 0.01em |
+| **Size** | `clamp(0.875rem, 1vw, 1.0625rem)` — 14-17px |
+| **Line Height** | 1.6-1.8 (generous, print-like leading) |
+| **Color** | Not pure black — `--color-text-on-light: rgba(74, 70, 67, 0.92)` |
+
+**Why slightly larger + reduced contrast:** Printed text on uncoated paper is usually a touch larger and less stark than screen text. The 92% ink opacity keeps body copy from glaring against the muted ground — it sits under the grain rather than above it.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same family, regular weight, wide tracking |
+| **Examples** | Fraunces Light, Space Grotesk Light, Inter Light |
+| **Weight** | 300-400 |
+| **Tracking** | 0.1em-0.2em — reads like a stamped or typeset inscription |
+| **Size** | 10-12px |
+| **Transform** | UPPERCASE |
+
+**Usage:** Section labels, image captions, editions metadata. These function as printer's marks — "PLATE 27", "ISSUE 08", "STONE 400 GSM" — not as screen annotations.
+
+---
+
+## Type Scale
+
+```
+Display:  clamp(2rem, 4.5vw, 4.5rem)       — assertive, editorial
+Body:     clamp(0.875rem, 1vw, 1.0625rem)  — 14-17px, ink at 92%
+Micro:    10-12px                          — editorial captions
+```
+
+The scale is moderate — 10px to 72px. The emphasis comes from texture and muted color, not dramatic type-size jumps. Let the grain do the heavy lifting.
+
+---
+
+## Font Pairing Logic
+
+**Two-family system:** a serif display family (Fraunces) paired with a muted grotesque for body and micro (Inter, Space Grotesk). The serif provides print warmth; the quiet sans keeps the pairing grounded. Both families render at reduced contrast to sit beneath the film grain overlay.
+
+**Never:** Monospace for long body copy (terminal, not analog), pure black renders that fight the reduced-contrast rule, thin ultra-lightweights that disappear behind the grain, or decorative slab/serifs that read as retro pastiche rather than honest print.
+
+---
+
+## Reduced Motion & Ink Legibility
+
+Grain adds noise to thin strokes. At display sizes the overlay barely matters, but body copy below 16px should sit under a lighter grain intensity (opacity 0.03) so the ink and the texture don't compete. If a page's grain reads stronger than its type, reduce the overlay before enlarging the type.

@@ -1,0 +1,165 @@
+# Parameterized Template — Liquid Glass Noir
+
+> Use this template to generate a Liquid Glass Noir page for YOUR brand.
+
+---
+
+```
+Build a Liquid Glass Noir page for "[BRAND_NAME]" — [ONE-LINE DESCRIPTION, e.g., "a spatial audio platform that puts sound in cinematic space"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: Frosted translucent glass panels floating over a dark, cinematic video background. Dark elegance, single light source, liquid-glass edge refraction. No purple, no cream — pure noir.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY)
+
+- NO heavy backdrop blur (keep 12-24px)
+- NO unreadable text on glass (test contrast against the brightest video frame)
+- NO uniform blur, NO flat glass (vary blur per Z-depth, add light)
+- NO overused frosted cards (fewer, larger, asymmetric panels)
+- NO purple glows, NO cream panels, NO saturated color (white glass only)
+- NO opaque panels (glass is always translucent)
+- NO solid color sections (the video is the background)
+- NO identical card grids (asymmetric, Z-depth layered)
+
+---
+
+## FONTS
+
+Use [DISPLAY_FONT] — a clean geometric sans, medium weight:
+- Inter Tight (500/600) — sharp, modern, pairs with glass edges
+- Satoshi (500/600) — premium, geometric, fashion-forward
+- Geist (500/600) — sleek, designed to be unseen
+- SF Pro Display (500/600) — Apple-native, Vision Pro feel
+
+Load via Google Fonts (Inter Tight, Geist) or your design system. Display 500-600, body 400-500. Display: `clamp(2rem, 5vw, 4rem)`, tracking -0.02em to 0 on headlines.
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --color-ground: #0A0A0A;                 /* Behind the video — near-black */
+  --glass-bg: rgba(255, 255, 255, 0.05);   /* Primary glass — blur does the work */
+  --glass-bg-hover: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.1); /* 1px outer border */
+  --glass-text: #FFFFFF;                    /* Primary text on glass */
+  --glass-text-secondary: rgba(255, 255, 255, 0.7);
+  --glass-text-muted: rgba(255, 255, 255, 0.5);
+  --color-accent: #FFFFFF;                  /* The glass IS the accent */
+  --color-accent-blue: rgba(100, 180, 255, 0.8); /* Optional subtle accent */
+}
+```
+
+**Accent guidance:** White by default. One subtle cool blue (`rgba(100,180,255,0.8)`) maximum. No purple, no cream, no gold — restraint is the signature.
+
+---
+
+## THE LIQUID-GLASS BORDER (SIGNATURE)
+
+```css
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.3) 0%,
+    rgba(255,255,255,0.05) 30%,
+    rgba(255,255,255,0) 50%,
+    rgba(255,255,255,0) 70%,
+    rgba(255,255,255,0.05) 90%,
+    rgba(255,255,255,0.3) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+```
+
+Orient the gradient's bright stops toward the video's key light (see LIGHTING). [VARY_BLUR_PX] between 12-24 based on the panel's Z-depth — near panels blur(24px), far panels blur(12px).
+
+---
+
+## STRUCTURE
+
+### Hero
+- `min-h-[100dvh]`, dark noir video background, full-bleed
+- Glass panels floating over the video — use the `.liquid-glass` class
+- Headline: [DISPLAY_FONT] 500-600, `clamp(2rem, 5vw, 4rem)`, tracking -0.02em
+- CTA: a glass pill — liquid-glass border, white text, no saturated fill
+
+### Key Sections (3-5)
+- Each: dark video ground + 1-2 asymmetric glass panels
+- Vary panel size and Z-depth per section — no identical trios
+- Text on glass: contrast-tested with [SCRIM] behind text-heavy panels
+
+### Metrics / Features
+- Small floating glass chips (high Z-depth, `blur(16px)`)
+- Specular highlight at the light-facing corner of each chip
+
+### Footer
+- Near-black ground, glass text on dark, minimal
+
+---
+
+## LIGHTING
+
+- Choose ONE [LIGHT_DIRECTION] from the video (e.g., top-left key light)
+- Specular highlights go on the light-facing edges of all panels
+- Animate a slow [SHEEN_CYCLE] iridescent sweep across the glass (2-4s, infinite)
+- If the video's light moves, the pane highlights should respond
+
+---
+
+## ANIMATIONS
+
+- Panel entrance: opacity 0→1 + translateY(24px)→0, 900ms, ease-out, staggered
+- Floating layers: slow y-drift/breathing, 8-12s, infinite (matches Motion axis score 5)
+- Iridescent sheen: background/border gradient sweep, [SHEEN_CYCLE], infinite
+- Hover: panel lifts with spring, `--glass-bg-hover` brightens, border gradient intensifies
+- Video: slow, cinematic, no fast cuts
+
+`prefers-reduced-motion: reduce` → disable drift and sheen, instant entrances, static glass.
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- Near-black ground (#0A0A0A) behind a dark noir video
+- Frosted glass panels — `rgba(255,255,255,0.05)` + `blur(12-24px)` + `saturate(1.2)`
+- Liquid-glass border: 1px inset gradient with mask-composite: exclude
+- Specular highlights matching a single consistent light source
+- Z-depth variation — near panels blur harder and cast soft shadows
+- Iridescent sheen — slow light moving across the glass
+- White text on glass with scrims for contrast — no purple, no cream
+- Clean geometric sans (medium weights) — Inter Tight / Satoshi / Geist
+- Few large asymmetric panels, not a uniform card grid
+- Contrast-test all glass text against the brightest video frame
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines:** 5-9 words. Cinematic, muted-luxury. "Sound, suspended in light" not "An Industry-Leading Audio Platform."
+
+**Body text:** 1-2 sentences. Restrained, premium, noir-cool. Testimony like a caption under glass, not a feature list.
+
+**Imagery/video:** Noir-appropriate footage — smoke, water, slow city light, hard studio edges. Dark and spatial. Cash visuals only where the copy needs it, lit to the [LIGHT_DIRECTION].
+
+---
+
+Replace all [BRACKETED] placeholders, then paste into your AI coding assistant.
+```

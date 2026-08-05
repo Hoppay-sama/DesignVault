@@ -1,0 +1,119 @@
+# Layout Grammar
+
+## Grid System
+
+**No visible grid.** The layout follows the illustration, not the other way around. Content is loose, organic, and asymmetric — anchored by hand-drawn elements rather than column math. Internally:
+
+- Sections: fluid width, `max-width: 1200px` with generous `clamp(2rem, 6vw, 6rem)` edge margins
+- Text containers: flexible width, never rigid 8-column boxes — width follows the illustration
+- Illustration containers: `aspect-ratio` preserved, elements allowed to break out of bounds
+- Dividers: hand-drawn strokes and doodle separators, never 1px border lines
+- Marginalia: sketch notes, arrows, and scribbles placed in the whitespace
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | `min-h-[80dvh]` — full, but not monumental |
+| Background | Paper texture (cream `#F5F0E1`) with ink/pencil marks |
+| Text position | Asymmetric — offset left or right, on a hand-drawn underline or scribble banner |
+| Headline size | `clamp(2rem, 5vw, 4rem)` — bold, slightly rotated (`-2deg` to `2deg`) |
+| Typography | Handwritten display (Caveat, Patrick Hand) with a hand-drawn accent stroke |
+
+```
+┌─────────────────────────────────────────┐
+│  [Paper background, faint pencil marks] │
+│                                         │
+│  ✏️  sketch marginalia           |      │
+│                                         │
+│   HAND-MADE                             │
+│   ~for humans, by humans~               │
+│   [hand-drawn underline]                │
+│   [wobbly line-art illustration]        │
+│   [INKS: button with marker fill]       │
+└─────────────────────────────────────────┘
+```
+
+**The illustration is the hero.** A large wobbly line-art drawing (plant, vessel, character, object) dominates the lower half, breaking out of any container. Text sits above it on hand-drawn strokes.
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(3rem, 10vh, 8rem);
+--content-max-width: 640px;
+--edge-margin: clamp(1.5rem, 6vw, 6rem);
+```
+
+**Spacing breathes like a sketchbook page.** Sections feel like separate pages or panels in a sketchbook — each with its own doodle, watercolor wash, or marginalia. Whitespace is part of the composition, not empty.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: Illustration Breaking Out of Container
+```
+┌─────────────────────────────────────────┐
+│  [Section content — headline + text]    │
+│                                         │
+│   ┌────────────────────┐   (drawing    │
+│   │ [text container]   │   escapes     │
+│   │                    │   the box —   │
+│   └────────────────────┘   wobbly      │
+│    \  .  \  .  \         outline)      │
+│     \ .   \ .   \  ~~~< (doodle)       │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 2: Split — Sketch + Annotation
+```
+┌──────────────────┬──────────────────────┐
+│                  │                      │
+│  [Hand-drawn     │  Scribble headline   │
+│   illustration]  │  Body text (clean    │
+│  (visible media  │  sans, generous      │
+│   texture)       │  line-height)        │
+│                  │  [hand-drawn arrow →]│
+│                  │                      │
+└──────────────────┴──────────────────────┘
+```
+
+### Pattern 3: Marginalia Column
+```
+┌─────────────────────────────────────────┐
+│  [Main content — illustration + text]  │
+│            / sketch note \              │
+│  (doodle) <  "see fig. 1" >  (arrow)    │
+│            \  hand label  /             │
+│  [ink splatter accent]                  │
+└─────────────────────────────────────────┘
+```
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Full layout freedom — illustrations break out, marginalia scattered in whitespace |
+| **Tablet (768px)** | Illustration breakout reduced, marginalia tucked inline, dividers simplified |
+| **Mobile (375px)** | Single column, illustrations contained (still wobbly), marginalia hidden or inline |
+
+**On mobile:** The organic feel is kept through rotation, wobble, and hand-drawn accents — not through layout gymnastics. Illustrations stay full-width but stop breaking out of containers.
+
+---
+
+## Layout Don'ts
+
+| Don't | Do Instead |
+|------|------------|
+| Rigid 12-column grids | Loose, asymmetric composition that follows the illustration |
+| Perfect rectangles and bordered cards | Wobbly, hand-drawn containers with irregular outlines |
+| Centered, symmetrical layouts | Offset, sketchbook-like asymmetry |
+| Straight horizontal dividers | Hand-drawn wavy separators and doodle rules |
+| Clip-art placement in tidy boxes | Illustrations that break out and overlap text |
+| Dense, cramped sections | Sketchbook whitespace with marginalia |
+| Perfectly aligned columns | Intentional misalignment and slight rotation (1-3deg) |

@@ -1,0 +1,145 @@
+# Exact Replica Prompt — Playful Interactive Maximal
+
+> Copy this entire prompt and paste it into your AI coding assistant.
+
+---
+
+```
+Build a playful interactive maximal page for "BONK!" — a campaign microsite for a game-toy launch. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `BONK! — Play hard. Click harder.`
+
+Vibe: A toy you want to pick up and shake. Saturated polychrome everywhere — electric pink, cobalt, lime, tangerine. Every hover, click, and scroll triggers a surprise: confetti, morphing shapes, springs, particle trails. The page is a game — browsing earns points, badges, and delight moments. Engagement over conversion.
+
+---
+
+## ANTI-SLOP CONSTRAINTS
+
+- NO restrained or muted palettes (saturated polychrome only)
+- NO minimal motion (springs, particles, morphs everywhere)
+- NO corporate seriousness (playful, loud, reward-driven copy and UI)
+- NO predictable interactions (every element hides a surprise)
+- NO flat hover states (hovers must transform, tilt, or trigger effects)
+- NO slow fades or subtle drifts (snap, bounce, burst)
+- NO uniform card grids (fullscreen sections, unexpected layouts)
+- NO quiet CTAs (buttons pop, morph, and celebrate)
+- NO muted neutral backgrounds as the base
+
+---
+
+## FONTS
+
+Load via Google Fonts:
+```
+https://fonts.googleapis.com/css2?family=Anton&family=Big+Shoulders+Display:wght@700;800;900&display=swap
+```
+
+Usage:
+- **Anton UPPERCASE**: Display headlines — `clamp(2.5rem, 6vw, 6rem)`, uppercase, tight leading 0.95, tracking -0.01em
+- **Big Shoulders Display 800-900**: Section titles, big numbers — `clamp(1.5rem, 3vw, 3rem)`, uppercase
+- **System font stack (chunky sans)**: Body and UI — 14-16px, weight 600-700, rounded feel via letter-spacing 0.02em
+- Optional: Druk (premium) in place of Anton if self-hosted
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --electric-pink: #FF2E93;      /* Primary brand — hot, loud */
+  --cobalt: #2050FF;             /* Contrast pair for pink */
+  --lime: #D6FF3D;               /* Highlight, accents, points */
+  --tangerine: #FF7A00;          /* Warm pop, badges, warnings */
+  --ink: #141210;                /* Near-black — text and outlines */
+  --paper: #FFF7E8;              /* Warm cream ground */
+  --white: #FFFFFF;
+}
+```
+
+Body: `bg-[#FFF7E8] text-[#141210] antialiased font-body overflow-x-hidden`.
+
+Pairing rules:
+- Pink + cobalt on cream — the base combo
+- Lime only as highlight or on dark — never a background
+- Tangerine for badges, points, and celebration accents
+- Text is always ink on paper, or white on saturated fills
+
+---
+
+## STRUCTURE
+
+### 1. Hero Section
+- `min-h-[100dvh]`, full-bleed saturated composition: giant 3D-rendered toy shapes on electric pink
+- Giant Anton headline: "PLAY HARD. CLICK HARDER." — uppercase, `clamp(2.5rem, 6vw, 6rem)`
+- Subtext: "Everything on this page reacts. Trust nothing. Click everything." — chunky body, max-width 460px
+- CTA: "START PLAYING" — morphing button, spring hover (tilt + scale + confetti burst on click)
+- Floating sticker elements with idle bobbing animation (spring loop)
+- Corner badge: "SCORE 0 — EARN POINTS BY EXPLORING" — tangerine badge, live score counter
+
+### 2. "Meet the Toy" Section (3 fullscreen worlds)
+- Each world: `min-h-[100dvh]`, its own saturated background (cobalt, lime-on-ink, tangerine)
+- Headline per world: Big Shoulders 900, uppercase
+- Each world has one hero interactive element:
+  - World 1: a huge button that squashes and stretches with spring physics on press
+  - World 2: a drag-and-toss object that leaves a particle trail
+  - World 3: a click-to-morph shape that cycles border-radius and colors
+- Every world awards points on interaction — score counter in the corner ticks up
+
+### 3. "How It Works" Section
+- Dense, playful layout: three chunky step cards with tilted stickers and numbers
+- Steps are gamified: "STEP 1 — OPEN", "STEP 2 — CLICK EVERYTHING", "STEP 3 — COLLECT THE BADGES"
+- Each card hover: lifts with spring, tilts, reveals a hidden fun-fact badge
+- Sticker collage: overlapping rotated labels pinned across the section
+
+### 4. Badge Wall (gamified payoff)
+- Fullscreen section on lime: "YOUR BADGES"
+- Grid of 9 badge tiles — each reveals on hover/click with a confetti burst and a sound-friendly pop animation
+- Unearned badges are "LOCKED" in grayscale; earned ones are saturated with a spring scale-in
+
+### 5. Footer
+- Ink background, white text, uppercase Anton label
+- "BONK! © 2026 — PLAY HARD. CLICK HARDER." — Anton, 16px, tracking 0.1em
+- Footer buttons repeat the confetti-burst hover
+
+---
+
+## SPRING & MOTION SYSTEM
+
+```ts
+const spring = { type: "spring", stiffness: 300, damping: 15, mass: 0.8 };
+const snappy = { type: "spring", stiffness: 500, damping: 22 };
+const bouncy = { type: "spring", stiffness: 260, damping: 12 };
+```
+
+| Element | Animation | Spec | Trigger |
+|---------|-----------|------|---------|
+| Buttons | tilt + scale(1.08) | spring, stiffness 300 | hover |
+| Buttons | squash + stretch + confetti burst | snappy + 80-120 particles | click |
+| Cards | lift + tilt (rotateX/rotateY) | spring, stiffness 300 | hover |
+| Stickers | idle bob + spin | spring loop, slow | always |
+| Section entry | scale(0.85)→1 + overshoot | bouncy, bounce 0.5 | scroll into view |
+| Badges | pop in with overshoot + confetti | bouncy | earn/reveal |
+| Score counter | flip/tick with scale pulse | snappy | on gain |
+| Scrolling | scroll-jacking — scroll scrubs the story sequence | 0.8s per section, spring eased | wheel |
+
+Confetti spec: 80-120 pieces, random colors from the palette, `randomInt` gravity + rotation, life 900-1400ms, emitted from click point.
+
+`prefers-reduced-motion: reduce` → disable particles, scroll-jacking, and idle bobbing; hovers become simple scale; entrance is instant.
+
+---
+
+## ANTI-SLOP (LOCKED)
+
+- Saturated polychrome palette (electric pink #FF2E93, cobalt #2050FF, lime #D6FF3D, tangerine #FF7A00)
+- Chunky rounded display type — Anton/Big Shoulders uppercase, tight leading
+- Physics-based hover — springs, tilt, squash-and-stretch
+- Confetti and particle effects on interaction
+- Delight moment on every click, hover, and scroll
+- Gamified elements — score, badges, points for exploring
+- Fullscreen immersive sections (min-h-[100dvh])
+- Playful, energetic copy throughout
+- No restrained palettes, no minimal motion, no corporate seriousness
+- No predictable interactions, no flat hover states, no uniform card grids
+
+---
+
+Recreate this page with the exact playful interactive maximal aesthetic — saturated polychrome, springs, confetti, gamified interactions, and surprise moments everywhere.
+```

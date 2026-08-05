@@ -1,0 +1,131 @@
+# Parameterized Template — Monochrome + Single Accent / Signal Line
+
+> Use this template to generate a Monochrome + Single Accent page for YOUR brand.
+
+---
+
+```
+Build a monochrome page for "[BRAND_NAME]" — [ONE-LINE DESCRIPTION, e.g., "a developer tool for monitoring production metrics"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion. Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: Radical restraint. Full grayscale spectrum with exactly one saturated color used surgically for CTAs, active states, and key data points. The accent becomes a beacon — everything else recedes into sophisticated neutrality.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY)
+
+- NO multiple accent colors (exactly ONE saturated color on the page)
+- NO colorful palette (grayscale ramp only, plus the single accent)
+- NO gradient backgrounds (flat value control)
+- NO rainbow effects
+- NO accent on more than 15% of surface area
+- NO decorative color — color only when it signals
+- NO competing textures (clean to subtle grain)
+- NO color-led hierarchy (weight and size do hierarchy, not hue)
+- NO serif typography (clean sans-serif only)
+
+---
+
+## FONTS
+
+Replace [DISPLAY_FONT] with a clean sans-serif — Geist, Outfit, or Cabinet Grotesk:
+- Geist (400-600) — neutral, modern, first choice
+- Outfit (400-600) — geometric, friendly
+- Cabinet Grotesk (400-700) — grotesque with character
+
+Pair with a monospace ([MONO_FONT]: Geist Mono, JetBrains Mono, or IBM Plex Mono) for technical details, labels, and data. Load via Google Fonts. Weight and size do hierarchy — not color.
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --ground: #09090B;           /* Near black */
+  --surface: #27272A;          /* Elevated surface */
+  --border: #52525B;           /* Muted borders */
+  --text-secondary: #A1A1AA;
+  --text-primary: #E4E4E7;     /* On dark */
+  --text-inverse: #FAFAFA;     /* On light / alternate theme */
+  --accent: [ACCENT_HEX];      /* THE one accent */
+  --text-muted: rgba(228, 228, 231, 0.55);
+}
+```
+
+**Accent guidance — choose exactly ONE:**
+- Electric blue #3B82F6 — trust, fintech, technical products
+- Emerald #10B981 — growth, health, positive data signals
+- Signal orange #FF5A1F — energy, developer tools, urgency
+- Hot pink #FF2E88 — bold consumer brands, creative tools
+
+**Accent rules (locked):** ONE accent only. On ≤15% of surface area. Reserved for CTA, active state, and the key data point. Everything else is grayscale — no tinted neutrals.
+
+---
+
+## STRUCTURE
+
+### Navbar
+- Fixed, `h-16`, bg ground/80 backdrop-blur, 1px bottom border
+- Wordmark left, links center (text-muted, hover text-primary), CTA right (solid accent — the only color in the nav)
+- Active link: accent underline
+
+### Hero
+- `min-h-[70vh]`, grid-based
+- Mono eyebrow (uppercase, tracking 0.12em), headline in [DISPLAY_FONT] 500, subtext muted
+- One primary CTA solid accent + one secondary outline CTA
+- One key data point with an accent value — the only color in the hero
+
+### Metrics Grid (6 cards)
+- Zinc/surface cards, 1px borders, rounded
+- Mono labels, large numbers, muted deltas
+- ONE primary metric in accent; hover reveals accent on grayscale elements
+
+### Chart / Key Visual
+- Neutral lines, muted gridlines
+- Latest point in accent ("the beacon"), optional accent threshold line
+
+### Pricing / Tiers (3 cards)
+- Neutral cards; middle tier highlighted with 1px accent border + accent mono badge
+- Solid accent CTA only on the highlighted tier
+
+### Footer
+- Top border, mono links, minimal — a quiet end to a restrained page
+
+---
+
+## ANIMATIONS
+
+- Entrances: opacity 0→1 + translateY(8-12px), 400-500ms, ease-out, staggered
+- Accent beacon: subtle pulse (2000ms, infinite) — accent draws attention to state changes
+- Hover: border-color + scale(1.01), 150ms — hover reveals accent on grayscale elements
+- Motion is precise and minimal — no drift, no morphing, no breathing backgrounds
+
+`prefers-reduced-motion: reduce` → instant entrances, remove pulse.
+
+---
+
+## VISUAL RULES (DO NOT MODIFY)
+
+- Full grayscale base — no tinted neutrals
+- ONE accent color only, ≤15% of surface area
+- Value-based hierarchy — light/dark contrast, not hue
+- Accent reserved for signal: CTA, active state, key data point
+- Weight and size do hierarchy, not color
+- Mono for technical details, clean sans-serif for display
+- Structured, grid-based layout; accent creates visual pathways
+- Clean to subtle grain — no competing textures
+- No multiple accents, no gradients, no rainbow, no decorative color
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines:** 3-6 words. Confident, precise. "Precision data. One beacon." not "We Make Dashboards for Your Team."
+
+**Body text:** 1-2 sentences. Calm, factual. Write like a spec sheet, not a pitch.
+
+**Data:** The accent belongs on your single most important number per screen. One number wins; the rest stay gray. If everything is emphasized, nothing is.
+
+---
+
+Replace all [BRACKETED] placeholders, then paste into your AI coding assistant.
+```

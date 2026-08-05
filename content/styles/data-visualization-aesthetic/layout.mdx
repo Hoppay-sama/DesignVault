@@ -1,0 +1,122 @@
+# Layout Grammar
+
+## Grid System
+
+**Dense, organized, cockpit-like.** The layout is a dashboard grid — metrics, charts, and data cards arranged in a tight but readable system. Internally:
+
+- Page background: dark (`#0A0A0A` to `#111827`)
+- Metric grid: 12-column system, cards with 12-16px gutters
+- Data cards: bordered by hairline gridlines in subtle gray, no heavy shadows
+- Content width: max-width 1440px (cockpit density, not editorial whitespace)
+- Alignment: strict left-aligned labels, right-aligned numerals, tabular figures throughout
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | Full viewport — `min-h-[100dvh]` |
+| Background | Dark `#0A0A0A`, subtle grid background pattern |
+| Content | Live KPI strip + headline, all numbers in monospace |
+| Headline size | `clamp(2rem, 4vw, 4.5rem)` — large, precise |
+| Numbers | Count-up on load, tabular figures, right-aligned |
+| Data points | Subtle glow on the active/latest data point |
+
+```
+┌─────────────────────────────────────────┐
+│  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░ │
+│  [grid background pattern]              │
+│                                         │
+│  1,284,392   ▸ 24.7%  ▸ 0.042s  ▸ $92.1 │
+│  active    growth   latency   price     │
+│                                         │
+│  LIVE MARKET DATA                       │
+│  Real-time metrics as the primary       │
+│  visual language of the page            │
+│  [ENTER COCKPIT]                        │
+│                                         │
+│  ── 12:00 ── 12:30 ── 13:00 ──         │
+└─────────────────────────────────────────┘
+```
+
+**The hero is the data.** A live KPI strip with count-up numbers establishes the cockpit aesthetic immediately. The headline and supporting metrics share the viewport — nothing decorative.
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(2rem, 6vh, 5rem);
+--content-max-width: 1440px;
+--grid-gutter: 12px;
+--card-padding: 1.25rem;
+```
+
+**Spacing is dense but disciplined.** Sections feel like cockpit panels — information-rich, tightly packed, but with consistent rhythm. The density communicates "everything here is measured." Whitespace is used to organize, not to decorate.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: KPI Metric Strip
+```
+┌─────────────────────────────────────────┐
+│  [Metric] [Metric] [Metric] [Metric]    │
+│  1,284,392  24.7%   0.042s   $92.10     │
+│  ──────     ──────  ──────  ──────     │
+│  label      label   label   label       │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 2: Chart + Annotation Split
+```
+┌──────────────────┬──────────────────────┐
+│                  │  ANNOTATION          │
+│  [Line chart]    │  +24.7% growth       │
+│  [gridlines]     │  Q3 vs Q2            │
+│  [two series]    │  ──────────────────  │
+│                  │  breakdown by        │
+│                  │  segment, 10-11px    │
+│                  │  micro-labels        │
+└──────────────────┴──────────────────────┘
+```
+
+### Pattern 3: Live Dashboard Grid
+```
+┌──────────┬──────────┬───────────────────┐
+│ [Spark]  │ [Spark]  │  [Bar chart]      │
+│ ▁▃▅▂▇▄▁  │ ▇▆▃▅▂▄▇  │  ▃▅▇▂▄▆▃        │
+├──────────┼──────────┤  (animated        │
+│ [Count]  │ [Count]  │   growth)         │
+│ 92,410   │ 18,332   ├───────────────────┤
+├──────────┼──────────┤  [Donut]          │
+│  ████░░  │  ██░░░░  │  ◔ ◕ ◕            │
+└──────────┴──────────┴───────────────────┘
+```
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Full cockpit grid — KPI strip, multi-series charts, sidebar annotations |
+| **Tablet (768px)** | Grid collapses to 2 columns, charts stack, micro-labels stay 10-11px |
+| **Mobile (375px)** | Single column, KPI strip scrolls horizontally, sparklines above labels |
+
+**On mobile:** The density compresses but never disappears — this style is information-rich at every size. Numbers stay monospace and tabular; charts reduce to their most essential series rather than growing decorative. Annotations drop below charts instead of beside them.
+
+---
+
+## Layout Don'ts
+
+| Don't | Do Instead |
+|------|------------|
+| Decorative hero imagery | Live KPI strip with count-up numbers |
+| Whitespace-heavy editorial layout | Dense, organized cockpit grid |
+| Isolated floating cards | Connected grid of metrics and charts |
+| Centered numerals | Right-aligned numerals, tabular figures |
+| Rounded, consumer-style cards | Hairline-bordered panels on grid |
+| Multiple overlapping layers | Flat, precise grid — depth comes from glow |
+| Charts as page decoration | Charts and metrics as the primary content |

@@ -1,0 +1,66 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Clean, precise sans-serif — typography-led, the voice of the page |
+| **Examples** | Geist, Outfit, Cabinet Grotesk |
+| **Weight** | 500-700 (weight does hierarchy — never color) |
+| **Tracking** | -0.02em to 0em (tight, engineered, confident) |
+| **Size** | `clamp(2rem, 5vw, 4.5rem)` — large, structural, monumental |
+| **Transform** | Sentence case; uppercase reserved for micro labels |
+
+**Why heavy sans:** In a monochrome system the type IS the hierarchy. There is no color to distinguish elements, so weight, size, and spacing carry the entire information structure. The display type must be strong enough to hold the page without relying on a single chromatic crutch.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same family as display, regular weight |
+| **Examples** | Geist Regular, Outfit Regular, Cabinet Grotesk Regular |
+| **Weight** | 400-450 (regular — readable, neutral) |
+| **Tracking** | 0em-0.01em (standard) |
+| **Size** | `clamp(0.9375rem, 1vw, 1.0625rem)` — 15-17px |
+| **Line Height** | 1.5-1.6 (dense but comfortable, data-forward) |
+
+**Why regular weight:** Body text recedes into the grayscale field. It is the neutral substrate against which the accent — and the display type — signal. Density is high enough to feel precise and technical, never airy or decorative.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Monospace — technical annotations, data, metadata |
+| **Examples** | Geist Mono, JetBrains Mono, IBM Plex Mono |
+| **Weight** | 400 |
+| **Tracking** | 0.05em-0.1em (spaced, tabular) |
+| **Size** | 11-12px |
+| **Transform** | UPPERCASE |
+
+**Usage:** Section labels, data points, timestamps, technical details. The mono voice is the style's signature — "ZINC-950", "ACCENT 01", "SIGNAL: ACTIVE". It separates the machine voice (data) from the human voice (editorial) within the same grayscale field.
+
+---
+
+## Type Scale
+
+```
+Display:  clamp(2rem, 5vw, 4.5rem)    — large, weight-driven
+Body:     clamp(0.9375rem, 1vw, 1.0625rem)  — 15-17px, regular
+Micro:    11-12px                      — monospace annotations
+```
+
+The scale is wide — 11px to 72px. Contrast comes from extreme size and weight jumps, not color. The hierarchy reads instantly in grayscale: monumental display, quiet body, technical micro. Each step is a deliberate value change in the zinc scale.
+
+---
+
+## Font Pairing Logic
+
+**Family + mono approach:** One primary sans (Geist, Outfit, or Cabinet Grotesk) for display and body, paired with a monospace (Geist Mono, JetBrains Mono) for labels and data. The sans/mono pairing is the only type duality — it mirrors the style's core duality of neutral base vs surgical accent.
+
+**The accent in type:** The single accent color appears in type only for the most important action — primary CTA text, active nav state, or a key data point. One word per viewport maximum. Bold, not colored, is the default emphasis; accent type is the exception that must be earned.
+
+**Never:** Multiple typefaces (three voices compete in monochrome — two is the limit), decorative fonts (this is engineered, not playful), or colored body text (breaks value-based hierarchy, violates the ≤15% accent rule).

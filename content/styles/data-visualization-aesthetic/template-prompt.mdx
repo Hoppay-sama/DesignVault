@@ -1,0 +1,128 @@
+# Parameterized Template — Data Visualization as Aesthetic / Living Dashboard
+
+> Use this template to generate a data-visualization page for YOUR brand.
+
+---
+
+```
+Build a data-visualization page for "[BRAND_NAME]" — [ONE-LINE DESCRIPTION, e.g., "a fintech analytics dashboard"]. Stack: React + Vite + TypeScript + Tailwind CSS v4 + framer-motion + [CHART_LIBRARY, e.g., recharts]. Page title: `[BRAND_NAME] — [TAGLINE]`.
+
+Vibe: Charts and metrics as primary visual content. Monospace numbers, precise labels, cockpit density. Data is the hero — every element decodes a number, nothing is decorative.
+
+---
+
+## ANTI-SLOP CONSTRAINTS (DO NOT MODIFY)
+
+- NO decorative charts (every mark must decode data)
+- NO imprecise numbers (tabular figures, correct decimal alignment)
+- NO non-monospace data (all numbers in a tabular monospace font)
+- NO cluttered layout (cockpit density must stay organized)
+- NO fake/random data (coherent series with meaningful trends)
+- NO 3D, glossy, or skeuomorphic charts (flat, precise, clean)
+- NO smooth gradients (categorical flat colors only)
+- NO missing axes or labels (every chart fully annotated)
+- NO text-heavy sections (data is the message — text is annotation)
+
+---
+
+## FONTS
+
+Replace [MONO_FONT] with a tabular-friendly monospace and [SANS_FONT] with a clean label sans:
+
+- **IBM Plex Mono (400-600)** — classic dashboard data type
+- **JetBrains Mono (400-600)** — modern, developer-grade
+- **Geist Mono (400-600)** — geometric, cockpit-appropriate
+- Inter / Geist for label text
+
+Load via Google Fonts. Apply `font-variant-numeric: tabular-nums` to all number elements. Use mono for every number (KPIs, chart labels, table cells, tick values); sans for labels and micro-labels (10-11px, uppercase, tracking 0.08-0.1em).
+
+---
+
+## COLOR SYSTEM
+
+```css
+:root {
+  --bg-deep: #0A0A0A;        /* Near-black ground */
+  --bg-panel: #111827;       /* Panel background */
+  --gridline: rgba(255, 255, 255, 0.08);
+  --text-primary: #F3F4F6;
+  --text-muted: #9CA3AF;
+  --text-faint: #6B7280;
+}
+```
+
+**Categorical palette guidance — one distinct hue per data series, never gradients:**
+- Tableau 10: `#4E79A7 #F28E2B #E15759 #76B7B2 #59A14F #EDC948 #B07AA1 #FF9DA7 #9C755F #BAB0AC`
+- Okabe-Ito (colorblind-safe): `#0072B2 #E69F00 #56B4E9 #009E73 #F0E442 #D55E00 #CC79A7 #000000`
+- Up to [MAX_SERIES, e.g., 8] distinct hues per page; assign one hue per series and keep it consistent across all charts.
+
+---
+
+## STRUCTURE
+
+### Top Bar
+- Sticky, dark ground, 1px gridline bottom border
+- Brand mark (sans, uppercase, tracked) + live ticker line ([METRIC_NAME] updating) + data source stamp — all readouts in mono
+
+### KPI Metric Row (4 cards)
+- Grid of metric cards: `bg-panel`, 1px gridline border, rounded
+- Each: micro-label + big tabular number + delta chip (green/red) + sparkline
+- Numbers count-up on scroll into view
+
+### Main Chart Section
+- One hero chart (line/area) on `bg-panel`, subtle gray gridlines, mono tick values, sans axis labels
+- Line draws left-to-right on scroll; active point glows subtly; end data label in mono
+
+### Secondary Charts (1-2 panels)
+- Bars (allocation/comparison) in categorical hues, scaleY-in with stagger from baseline
+- or small multiples strip: repeated mini charts sharing one scale, each with mono value
+
+### Data Table
+- Columns: [LABEL / VALUE / DELTA / TREND]. Values and deltas mono tabular-nums, right-aligned, color-coded signs. 16px sparkline per row.
+- Hover: faint `bg-white/5` highlight only
+
+### Footer
+- Mono, text-faint: brand + update stamp ("DATA UPDATED LIVE · SOURCE: [SOURCE]")
+
+---
+
+## ANIMATIONS
+
+- KPI count-up 0 → value, 900ms, ease-out (stagger 100ms)
+- Line/area draw pathLength 0 → 1, 1200ms, ease-out
+- Bar growth scaleY 0 → 1 from baseline, 800ms, ease-out (stagger 100ms)
+- Sparkline draws, 600ms, ease-out
+- Live ticker number flicker, 400ms, ease-in-out
+- Active data point: 4px dot + subtle glow, 2s, infinite
+
+`prefers-reduced-motion: reduce` → skip count-ups/draws/glows, render final state.
+
+---
+
+## VISUAL RULES (DO NOT EDIT)
+
+- Charts and metrics are the primary visual content, not ornament
+- All numbers in tabular monospace with decimal alignment
+- Maximize data ink — subtle gridlines, zero chart junk
+- Categorical flat palette, one distinct hue per series
+- Organized cockpit density — information-rich, never cluttered
+- Real-time and scroll-triggered motion: count-up, bar growth, line draw
+- Clean sans micro-labels (10-11px), precise axes on every chart
+- Dark ground with panels and subtle gridlines
+
+---
+
+## CONTENT GUIDANCE
+
+**Headlines/labels:** 2-5 words, factual, precise. "PORTFOLIO VALUE — 12 MONTHS" not "See How We Grew."
+
+**Numbers:** Real, coherent, consistent series. Same decimal precision across a column, same scale for in-chart comparisons, formatted with thousands separators and fixed decimals where appropriate.
+
+**Writing tone:** Analyst annotation, not a marketing pitch. Short descriptive labels; the data carries the message.
+
+**Data:** Make the series internally coherent (seasonal patterns, monotonic trends, realistic ranges). Label every axis, cite a plausible "source" in the footer so it reads as live.
+
+---
+
+Replace all [BRACKETED] placeholders, then paste into your AI coding assistant.
+```

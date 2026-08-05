@@ -1,0 +1,134 @@
+# Texture & Surface
+
+## Primary Texture: Clean Digital Surfaces
+
+The default surface is clean, glossy digital — flat saturated color, crisp edges, no noise. The toy world is built on solid candy grounds and clean panels; texture variety comes from what sits ON those surfaces, not from degrading them.
+
+| Quality | Description |
+|---------|-------------|
+| **Flat saturated fields** | Solid candy-color sections — the clean canvas |
+| **Crisp vector edges** | Sharp sticker-cut shapes, no feathered borders |
+| **Glossy highlights** | Small white specular highlights on buttons and shapes |
+| **Chunky outlines** | Thick 2-4px black or white outlines on stickers and badges |
+
+**The goal:** Surfaces start clean and toy-like — like a plastic playset. Texture arrives as layered elements (stickers, confetti, illustrations), not as material grunge.
+
+---
+
+## Sticker Variety
+
+```css
+.sticker {
+  border: 3px solid #182058;        /* Chunky ink outline */
+  border-radius: 999px;
+  background: #FFFFFF;
+  box-shadow: 4px 4px 0 rgba(24, 32, 88, 0.25);  /* Hard offset shadow */
+}
+```
+
+| Sticker Style | Treatment |
+|---------------|-----------|
+| **Candy sticker** | Thick ink outline + hard offset shadow — "peel me off the sheet" |
+| **Die-cut shape** | Circle, starburst, squiggle — irregular silhouette, no box |
+| **Ripped edge** | White paper texture with a jagged torn edge for badges |
+| **Rotated placement** | -3deg to +5deg rotation, never axis-aligned |
+
+**Purpose:** Stickers are the layer between UI and decoration. They sit slightly rotated, cast hard offset shadows, and look manually placed on the page — like a decorated journal spread. The thick outline keeps them readable on any loud ground.
+
+---
+
+## Confetti & Particle Textures
+
+```css
+.confetti-piece {
+  width: 8px;
+  height: 14px;
+  border-radius: 2px;
+  background: var(--candy-lime);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15);
+}
+```
+
+| Particle | Treatment |
+|----------|-----------|
+| **Confetti pieces** | Small 8x14px strips in confetti-mix colors with tiny drop shadows |
+| **Emoji / glyph rain** | Spinning emoji and glyph particles on celebration moments |
+| **Star & sparkle overlays** | Hand-drawn star/sparkle SVGs sprinkled on hero and section edges |
+| **Dotted swarm** | Clustered dots that scatter on cursor proximity |
+
+**Purpose:** Confetti gives surfaces motion and celebration without breaking the clean digital base. Pieces are simple shapes — strips, stars, dots — that read instantly as "party" against flat grounds.
+
+---
+
+## 3D Rendered Elements
+
+```css
+.card-3d {
+  background: linear-gradient(145deg, #FFFFFF 0%, #FFE9F3 40%, #FFD5E8 100%);
+  border-radius: 24px;
+  box-shadow:
+    0 16px 32px rgba(24, 32, 88, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.9);
+  transform: perspective(800px) rotateX(2deg) rotateY(-2deg);
+}
+```
+
+| Element | Treatment |
+|----------|-----------|
+| **Hero objects** | 3D-rendered toys, mascots, and abstract shapes — glossy, clay-like |
+| **Cards** | CSS 3D tilt with perspective — floating panels with depth shadow |
+| **Shapes** | Clay / plastic material feel: rounded corners, specular highlight, soft floor shadow |
+| **Rotation** | Elements rotate on hover in 3D space (perspective transform) |
+
+**Purpose:** 3D elements bridge the flat UI and the toy metaphor. Glossy rendered objects sit on the clean surfaces like props on a stage — they add depth without adding noise.
+
+---
+
+## Illustrated Overlays
+
+```css
+.overlay-sparkle {
+  position: absolute;
+  background: url('data:image/svg+xml;utf8,<svg .../>') no-repeat center;
+  mix-blend-mode: screen;
+  opacity: 0.9;
+}
+```
+
+| Overlay | Treatment |
+|---------|-----------|
+| **Hand-drawn doodles** | Squiggly underlines, burst rays, circling lines around headlines |
+| **Background doodles** | Sparse giant stars, lightning bolts, and half-sun shapes at low visual weight |
+| **Pattern patches** | Polka dots, candy stripes, and checker patches as small section accents |
+| **Scanline / grain** | Optional subtle grain (opacity 0.02) only on illustration areas, never on text |
+
+**Purpose:** Illustrated overlays add hand-drawn personality on top of the clean surfaces. They stay sparse — a squiggle under a word, a burst behind a badge — and never degrade the flat candy ground into noise.
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Flat saturated candy color per section |
+| Panels & cards | Clean white or inverted candy with thick outlines + hard offset shadows |
+| Buttons | Glossy gradient, chunky outline, specular highlight, jelly hover |
+| Badges / stickers | Die-cut shapes, rotated, hard offset shadow |
+| Navigation | Clean bar or floating pill — always readable on any ground |
+| Dividers | Doodle zigzags, wavy lines, or star-shaped separators — never plain lines |
+
+**No grunge, no grain-heavy paper, no glassmorphism.** Surfaces are clean and toy-like. Every surface supports the flat-and-glossy world; texture variety comes from the sticker/3D/illustration layer, not from material effects.
+
+---
+
+## Texture Don'ts
+
+| Don't | Do Instead |
+|-------|------------|
+| Realistic photography | Flat candy grounds with 3D-rendered toys and illustrated overlays |
+| Grunge, noise-heavy textures | Clean glossy digital surfaces |
+| Restrained, corporate surfaces | Stickers, confetti, doodles — decorated like a journal |
+| Thin, hairline borders | Chunky 2-4px outlines with hard offset shadows |
+| Subtle, muted shading | Specular highlights and soft floor shadows — glossy toy depth |
+| Glassmorphism blur panels | Clean opaque panels with thick outlines |
+| Uniform, predictable grids of texture | Rotated stickers, scattered confetti, varied doodle accents |
