@@ -46,6 +46,28 @@ export function buildVocabularyIndex(): VocabularyTerm[] {
         if (phraseMatch) {
           const term = phraseMatch[1].trim();
           addTerm(termMap, term, 'Prompt-ready phrase', 'Prompt Phrases', styleRef);
+          continue;
+        }
+
+        // Parse inline term lists from index.mdx: **Primary:** `term`, `term`
+        const listMatch = line.match(/^\*\*([^*]+):\*\*\s*(.+)$/);
+        if (listMatch) {
+          const group = listMatch[1].trim();
+          const items = listMatch[2].match(/`([^`]+)`/g);
+          if (items) {
+            for (const item of items) {
+              const term = item.replace(/`/g, '').trim();
+              if (term.length > 1) {
+                addTerm(
+                  termMap,
+                  term,
+                  `${group} term for ${style.title}`,
+                  `${group} Terms`,
+                  styleRef
+                );
+              }
+            }
+          }
         }
       }
     }

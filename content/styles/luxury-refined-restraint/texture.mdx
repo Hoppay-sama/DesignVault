@@ -1,0 +1,106 @@
+# Texture & Surface
+
+## Philosophy
+
+Surfaces in Luxury Refined Restraint feel like **physical materials viewed in museum light**: uncoated paper, honed stone, raw silk, brushed brass. The screen disappears and the material remains. Texture is present but must never announce itself — if a user notices the grain, it is too heavy.
+
+---
+
+## Primary Texture: Fine Paper / Material Grain
+
+A barely-there noise overlay unifies all surfaces and gives photography a physical ground.
+
+```css
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025; /* 0.02-0.035 — felt, never seen */
+  background-image: url("data:image/svg+xml,..."); /* feTurbulence, baseFrequency 0.9 */
+  mix-blend-mode: multiply; /* On ivory. Use overlay for noir mode */
+}
+```
+
+**Parameters:**
+- Opacity: 0.02-0.035 (half of what most designers use)
+- Blend: `multiply` on ivory ground, `overlay` on noir
+- Frequency: fine (baseFrequency 0.8-1.0) — coarse grain reads as "vintage filter," not material
+- Animation: static. NEVER animate the grain (24fps jitter belongs to film styles, not galleries)
+
+---
+
+## Secondary Texture: Hairline Rules
+
+```css
+.hairline {
+  height: 1px;
+  background: #E0D9CC; /* --color-hairline */
+  transform-origin: left;
+}
+```
+
+**Purpose:** Hairlines divide sections the way museum labels divide works — a physical line that says "here ends one object, here begins another." Use them:
+- Between nav and content
+- Between footer columns
+- As underline on hover
+- As the only "card border" (never full boxes)
+
+---
+
+## Tertiary Texture: Natural Light
+
+The most important "texture" is light itself, delivered through photography:
+- **Soft window light** with visible falloff (shadow direction consistent)
+- **Dappled texture** on stone, linen, marble, plaster
+- **Highlights on metal** (brass, gold, silver) catching the same light source
+
+Every image should look like it was shot in the same room at the same hour. Inconsistent lighting breaks the material illusion instantly.
+
+---
+
+## Image Processing Rules
+
+| Treatment | Allowed? | Notes |
+|-----------|----------|-------|
+| Natural photography, soft light | ✅ Yes | THE standard — no filters |
+| Desaturation to 85-95% | ✅ Yes | For cohesion across a set |
+| Slight contrast lift | ✅ Yes | Preserve shadow detail |
+| Warm color grade (+5-10% warmth) | ✅ Yes | Unifies with ivory ground |
+| Film grain overlay on photos | ⚠️ Max 0.02 | Subtle only |
+| Heavy filters / presets | ❌ No | Looks like Instagram, not luxury |
+| HDR / oversaturated | ❌ No | Blows out the quiet register |
+| Black & white | ✅ Yes | Classic for fashion/atelier sets |
+| Vintage sepia / instagram vintage | ❌ No | Costume, not heritage |
+
+**The one processing rule that matters:** every photograph must look **printed in the same book**. Crop consistently (3:4 or 4:5), grade consistently, light consistently.
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Ivory #FAF7F2 (or espresso noir #141210) + grain at 0.025 |
+| Panels/Asides | Slightly deeper neutral (#F3EEE6), NO border, NO shadow, NO radius beyond 2px |
+| Buttons | Hairline border (1px #262220), transparent fill; hover fills champagne |
+| Images | Sharp 0-2px radius; 1px hairline frame in gallery contexts only |
+| Dividers | 1px hairline #E0D9CC |
+| Cards | None. This style doesn't do cards — content sits directly on the ground |
+
+**No glassmorphism, no gradients, no drop shadows, no 3D.** A shadow on a luxury site is a lie about the physics of the room — nothing floats in a gallery.
+
+---
+
+## Texture Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Heavy noise (opacity 0.1+) | 0.02-0.035, felt not seen |
+| Animated grain | Static grain |
+| Glassmorphism / backdrop-blur | Flat material surfaces |
+| Drop shadows | Hairlines + natural light in photography |
+| Metallic CSS gradients | Flat champagne accent |
+| Rounded 12px+ corners | 0-2px radius |
+| Card grids with borders | Bare content on the ground plane |
+| 3D renders | Real photography of real materials |

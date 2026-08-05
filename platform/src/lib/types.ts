@@ -16,6 +16,7 @@ export interface StyleEntry {
   difficulty: number;
   tags: string[];
   status: string;
+  testedWith?: string[];
   // Content sections
   visualDna?: string;
   principles?: string[];

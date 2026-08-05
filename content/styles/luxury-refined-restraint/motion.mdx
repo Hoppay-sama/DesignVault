@@ -1,0 +1,85 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Luxury Refined Restraint is **the pace of a gallery visitor**, not a website visitor. Nothing rushes. Nothing bounces. Every transition is a slow, deliberate crossfade — the digital equivalent of a docent turning toward the next painting. If a user can notice the animation as "animation," it is too fast.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Page background | Opacity crossfade | 1200ms | `ease-out` | 0ms |
+| Display headline | Opacity + translateY(24px) → 0 | 1400ms | `cubic-bezier(0.22, 1, 0.36, 1)` | 200ms |
+| Body text block | Opacity fade-in | 1000ms | `ease-out` | 500ms |
+| Photography | Opacity + scale(1.03) → 1 | 1800ms | `ease-out` | 300ms |
+| Micro labels | Opacity fade-in | 800ms | `ease-out` | 800ms |
+| Hairline rules | ScaleX(0) → 1 (draw-in) | 1200ms | `cubic-bezier(0.4, 0, 0.2, 1)` | 600ms |
+
+**Key easing:** `cubic-bezier(0.22, 1, 0.36, 1)` — smooth deceleration, zero bounce. Long durations (1000ms+) are the signature; short snappy animations feel cheap.
+
+**Stagger pattern:** 200-300ms between elements, in reading order. Never a simultaneous burst — each element takes its turn like guests entering a room.
+
+---
+
+## Scroll Behavior
+
+| Effect | Specification |
+|--------|--------------|
+| Image reveals | Opacity + subtle scale (1.03 → 1), triggered at 20% viewport visibility |
+| Parallax on photography | 5-10% of scroll distance — barely perceptible |
+| Section transitions | Crossfade with 300ms overlap, no slide |
+| Sticky elements | None. Nothing pins. The page flows like a gallery wall |
+| Scroll progress | No progress bars, no scroll-linked effects |
+
+**Scroll-linked motion is nearly absent.** The style's drama comes from stillness and composition. If photography is strong, the best scroll effect is none.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Transition |
+|---------|------------|-----------|
+| Navigation links | Underline draws from left (scaleX 0→1) | 500ms `ease-out` |
+| CTA button | Background fills champagne, text shifts to ivory | 600ms `ease-out` |
+| Image cards | Scale 1.0 → 1.02, subtle | 1200ms `cubic-bezier(0.22, 1, 0.36, 1)` |
+| Micro labels | Color shift to accent (opacity + color) | 400ms `ease-out` |
+| Product thumbnails | Image crossfades to alternate shot | 800ms `ease-in-out` |
+
+**No bounce, no lift, no glow, no magnetic cursors.** The hover state is a whisper: a line appears, an image leans slightly. Physical motion on luxury sites reads as nervous energy.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- All entrances collapse to instant opacity changes
+- No parallax, no image scale
+- Hairlines appear immediately
+- Crossfades become 0.01ms
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| ❌ Never animate | Why |
+|-----------------|-----|
+| Bounce, spring, or elastic easing | Cheap, playful — the opposite of restraint |
+| Marquee text strips | Retail energy; luxury never scrolls its own name |
+| Rotating 3D elements | Gimmickry |
+| Glow or neon pulses | Nightclub, not atelier |
+| Every element on scroll | Motion must be an event, not ambient noise |
+| Parallax beyond 10% | Motion sickness + gimmick |
+| Typing effects | Terminal aesthetic, wrong register entirely |
+| Color transitions on text | Only opacity and position — color changes feel digital |

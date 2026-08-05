@@ -35,7 +35,7 @@ const AXIS_KEYS: (keyof StyleAxis)[] = [
   'layout',
 ];
 
-const DEFAULT_RANGE: AxisRange = { min: 1, max: 5 };
+const DEFAULT_RANGE: AxisRange = { min: 1, max: 6 };
 const VISIBLE_TAG_COUNT = 6;
 
 function createDefaultAxisFilters(): AxisFiltersState {
@@ -138,10 +138,22 @@ export function StyleFilters({ styles, onFilteredStyles }: StyleFiltersProps) {
       axisFilters[key].max !== DEFAULT_RANGE.max
   );
 
-  // Count currently visible styles
-  const filteredCount = activeTag
-    ? styles.filter((s) => s.tags.includes(activeTag)).length
-    : styles.length;
+  // Count currently visible styles (tag + axis filters)
+  const filteredCount = useMemo(() => {
+    return styles.filter((style) => {
+      if (activeTag && !style.tags.includes(activeTag)) {
+        return false;
+      }
+      for (const key of AXIS_KEYS) {
+        const range = axisFilters[key];
+        const value = style.axis[key];
+        if (value < range.min || value > range.max) {
+          return false;
+        }
+      }
+      return true;
+    }).length;
+  }, [styles, activeTag, axisFilters]);
 
   return (
     <div className="space-y-6">
@@ -249,7 +261,7 @@ export function StyleFilters({ styles, onFilteredStyles }: StyleFiltersProps) {
                       <input
                         type="range"
                         min={1}
-                        max={5}
+                        max={6}
                         value={range.min}
                         onChange={(e) =>
                           handleAxisChange(
@@ -264,7 +276,7 @@ export function StyleFilters({ styles, onFilteredStyles }: StyleFiltersProps) {
                       <input
                         type="range"
                         min={1}
-                        max={5}
+                        max={6}
                         value={range.max}
                         onChange={(e) =>
                           handleAxisChange(

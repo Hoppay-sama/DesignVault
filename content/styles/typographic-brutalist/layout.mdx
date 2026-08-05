@@ -1,0 +1,119 @@
+# Layout Grammar
+
+## Grid System
+
+**12-column grid that is *drawn* but not obeyed.** The grid exists as visible structure (hairline column rules), and content deliberately breaks it — type overflows its column, elements overlap, nothing aligns politely. The grid is the skeleton; the broken alignment is the muscle.
+
+```
+[1][2][3][4][5][6][7][8][9][10][11][12]
+ ████████████████████████████████████████  ← visible column rules
+        OVERLAPPING TYPE
+   ██████████████████████
+              ██████████████████████  ← type bleeds across columns
+```
+
+**The rule:** Content anchors to the grid at its *start* edge, then overflows freely. Nothing is centered. Nothing floats in the middle of a column.
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | Full viewport — `min-h-[100dvh]` |
+| Background | Flat paper, or a processed (threshold/halftone) image |
+| Headline | Fills the viewport — `clamp(4rem, 15vw, 14rem)`, uppercase, left-aligned, may overflow the right edge |
+| Headline position | Top-left or bottom-left, bleeding off the edge |
+| Supporting text | Small, right-aligned or bottom-right, mono micro-label above |
+| CTA | Below headline, left-aligned, flat solid button |
+| Signature | Headline overlaps the section below it (negative margin) |
+
+**Never centered hero.** A centered brutalist hero is a contradiction — the style is about aggressive asymmetry. The headline should feel like it was stamped onto the page at an angle that ignores the margins.
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(3rem, 8vh, 6rem); /* Tighter than editorial styles */
+--component-gap: clamp(1rem, 2vw, 2rem);
+--content-max-width: min(1400px, calc(100vw - clamp(1rem, 4vw, 3rem)));
+```
+
+**Spacing is tight and deliberate.** Brutalism doesn't breathe like editorial — it crowds. Sections sit close together, separated by 2px rules rather than vast whitespace. The whitespace that *does* exist is asymmetric and intentional (a huge empty right half next to a packed left half).
+
+---
+
+## Layout Patterns
+
+### Pattern 1: The Statement
+```
+┌─────────────────────────────────────────┐
+│ 01 / MANIFESTO                          │
+│                                         │
+│  WE ARE                                 │
+│  NOT                                     │
+│  YOUR                                    │
+│  AESTHETIC                               │  ← 15vw type, bleeds right
+│                                         │
+│  [CTA]  Supporting text →                │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 2: Overlap Stack
+```
+┌─────────────────────────────────────────┐
+│  [Processed image, full-bleed]          │
+│                                         │
+│  TITLE OVERLAPS IMAGE                   │  ← negative margin pulls
+│  (type sits on top of image)            │     type over the image
+│                                         │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 3: Marquee Divider
+```
+┌─────────────────────────────────────────┐
+│  Content above...                       │
+│                                         │
+│  NOISE NOISE NOISE NOISE NOISE NOISE    │  ← marquee strip, 2px rules
+│                                         │
+│  Content below...                       │
+└─────────────────────────────────────────┘
+```
+
+### Pattern 4: Exposed Grid
+```
+┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
+│   │   │   │   │   │   │   │   │   │   │   │   │  ← visible column rules
+│   │   │   │   │   │   │   │   │   │   │   │   │
+│   │   │   │   │   │   │   │   │   │   │   │   │
+│   │   │   │   │   │   │   │   │   │   │   │   │
+└───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘
+```
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | Full broken-grid composition, monumental type, marquee strips |
+| **Tablet (768px)** | Type scales down via clamp, overlaps reduce, grid lines stay |
+| **Mobile (375px)** | Single column, type still large (min 3rem), marquee becomes static overflow strip |
+
+**Fluid typography via `clamp()` is essential.** The monumental scale must survive on mobile — a brutalist page on a phone should still feel like a poster, not a blog.
+
+---
+
+## Layout Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Centered hero layout | Left-anchored, edge-bleeding statement |
+| Card grids with equal spacing | Overlapping blocks, exposed grid, marquee dividers |
+| Symmetrical, balanced compositions | Aggressive asymmetry — empty space as a weapon |
+| Generous "editorial" whitespace | Tight, crowded sections with hard rules |
+| Rounded cards and soft containers | Flat blocks, hard edges, no containers |
+| Everything aligned to the grid | Anchor start, then overflow with intent |
+| Bento grids | Statement layouts, overlap stacks, marquees |

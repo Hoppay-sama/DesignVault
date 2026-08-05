@@ -1,0 +1,139 @@
+# Layout Grammar
+
+## Philosophy
+
+Layout in Luxury Refined Restraint is **curation**. The page is a gallery wall: each section is one artwork, given a room of its own. The whitespace between sections is not leftover space — it is the most expensive material on the page. Budget it like marble.
+
+---
+
+## Grid System
+
+**12-column grid, used at 20% capacity.**
+
+Content typically lives in a narrow band: columns 2-7 on desktop (50-58% width), leaving 40%+ of the viewport as quiet margin. Asymmetry is allowed but must be *calm* asymmetry — a 55/45 split, never a 70/30 drama.
+
+```
+[1][2][3][4][5][6][7][8][9][10][11][12]
+    ████████████████
+         Content (columns 2-7)
+    ← 6 columns of margin →
+```
+
+**Why so narrow:** The extreme margins are the style's loudest signal. A narrow measure makes the content feel like a rare object displayed on a vast table. It also guarantees the 55-65ch measure that makes body text luxurious.
+
+---
+
+## Hero Section
+
+| Property | Specification |
+|----------|--------------|
+| Height | 100dvh or slightly less (85-100dvh) — a full "room" |
+| Content position | Centered horizontally OR offset-left, never a split-screen |
+| Headline | Display serif, sentence case, max 8 words |
+| Supporting text | 1-2 lines, small, generous leading, max-width 42ch |
+| Photography | Full-bleed background OR a single framed image right-of-center |
+| CTA | Text link with hairline underline — or none |
+| Micro label | Above headline, wide-tracked uppercase ("MAISON FONDÉE EN 1987") |
+
+**Hero variants:**
+1. **Quiet centered:** micro label, serif headline, one line of copy, hairline rule. No image. Pure typographic confidence.
+2. **Single image:** one full-bleed photograph with text in the lower-left quadrant, 120px+ from the edge.
+3. **Framed image:** headline left, image right in a 4:5 frame with 1px hairline border and 80px+ gap between them.
+
+---
+
+## Section Spacing
+
+```css
+--section-padding-y: clamp(6rem, 14vh, 12rem);  /* GALLERY SPACING — do not compress */
+--component-gap: clamp(3rem, 6vw, 6rem);
+--content-max-width: min(720px, calc(100vw - clamp(3rem, 10vw, 8rem)));
+--pad-x: clamp(2rem, 6vw, 6rem);
+```
+
+**Rule of thumb:** if two sections feel "close," double the gap. The vertical rhythm is the style's heartbeat — sections separated by less than 6rem start to read as a dashboard.
+
+---
+
+## Layout Patterns
+
+### Pattern 1: The Gallery Wall (editorial sections)
+```
+┌────────────────────────────────────────────┐
+│  THE ATELIER                    (micro)    │
+│                                             │
+│  Where craft survives           (serif h2)  │
+│                                             │
+│  Two paragraphs, 62ch,          (body)      │
+│  generous leading...                        │
+│                                             │
+│  ──────────────────────────────  (hairline) │
+│  EST. 1987 · MILANO            (micro)      │
+└────────────────────────────────────────────┘
+```
+
+### Pattern 2: Single Artwork (image-led)
+```
+┌────────────────────────────────────────────┐
+│                                             │
+│                                             │
+│            ┌─────────────┐                  │
+│            │  4:5 image  │   Headline       │
+│            │  (framed)   │   (right of      │
+│            │             │    image,        │
+│            └─────────────┘    vertically    │
+│                                centered)    │
+└────────────────────────────────────────────┘
+```
+
+### Pattern 3: The Collection (product/gallery grid)
+```
+┌────────────────────────────────────────────┐
+│  [image]     [image]     [image]           │
+│  Calfskin    Cashmere    Silk              │
+│  ¥48,000     ¥32,500     ¥21,000           │
+│                                             │
+│  3 columns, 48px gap, no borders,          │
+│  images 3:4, captions in micro type        │
+└────────────────────────────────────────────┘
+```
+
+---
+
+## Hierarchy
+
+| Level | Element | Treatment |
+|-------|---------|-----------|
+| Primary | Headline | Serif display, `clamp(1.8rem, 3vw, 2.75rem)` |
+| Secondary | Image or body | Full presence, never competing with headline |
+| Tertiary | Micro labels | 10px, wide tracking, muted #9A9185 |
+| Negative | Whitespace | The true primary element — reserve 60%+ per viewport |
+
+Only ONE primary focal point per viewport. If two elements demand attention, one of them is wrong.
+
+---
+
+## Responsive Behavior
+
+| Breakpoint | Layout Change |
+|------------|--------------|
+| **Desktop (1200px+)** | 12-col grid, content columns 2-7, full gallery spacing |
+| **Tablet (768px)** | Content columns 1-10, gaps compress by 20% |
+| **Mobile (375px)** | Single column, pad-x 1.5rem, section padding reduced 30%, images stay 3:4 but full-width |
+
+**Fluid via `clamp()`** everywhere — type, padding, gaps. The style must never feel "small" on mobile, just more intimate.
+
+---
+
+## Layout Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Full-width content blocks | Narrow measure (columns 2-7) |
+| Dense multi-column layouts | One object per viewport |
+| Cards with borders/shadows | Bare content + hairlines |
+| Zigzag alternating sections | Calm stacked or paired rhythm |
+| Overlapping text on text | Generous separation |
+| Grids at 100% capacity | 20% occupancy — space is the design |
+| Floating CTAs/badges over images | CTAs inline with text or none |
+| Equal 3-column feature grids | Sequential editorial sections |

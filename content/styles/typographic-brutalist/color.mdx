@@ -1,0 +1,83 @@
+# Color Architecture
+
+## Ground
+
+```css
+--color-ground: #F4F3EF; /* Paper white — never pure #FFF */
+--color-ground-dark: #0A0A0A; /* Optional dark mode ground — never pure #000 */
+--color-ground-elevated: #ECEBE6; /* Slightly darker paper for panels */
+```
+
+**Why paper white:** Typographic brutalism is a print aesthetic — zines, protest posters, risograph prints. Pure `#FFFFFF` reads as a screen, not paper. `#F4F3EF` has a faint warm cast that makes oversized black type feel printed rather than rendered. The dark variant (`#0A0A0A`) is for the "blackout poster" register — use one ground, never mix them on the same page.
+
+---
+
+## Text
+
+```css
+--color-text-primary: #111110; /* Near-black ink — never pure #000 */
+--color-text-secondary: #55554F; /* Muted ink for supporting copy */
+--color-text-muted: #8A8A82; /* For micro labels and metadata */
+```
+
+**Why near-black ink:** Pure `#000000` type on pure white is the "default document" look — it has no voice. `#111110` keeps the aggressive contrast while adding a trace of warmth that matches the paper ground. The secondary ink (`#55554F`) is where most body copy lives; it lets the display type own the purest contrast.
+
+---
+
+## Accent
+
+```css
+--color-accent: #E10600; /* Signal red — the signature brutalist accent */
+/* Alternatives: */
+--color-accent-blue: #0047FF; /* Electric blue — colder, more technical */
+--color-accent-orange: #FF4D00; /* Safety orange — most aggressive */
+```
+
+**Rule:** ONE stark accent maximum. The accent appears ONLY on:
+- The single most important statement on the page (usually the hero headline or primary CTA)
+- Active navigation state
+- One underline/strike-through highlight per section
+
+**Why red:** Red is the color of protest posters, warning labels, and emergency. It carries the same aggressive, unapologetic energy as the oversized type. It must be a *pure, saturated* red — muted or desaturated reds read as "branded" and polite, which kills the style.
+
+---
+
+## Semantic Colors
+
+```css
+--color-success: #1A7F37; /* Flat green — no glow, no gradient */
+--color-error: #D1242F;   /* Flat red — close to accent, used for errors only */
+--color-warning: #9A6700; /* Flat amber */
+```
+
+**Semantic colors are flat and unglossed.** No soft backgrounds, no tinted pills with shadows. A success state is a solid block of flat green with near-black text — like a stamp, not a toast notification.
+
+---
+
+## The Color Rule
+
+> **Color is a weapon, not a decoration.** One stark accent maximum. It appears only where the page must shout. Everything else is ink on paper — black, white, and the grays between.
+
+---
+
+## Gradient Policy
+
+**No gradients. Ever.** Gradients are the visual language of "digital smoothness" — the exact opposite of this style's flat, printed honesty. If you need to separate two areas, use:
+- A hard edge (1px hairline rule)
+- A solid color block
+- Overlapping type (the overlap itself creates separation)
+
+---
+
+## Color Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Pure #FFFFFF background | #F4F3EF paper white |
+| Pure #000000 text | #111110 near-black ink |
+| Muted, "branded" accent colors | Pure saturated red (#E10600), blue (#0047FF), or orange (#FF4D00) |
+| Multiple accent colors | ONE stark accent, used like a weapon |
+| Gradient backgrounds | Flat paper, solid blocks, hard edges |
+| Soft tinted surfaces | Flat color blocks with hard boundaries |
+| Purple or pastel accents | Red, electric blue, or safety orange |
+| Dark-mode-only with glow effects | Flat ink-on-paper, or flat blackout poster |

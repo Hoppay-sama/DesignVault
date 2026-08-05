@@ -1,0 +1,114 @@
+# Color Architecture
+
+## The Palette Philosophy
+
+Luxury Refined Restraint uses color the way a gallery uses lighting: the fewer sources, the more precious each one is. The palette is almost entirely neutrals — the "color" in the style comes from material tones (ivory, stone, charcoal, champagne) rather than hue. When a saturated color appears, it is a single, deliberate event, never a system.
+
+---
+
+## Ground — Ivory Mode (primary)
+
+```css
+--color-ground: #FAF7F2;           /* Warm ivory — never pure white */
+--color-ground-elevated: #F3EEE6;  /* Slightly deeper for panels */
+--color-ground-deep: #EDE6DA;      /* Footer and contrast sections */
+```
+
+**Why ivory, not white:** Pure `#FFFFFF` reads as "screen," not "material." Warm ivory (#FAF7F2) suggests plaster, paper, or limestone — physical luxury surfaces. It also makes skin tones in photography look richer, which matters for fashion and beauty brands.
+
+---
+
+## Ground — Noir Mode (dark variant)
+
+```css
+--color-ground-dark: #141210;          /* Espresso-black, never #000 */
+--color-ground-dark-elevated: #1D1A17; /* Raised surfaces in dark mode */
+--color-text-on-dark: #EDE6DA;         /* Warm ivory text */
+```
+
+**When to use noir:** Editorial "expensive darkness" for fragrance, film, and evening-wear launches. The near-black carries warm undertones (espresso, not blue-black) to keep the mood intimate rather than cold. Never use pure `#000` — the depth of the room would disappear.
+
+---
+
+## Text
+
+```css
+--color-text-primary: #262220;   /* Soft black — ink, not pure black */
+--color-text-secondary: #6E675E; /* Warm gray for supporting copy */
+--color-text-muted: #9A9185;     /* Metadata, captions, dates */
+--color-text-on-image: #F5F1EA;  /* Ivory for text over photography */
+```
+
+**Why soft black:** `#000000` text on ivory is harsh — it pulls the eye to every letter. `#262220` sits quieter on the page and photographs better, which matters for luxury brands that live on Instagram and in lookbooks.
+
+---
+
+## Accent
+
+```css
+--color-accent-champagne: #B9975B;  /* Signature champagne gold */
+--color-accent-oxblood: #6B2323;    /* Editorial option — oxblood */
+--color-accent-emerald: #23402F;    /* Heritage option — deep emerald */
+```
+
+**Rule:** ONE accent, ONE moment per page. The accent may appear on:
+- The single primary CTA — or none at all (many luxury pages have zero CTAs)
+- One editorial detail (an italic serif word, a hairline underline)
+- Hover states (link underline, image frame)
+
+**Why champagne:** Gold at 60-70% saturation on ivory reads as jewelry, not Vegas. It catches light the way the metal does — subtle, reflective, expensive. Never use metallic gradients; use flat champagne and let the surrounding texture imply the sheen.
+
+---
+
+## Semantic Colors
+
+```css
+--color-success: #3E5C4A;  /* Muted moss */
+--color-error: #7A3B32;    /* Faded rust */
+--color-warning: #8A6D3B;  /* Muted brass */
+```
+
+All semantic colors are desaturated to the same register as the neutrals — a status message must never shout louder than the product photography.
+
+---
+
+## Hairline & Divider
+
+```css
+--color-hairline: #E0D9CC;      /* On ivory */
+--color-hairline-dark: #2E2A26; /* On noir */
+```
+
+The hairline is a design element, not a utility. 1px lines in this warm neutral separate content the way museum vitrines separate objects — visible but quiet.
+
+---
+
+## The Color Rule
+
+> **If a hue appears, it must be the only hue on the page.** Neutrals carry 95% of the surface area. The single accent is a jewel — scarcity is what makes it valuable.
+
+---
+
+## Gradient Policy
+
+**No gradients — ever.** Luxury restraint has no room for color transitions. Depth comes from:
+- Layered neutrals (ground → elevated → deep)
+- Photography with natural light falloff
+- Fine grain that unifies tones
+
+The only exception: an extremely subtle vignette on noir-mode photography (radial darkening at edges, 4-6% opacity).
+
+---
+
+## Color Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Pure `#FFFFFF` background | Warm ivory `#FAF7F2` |
+| Pure `#000000` background | Espresso noir `#141210` |
+| Metallic gradient text | Flat champagne `#B9975B` |
+| Multiple accents (gold + blue + red) | ONE accent per page |
+| Neon or saturated hues | Desaturated material tones |
+| Blue/purple "tech" palette | Warm stone, ivory, charcoal |
+| Bright red CTA buttons | Champagne outline or text-link CTA |
+| Color everywhere "for life" | Color as a rare event |

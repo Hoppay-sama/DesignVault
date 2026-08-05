@@ -1,0 +1,94 @@
+# Texture & Surface
+
+## Primary Texture: Flat Paper
+
+**The defining surface is flatness.** No gradients, no shadows, no glass, no depth. The page is a sheet of paper — or a poster — and everything on it is printed ink. This flatness is what makes the oversized type feel physical. Depth is created by *overlap* (type over type, type over image), never by shadow.
+
+```css
+/* The entire surface treatment: */
+body {
+  background: #F4F3EF; /* paper */
+  box-shadow: none;
+  text-shadow: none;
+}
+```
+
+---
+
+## Secondary Texture: Visible Grid Lines
+
+**Exposed structure.** The layout grid is drawn on the page — 1px hairlines at column boundaries, section dividers, and baseline rules. This is the "blueprint" texture: the design shows its skeleton instead of hiding it.
+
+```css
+.grid-line {
+  border-left: 1px solid #D8D7D0; /* visible column rule */
+}
+.section-rule {
+  border-top: 2px solid #111110; /* heavy section divider */
+}
+```
+
+**Parameters:**
+- Column rules: 1px, `#D8D7D0` (subtle — the skeleton, not the content)
+- Section dividers: 2px solid `#111110` (heavy — a deliberate cut)
+- Baseline rules: 1px dashed `#C9C8C1` (technical, blueprint-like)
+
+---
+
+## Tertiary Texture: Halftone & Risograph on Images
+
+**Images are never raw.** Photography must be processed to match the print aesthetic:
+
+| Processing | Effect | When to Use |
+|-----------|--------|-------------|
+| High-contrast B&W threshold | Pure black/white, no gray | Portraits, product shots |
+| Halftone dots | Print-style dot pattern | Editorial images, backgrounds |
+| Risograph misregistration | Offset color layers, imperfect overlap | Poster-style graphics |
+| Posterize (3-4 levels) | Flat tonal bands | Any photography |
+| Duotone (black + accent) | Two-color print look | When the accent color is used |
+
+**Implementation note:** Pre-process images as static assets (Photoshop, ImageMagick, or a halftone generator) rather than relying on CSS filters — you want *control* over the dot pattern, not a generic filter.
+
+---
+
+## Surface Rules
+
+| Surface | Treatment |
+|---------|-----------|
+| Background | Flat paper `#F4F3EF`, no texture overlay |
+| Panels/Blocks | Flat `#ECEBE6` or solid accent block, hard edges |
+| Buttons | Flat fill (near-black or accent), no border radius above 2px, no shadow |
+| Navigation | Transparent, inverts to solid on hover |
+| Dividers | 2px solid near-black — a cut, not a hairline |
+| Images | Processed (halftone, threshold, posterize) — never raw |
+| Cards | None — this style doesn't use cards. Content sits directly on the paper |
+
+**No glossy, no glassmorphism, no gradients, no drop shadows.** Surfaces feel like paper, cardboard, or concrete — never digital-smooth.
+
+---
+
+## Image Processing Rules
+
+**NEVER use raw, unprocessed photography.** Every image must pass through at least one processing step:
+
+| Processing | Effect | When to Use |
+|-----------|--------|-------------|
+| Threshold (B&W) | Pure black/white, maximum contrast | Primary images |
+| Halftone | Print-style dots | Editorial imagery |
+| Posterize | Flat tonal bands | Portraits, still life |
+| Duotone | Two-color (black + accent) | Statement images |
+| Grain + contrast | Aged print look | Background textures |
+
+---
+
+## Texture Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Drop shadows on cards or type | Overlap elements — overlap creates depth |
+| Gradient overlays on images | Threshold, halftone, or posterize |
+| Glassmorphism / backdrop-blur | Flat surfaces with hard edges |
+| Smooth 3D renders | Processed, flat, print-like imagery |
+| Rounded corners everywhere | Sharp corners (border-radius: 0-2px max) |
+| Subtle "premium" grain | No grain on surfaces — flat paper only |
+| Glow or neon effects | Flat solid color blocks |

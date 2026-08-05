@@ -1,0 +1,98 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Editorial serif — refined, high-contrast, slightly narrow |
+| **Examples** | Canela, Domaine Display, Tiempos Headline, Cormorant Garamond (free), Marcellus (free), Freight Display |
+| **Weight** | 300-500 (light to medium — never black; luxury whispers) |
+| **Tracking** | 0 to -0.01em (natural; never tight, never loose on headlines) |
+| **Size** | `clamp(2.5rem, 6vw, 5.5rem)` — large but never viewport-dominating |
+| **Case** | Sentence case or title case. NEVER all-caps display (all-caps is retail, not luxury) |
+| **Italic** | Available and encouraged for a single emphasized word |
+
+**Why a serif:** Serifs carry history — 500 years of print authority. A high-contrast editorial serif (thin hairlines, generous bowls) signals craft the way a hand-stitched seam does. The letterforms are the brand's monogram.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Same serif family or a refined humanist sans |
+| **Examples** | EB Garamond (free), Freight Text, Tiempos Text; or Söhne, Neue Haas Grotesk, Avenir Next |
+| **Weight** | 400 (regular only — no bold body text) |
+| **Tracking** | 0.01-0.02em (slightly open — luxury typography breathes) |
+| **Size** | Small — `clamp(0.9rem, 1.2vw, 1.05rem)` (14-16px) |
+| **Line Height** | 1.7-1.9 (extreme leading — one of the style's signatures) |
+| **Measure** | 55-65 characters per line, max-width 62ch |
+
+**Why small body + huge leading:** The ratio of text to whitespace IS the luxury signal. Small text with generous line-height creates air between every line — the page feels hand-set, not machine-rendered. It slows the reader down, which is the point: luxury asks for your time.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Sans-serif small caps or uppercase, letter-spaced |
+| **Examples** | Karla (500), Jost (400), Montserrat Light (avoid — overused); premium: Söhne Mono or Neue Haas Grotesk |
+| **Weight** | 400-500 |
+| **Tracking** | 0.2em-0.35em (very wide — the wide tracking is the luxury tell) |
+| **Size** | 10-11px |
+| **Case** | UPPERCASE or true small caps |
+
+**Usage:** Section labels ("THE ATELIER"), dates ("EST. 1987"), coordinates, materials, garment details. These micro labels do the "product specification" work that makes a fashion house feel technical and precise.
+
+---
+
+## Type Scale
+
+**Ratio:** 1.25x (minor third) — deliberately conservative. Luxury doesn't shout with size.
+
+```
+Display:   clamp(2.5rem, 6vw, 5.5rem)   — 1.25^4
+Headline:  clamp(1.8rem, 3vw, 2.75rem)  — 1.25^3
+Subhead:   clamp(1.25rem, 2vw, 1.5rem)  — 1.25^2
+Body:      clamp(0.9rem, 1.2vw, 1.05rem) — baseline
+Micro:     10-11px                        — 0.68x
+```
+
+Contrast comes from spacing and weight, not from a dramatic ratio. A 4.4x jump would be theatrical; this style is architectural.
+
+---
+
+## Font Pairing Logic
+
+**Serif display + serif body:** The most restrained pairing — one family, two roles. Canela display + Freight Text body is the classic combination. Maximum coherence, minimal noise.
+
+**Serif display + humanist sans body:** The modern luxury pairing — Söhne body under Domaine headlines. The sans adds contemporary precision; the serif adds heritage. Used by Bottega Veneta and Aesop.
+
+**The label voice:** Micro labels should come from the SANS family in the pairing (wide-tracked uppercase), never a second serif and never monospace. Monospace breaks the material, handcrafted illusion.
+
+**Never mix:** More than 2 families. No geometric sans (Futura, Montserrat) with serif — too 2015-startup. No slab serifs. No display sans with display serif together.
+
+---
+
+## Micro-Typography Rules
+
+- Use true ligatures (`fi`, `fl`) — set `font-feature-settings: "liga", "dlig"` where available
+- Use old-style or lining figures consistently; tabular for prices and dates
+- Hanging punctuation on quotes in body text
+- Hyphens: use `&hyphen;`/soft hyphens with `hyphens: auto` in justified text; em-dashes with thin spaces in editorial copy
+- Small caps via the font's `smcp` feature, not `text-transform: uppercase` (true small caps preserve optical sizing)
+
+---
+
+## Typography Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| All-caps display headlines | Sentence case serif |
+| Bold/black weights | Light to medium (300-500) |
+| Inter, Roboto, Arial | Editorial serif + refined sans |
+| Monospace labels | Wide-tracked uppercase sans |
+| Tight leading (1.2) | Extreme leading (1.7-1.9) |
+| Huge display type (10vw+) | Restrained `clamp(2.5rem, 6vw, 5.5rem)` |
+| More than 2 families | One serif family + one sans |

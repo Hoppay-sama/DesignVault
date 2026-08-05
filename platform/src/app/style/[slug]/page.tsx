@@ -251,6 +251,7 @@ export default function StylePage({ params }: StylePageProps) {
             exactPrompt={style.exactPrompt}
             templatePrompt={style.templatePrompt}
             styleName={style.title}
+            testedWith={style.testedWith}
           />
         )}
       </div>

@@ -1,0 +1,84 @@
+# Typography System
+
+## Display Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Heavy grotesk, condensed grotesk, or expanded black — type with a physical presence |
+| **Examples** | Archivo Black (900), Anton (400 condensed), Monument Extended (800), Archivo Expanded (800), Space Grotesk (700) |
+| **Weight** | 700-900 — the heaviest weights available. No "medium" display type |
+| **Tracking** | -0.03em to -0.05em (tight, stamped) OR +0.08em to +0.12em (wide, monumental). Never default |
+| **Size** | Monumental — `clamp(4rem, 15vw, 14rem)` for hero statements |
+| **Transform** | UPPERCASE. Always. Lowercase display type reads as "modern SaaS," not brutalist |
+
+**Why these fonts:** Archivo Black and Anton are poster fonts — designed for headlines that must be read from across the street. They have no "polite" weights, which forces the design to commit. The condensed register (Anton) packs more characters per line, letting a full sentence become a single massive line. The expanded register (Archivo Expanded) does the opposite — each letter becomes a sculptural object.
+
+---
+
+## Body Typeface
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Neutral grotesk — quiet enough to let display type shout |
+| **Examples** | Archivo (400/500), Space Grotesk (400/500), Public Sans (400/500) |
+| **Weight** | 400-500 |
+| **Tracking** | 0 to 0.01em |
+| **Size** | `clamp(0.9rem, 1.2vw, 1.05rem)` |
+| **Line Height** | 1.5-1.6 |
+
+**Why neutral body:** The body type is the straight man. It must be completely unremarkable so the display type's aggression reads as intentional. If the body font has too much personality, the page becomes noise instead of a statement.
+
+---
+
+## Micro / Label Type
+
+| Property | Specification |
+|----------|--------------|
+| **Register** | Monospace |
+| **Examples** | Space Mono, IBM Plex Mono, JetBrains Mono |
+| **Weight** | 400-500 |
+| **Tracking** | 0.1em-0.2em (wide, technical) |
+| **Size** | 10-12px |
+| **Transform** | UPPERCASE |
+
+**Usage:** Section numbers (`01 / MANIFESTO`), timestamps, coordinates, edition numbers, technical marginalia. The mono micro-labels are the "fine print" of the poster — they signal that the aggression is deliberate and documented.
+
+---
+
+## Type Scale
+
+**Ratio:** 1.618x (golden ratio) with deliberate gaps — the scale jumps, it doesn't glide.
+
+```
+Hero statement: clamp(4rem, 15vw, 14rem)   — the weapon
+Section title:  clamp(2.5rem, 7vw, 6rem)   — 1.618x down
+Subhead:        clamp(1.25rem, 2.5vw, 2rem) — 1.618x down
+Body:           clamp(0.9rem, 1.2vw, 1.05rem) — baseline
+Micro:          10-12px                      — the fine print
+```
+
+**The gap between hero and section title is intentional.** A smooth 1.25x scale would make every level feel like a slightly bigger paragraph. The brutalist scale has *tiers* — you're either shouting, speaking, or whispering.
+
+---
+
+## Font Pairing Logic
+
+**Display + Body:** Heavy grotesk display + neutral grotesk body creates the "poster + fine print" pairing. The display type is the artwork; the body is the exhibition label.
+
+**Display + Micro:** Heavy display + monospace micro creates the "statement + documentation" pairing — the shout and the footnote. This is the signature brutalist combination.
+
+**Never mix:** Maximum 2 typeface families plus the mono system font. Three families with different personalities turns the page into a ransom note (in the bad way).
+
+---
+
+## Typography Don'ts
+
+| ❌ Don't | ✅ Do Instead |
+|----------|--------------|
+| Inter, Roboto, or Arial as display | Archivo Black, Anton, Monument Extended |
+| Medium (500) display weights | 700-900 only |
+| Default tracking | Tight (-0.03em) or wide (+0.08em), never default |
+| Sentence case headlines | UPPERCASE always |
+| Smooth 1.25x scale | Tiered scale with deliberate gaps |
+| More than 2 families + mono | Display + body + mono system font |
+| Rounded or soft typefaces | Sharp, geometric, mechanical letterforms |

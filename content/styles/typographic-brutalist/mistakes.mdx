@@ -1,0 +1,79 @@
+# Common Mistakes
+
+## Mistake 1: Rounded Corners Everywhere
+
+**What people do:** Add `border-radius: 12px` or `16px` to buttons, cards, and containers.
+
+**Why it fails:** Rounded corners are the universal signifier of "friendly modern app." They instantly drag the page from protest poster to SaaS dashboard. The style's aggression lives in its sharpness — a sharp corner is a cut; a rounded corner is a hug.
+
+**Fix:** `border-radius: 0` for everything. Maximum 2px on buttons. If you need to soften something, use a hard edge with more whitespace instead.
+
+---
+
+## Mistake 2: Adding Soft Shadows and Depth
+
+**What people do:** Add `box-shadow` to cards, `drop-shadow` to type, or subtle gradients to create "depth."
+
+**Why it fails:** Brutalism is flat by principle — FLATNESS IS HONESTY. Shadows simulate a 3D world the style refuses to pretend exists. Depth in brutalism comes from overlap and scale, never from simulated lighting.
+
+**Fix:** Remove all shadows. Create separation with 2px solid rules, solid color blocks, and type overlapping imagery.
+
+---
+
+## Mistake 3: Polite, Centered Headlines
+
+**What people do:** Use a 48px centered headline that reads like a blog post title.
+
+**Why it fails:** Centered = balanced = polite. The brutalist headline must be a statement — massive, left-anchored, bleeding off the edge. A centered headline has no aggression; it's asking for attention instead of demanding it.
+
+**Fix:** `clamp(4rem, 15vw, 14rem)`, uppercase, left-aligned, overflowing the right edge. The headline should feel stamped, not typed.
+
+---
+
+## Mistake 4: Using Gradients
+
+**What people do:** Add a subtle gradient to the hero background or a gradient button.
+
+**Why it fails:** Gradients are the single most common AI-slop tell. They signal "digital smoothness" and instantly break the paper metaphor. The style's color system is flat blocks — a gradient is a different design language entirely.
+
+**Fix:** Flat paper background. If you need visual interest, use a processed image (halftone, threshold) or a solid accent block.
+
+---
+
+## Mistake 5: Over-Animating
+
+**What people do:** Add bounce easing, spring physics, staggered fade-ins, and scroll-triggered choreography.
+
+**Why it fails:** Motion in brutalism is a stamp, not a dance. Bounce and spring feel playful and cheap — the opposite of aggressive. Over-animation turns the page into a "modern interactive site," which is exactly what this style rejects.
+
+**Fix:** Hard cuts (`steps(1)`) and heavy deceleration (`cubic-bezier(0.16, 1, 0.3, 1)`). One marquee maximum. Hover states are instant inversions, not transitions.
+
+---
+
+## Mistake 6: Making It "Clean Brutalist"
+
+**What people do:** Keep the big type but polish everything else — smooth images, tidy alignment, subtle colors, generous spacing.
+
+**Why it fails:** Clean brutalism is just minimalism with big fonts. The style's identity comes from the *roughness* — the broken grid, the processed imagery, the hard cuts. Without the roughness, you've built a generic modern site with a big headline.
+
+**Fix:** Commit to the roughness. Break the grid. Process the images. Use the stark accent. If it doesn't feel slightly uncomfortable, it isn't brutalist.
+
+---
+
+## Mistake 7: Using Inter or Generic Fonts
+
+**What people do:** Use Inter, Roboto, or Arial for the display type because they're "safe."
+
+**Why it fails:** Inter is the statistical default — the font AI models reach for when nothing is specified. It has no personality, no weight, no statement. A brutalist headline in Inter is a contradiction: the style demands type with physical presence.
+
+**Fix:** Archivo Black, Anton, Monument Extended, or Space Grotesk 700. Heavy weights only. If the font has a "medium" weight, it's not brutalist enough.
+
+---
+
+## Mistake 8: Breaking the Grid Without Purpose
+
+**What people do:** Randomly misalign elements with no visible structure, creating chaos.
+
+**Why it fails:** BROKEN GRID AS INTENT requires the grid to be *visible* and the breaks to be *decisions*. Random misalignment without visible column rules reads as sloppy, not aggressive. The tension between structure and breakage is the whole point.
+
+**Fix:** Draw the grid (visible column rules, section dividers), then break it deliberately — anchor start edges, overflow with intent, overlap specific elements. Every break should look like a choice.

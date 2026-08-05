@@ -1,0 +1,81 @@
+# Motion Principles
+
+## Philosophy
+
+Motion in Typographic Brutalist is **a stamp, not a dance**. Elements don't glide in — they slam into place. No bounce, no spring, no overshoot, no float. When something appears, it appears *now*, with the finality of a letterpress impression. The style's aggression extends to its motion: hard cuts, instant state changes, and heavy reveals.
+
+---
+
+## Entrance Animations
+
+| Element | Animation | Duration | Easing | Delay |
+|---------|-----------|----------|--------|-------|
+| Hero display type | Clip-path wipe (top-to-bottom) or hard cut | 400-600ms | `steps(1)` or `cubic-bezier(0.16, 1, 0.3, 1)` | 0ms |
+| Secondary type | Hard opacity cut (no fade) | 150ms | `steps(1)` | 150ms |
+| Body text blocks | Opacity fade | 300ms | `ease-out` | 300ms |
+| Micro labels | Hard cut | 100ms | `steps(1)` | 400ms |
+| Marquee strip | Continuous translateX loop | 20-30s linear | `linear` | 0ms |
+| CTA button | Background invert (instant) | 0ms | `steps(1)` | — |
+
+**Key easing:** `cubic-bezier(0.16, 1, 0.3, 1)` — fast start, heavy deceleration. The element arrives quickly and stops dead. For the most aggressive moments, use `steps(1)` — the element simply *exists* one frame and not the next.
+
+---
+
+## Scroll Behavior
+
+| Effect | Specification |
+|--------|--------------|
+| Marquee strips | Continuous horizontal scroll, `translateX(-50%)` loop, 20-30s per loop |
+| Sticky display type | Section title sticks while content scrolls past (position: sticky) |
+| Scroll-linked scale | Display type scales from 1.0 → 1.15 as it enters viewport (subtle) |
+| Text reveals | Clip-path or hard mask reveals — never soft fades for display type |
+| Parallax | None. Parallax is a "smooth digital" effect; this style is flat |
+
+**Scroll choreography is minimal.** The type is already the spectacle — it doesn't need scroll-triggered theatrics. One marquee and one sticky statement per page is the maximum.
+
+---
+
+## Interaction States
+
+| Element | Hover State | Active State |
+|---------|------------|-------------|
+| Navigation links | Background inverts to near-black, text to paper (instant) | — |
+| CTA buttons | Background inverts to accent, text to paper (instant) | Slight translateY(2px) |
+| Text links | Underline appears or strike-through appears (instant) | — |
+| Cards | Border color → accent (instant) | — |
+
+**All hover states are instant.** No 200ms transitions, no easing curves on hover. The brutalist interaction is binary: it's either off or on. A transition implies hesitation; this style never hesitates.
+
+---
+
+## Reduced Motion
+
+When `prefers-reduced-motion: reduce`:
+- All entrance animations collapse to instant appearance (no clip-path, no fade)
+- Marquee strips freeze in place (or become a static overflow strip)
+- No scroll-linked scale
+- Hover states remain instant (they already are)
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## What NOT to Animate
+
+| ❌ Never animate | Why |
+|-----------------|-----|
+| Bounce or spring easing | Playful physics contradict the aggressive, flat register |
+| Smooth glides or floats | Motion must feel stamped, not drifted |
+| Color transitions | Color changes are instant state flips, not fades |
+| Rotation on hover | Gimmicky — the type is already the statement |
+| Every element revealing | Brutalism is about the *absence* of decoration, including motion decoration |
+| Parallax layers | Depth effects contradict the flat, printed surface |
+| Gradient or glow pulses | Digital effects that break the paper metaphor |

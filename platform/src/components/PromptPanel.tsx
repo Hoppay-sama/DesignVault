@@ -6,13 +6,24 @@ interface PromptPanelProps {
   exactPrompt?: string;
   templatePrompt?: string;
   styleName: string;
+  testedWith?: string[];
 }
 
-export function PromptPanel({ exactPrompt, templatePrompt, styleName }: PromptPanelProps) {
+export function PromptPanel({
+  exactPrompt,
+  templatePrompt,
+  styleName,
+  testedWith,
+}: PromptPanelProps) {
   const [activeTab, setActiveTab] = useState<'exact' | 'template'>('exact');
   const [copied, setCopied] = useState(false);
 
-  const currentPrompt = activeTab === 'exact' ? exactPrompt : templatePrompt;
+  // Guard: if the active tab has no prompt (e.g. missing template on partial
+  // styles), fall back to the one that exists so the panel never shows empty.
+  const currentPrompt =
+    activeTab === 'exact'
+      ? exactPrompt
+      : templatePrompt ?? exactPrompt;
 
   const handleCopy = async () => {
     if (currentPrompt) {
@@ -32,7 +43,8 @@ export function PromptPanel({ exactPrompt, templatePrompt, styleName }: PromptPa
       <div className="flex gap-2 mb-6">
         <button
           onClick={() => setActiveTab('exact')}
-          className={`px-6 py-3 rounded-lg font-medium transition-colors ${
+          disabled={!exactPrompt}
+          className={`px-6 py-3 rounded-lg font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed ${
             activeTab === 'exact'
               ? 'bg-accent text-accent-text'
               : 'bg-ground-elevated border border-border text-text-secondary hover:text-text-primary'
@@ -42,7 +54,8 @@ export function PromptPanel({ exactPrompt, templatePrompt, styleName }: PromptPa
         </button>
         <button
           onClick={() => setActiveTab('template')}
-          className={`px-6 py-3 rounded-lg font-medium transition-colors ${
+          disabled={!templatePrompt}
+          className={`px-6 py-3 rounded-lg font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed ${
             activeTab === 'template'
               ? 'bg-accent text-accent-text'
               : 'bg-ground-elevated border border-border text-text-secondary hover:text-text-primary'
@@ -61,10 +74,16 @@ export function PromptPanel({ exactPrompt, templatePrompt, styleName }: PromptPa
               {activeTab === 'exact' ? 'EXACT REPLICA' : 'PARAMETERIZED TEMPLATE'}
             </span>
             <span className="text-xs text-text-muted">{charCount} characters</span>
+            {testedWith && testedWith.length > 0 && (
+              <span className="text-xs text-text-muted hidden sm:inline">
+                Tested with: {testedWith.join(', ')}
+              </span>
+            )}
           </div>
           <button
             onClick={handleCopy}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-accent text-accent-text font-medium hover:scale-105 transition-transform"
+            disabled={!currentPrompt}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-accent text-accent-text font-medium hover:scale-105 transition-transform disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
           >
             {copied ? (
               <>
