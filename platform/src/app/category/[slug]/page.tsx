@@ -4,6 +4,7 @@ import { SiteHeader } from '@/components/SiteHeader';
 import { StyleCard } from '@/components/StyleGrid';
 import { getAllStyles } from '@/lib/content';
 import { StyleEntry } from '@/lib/types';
+import { STYLE_CLUSTERS } from '@/lib/clusters';
 
 /** Normalizes a display tag ("Dark & Moody") into a URL slug ("dark-moody"). */
 export function tagToSlug(tag: string): string {
@@ -50,6 +51,9 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   if (!tag) {
     notFound();
   }
+
+  // Cluster metadata: when the tag is a cluster name, surface its shared DNA.
+  const cluster = STYLE_CLUSTERS.find((c) => tagToSlug(c.name) === slug);
 
   const filtered: StyleEntry[] = styles.filter((style) =>
     style.tags.some((t) => tagToSlug(t) === slug)
@@ -98,7 +102,14 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             {tag}
           </h1>
           <p className="text-lg text-text-secondary max-w-2xl">
-            Every style tagged <strong className="text-text-primary">{tag}</strong> in the vault.
+            {cluster ? (
+              cluster.sharedDna
+            ) : (
+              <>
+                Every style tagged{' '}
+                <strong className="text-text-primary">{tag}</strong> in the vault.
+              </>
+            )}
           </p>
         </div>
 

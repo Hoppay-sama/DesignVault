@@ -3,6 +3,7 @@
 import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { StyleEntry, StyleAxis } from '@/lib/types';
+import { STYLE_CLUSTERS } from '@/lib/clusters';
 
 interface AxisRange {
   min: number;
@@ -37,7 +38,6 @@ const AXIS_KEYS: (keyof StyleAxis)[] = [
 ];
 
 const DEFAULT_RANGE: AxisRange = { min: 1, max: 6 };
-const VISIBLE_TAG_COUNT = 6;
 
 function createDefaultAxisFilters(): AxisFiltersState {
   return {
@@ -59,7 +59,6 @@ export function StyleFilters({ styles, onFilteredStyles }: StyleFiltersProps) {
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [axisFilters, setAxisFilters] = useState<AxisFiltersState>(createDefaultAxisFilters);
   const [showAxisFilters, setShowAxisFilters] = useState(false);
-  const [showAllTags, setShowAllTags] = useState(false);
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -74,27 +73,16 @@ export function StyleFilters({ styles, onFilteredStyles }: StyleFiltersProps) {
   // can tell "our own navigation" apart from back/forward.
   const pendingRef = useRef<string | null>(null);
 
-  // Compute tags sorted by frequency from the styles data
-  const { topTags, allTagsByFrequency, tagCounts } = useMemo(() => {
+  // Cluster pills: one per style cluster (A→H), counts from actual tag data.
+  const clusterCounts = useMemo(() => {
     const counts: Record<string, number> = {};
-    for (const style of styles) {
-      for (const tag of style.tags) {
-        counts[tag] = (counts[tag] || 0) + 1;
-      }
+    for (const cluster of STYLE_CLUSTERS) {
+      counts[cluster.name] = styles.filter((style) =>
+        style.tags.includes(cluster.name)
+      ).length;
     }
-
-    const sorted = Object.entries(counts)
-      .sort(([, a], [, b]) => b - a);
-
-    return {
-      topTags: sorted.slice(0, VISIBLE_TAG_COUNT).map(([tag]) => tag),
-      allTagsByFrequency: sorted.map(([tag]) => tag),
-      tagCounts: counts,
-    };
+    return counts;
   }, [styles]);
-
-  const visibleTags = showAllTags ? allTagsByFrequency : topTags;
-  const hasMoreTags = allTagsByFrequency.length > VISIBLE_TAG_COUNT;
 
   const applyFilters = useCallback(
     (tag: string | null, axes: AxisFiltersState) => {
@@ -262,28 +250,20 @@ export function StyleFilters({ styles, onFilteredStyles }: StyleFiltersProps) {
         >
           All
         </button>
-        {visibleTags.map((tag) => (
+        {STYLE_CLUSTERS.map((cluster) => (
           <button
-            key={tag}
-            onClick={() => handleTagClick(tag)}
+            key={cluster.id}
+            onClick={() => handleTagClick(cluster.name)}
             className={`px-3 py-1.5 rounded-full text-xs transition-colors ${
-              activeTag === tag
+              activeTag === cluster.name
                 ? 'bg-accent text-accent-text'
                 : 'bg-ground-elevated border border-border text-text-secondary hover:text-text-primary hover:border-border-hover'
             }`}
           >
-            {tag}
-            <span className="ml-1 opacity-50">{tagCounts[tag]}</span>
+            {cluster.name}
+            <span className="ml-1 opacity-50">{clusterCounts[cluster.name]}</span>
           </button>
         ))}
-        {hasMoreTags && (
-          <button
-            onClick={() => setShowAllTags(!showAllTags)}
-            className="px-3 py-1.5 rounded-full text-xs text-text-muted hover:text-text-secondary transition-colors"
-          >
-            {showAllTags ? 'Show less' : `+${allTagsByFrequency.length - VISIBLE_TAG_COUNT} more`}
-          </button>
-        )}
       </div>
 
       {/* Axis Filter Toggle */}

@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { StyleEntry } from '@/lib/types';
+import { STYLE_CLUSTERS } from '@/lib/clusters';
 import { StyleFilters } from './StyleFilters';
 import { StyleCard } from './StyleGrid';
 
@@ -15,6 +16,18 @@ export function StyleGallery({ styles }: StyleGalleryProps) {
   const handleFilteredStyles = useCallback((filtered: StyleEntry[]) => {
     setFilteredStyles(filtered);
   }, []);
+
+  // Group the (already filtered) styles into cluster sections, A→H order.
+  // Empty clusters are skipped. When a tag filter is active, filteredStyles
+  // only contains that cluster's styles, so a single section renders.
+  const grouped = useMemo(
+    () =>
+      STYLE_CLUSTERS.map((cluster) => ({
+        cluster,
+        styles: filteredStyles.filter((style) => style.tags.includes(cluster.name)),
+      })).filter((group) => group.styles.length > 0),
+    [filteredStyles]
+  );
 
   return (
     <>
@@ -43,9 +56,31 @@ export function StyleGallery({ styles }: StyleGalleryProps) {
       <section id="gallery" className="px-6 lg:px-8 pb-20">
         <div className="max-w-7xl mx-auto">
           {filteredStyles.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredStyles.map((style) => (
-                <StyleCard key={style.slug} style={style} />
+            <div className="space-y-16">
+              {grouped.map(({ cluster, styles }) => (
+                <section key={cluster.id} aria-labelledby={`cluster-${cluster.id}`}>
+                  <header className="mb-6">
+                    <div className="flex items-baseline justify-between gap-4">
+                      <h2
+                        id={`cluster-${cluster.id}`}
+                        className="font-display text-2xl md:text-3xl leading-tight tracking-tight"
+                      >
+                        {cluster.name}
+                      </h2>
+                      <span className="font-mono-label text-xs text-text-muted tracking-widest shrink-0">
+                        {styles.length} {styles.length === 1 ? 'STYLE' : 'STYLES'}
+                      </span>
+                    </div>
+                    <p className="text-sm text-text-muted mt-1 max-w-2xl">
+                      {cluster.sharedDna}
+                    </p>
+                  </header>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {styles.map((style) => (
+                      <StyleCard key={style.slug} style={style} />
+                    ))}
+                  </div>
+                </section>
               ))}
             </div>
           ) : (
