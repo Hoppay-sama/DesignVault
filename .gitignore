@@ -93,3 +93,6 @@ $RECYCLE.BIN/
 platform/node_modules/
 platform/.next/
 platform/out/
+
+# Docs
+docs/
