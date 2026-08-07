@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import { getStyleBySlug, getAllStyleSlugs } from '@/lib/content';
 import { PromptPanel } from '@/components/PromptPanel';
 import { StyleToc, TocItem } from '@/components/StyleToc';
+import { PreviewFontProvider } from '@/components/preview/font-registry';
+import { MiniPageMockup } from '@/components/preview/MiniPageMockup';
 
 interface StylePageProps {
   params: Promise<{
@@ -111,6 +113,15 @@ export default async function StylePage({ params }: StylePageProps) {
                 ))}
               </div>
             </div>
+
+            {/* Live Preview */}
+            {style.preview ? (
+              <section aria-label="Live style preview" className="mb-16">
+                <PreviewFontProvider>
+                  <MiniPageMockup style={style} />
+                </PreviewFontProvider>
+              </section>
+            ) : null}
 
             {/* Visual DNA */}
             {style.visualDna && (
