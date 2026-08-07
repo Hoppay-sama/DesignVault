@@ -30,6 +30,7 @@ export function StyleCard({ style }: StyleCardProps) {
   return (
     <Link
       href={`/style/${style.slug}`}
+      data-testid="style-card"
       data-slug={style.slug}
       className="bg-ground-elevated border border-border rounded-xl overflow-hidden hover:border-border-hover transition-colors group"
     >

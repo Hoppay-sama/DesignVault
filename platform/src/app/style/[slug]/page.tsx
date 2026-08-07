@@ -155,7 +155,7 @@ export default async function StylePage({ params }: StylePageProps) {
               <section id="typography" className="mb-16 scroll-mt-24">
                 <h2 className="font-display text-2xl mb-6">Typography System</h2>
                 <div className="bg-ground-elevated border border-border rounded-lg p-6">
-                  <pre className="text-text-secondary text-sm whitespace-pre-wrap font-mono">
+                  <pre className="text-text-secondary text-sm whitespace-pre-wrap font-mono overflow-x-auto">
                     {style.typography}
                   </pre>
                 </div>
@@ -167,7 +167,7 @@ export default async function StylePage({ params }: StylePageProps) {
               <section id="color" className="mb-16 scroll-mt-24">
                 <h2 className="font-display text-2xl mb-6">Color Architecture</h2>
                 <div className="bg-ground-elevated border border-border rounded-lg p-6">
-                  <pre className="text-text-secondary text-sm whitespace-pre-wrap font-mono">
+                  <pre className="text-text-secondary text-sm whitespace-pre-wrap font-mono overflow-x-auto">
                     {style.color}
                   </pre>
                 </div>
@@ -179,7 +179,7 @@ export default async function StylePage({ params }: StylePageProps) {
               <section id="motion" className="mb-16 scroll-mt-24">
                 <h2 className="font-display text-2xl mb-6">Motion Principles</h2>
                 <div className="bg-ground-elevated border border-border rounded-lg p-6">
-                  <pre className="text-text-secondary text-sm whitespace-pre-wrap font-mono">
+                  <pre className="text-text-secondary text-sm whitespace-pre-wrap font-mono overflow-x-auto">
                     {style.motion}
                   </pre>
                 </div>
@@ -191,7 +191,7 @@ export default async function StylePage({ params }: StylePageProps) {
               <section id="layout" className="mb-16 scroll-mt-24">
                 <h2 className="font-display text-2xl mb-6">Layout Grammar</h2>
                 <div className="bg-ground-elevated border border-border rounded-lg p-6">
-                  <pre className="text-text-secondary text-sm whitespace-pre-wrap font-mono">
+                  <pre className="text-text-secondary text-sm whitespace-pre-wrap font-mono overflow-x-auto">
                     {style.layout}
                   </pre>
                 </div>
@@ -203,7 +203,7 @@ export default async function StylePage({ params }: StylePageProps) {
               <section id="texture" className="mb-16 scroll-mt-24">
                 <h2 className="font-display text-2xl mb-6">Texture & Surface</h2>
                 <div className="bg-ground-elevated border border-border rounded-lg p-6">
-                  <pre className="text-text-secondary text-sm whitespace-pre-wrap font-mono">
+                  <pre className="text-text-secondary text-sm whitespace-pre-wrap font-mono overflow-x-auto">
                     {style.texture}
                   </pre>
                 </div>
@@ -215,7 +215,7 @@ export default async function StylePage({ params }: StylePageProps) {
               <section id="vocabulary" className="mb-16 scroll-mt-24">
                 <h2 className="font-display text-2xl mb-6">Vocabulary Bank</h2>
                 <div className="bg-ground-elevated border border-border rounded-lg p-6">
-                  <pre className="text-text-secondary text-sm whitespace-pre-wrap font-mono">
+                  <pre className="text-text-secondary text-sm whitespace-pre-wrap font-mono overflow-x-auto">
                     {style.vocabulary}
                   </pre>
                 </div>
@@ -245,7 +245,7 @@ export default async function StylePage({ params }: StylePageProps) {
               <section id="when-to-use" className="mb-16 scroll-mt-24">
                 <h2 className="font-display text-2xl mb-6">When to Use</h2>
                 <div className="bg-ground-elevated border border-border rounded-lg p-6">
-                  <pre className="text-text-secondary text-sm whitespace-pre-wrap font-mono">
+                  <pre className="text-text-secondary text-sm whitespace-pre-wrap font-mono overflow-x-auto">
                     {style.whenToUse}
                   </pre>
                 </div>
@@ -274,7 +274,7 @@ export default async function StylePage({ params }: StylePageProps) {
               <section id="references" className="mb-16 scroll-mt-24">
                 <h2 className="font-display text-2xl mb-6">Reference Gallery</h2>
                 <div className="bg-ground-elevated border border-border rounded-lg p-6">
-                  <pre className="text-text-secondary text-sm whitespace-pre-wrap font-mono">
+                  <pre className="text-text-secondary text-sm whitespace-pre-wrap font-mono overflow-x-auto">
                     {style.references}
                   </pre>
                 </div>

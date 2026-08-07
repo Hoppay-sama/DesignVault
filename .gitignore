@@ -94,5 +94,9 @@ platform/node_modules/
 platform/.next/
 platform/out/
 
+# Playwright
+platform/test-results/
+platform/playwright-report/
+
 # Docs
 docs/
