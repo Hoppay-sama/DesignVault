@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { SiteHeader } from '@/components/SiteHeader';
 import { StyleCard } from '@/components/StyleGrid';
+import { PreviewFontProvider } from '@/components/preview/font-registry';
 import { getAllStyles } from '@/lib/content';
 import { StyleEntry } from '@/lib/types';
 import { STYLE_CLUSTERS } from '@/lib/clusters';
@@ -113,12 +114,14 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
           </p>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((style) => (
-            <StyleCard key={style.slug} style={style} />
-          ))}
-        </div>
+        {/* Grid — PreviewFontProvider binds --font-* vars for specimen typography */}
+        <PreviewFontProvider>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filtered.map((style) => (
+              <StyleCard key={style.slug} style={style} />
+            ))}
+          </div>
+        </PreviewFontProvider>
       </div>
     </main>
   );

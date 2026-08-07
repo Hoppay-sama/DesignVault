@@ -66,3 +66,35 @@ test('a11y: decorative specimens are aria-hidden, cards stay links', async ({ pa
   await expect(page.getByTestId('specimen-preview').first()).toHaveAttribute('aria-hidden', 'true');
   await expect(page.locator('a[href^="/style/"]').first()).toBeVisible();
 });
+
+test('category pages resolve specimen display fonts via PreviewFontProvider', async ({ page }) => {
+  // Regresses the fix where /category/* grids omitted the provider, so
+  // --font-* vars were undefined and specimen type silently fell back to
+  // the platform body font. editorial-serif-narrative declares fraunces as
+  // its displayFont (fonts.ts FONT_CATALOG key -> next/font Fraunces).
+  // Keep the literal class below: fonts.ts builds classes via template
+  // strings, so this literal is what anchors Tailwind v4's candidate scan
+  // and makes the compiled CSS emit the font-[family-name:...] rule.
+  const DISPLAY_CLASS = 'font-[family-name:var(--font-fraunces)]';
+  await page.goto('/category/editorial-and-serif');
+  const specimen = page.locator(
+    '[data-testid="style-card"][data-slug="editorial-serif-narrative"] [data-testid="specimen-preview"]'
+  );
+  await expect(specimen).toHaveCount(1);
+  const result = await specimen.evaluate((node, cls) => {
+    const seen = new Set<string>();
+    const visit = (el: Element) => {
+      seen.add(getComputedStyle(el).fontFamily);
+      Array.from(el.children).forEach(visit);
+    };
+    visit(node);
+    return {
+      hasDisplayClass: Array.from(node.querySelectorAll('*')).some((el) =>
+        el.classList.contains(cls)
+      ),
+      families: Array.from(seen),
+    };
+  }, DISPLAY_CLASS);
+  expect(result.hasDisplayClass).toBe(true);
+  expect(result.families.some((f) => f.includes('Fraunces'))).toBe(true);
+});
