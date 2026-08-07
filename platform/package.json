@@ -2,11 +2,13 @@
   "name": "design-inspiration-platform",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:unit": "node --test \"src/lib/*.test.ts\""
   },
   "dependencies": {
     "flexsearch": "^0.8.212",
