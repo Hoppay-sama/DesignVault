@@ -15,6 +15,7 @@ export interface StyleEntry {
   moodKeywords: string[];
   difficulty: number;
   tags: string[];
+  useCases: string[];
   status: string;
   testedWith?: string[];
   // Content sections

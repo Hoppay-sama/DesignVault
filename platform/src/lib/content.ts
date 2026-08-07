@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { StyleEntry } from './types';
+import { getUseCasesForSlug } from './use-cases';
 
 const CONTENT_DIR = path.join(process.cwd(), '..', 'content', 'styles');
 
@@ -195,6 +196,7 @@ export function getStyleBySlug(slug: string): StyleEntry | null {
     moodKeywords: data.moodKeywords || [],
     difficulty: data.difficulty || 3,
     tags: data.tags || [],
+    useCases: getUseCasesForSlug(slug).map((uc) => uc.id),
     status: data.status || 'draft',
     testedWith: data.testedWith || undefined,
     visualDna: extractBodySection(body, 'Visual DNA') || body || undefined,

@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
+import { useState, useCallback, useMemo, useEffect, useRef, type KeyboardEvent } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { StyleEntry, StyleAxis } from '@/lib/types';
 import { STYLE_CLUSTERS } from '@/lib/clusters';
+import { USE_CASES, USE_CASE_LABELS } from '@/lib/use-cases';
 
 interface AxisRange {
   min: number;
@@ -17,6 +18,13 @@ interface AxisFiltersState {
   density: AxisRange;
   texture: AxisRange;
   layout: AxisRange;
+}
+
+/** External command from the gallery empty state: reset everything or quick-pick a use case. */
+export interface FilterCommand {
+  signal: number;
+  action: 'reset' | 'quickpick';
+  useCaseId?: string;
 }
 
 const AXIS_LABELS: Record<keyof StyleAxis, { label: string; low: string; high: string }> = {
@@ -53,25 +61,32 @@ function createDefaultAxisFilters(): AxisFiltersState {
 interface StyleFiltersProps {
   styles: StyleEntry[];
   onFilteredStyles: (filtered: StyleEntry[]) => void;
+  command?: FilterCommand | null;
 }
 
-export function StyleFilters({ styles, onFilteredStyles }: StyleFiltersProps) {
+export function StyleFilters({ styles, onFilteredStyles, command }: StyleFiltersProps) {
   const [activeTag, setActiveTag] = useState<string | null>(null);
+  const [activeUseCases, setActiveUseCases] = useState<string[]>([]);
   const [axisFilters, setAxisFilters] = useState<AxisFiltersState>(createDefaultAxisFilters);
   const [showAxisFilters, setShowAxisFilters] = useState(false);
+  const [showUseCaseRow, setShowUseCaseRow] = useState(false);
 
   const searchParams = useSearchParams();
   const router = useRouter();
 
   // Latest state snapshot for URL round-trip comparison.
-  const stateRef = useRef({ tag: activeTag, axes: axisFilters });
+  const stateRef = useRef({ tag: activeTag, axes: axisFilters, useCases: activeUseCases });
   useEffect(() => {
-    stateRef.current = { tag: activeTag, axes: axisFilters };
-  }, [activeTag, axisFilters]);
+    stateRef.current = { tag: activeTag, axes: axisFilters, useCases: activeUseCases };
+  }, [activeTag, axisFilters, activeUseCases]);
 
-  // Set when WE push a URL (router.replace) so the searchParams effect
-  // can tell "our own navigation" apart from back/forward.
-  const pendingRef = useRef<string | null>(null);
+  // Queue of URLs WE pushed (router.replace). router.replace is async, so
+  // rapid clicks can have several pushes in flight that land out of order.
+  // When a landing matches a queued URL it is our own navigation — consume
+  // it and skip the round-trip. A landing NOT in the queue is a back/forward
+  // or deep link, so apply its state. A single-slot ref misattributes late
+  // landings under rapid clicks (URL/state desync), hence the queue.
+  const pushedRef = useRef<string[]>([]);
 
   // Cluster pills: one per style cluster (A→H), counts from actual tag data.
   const clusterCounts = useMemo(() => {
@@ -84,11 +99,26 @@ export function StyleFilters({ styles, onFilteredStyles }: StyleFiltersProps) {
     return counts;
   }, [styles]);
 
+  // Use-case pills: counts from the style → use-case mapping.
+  const useCaseCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const uc of USE_CASES) {
+      counts[uc.id] = styles.filter((style) => style.useCases.includes(uc.id)).length;
+    }
+    return counts;
+  }, [styles]);
+
+  // Combined rule: (cluster if any) AND (use-case OR if any) AND axis ranges.
   const applyFilters = useCallback(
-    (tag: string | null, axes: AxisFiltersState) => {
+    (tag: string | null, axes: AxisFiltersState, useCases: string[]) => {
       const filtered = styles.filter((style) => {
         // Tag filter
         if (tag && !style.tags.includes(tag)) {
+          return false;
+        }
+
+        // Use-case filter — OR-union across the selected pills
+        if (useCases.length > 0 && !useCases.some((id) => style.useCases.includes(id))) {
           return false;
         }
 
@@ -112,10 +142,13 @@ export function StyleFilters({ styles, onFilteredStyles }: StyleFiltersProps) {
   // ---- URL state (PRD §5.4): filter state lives in the URL ----
 
   const serializeState = useCallback(
-    (tag: string | null, axes: AxisFiltersState): string => {
+    (tag: string | null, axes: AxisFiltersState, useCases: string[]): string => {
       const params = new URLSearchParams();
       if (tag) {
         params.set('tag', tag);
+      }
+      if (useCases.length > 0) {
+        params.set('use', useCases.join(','));
       }
       for (const key of AXIS_KEYS) {
         const range = axes[key];
@@ -129,7 +162,9 @@ export function StyleFilters({ styles, onFilteredStyles }: StyleFiltersProps) {
   );
 
   const parseSearchParams = useCallback(
-    (sp: URLSearchParams | null): { tag: string | null; axes: AxisFiltersState } => {
+    (
+      sp: URLSearchParams | null
+    ): { tag: string | null; axes: AxisFiltersState; useCases: string[] } => {
       const axes = createDefaultAxisFilters();
       if (sp) {
         for (const key of AXIS_KEYS) {
@@ -143,51 +178,89 @@ export function StyleFilters({ styles, onFilteredStyles }: StyleFiltersProps) {
         }
       }
       const tag = sp?.get('tag') ?? null;
-      return { tag, axes };
+      // Drop ids we don't know about so stale/deep-linked URLs can't create
+      // an unfilterable state.
+      const useCases = (sp?.get('use')?.split(',').filter(Boolean) ?? []).filter(
+        (id) => USE_CASE_LABELS[id]
+      );
+      return { tag, axes, useCases };
     },
     []
   );
 
-  // URL → state. Skips our own pushed URLs (they round-trip identical
-  // to stateRef and are consumed via pendingRef).
+  // URL → state. Skips our own pushed URLs (any landing that matches a
+  // queued push is consumed and ignored; back/forward and deep links apply).
   useEffect(() => {
     const parsed = parseSearchParams(searchParams);
-    const parsedKey = serializeState(parsed.tag, parsed.axes);
+    const parsedKey = serializeState(parsed.tag, parsed.axes, parsed.useCases);
 
-    if (pendingRef.current === parsedKey) {
-      pendingRef.current = null;
+    const idx = pushedRef.current.indexOf(parsedKey);
+    if (idx !== -1) {
+      pushedRef.current.splice(idx, 1);
       return;
     }
 
-    const currentKey = serializeState(stateRef.current.tag, stateRef.current.axes);
+    const currentKey = serializeState(
+      stateRef.current.tag,
+      stateRef.current.axes,
+      stateRef.current.useCases
+    );
     if (parsedKey !== currentKey) {
       setActiveTag(parsed.tag);
+      setActiveUseCases(parsed.useCases);
       setAxisFilters(parsed.axes);
     }
   }, [searchParams, parseSearchParams, serializeState]);
 
   // State → filtered results. Single place where filtering happens.
   useEffect(() => {
-    applyFilters(activeTag, axisFilters);
-  }, [activeTag, axisFilters, applyFilters]);
+    applyFilters(activeTag, axisFilters, activeUseCases);
+  }, [activeTag, axisFilters, activeUseCases, applyFilters]);
 
   const commitUrl = useCallback(
-    (tag: string | null, axes: AxisFiltersState) => {
-      const qs = serializeState(tag, axes);
-      const currentParsed = parseSearchParams(searchParams);
-      const currentQs = serializeState(currentParsed.tag, currentParsed.axes);
-      if (qs === currentQs) {
-        return;
+    (tag: string | null, axes: AxisFiltersState, useCases: string[]) => {
+      const qs = serializeState(tag, axes, useCases);
+      pushedRef.current.push(qs);
+      // Cap the queue: superseded pushes can linger if a navigation is
+      // cancelled, and stale entries only ever cause a harmless no-op.
+      if (pushedRef.current.length > 20) {
+        pushedRef.current.shift();
       }
-      pendingRef.current = qs;
       router.replace(qs ? `/?${qs}` : '/', { scroll: false });
     },
-    [router, searchParams, serializeState, parseSearchParams]
+    [router, serializeState]
   );
+
+  // External commands from the gallery empty state (Reset / quick-pick).
+  useEffect(() => {
+    if (!command) {
+      return;
+    }
+    const defaultAxes = createDefaultAxisFilters();
+    if (command.action === 'reset') {
+      setActiveTag(null);
+      setActiveUseCases([]);
+      setAxisFilters(defaultAxes);
+      commitUrl(null, defaultAxes, []);
+    } else if (command.action === 'quickpick' && command.useCaseId) {
+      setActiveTag(null);
+      setActiveUseCases([command.useCaseId]);
+      setAxisFilters(defaultAxes);
+      commitUrl(null, defaultAxes, [command.useCaseId]);
+    }
+  }, [command, commitUrl]);
 
   const handleTagClick = (tag: string | null) => {
     setActiveTag(tag);
-    commitUrl(tag, axisFilters);
+    commitUrl(tag, axisFilters, activeUseCases);
+  };
+
+  const handleUseCaseClick = (id: string) => {
+    const updated = activeUseCases.includes(id)
+      ? activeUseCases.filter((uc) => uc !== id)
+      : [...activeUseCases, id];
+    setActiveUseCases(updated);
+    commitUrl(activeTag, axisFilters, updated);
   };
 
   const handleAxisChange = (axis: keyof StyleAxis, bound: 'min' | 'max', value: number) => {
@@ -199,13 +272,13 @@ export function StyleFilters({ styles, onFilteredStyles }: StyleFiltersProps) {
       },
     };
     setAxisFilters(updated);
-    commitUrl(activeTag, updated);
+    commitUrl(activeTag, updated, activeUseCases);
   };
 
   const handleResetAxes = () => {
     const newState = createDefaultAxisFilters();
     setAxisFilters(newState);
-    commitUrl(activeTag, newState);
+    commitUrl(activeTag, newState, activeUseCases);
   };
 
   const hasActiveAxisFilter = AXIS_KEYS.some(
@@ -214,10 +287,39 @@ export function StyleFilters({ styles, onFilteredStyles }: StyleFiltersProps) {
       axisFilters[key].max !== DEFAULT_RANGE.max
   );
 
-  // Count currently visible styles (tag + axis filters)
+  // Mobile (<640px): use-case row collapses behind a disclosure.
+  const useCaseRowOpen = showUseCaseRow || activeUseCases.length > 0;
+
+  // Arrow keys move focus within a pill row (Enter/Space toggle natively).
+  const handlePillRowKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') {
+      return;
+    }
+    const pills = Array.from(
+      e.currentTarget.querySelectorAll<HTMLButtonElement>('button[data-pill]')
+    );
+    if (pills.length === 0) {
+      return;
+    }
+    const currentIndex = pills.indexOf(document.activeElement as HTMLButtonElement);
+    if (currentIndex === -1) {
+      return;
+    }
+    e.preventDefault();
+    const delta = e.key === 'ArrowRight' ? 1 : -1;
+    pills[(currentIndex + delta + pills.length) % pills.length].focus();
+  };
+
+  // Count currently visible styles (tag + use-case + axis filters)
   const filteredCount = useMemo(() => {
     return styles.filter((style) => {
       if (activeTag && !style.tags.includes(activeTag)) {
+        return false;
+      }
+      if (
+        activeUseCases.length > 0 &&
+        !activeUseCases.some((id) => style.useCases.includes(id))
+      ) {
         return false;
       }
       for (const key of AXIS_KEYS) {
@@ -229,45 +331,163 @@ export function StyleFilters({ styles, onFilteredStyles }: StyleFiltersProps) {
       }
       return true;
     }).length;
-  }, [styles, activeTag, axisFilters]);
+  }, [styles, activeTag, activeUseCases, axisFilters]);
 
   return (
     <div className="space-y-6">
-      {/* Style count */}
-      <p className="text-center font-mono-label text-text-muted tracking-widest">
+      {/* Style count — single source of truth for result counts */}
+      <p className="font-mono-label text-text-muted tracking-widest">
         {filteredCount} {filteredCount === 1 ? 'STYLE' : 'STYLES'}
       </p>
 
-      {/* Tag Pills */}
-      <div className="flex flex-wrap items-center justify-center gap-2">
-        <button
-          onClick={() => handleTagClick(null)}
-          className={`px-3 py-1.5 rounded-full text-xs transition-colors ${
-            activeTag === null
-              ? 'bg-accent text-accent-text'
-              : 'bg-ground-elevated border border-border text-text-secondary hover:text-text-primary hover:border-border-hover'
-          }`}
+      {/* Cluster Pills */}
+      <div className="space-y-2">
+        <span className="block font-mono-label text-xs text-text-muted tracking-widest uppercase">
+          Browse by style
+        </span>
+        <div
+          data-pill-row
+          onKeyDown={handlePillRowKeyDown}
+          className="flex flex-wrap items-center justify-start gap-2"
         >
-          All
-        </button>
-        {STYLE_CLUSTERS.map((cluster) => (
           <button
-            key={cluster.id}
-            onClick={() => handleTagClick(cluster.name)}
-            className={`px-3 py-1.5 rounded-full text-xs transition-colors ${
-              activeTag === cluster.name
+            data-pill
+            onClick={() => handleTagClick(null)}
+            aria-pressed={activeTag === null}
+            className={`min-h-11 sm:min-h-0 px-3 py-1.5 rounded-full text-xs transition-colors ${
+              activeTag === null
                 ? 'bg-accent text-accent-text'
                 : 'bg-ground-elevated border border-border text-text-secondary hover:text-text-primary hover:border-border-hover'
             }`}
           >
-            {cluster.name}
-            <span className="ml-1 opacity-50">{clusterCounts[cluster.name]}</span>
+            All
+            <span className={`ml-1 ${activeTag === null ? '' : 'opacity-80'}`}>
+              {styles.length}
+            </span>
           </button>
-        ))}
+          {STYLE_CLUSTERS.map((cluster) => (
+            <button
+              key={cluster.id}
+              data-pill
+              onClick={() => handleTagClick(cluster.name)}
+              aria-pressed={activeTag === cluster.name}
+              className={`min-h-11 sm:min-h-0 px-3 py-1.5 rounded-full text-xs transition-colors ${
+                activeTag === cluster.name
+                  ? 'bg-accent text-accent-text'
+                  : 'bg-ground-elevated border border-border text-text-secondary hover:text-text-primary hover:border-border-hover'
+              }`}
+            >
+              {cluster.name}
+              <span
+                className={`ml-1 ${
+                  activeTag === cluster.name ? '' : 'opacity-80'
+                }`}
+              >
+                {clusterCounts[cluster.name]}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Use-case pills: multi-select OR-union */}
+      <div className="space-y-2">
+        <div className="flex items-center justify-start">
+          <span className="hidden md:block font-mono-label text-xs text-text-muted tracking-widest uppercase">
+            Browse by use case
+          </span>
+          <button
+            type="button"
+            onClick={() => setShowUseCaseRow(!showUseCaseRow)}
+            aria-expanded={useCaseRowOpen}
+            aria-controls="use-case-pills"
+            className="md:hidden min-h-11 flex items-center gap-2 px-4 rounded-lg text-xs font-medium bg-ground-elevated border border-border text-text-secondary hover:text-text-primary transition-colors"
+          >
+            Browse by use case
+            <svg
+              className={`w-3.5 h-3.5 transition-transform ${
+                useCaseRowOpen ? 'rotate-180' : ''
+              }`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+            {activeUseCases.length > 0 && <span className="w-2 h-2 rounded-full bg-accent" />}
+          </button>
+        </div>
+        <p
+          className={`text-xs text-text-muted ${
+            useCaseRowOpen ? '' : 'hidden md:block'
+          }`}
+        >
+          Select all that apply
+        </p>
+        <div
+          id="use-case-pills"
+          data-pill-row
+          onKeyDown={handlePillRowKeyDown}
+          className={`flex flex-wrap items-center justify-start gap-2 ${
+            useCaseRowOpen ? '' : 'hidden md:flex'
+          }`}
+        >
+          {USE_CASES.map((uc) => {
+            const isSelected = activeUseCases.includes(uc.id);
+            return (
+              <button
+                key={uc.id}
+                data-pill
+                onClick={() => handleUseCaseClick(uc.id)}
+                aria-pressed={isSelected}
+                title={uc.description}
+                className={`min-h-11 sm:min-h-0 px-3 py-1.5 rounded-full text-xs transition-colors ${
+                  isSelected
+                    ? 'bg-accent text-accent-text'
+                    : 'bg-ground-elevated border border-border text-text-secondary hover:text-text-primary hover:border-border-hover'
+                }`}
+              >
+                <span
+                  aria-hidden="true"
+                  className={`mr-1.5 inline-flex items-center justify-center w-3.5 h-3.5 rounded-[3px] border ${
+                    isSelected
+                      ? 'border-current'
+                      : 'border-text-muted'
+                  }`}
+                >
+                  {isSelected && (
+                    <svg
+                      className="w-2.5 h-2.5"
+                      viewBox="0 0 10 10"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={1.8}
+                    >
+                      <path
+                        d="M2 5.5l2 2 4-4.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  )}
+                </span>
+                {uc.label}
+                <span className={`ml-1 ${isSelected ? '' : 'opacity-80'}`}>
+                  {useCaseCounts[uc.id]}
+                </span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Axis Filter Toggle */}
-      <div className="flex items-center justify-center gap-4">
+      <div className="flex items-center justify-start gap-4">
         <button
           onClick={() => setShowAxisFilters(!showAxisFilters)}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors ${
@@ -294,19 +514,24 @@ export function StyleFilters({ styles, onFilteredStyles }: StyleFiltersProps) {
             <span className="w-2 h-2 rounded-full bg-accent" />
           )}
         </button>
-        {hasActiveAxisFilter && (
-          <button
-            onClick={handleResetAxes}
-            className="text-sm text-text-muted hover:text-text-secondary transition-colors"
-          >
-            Reset axes
-          </button>
-        )}
+        <button
+          onClick={handleResetAxes}
+          disabled={!hasActiveAxisFilter}
+          aria-hidden={!hasActiveAxisFilter}
+          tabIndex={hasActiveAxisFilter ? 0 : -1}
+          className={`text-sm transition-colors ${
+            hasActiveAxisFilter
+              ? 'text-text-muted hover:text-text-secondary'
+              : 'invisible'
+          }`}
+        >
+          Reset axes
+        </button>
       </div>
 
       {/* Axis Sliders */}
       {showAxisFilters && (
-        <div className="bg-ground-elevated border border-border rounded-xl p-6 max-w-3xl mx-auto">
+        <div className="bg-ground-elevated border border-border rounded-xl p-6 max-w-3xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {AXIS_KEYS.map((key) => {
               const config = AXIS_LABELS[key];
