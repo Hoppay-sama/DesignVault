@@ -70,31 +70,55 @@ test('a11y: decorative specimens are aria-hidden, cards stay links', async ({ pa
 test('category pages resolve specimen display fonts via PreviewFontProvider', async ({ page }) => {
   // Regresses the fix where /category/* grids omitted the provider, so
   // --font-* vars were undefined and specimen type silently fell back to
-  // the platform body font. editorial-serif-narrative declares fraunces as
-  // its displayFont (fonts.ts FONT_CATALOG key -> next/font Fraunces).
-  // Keep the literal class below: fonts.ts builds classes via template
-  // strings, so this literal is what anchors Tailwind v4's candidate scan
-  // and makes the compiled CSS emit the font-[family-name:...] rule.
-  const DISPLAY_CLASS = 'font-[family-name:var(--font-fraunces)]';
-  await page.goto('/category/editorial-and-serif');
-  const specimen = page.locator(
-    '[data-testid="style-card"][data-slug="editorial-serif-narrative"] [data-testid="specimen-preview"]'
-  );
-  await expect(specimen).toHaveCount(1);
-  const result = await specimen.evaluate((node, cls) => {
-    const seen = new Set<string>();
-    const visit = (el: Element) => {
-      seen.add(getComputedStyle(el).fontFamily);
-      Array.from(el.children).forEach(visit);
-    };
-    visit(node);
-    return {
-      hasDisplayClass: Array.from(node.querySelectorAll('*')).some((el) =>
-        el.classList.contains(cls)
-      ),
-      families: Array.from(seen),
-    };
-  }, DISPLAY_CLASS);
-  expect(result.hasDisplayClass).toBe(true);
-  expect(result.families.some((f) => f.includes('Fraunces'))).toBe(true);
+  // the platform body font. Font classes come from the literal safelist in
+  // fonts.ts (FONT_CLASSES), which is what makes Tailwind emit the arbitrary
+  // font utilities; these fixtures verify each in-use family resolves.
+  const FIXTURES: Array<{
+    category: string;
+    slug: string;
+    displayClass: string;
+    fontFamily: string;
+  }> = [
+    {
+      category: '/category/editorial-and-serif',
+      slug: 'editorial-serif-narrative',
+      displayClass: 'font-[family-name:var(--font-fraunces)]',
+      fontFamily: 'Fraunces',
+    },
+    {
+      category: '/category/dark-and-monumental',
+      slug: 'typographic-brutalist',
+      displayClass: 'font-[family-name:var(--font-archivo)]',
+      fontFamily: 'Archivo',
+    },
+  ];
+  for (const fixture of FIXTURES) {
+    await test.step(fixture.slug, async () => {
+      await page.goto(fixture.category);
+      const specimen = page.locator(
+        `[data-testid="style-card"][data-slug="${fixture.slug}"] [data-testid="specimen-preview"]`
+      );
+      await expect(specimen).toHaveCount(1);
+      const result = await specimen.evaluate((node, { displayClass, fontFamily }) => {
+        const seen = new Set<string>();
+        const visit = (el: Element) => {
+          seen.add(getComputedStyle(el).fontFamily);
+          Array.from(el.children).forEach(visit);
+        };
+        visit(node);
+        return {
+          hasDisplayClass: Array.from(node.querySelectorAll('*')).some((el) =>
+            el.classList.contains(displayClass)
+          ),
+          families: Array.from(seen),
+        };
+      }, fixture);
+      expect(result.hasDisplayClass).toBe(true);
+      expect(result.families.some((f) => f.includes(fixture.fontFamily))).toBe(true);
+      expect(
+        result.families.some((f) => !f.includes('Inter Tight')),
+        `expected at least one specimen family to differ from the platform body font (Inter Tight), got: ${result.families.join(' | ')}`
+      ).toBe(true);
+    });
+  }
 });
