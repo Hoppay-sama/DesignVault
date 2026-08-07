@@ -4,6 +4,7 @@ import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import { StyleEntry } from '@/lib/types';
 import { USE_CASE_LABELS } from '@/lib/use-cases';
+import { SpecimenPreview } from '@/components/preview/SpecimenPreview';
 
 interface StyleGridProps {
   initialStyles: StyleEntry[];
@@ -29,23 +30,10 @@ export function StyleCard({ style }: StyleCardProps) {
   return (
     <Link
       href={`/style/${style.slug}`}
+      data-slug={style.slug}
       className="bg-ground-elevated border border-border rounded-xl overflow-hidden hover:border-border-hover transition-colors group"
     >
-      <div className="h-48 bg-gradient-to-br from-ground to-ground-elevated relative">
-        <div className="absolute bottom-3 left-3 font-mono-label text-text-muted">
-          {style.title.toUpperCase()}
-        </div>
-        <div className="absolute top-3 right-3 flex gap-1">
-          {style.tags.slice(0, 2).map((tag) => (
-            <span
-              key={tag}
-              className="bg-ground/80 border border-border px-2 py-1 rounded text-xs text-text-muted backdrop-blur-sm"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
+      <SpecimenPreview style={style} />
       <div className="p-5">
         <h3 className="font-display text-lg mb-2 group-hover:text-accent transition-colors">
           {style.title}

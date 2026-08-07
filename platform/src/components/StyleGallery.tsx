@@ -6,6 +6,7 @@ import { STYLE_CLUSTERS } from '@/lib/clusters';
 import { USE_CASE_LABELS } from '@/lib/use-cases';
 import { StyleFilters, FilterCommand } from './StyleFilters';
 import { StyleCard } from './StyleGrid';
+import { PreviewFontProvider } from '@/components/preview/font-registry';
 
 interface StyleGalleryProps {
   styles: StyleEntry[];
@@ -60,7 +61,8 @@ export function StyleGallery({ styles }: StyleGalleryProps) {
 
       {/* Style Grid */}
       <section className="px-6 lg:px-8 pb-20">
-        <div className="max-w-7xl mx-auto">
+        <PreviewFontProvider>
+          <div className="max-w-7xl mx-auto">
           {filteredStyles.length > 0 ? (
             <div className="space-y-16">
               {grouped.map(({ cluster, styles }) => (
@@ -110,7 +112,8 @@ export function StyleGallery({ styles }: StyleGalleryProps) {
               </div>
             </div>
           )}
-        </div>
+          </div>
+        </PreviewFontProvider>
       </section>
     </>
   );
