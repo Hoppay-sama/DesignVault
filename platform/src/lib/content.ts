@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { StyleEntry } from './types';
+import { StyleEntry, StylePreview } from './types';
+import { parsePreviewFrontmatter } from './preview';
 import { getUseCasesForSlug } from './use-cases';
 
 const CONTENT_DIR = path.join(process.cwd(), '..', 'content', 'styles');
@@ -125,6 +126,18 @@ export function getStyleBySlug(slug: string): StyleEntry | null {
   const { data, content } = matter(fileContents);
   const body = content;
 
+  // Preview: optional 15th file; any failure degrades to preview: undefined.
+  let preview: StylePreview | undefined;
+  try {
+    const previewPath = path.join(dirPath, 'preview.mdx');
+    if (fs.existsSync(previewPath)) {
+      preview = parsePreviewFrontmatter(fs.readFileSync(previewPath, 'utf8'));
+    }
+  } catch (err) {
+    console.warn(`[preview] failed to parse preview.mdx for ${slug}:`, err);
+    preview = undefined;
+  }
+
   // Read optional section files
   const readSection = (filename: string): string | undefined => {
     const filePath = path.join(dirPath, filename);
@@ -199,6 +212,7 @@ export function getStyleBySlug(slug: string): StyleEntry | null {
     useCases: getUseCasesForSlug(slug).map((uc) => uc.id),
     status: data.status || 'draft',
     testedWith: data.testedWith || undefined,
+    preview,
     visualDna: extractBodySection(body, 'Visual DNA') || body || undefined,
     principles,
     typography: section('typography.mdx', 'Typography'),
