@@ -7,6 +7,23 @@ export interface StyleAxis {
   layout: number;
 }
 
+/**
+ * Rendered-preview configuration parsed from content/styles/<slug>/preview.mdx.
+ * All hex fields are validated 6-digit hex or undefined (component falls back
+ * to platform tokens). layout/texture/motif are normalized at parse time.
+ */
+export interface StylePreview {
+  layout: 'editorial' | 'brutalist' | 'terminal' | 'cinematic' | 'grid' | 'asymmetric';
+  displayFont?: string;
+  bodyFont?: string;
+  background?: string;
+  surface?: string;
+  ink?: string;
+  accent?: string;
+  texture: 'none' | 'grain' | 'paper' | 'grid-lines' | 'mono-lines';
+  motif: 'marquee' | 'ticker' | 'orbit' | 'none';
+}
+
 export interface StyleEntry {
   slug: string;
   title: string;
@@ -33,4 +50,5 @@ export interface StyleEntry {
   references?: string;
   exactPrompt?: string;
   templatePrompt?: string;
+  preview?: StylePreview;
 }
