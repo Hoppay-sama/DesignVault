@@ -12,28 +12,30 @@ export default function Home() {
       <SiteHeader />
 
       {/* Hero */}
-      <section className="pt-32 pb-20 px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="font-display text-5xl md:text-7xl leading-[0.95] tracking-tight mb-6">
-            {styles.length} Design Aesthetics.
-            <br />
-            <span className="text-text-secondary">Copy the prompt. Ship the page.</span>
+      <section className="dv-hero px-6 pb-20 pt-32 lg:px-8">
+        <div className="dv-hero-scene" aria-hidden="true">
+          <span className="dv-hero-orbit dv-hero-orbit--outer" />
+          <span className="dv-hero-orbit dv-hero-orbit--inner" />
+          <span className="dv-hero-crosshair dv-hero-crosshair--top" />
+          <span className="dv-hero-crosshair dv-hero-crosshair--bottom" />
+          <span className="dv-hero-scanline" />
+        </div>
+        <div className="dv-hero-copy mx-auto max-w-4xl text-center">
+          <h1 className="dv-hero-title font-display text-5xl leading-[0.95] tracking-tight md:text-7xl">
+            <span className="dv-hero-title-line">{styles.length} Design Aesthetics.</span>
+            <span className="dv-hero-title-line dv-hero-title-line--muted">
+              Copy the prompt. Ship the page.
+            </span>
           </h1>
-          <p className="text-lg text-text-secondary max-w-2xl mx-auto mb-10">
+          <p className="dv-hero-description mx-auto mb-10 mt-7 max-w-2xl text-lg text-text-secondary">
             A curated design inspiration platform with full design intelligence — principles,
             vocabulary, anti-patterns — and ready-to-use AI prompts for each style.
           </p>
-          <div className="flex items-center justify-center gap-4">
-            <a
-              href="#gallery"
-              className="bg-accent text-accent-text px-8 py-3 rounded-lg font-medium hover:scale-105 transition-transform"
-            >
+          <div className="dv-hero-actions flex items-center justify-center gap-4">
+            <a href="#gallery" className="dv-hero-primary bg-accent text-accent-text">
               Browse Styles
             </a>
-            <Link
-              href="/vocabulary"
-              className="border border-border hover:border-border-hover px-8 py-3 rounded-lg font-medium transition-colors"
-            >
+            <Link href="/vocabulary" className="dv-hero-secondary">
               Search Vocabulary
             </Link>
           </div>
