@@ -1,0 +1,379 @@
+/* LONGWIRE - Dither Mono proof (B). Near-black ground, one amber accent. */
+
+.proof-lw {
+  --pad-x: clamp(1.5rem, 5vw, 4rem);
+  --gap: clamp(4rem, 10vh, 8rem);
+  --ground: #0a0a0a;
+  --text: #e8e8e8;
+  --dim: #a0a0a0;
+  --muted: #666;
+  --line: #222;
+  --accent: #d4a574;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+  --display: "Space Grotesk", ui-sans-serif, sans-serif;
+
+  position: relative;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  background: var(--ground);
+  color: var(--text);
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: clamp(0.75rem, 1vw, 0.9rem);
+}
+
+.proof-lw ::selection {
+  background: var(--accent);
+  color: var(--ground);
+}
+
+/* Fixed film grain. Felt, not seen. */
+.proof-lw-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+/* Micro type: labels, frame captions, footer row. */
+.proof-lw-label,
+.proof-lw-frame-cap,
+.proof-lw-footer-row {
+  font-family: var(--mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.proof-lw-label {
+  margin: 0;
+  font-size: clamp(0.55rem, 0.2vw + 0.45rem, 0.65rem);
+  letter-spacing: 0.22em;
+  color: var(--muted);
+}
+
+/* Small body copy. */
+.proof-lw-sub,
+.proof-lw-body {
+  color: var(--dim);
+  font-size: clamp(0.75rem, 1vw, 0.9rem);
+  line-height: 1.6;
+}
+
+/* ---------- Hero ---------- */
+
+.proof-lw-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 2rem 3rem;
+  min-height: 100dvh;
+  padding: clamp(3rem, 10vh, 7rem) var(--pad-x) clamp(2.5rem, 6vh, 4.5rem);
+}
+
+.proof-lw-lead {
+  max-width: 60ch;
+}
+
+.proof-lw-hero h1 {
+  margin: 0.9rem 0 1.4rem;
+  max-width: 14ch;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 9.5vw, 8.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.proof-lw-sub {
+  margin: 0;
+  max-width: 46ch;
+}
+
+.proof-lw-cta {
+  display: inline-block;
+  margin-top: clamp(1.5rem, 3vh, 2.4rem);
+  padding: clamp(0.65rem, 0.8vh, 0.9rem) clamp(1.2rem, 1.5vw, 1.75rem);
+  border: 1px solid var(--accent);
+  border-radius: 0;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: clamp(0.6rem, 0.4vw + 0.5rem, 0.7rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.proof-lw-cta:hover,
+.proof-lw-cta:focus-visible {
+  background: var(--accent);
+  color: var(--ground);
+  outline: none;
+}
+
+.proof-lw-cluster {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0;
+  text-align: right;
+}
+
+.proof-lw-cluster > div {
+  display: grid;
+  gap: 0.12rem;
+}
+
+.proof-lw-cluster dt,
+.proof-lw-cluster dd {
+  margin: 0;
+  font-family: var(--mono);
+  text-transform: uppercase;
+}
+
+.proof-lw-cluster dt {
+  font-size: 0.56rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+}
+
+.proof-lw-cluster dd {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  color: var(--dim);
+}
+
+.proof-lw-cluster dd.proof-lw-accent {
+  color: var(--accent);
+}
+
+/* ---------- Exposures ---------- */
+
+.proof-lw-frame {
+  position: relative;
+  margin: 0;
+  border: 1px solid var(--line);
+  background: var(--ground);
+  overflow: hidden;
+}
+
+.proof-lw-frame--wide {
+  height: clamp(300px, 56vh, 600px);
+}
+
+.proof-lw-frame--tall {
+  height: clamp(340px, 60vh, 680px);
+}
+
+.proof-lw-frame--band {
+  height: clamp(280px, 50vh, 540px);
+}
+
+.proof-lw-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.proof-lw-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 45% 42%, transparent 38%, rgba(0, 0, 0, 0.45) 100%);
+}
+
+.proof-lw-frame-cap {
+  position: absolute;
+  top: 0.85rem;
+  left: 1rem;
+  right: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.54rem;
+  color: var(--muted);
+}
+
+/* ---------- Section copy ---------- */
+
+.proof-lw-section {
+  padding: var(--gap) var(--pad-x);
+}
+
+.proof-lw-h2 {
+  margin: 0.7rem 0 1rem;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.8rem, 5vw, 3.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.proof-lw-body {
+  margin: 0 0 1.2rem;
+  max-width: 42ch;
+}
+
+.proof-lw-spec {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Section 01: full-bleed exposure + overlay. */
+.proof-lw-bleed {
+  padding: var(--gap) 0;
+}
+
+.proof-lw-bleed .proof-lw-frame {
+  border-left: 0;
+  border-right: 0;
+}
+
+.proof-lw-bleed-wrap {
+  position: relative;
+}
+
+.proof-lw-overlay {
+  position: absolute;
+  left: var(--pad-x);
+  right: var(--pad-x);
+  bottom: clamp(1.5rem, 4vh, 3rem);
+  max-width: 52ch;
+}
+
+/* Section 02: asymmetric split. */
+.proof-lw-split {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+}
+
+/* Section 03: band + two-column caption. */
+.proof-lw-return-row {
+  display: grid;
+  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  align-items: start;
+  gap: clamp(2rem, 5vw, 4rem);
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+}
+
+/* ---------- Footer wordmark bleed ---------- */
+
+.proof-lw-footer {
+  margin-top: var(--gap);
+  border-top: 1px solid #1a1a1a;
+  overflow: hidden;
+}
+
+.proof-lw-wordmark {
+  padding: 0.05em 0;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(4rem, 35vw, 30rem);
+  line-height: 0.9;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #111;
+  white-space: nowrap;
+  user-select: none;
+  transform-origin: left bottom;
+}
+
+.proof-lw-footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.6rem 1rem;
+  padding: 0.8rem var(--pad-x) clamp(1rem, 3vh, 1.6rem);
+  border-top: 1px solid #1a1a1a;
+  font-size: clamp(0.55rem, 0.2vw + 0.45rem, 0.65rem);
+  color: #444;
+}
+
+/* ---------- Reveal + reduced motion ---------- */
+
+[data-reveal] {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    transform: translateY(18px);
+  }
+
+  [data-reveal].is-visible {
+    animation: proof-lw-rise 1000ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+
+  .proof-lw-footer .proof-lw-wordmark.is-visible {
+    animation: proof-lw-wordmark 1400ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+}
+
+@keyframes proof-lw-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes proof-lw-wordmark {
+  from {
+    opacity: 0;
+    transform: scale(0.955);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 767px) {
+  .proof-lw-hero {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 2.4rem;
+  }
+
+  .proof-lw-cluster {
+    text-align: left;
+  }
+
+  .proof-lw-split,
+  .proof-lw-return-row {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+  }
+}

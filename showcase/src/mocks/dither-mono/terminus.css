@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+.mock-terminus {
+  position: relative;
+  min-height: 100dvh;
+  background: #0a0a0a;
+  color: #e8e8e8;
+  overflow-x: hidden;
+}
+
+/* Static film grain, felt not seen. */
+.mock-terminus-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+.mock-terminus-hero {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(1rem, 2.4vh, 1.6rem);
+  padding: clamp(2.5rem, 6vw, 5.5rem);
+  padding-right: clamp(2.5rem, 26vw, 28rem);
+}
+
+.mock-terminus-label {
+  margin: 0;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #666;
+}
+
+.mock-terminus-title {
+  margin: 0;
+  width: 100%;
+}
+
+.mock-terminus-title svg,
+.mock-terminus-chapter-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* No fill or font-size here: CSS would override the SVG presentation attributes. */
+.mock-terminus-word {
+  font-family: "Space Grotesk", ui-sans-serif, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.mock-terminus-stand {
+  margin: 0;
+  max-width: 36ch;
+  color: #a0a0a0;
+  font-size: clamp(0.75rem, 1vw, 0.9rem);
+  line-height: 1.6;
+}
+
+.mock-terminus-chapter {
+  padding: clamp(4rem, 12vh, 9rem) clamp(2.5rem, 6vw, 5.5rem);
+  border-top: 1px solid #1d1d1d;
+}
+
+.mock-terminus-chapter-svg {
+  width: min(100%, 920px);
+  margin: clamp(1.4rem, 4vh, 2.6rem) 0;
+}
+
+.mock-terminus-callout {
+  margin: 0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8b0000;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .mock-terminus-hero > * {
+    animation: mock-terminus-rise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .mock-terminus-hero > :nth-child(2) {
+    animation-delay: 0.12s;
+  }
+  .mock-terminus-hero > :nth-child(3) {
+    animation-delay: 0.24s;
+  }
+  @keyframes mock-terminus-rise {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}

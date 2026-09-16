@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+/* Showcase index is deliberately neutral - each proof owns its own aesthetic. */
+.dv-index {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  gap: 1rem;
+  background: #0a0a0a;
+  color: #e8e8e8;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.dv-index h2 {
+  margin-top: 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #a0a0a0;
+}
+
+.dv-index nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  justify-content: center;
+  max-width: 760px;
+}
+
+.dv-index a {
+  color: #d4a574;
+  text-decoration: none;
+}
+
+.dv-index a:hover {
+  text-decoration: underline;
+}

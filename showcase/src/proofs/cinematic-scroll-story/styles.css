@@ -1,0 +1,290 @@
+.kovra {
+  --p: 0;
+  position: relative;
+  height: calc(100vh + 3600px);
+  /* clip, not hidden: keeps the sticky stage working */
+  overflow-x: clip;
+  background: #07111f;
+  color: #f5f0e7;
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+.kovra-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.kovra-nav {
+  position: absolute;
+  z-index: 20;
+  top: 28px;
+  right: 4vw;
+  left: 4vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: rgb(245 240 231 / 0.58);
+  font-size: 0.61rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.kovra-nav a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 240ms ease;
+}
+
+.kovra-nav a:hover,
+.kovra-nav a:focus-visible { color: #f4c777; }
+
+.kovra-mark {
+  color: #f5f0e7 !important;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.35rem;
+  letter-spacing: 0.2em;
+}
+
+.kovra-scene,
+.kovra-terrain,
+.kovra-thread {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.kovra-scene {
+  overflow: hidden;
+  background: #0a1c2c;
+}
+
+.kovra-scene::before,
+.kovra-scene::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+}
+
+.kovra-scene::before {
+  background: linear-gradient(145deg, #0b3451, #347f83 55%, #c6dcae);
+  opacity: clamp(0, calc((0.34 - var(--p)) * 8), 1);
+  mix-blend-mode: color;
+}
+
+.kovra-scene::after {
+  background: linear-gradient(150deg, #101943, #242460 58%, #ca795f);
+  opacity: clamp(0, calc((var(--p) - 0.62) * 4), 0.9);
+  mix-blend-mode: color;
+}
+
+.kovra-terrain {
+  z-index: 2;
+  transform: translate3d(0, calc(var(--p) * -12px), 0);
+  filter: blur(calc(14px * max(
+    clamp(0, calc((var(--p) - 0.19) * 12), 1),
+    clamp(0, calc((0.31 - var(--p)) * 12), 1),
+    clamp(0, calc((var(--p) - 0.44) * 12), 1),
+    clamp(0, calc((0.56 - var(--p)) * 12), 1),
+    clamp(0, calc((var(--p) - 0.68) * 12), 1),
+    clamp(0, calc((0.8 - var(--p)) * 12), 1)
+  ))) brightness(calc(1 + var(--p) * 0.08));
+}
+.kovra-sky { opacity: 0.76; }
+.kovra-night { opacity: clamp(0, calc((var(--p) - 0.62) * 3.2), 0.92); }
+.kovra-sun { opacity: clamp(0.15, calc(1 - var(--p) * 1.15), 0.9); }
+.kovra-ridge { transform-box: fill-box; transform-origin: center bottom; }
+.kovra-ridge-back { fill: #123d55; opacity: 0.82; transform: translateY(calc(var(--p) * 44px)); }
+.kovra-ridge-mid { fill: #155660; opacity: 0.92; transform: translateY(calc(var(--p) * -38px)); }
+.kovra-valley { fill: #287d79; transform: translateY(calc(var(--p) * -74px)); }
+.kovra-bank { fill: #163e42; transform: translateY(calc(var(--p) * -118px)); }
+.kovra-foreground { fill: #0a252e; transform: translateY(calc(var(--p) * -168px)); }
+
+.kovra-ridge-back,
+.kovra-ridge-mid,
+.kovra-valley,
+.kovra-bank,
+.kovra-foreground {
+  filter: saturate(calc(0.8 + var(--p) * 0.6)) brightness(calc(0.94 - var(--p) * 0.18));
+}
+
+.kovra-thread { z-index: 7; pointer-events: none; transform: translateY(calc(var(--p) * -24px)); }
+.kovra-thread-shadow,
+.kovra-thread-line {
+  fill: none;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.kovra-thread-shadow {
+  stroke: #06141e;
+  stroke-width: 11;
+  opacity: 0.45;
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--p));
+  filter: blur(8px);
+}
+
+.kovra-thread-line {
+  stroke: #bcf2dc;
+  stroke-width: 3;
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--p));
+  filter: drop-shadow(0 0 7px rgb(188 242 220 / 0.72));
+}
+
+.kovra-bridge {
+  position: absolute;
+  z-index: 8;
+  top: 55%;
+  left: 50%;
+  width: 31vw;
+  min-width: 280px;
+  height: 22vh;
+  transform: translate(-50%, calc(var(--p) * -100px));
+  opacity: clamp(0, calc((var(--p) - 0.42) * 8), 1);
+}
+
+.kovra-bridge-deck {
+  position: absolute;
+  top: 48%;
+  right: -8%;
+  left: -8%;
+  height: 5px;
+  background: #172a2d;
+  box-shadow: 0 4px 0 rgb(3 13 18 / 0.4);
+}
+
+.kovra-bridge-cable {
+  position: absolute;
+  top: 16%;
+  right: 7%;
+  left: 7%;
+  height: 60%;
+  border-top: 1px solid rgb(244 199 119 / 0.75);
+  border-radius: 50%;
+}
+
+.kovra-bridge-tower {
+  position: absolute;
+  top: 8%;
+  width: 7px;
+  height: 46%;
+  background: #203f3b;
+}
+
+.kovra-bridge-tower-left { left: 9%; }
+.kovra-bridge-tower-right { right: 9%; }
+.kovra-stars {
+  position: absolute;
+  z-index: 4;
+  inset: 0;
+  opacity: clamp(0, calc((var(--p) - 0.64) * 4), 0.55);
+  background-image: radial-gradient(circle at 18% 20%, #fff 0 1px, transparent 1.5px),
+    radial-gradient(circle at 78% 16%, #fff 0 1px, transparent 1.5px),
+    radial-gradient(circle at 63% 30%, #fff 0 1px, transparent 1.5px);
+  background-size: 260px 220px, 320px 280px, 410px 320px;
+}
+
+.kovra-panels { position: absolute; z-index: 12; inset: 0; pointer-events: none; }
+.kovra-panel {
+  position: absolute;
+  top: 50%;
+  left: 8vw;
+  width: min(490px, 44vw);
+  transform: translateY(-50%);
+  filter: blur(0);
+  opacity: 0;
+}
+
+.kovra-panel::before {
+  display: block;
+  width: 36px;
+  height: 1px;
+  margin-bottom: 26px;
+  background: #f4c777;
+  content: "";
+}
+
+.kovra-panel-note,
+.kovra-panel-detail,
+.kovra-eyebrow,
+.kovra-scroll-cue {
+  color: rgb(245 240 231 / 0.62);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.kovra-panel-place { margin: 0.4rem 0 0.75rem; color: #f4c777; font-size: 0.75rem; letter-spacing: 0.13em; text-transform: uppercase; }
+.kovra-panel h2 { max-width: 480px; margin: 0; font-family: "Cormorant Garamond", Georgia, serif; font-size: clamp(2.3rem, 4.4vw, 4.8rem); font-weight: 300; letter-spacing: -0.025em; line-height: 0.95; }
+.kovra-panel-detail { margin-top: 1.4rem; letter-spacing: 0.1em; }
+
+.kovra-panel-source { opacity: min(clamp(0, calc((var(--p) - 0.02) * 13), 1), clamp(0, calc((0.27 - var(--p)) * 13), 1)); }
+.kovra-panel-gorge { opacity: min(clamp(0, calc((var(--p) - 0.23) * 13), 1), clamp(0, calc((0.51 - var(--p)) * 13), 1)); }
+.kovra-panel-mill { opacity: min(clamp(0, calc((var(--p) - 0.47) * 13), 1), clamp(0, calc((0.76 - var(--p)) * 13), 1)); }
+.kovra-panel-delta { opacity: min(clamp(0, calc((var(--p) - 0.72) * 13), 1), clamp(0, calc((0.82 - var(--p)) * 13), 1), 1); }
+
+.kovra-opening {
+  position: absolute;
+  z-index: 14;
+  top: 50%;
+  left: 50%;
+  width: min(72rem, 90vw);
+  text-align: center;
+  transform: translate(-50%, -50%) translateY(calc(var(--p) * -60px));
+  opacity: clamp(0, calc((0.2 - var(--p)) * 8), 1);
+}
+
+.kovra-opening h1 { margin: 0.05em 0 0; font-family: "Cormorant Garamond", Georgia, serif; font-size: clamp(6rem, 20vw, 17rem); font-weight: 300; letter-spacing: -0.08em; line-height: 0.72; }
+.kovra-intro { margin: 2rem 0 0; font-family: "Cormorant Garamond", Georgia, serif; font-size: clamp(1.3rem, 2.1vw, 2rem); letter-spacing: 0.02em; }
+.kovra-scroll-cue { display: inline-flex; align-items: center; gap: 14px; margin-top: 6rem; }
+.kovra-scroll-cue i { display: block; width: 44px; height: 1px; background: #f4c777; }
+.kovra-progress { position: absolute; z-index: 20; right: 4vw; bottom: 28px; left: 4vw; height: 1px; background: rgb(245 240 231 / 0.2); }
+.kovra-progress span { display: block; width: calc(var(--p) * 100%); height: 100%; background: #f4c777; }
+
+.kovra-sights { position: absolute; z-index: 18; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 4vw 8vh; pointer-events: none; opacity: clamp(0, calc((var(--p) - 0.76) * 5), 1); }
+.kovra-sights-heading { max-width: 440px; margin-bottom: 2.5rem; }
+.kovra-sights-heading h2 { margin: 0.8rem 0 0; font-family: "Cormorant Garamond", Georgia, serif; font-size: clamp(2.5rem, 5vw, 5.5rem); font-weight: 300; letter-spacing: -0.04em; line-height: 0.88; }
+.kovra-landmark-rail { display: flex; gap: 1.5rem; width: max-content; transform: translateX(calc(420vw * pow(1 - var(--p), 1.55))); }
+.kovra-landmark { position: relative; width: min(270px, 62vw); min-height: 220px; padding: 1.3rem; border: 1px solid rgb(245 240 231 / 0.25); background: rgb(11 19 48 / 0.46); backdrop-filter: blur(12px); pointer-events: auto; }
+.kovra-landmark > p { margin: 0; color: #f4c777; font-size: 0.65rem; letter-spacing: 0.16em; }
+.kovra-landmark h3 { margin: 3.8rem 0 0.7rem; font-family: "Cormorant Garamond", Georgia, serif; font-size: 2.2rem; font-weight: 400; }
+.kovra-landmark span { display: block; color: rgb(245 240 231 / 0.62); font-size: 0.73rem; line-height: 1.55; }
+.kovra-landmark i { position: absolute; right: 1.3rem; bottom: 1.3rem; width: 18px; height: 18px; border-right: 1px solid #f4c777; border-bottom: 1px solid #f4c777; transform: rotate(-45deg); }
+.kovra-footer { display: flex; justify-content: space-between; padding-top: 4rem; color: rgb(245 240 231 / 0.42); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; }
+
+@media (max-width: 767px) {
+  .kovra { height: calc(100vh + 2000px); }
+  .kovra-nav { top: 20px; right: 6vw; left: 6vw; }
+  .kovra-nav > span { display: none; }
+  .kovra-ridge-back, .kovra-bank { display: none; }
+  .kovra-terrain { transform: translateY(calc(var(--p) * -8px)); }
+  .kovra-panel { top: 48%; left: 8vw; width: 84vw; text-align: center; }
+  .kovra-panel::before { margin-right: auto; margin-left: auto; }
+  .kovra-panel h2 { margin: 0 auto; font-size: clamp(2.2rem, 10vw, 3.8rem); }
+  .kovra-bridge { width: 70vw; }
+  .kovra-opening { width: 86vw; }
+  .kovra-opening h1 { font-size: clamp(5rem, 27vw, 9rem); }
+  .kovra-sights { padding: 0 6vw 7vh; }
+  .kovra-sights-heading { margin-bottom: 1.8rem; }
+  .kovra-landmark-rail { gap: 0.75rem; transform: translateX(calc(140vw * pow(1 - var(--p), 1.55))); }
+  .kovra-landmark { width: 72vw; min-height: 190px; }
+  .kovra-landmark h3 { margin-top: 2.8rem; }
+  .kovra-footer { gap: 1rem; padding-top: 2rem; font-size: 0.5rem; }
+  .kovra-footer span:last-child { text-align: right; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kovra { --p: 1; }
+  .kovra-opening { opacity: 1; transform: translate(-50%, -50%); }
+  .kovra-panel { display: none; }
+  .kovra-sights { opacity: 1; }
+  .kovra-landmark-rail { transform: none; }
+}

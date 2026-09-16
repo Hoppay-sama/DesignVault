@@ -1,0 +1,162 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300&family=IBM+Plex+Mono:wght@300;400&display=swap");
+
+.mock-longitude {
+  --mock-lon-ink: #e8e2d8;
+  --mock-lon-accent: #c4956a;
+  position: relative;
+  min-height: 2000px;
+  margin: 0;
+  background: #0d1013;
+  color: var(--mock-lon-ink);
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 300;
+  /* clip, not hidden: overflow-x hidden makes this a scroll container and breaks sticky */
+  overflow-x: clip;
+}
+
+/* ---- letterbox bars ---- */
+.mock-longitude-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 8vh;
+  min-height: 54px;
+  padding: 0 1.6rem;
+  background: #08090b;
+  font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(232, 226, 216, 0.58);
+}
+
+.mock-longitude-bar--top {
+  top: 0;
+  border-bottom: 1px solid rgba(232, 226, 216, 0.14);
+}
+
+.mock-longitude-bar--bottom {
+  bottom: 0;
+  border-top: 1px solid rgba(232, 226, 216, 0.14);
+}
+
+.mock-longitude-accent {
+  color: var(--mock-lon-accent);
+  font-weight: 400;
+}
+
+/* ---- scroll track + sticky viewport ---- */
+.mock-longitude-track {
+  position: relative;
+  height: 2000px;
+}
+
+.mock-longitude-viewport {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: #0d1013;
+}
+
+.mock-longitude-panorama {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 300vw;
+  height: 100%;
+  will-change: transform;
+  transition: transform 0.08s linear;
+}
+
+.mock-longitude-sky {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(52vw 42vh at 68% 80%, rgba(196, 149, 106, 0.5), rgba(196, 149, 106, 0) 70%),
+    linear-gradient(
+      180deg,
+      #0e1216 0%,
+      #1c2228 30%,
+      #3b3a39 52%,
+      #7a6650 68%,
+      #c4956a 82%,
+      #e6d3bb 100%
+    );
+}
+
+.mock-longitude-fog {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(232, 226, 216, 0) 0 34px,
+    rgba(232, 226, 216, 0.05) 34px 68px
+  );
+  -webkit-mask-image: linear-gradient(180deg, transparent 28%, #000 55%, transparent 94%);
+  mask-image: linear-gradient(180deg, transparent 28%, #000 55%, transparent 94%);
+}
+
+.mock-longitude-ridge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.mock-longitude-ridge--far {
+  height: 46%;
+  filter: blur(3px);
+  opacity: 0.62;
+}
+
+.mock-longitude-ridge--near {
+  height: 34%;
+  filter: blur(1.4px);
+  opacity: 0.9;
+}
+
+.mock-longitude-ridge--far path {
+  fill: #2c3338;
+}
+
+.mock-longitude-ridge--near path {
+  fill: #12181b;
+}
+
+/* ---- station labels ---- */
+.mock-longitude-station {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.mock-longitude-station h2 {
+  margin: 0 0 0.7rem;
+  font-size: clamp(1.6rem, 4vw, 3.4rem);
+  font-weight: 200;
+  letter-spacing: 0.18em;
+}
+
+.mock-longitude-station p {
+  margin: 0;
+  font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(232, 226, 216, 0.62);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mock-longitude-panorama {
+    transition: none;
+  }
+}

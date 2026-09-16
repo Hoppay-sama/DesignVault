@@ -98,5 +98,12 @@ platform/out/
 platform/test-results/
 platform/playwright-report/
 
+# Showcase
+showcase/node_modules/
+showcase/dist/
+showcase/test-results/
+showcase/playwright-report/
+showcase/.verify/
+
 # Docs
 docs/

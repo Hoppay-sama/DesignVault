@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=IBM+Plex+Mono:wght@400&family=Inter:wght@300;400&display=swap");
+
+.mock-lumen {
+  --p: 0;
+  position: relative;
+  height: calc(100vh + 1800px);
+  background: #efe6d2;
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+.mock-lumen-stage {
+  /* d rises 0 -> 1 across the first half of the scroll, then returns to 0. */
+  --d: calc(2 * min(var(--p), calc(1 - var(--p))));
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.mock-lumen-room {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, #7d97ad, #22323f);
+  opacity: calc(var(--p) * 0.88);
+}
+
+.mock-lumen-clock {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(46vmin, 52vh);
+  transform: translate(-50%, -50%);
+  overflow: visible;
+}
+
+.mock-lumen-part {
+  transform-box: view-box;
+  transform: translate(calc(var(--ox, 0px) * var(--d)), calc(var(--oy, 0px) * var(--d)));
+}
+
+.mock-lumen-case {
+  --ox: -26px;
+  --oy: 30px;
+}
+
+.mock-lumen-bezel {
+  --ox: 52px;
+  --oy: -22px;
+}
+
+.mock-lumen-dial {
+  --ox: -46px;
+  --oy: 58px;
+}
+
+.mock-lumen-needle {
+  --ox: 64px;
+  --oy: 48px;
+  transform-origin: 200px 200px;
+  transform: rotate(calc(var(--d) * 14deg))
+    translate(calc(var(--ox) * var(--d)), calc(var(--oy) * var(--d)));
+}
+
+.mock-lumen-cam {
+  --ox: -40px;
+  --oy: -64px;
+}
+
+.mock-lumen-label {
+  position: absolute;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #233541;
+  opacity: clamp(0, calc((var(--d) - 0.35) * 3), 1);
+}
+
+.mock-lumen-l1 {
+  top: 20%;
+  left: 24%;
+}
+
+.mock-lumen-l2 {
+  top: 26%;
+  right: 18%;
+}
+
+.mock-lumen-l3 {
+  bottom: 24%;
+  left: 20%;
+}
+
+.mock-lumen-l4 {
+  bottom: 20%;
+  right: 22%;
+}
+
+.mock-lumen-l5 {
+  top: 48%;
+  left: 12%;
+}
+
+.mock-lumen-panel {
+  position: absolute;
+  top: 45%;
+  left: 4%;
+  z-index: 5;
+  max-width: 340px;
+  transform: translateY(-50%);
+  padding: 1.1rem 1.3rem;
+  border: 1px solid rgba(243, 236, 221, 0.18);
+  background: rgba(18, 28, 36, 0.42);
+  color: #f4ecdb;
+}
+
+.mock-lumen-kicker {
+  margin: 0 0 0.9rem;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #e4c98d;
+}
+
+.mock-lumen-copy {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.5rem, 2.6vw, 2.3rem);
+  font-weight: 300;
+  line-height: 1.15;
+}
+
+.mock-lumen-sub {
+  margin: 0.8rem 0 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(244, 236, 219, 0.62);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mock-lumen-panel {
+    opacity: 1;
+  }
+}

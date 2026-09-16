@@ -1,0 +1,81 @@
+.lumen-page {
+  --p: 0;
+  --explode: 0;
+  --focus: 0;
+  --showroom: 0;
+  --nav: 0;
+  position: relative;
+  height: calc(100vh + 3900px);
+  overflow: clip;
+  color: #192c37;
+  background: #efe6d2;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.lumen-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; isolation: isolate; }
+.lumen-wash { position: absolute; inset: 0; z-index: -2; background: linear-gradient(135deg, #efe6d2 0%, #d9d4c6 35%, #334f61 70%, #101d2b 100%); opacity: calc(var(--p) * .92); }
+.lumen-wash::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 50% 43%, transparent 0 22%, rgba(9, 20, 29, .38) 75%); opacity: var(--p); }
+.lumen-scrim { position: absolute; inset: 0; z-index: 4; pointer-events: none; background: linear-gradient(100deg, transparent 30%, rgba(9, 20, 29, .6) 75%); opacity: var(--focus); }
+.lumen-shade { position: absolute; inset: 0; z-index: 5; pointer-events: none; background: linear-gradient(180deg, rgba(6, 12, 18, .9) 0%, rgba(6, 12, 18, 0) 34%, rgba(6, 12, 18, 0) 66%, rgba(6, 12, 18, .9) 100%); opacity: var(--shade, 0); }
+.lumen-grain { position: fixed; inset: 0; z-index: 40; pointer-events: none; opacity: .04; mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23g)'/%3E%3C/svg%3E"); background-size: 160px 160px; }
+.lumen-header { position: absolute; z-index: 10; top: 26px; left: 4vw; right: 4vw; display: flex; justify-content: space-between; font: 500 10px/1 JetBrains Mono, monospace; letter-spacing: .2em; text-transform: uppercase; }
+.lumen-mark { color: inherit; text-decoration: none; }
+.lumen-header-note { opacity: .58; }
+.lumen-hero-copy { position: absolute; z-index: 3; top: 18vh; left: 5vw; transition: opacity .2s; opacity: calc(1 - var(--p) * 2.2); }
+.lumen-eyebrow { margin: 0 0 18px; color: #a47739; font: 500 10px/1.4 JetBrains Mono, monospace; letter-spacing: .17em; text-transform: uppercase; }
+.lumen-hero-copy h1 { margin: 0; font: 300 clamp(5.5rem, 15vw, 15rem)/.7 "Cormorant Garamond", Georgia, serif; letter-spacing: -.06em; }
+.lumen-deck { margin: 20px 0 0 8px; font: 300 clamp(1.1rem, 2vw, 1.7rem)/1 "Cormorant Garamond", Georgia, serif; letter-spacing: .08em; }
+.lumen-instrument { position: absolute; z-index: 2; top: 50%; left: 50%; width: min(72vw, 700px); transform: translate(-50%, -50%) scale(calc(1 + var(--p) * .05)); }
+.lumen-clock { display: block; width: 100%; overflow: visible; }
+.clock-part { transform-box: view-box; transform: translate(calc(var(--x) * var(--explode)), calc(var(--y) * var(--explode))) scale(calc(1 + var(--z) * var(--explode) * .035)); transition: filter .1s linear; }
+.lumen-ground-shadow { opacity: calc(1 - var(--focus)); }
+.part-case { filter: blur(calc(var(--focus) * 6px)); }
+.part-bezel { filter: blur(calc(var(--focus) * 8px)); }
+.part-crystal { filter: blur(calc(var(--focus) * 9px)); }
+.part-dial { filter: blur(calc(var(--focus) * 10px)); }
+.part-hands { filter: blur(calc(var(--focus) * 13px)); }
+.part-gears { filter: blur(calc(var(--focus) * 15px)); }
+.part-cam { transform-box: fill-box; transform-origin: center; transform: translate(calc(var(--x) * var(--explode)), calc(var(--y) * var(--explode))) scale(calc(1 + var(--z) * var(--explode) * .035 + var(--focus) * .5)); filter: none; }
+.lumen-crosshair { position: absolute; opacity: calc(var(--explode) * .34); background: #d7b66e; }
+.lumen-crosshair-x { top: 50%; left: -11%; width: 122%; height: 1px; }
+.lumen-crosshair-y { top: -7%; left: 50%; width: 1px; height: 114%; }
+.lumen-parts { position: absolute; inset: 0; pointer-events: none; opacity: var(--explode); font: 10px/1 JetBrains Mono, monospace; letter-spacing: .12em; }
+.part-label { position: absolute; padding: 8px 10px; border-top: 1px solid currentColor; color: #b88742; }
+.label-case { top: 25%; left: 23%; }.label-bezel { top: 29%; right: 20%; }.label-dial { bottom: 25%; left: 20%; }.label-hands { bottom: 21%; right: 21%; }.label-cam { top: 47%; left: 13%; }.label-gears { top: 58%; right: 12%; }
+.lumen-ledger { position: absolute; z-index: 4; bottom: 9vh; left: 5vw; display: grid; gap: 5px; color: #f3eadb; opacity: calc(min(1, var(--p) * 2) * (1 - var(--showroom))); text-shadow: 0 1px 14px rgba(9,20,29,.5); font: 300 clamp(1.2rem, 2.5vw, 2.2rem)/1.04 "Cormorant Garamond", Georgia, serif; }
+.ledger-title { color: #ebc77d; }
+.lumen-scroll-cue { position: absolute; right: 5vw; bottom: 8vh; margin: 0; opacity: calc(1 - var(--p) * 3); color: #425c68; font: 10px/1 JetBrains Mono, monospace; letter-spacing: .14em; text-transform: uppercase; }
+.lumen-scroll-cue span { display: inline-block; margin-left: 8px; color: #ad7c34; font-size: 17px; }
+.lumen-inspection { position: absolute; z-index: 5; top: 20%; right: 6vw; width: min(280px, 34vw); color: #f3eadb; opacity: var(--focus); transform: translateY(calc((1 - var(--focus)) * 25px)); }
+.lumen-inspection h2 { margin: 0 0 16px; font: 300 clamp(2.4rem, 4vw, 4.5rem)/.86 "Cormorant Garamond", Georgia, serif; letter-spacing: -.03em; }
+.lumen-inspection > p:last-child { max-width: 230px; color: rgba(243, 234, 219, .66); font-size: 12px; line-height: 1.6; }
+.lumen-showroom { position: absolute; z-index: 6; inset: auto 0 9vh; padding-left: 5vw; color: #f2eadc; opacity: var(--showroom); transform: translateY(calc((1 - var(--showroom)) * 40px)); }
+.material-rail { display: flex; gap: 12px; width: max-content; margin-top: 25px; transform: translateX(calc((1 - var(--showroom)) * 120vw)); }
+.material-card { --card-in: clamp(0, calc((var(--p) - .8 - var(--i) * .015) / .1), 1); width: min(210px, 24vw); min-height: 136px; padding: 18px; border: 1px solid rgba(240, 228, 205, .25); background: rgba(17, 29, 40, .46); backdrop-filter: blur(8px); opacity: var(--card-in); transform: translateY(calc((1 - var(--card-in)) * 14px)); }
+.material-swatch { display: block; width: 100%; height: 4px; margin-bottom: 30px; background: var(--material); }
+.material-card h3 { margin: 0 0 7px; font: 400 25px/1 "Cormorant Garamond", Georgia, serif; }
+.material-card p { margin: 0; color: rgba(241, 233, 219, .58); font: 10px/1.5 JetBrains Mono, monospace; text-transform: uppercase; }
+.lumen-nav { position: absolute; z-index: 8; right: 4vw; bottom: 28px; left: 4vw; display: flex; gap: 27px; align-items: center; color: #d7c7ad; opacity: var(--nav); font: 10px/1 JetBrains Mono, monospace; letter-spacing: .14em; text-transform: uppercase; }
+.lumen-nav span { margin-right: auto; color: #e4bf76; }.lumen-nav a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(228, 191, 118, .5); padding-bottom: 5px; }
+
+@media (max-width: 767px) {
+  .lumen-page { height: calc(100vh + 2900px); }
+  .lumen-header { top: 19px; left: 6vw; right: 6vw; }.lumen-header-note { display: none; }
+  .lumen-hero-copy { top: 16vh; left: 7vw; }.lumen-hero-copy h1 { font-size: clamp(5rem, 24vw, 8rem); }
+  .lumen-instrument { width: min(112vw, 560px); top: 51%; }
+  .part-crystal, .part-gears, .label-dial, .label-gears { display: none; }
+  .lumen-parts .label-case, .lumen-parts .label-bezel, .lumen-parts .label-cam { display: block; }
+  .lumen-ledger { left: 7vw; bottom: 12vh; }.lumen-scroll-cue { right: 7vw; bottom: 6vh; }
+  .lumen-inspection { top: 14%; right: 7vw; width: 190px; }.lumen-inspection h2 { font-size: 2.7rem; }
+  .lumen-showroom { padding-left: 7vw; bottom: 11vh; }.material-card { width: 168px; min-height: 125px; padding: 14px; }.material-card h3 { font-size: 22px; }
+  .lumen-nav { right: 7vw; bottom: 20px; left: 7vw; gap: 12px; font-size: 8px; }.lumen-nav span { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumen-page { height: 100vh; }.lumen-hero-copy { opacity: 0; }.lumen-scroll-cue { display: none; }
+  .lumen-wash { opacity: .5; }.lumen-ledger { opacity: 1; }.lumen-parts { opacity: 1; }
+  .lumen-showroom, .lumen-inspection { display: block; opacity: 1; transform: none; transition: none; }
+  .material-rail, .material-card { transform: none; opacity: 1; transition: none; }
+  .lumen-nav { opacity: 1; }
+  .lumen-shade { opacity: 0; }
+}

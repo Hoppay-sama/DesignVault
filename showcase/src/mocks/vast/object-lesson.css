@@ -1,0 +1,165 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300&family=IBM+Plex+Mono:wght@300;400&display=swap");
+
+.mock-object-lesson {
+  --mock-ol-ink: #ded8cc;
+  --mock-ol-accent: #8b9d83;
+  margin: 0;
+  background: #0b0c0d;
+  color: var(--mock-ol-ink);
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 300;
+  /* clip, not hidden: keeps sticky sections working */
+  overflow-x: clip;
+}
+
+.mock-ol-gap {
+  height: 70vh;
+}
+
+/* ---- cuts ---- */
+.mock-ol-shot {
+  position: sticky;
+  top: 0;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  margin: 0;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.mock-ol-shot.is-visible {
+  opacity: 1;
+}
+
+.mock-ol-shot[data-shot="1"] {
+  background:
+    radial-gradient(70vw 55vh at 50% 62%, rgba(196, 180, 150, 0.16), rgba(0, 0, 0, 0) 72%),
+    linear-gradient(180deg, #14171a 0%, #262a2c 48%, #3d4142 100%);
+}
+
+.mock-ol-shot[data-shot="2"] {
+  background:
+    radial-gradient(58vw 50vh at 42% 56%, rgba(210, 198, 172, 0.2), rgba(0, 0, 0, 0) 70%),
+    linear-gradient(200deg, #1b1e1f 0%, #35393a 55%, #565b5b 100%);
+}
+
+.mock-ol-shot[data-shot="3"] {
+  background:
+    radial-gradient(52vw 48vh at 58% 50%, rgba(226, 214, 190, 0.24), rgba(0, 0, 0, 0) 68%),
+    linear-gradient(160deg, #222526 0%, #44494a 52%, #6d7271 100%);
+}
+
+.mock-ol-shot--return {
+  min-height: 90vh;
+  background: linear-gradient(180deg, #0b0c0d 0%, #1b1e20 60%, #0b0c0d 100%);
+}
+
+.mock-ol-shot-id {
+  position: absolute;
+  top: 4.2rem;
+  left: 1.6rem;
+  font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: rgba(222, 216, 204, 0.6);
+}
+
+/* ---- the gauge ---- */
+.mock-ol-stage {
+  transform-origin: center;
+}
+
+.mock-ol-gauge {
+  display: block;
+  width: 240px;
+  height: 312px;
+  animation: mock-ol-drift 9s ease-in-out infinite;
+}
+
+.mock-ol-dial,
+.mock-ol-dial-inner {
+  fill: none;
+  stroke: rgba(222, 216, 204, 0.6);
+  stroke-width: 1.2;
+}
+
+.mock-ol-dial-inner {
+  stroke: rgba(222, 216, 204, 0.2);
+}
+
+.mock-ol-tick {
+  stroke: rgba(222, 216, 204, 0.5);
+  stroke-width: 1;
+}
+
+.mock-ol-needle {
+  stroke: rgba(222, 216, 204, 0.85);
+  stroke-width: 2;
+}
+
+.mock-ol-hub {
+  fill: rgba(222, 216, 204, 0.85);
+}
+
+.mock-ol-post {
+  fill: rgba(222, 216, 204, 0.14);
+}
+
+/* ---- editor-log meta ---- */
+.mock-ol-meta {
+  position: absolute;
+  bottom: 3.4rem;
+  left: 1.6rem;
+  right: 1.6rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(222, 216, 204, 0.6);
+}
+
+.mock-ol-accent {
+  color: var(--mock-ol-accent);
+  font-weight: 400;
+}
+
+.mock-ol-credit {
+  position: absolute;
+  bottom: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(560px, 84vw);
+  margin: 0;
+  text-align: center;
+  font-size: 0.86rem;
+  font-weight: 200;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+  color: rgba(222, 216, 204, 0.72);
+}
+
+@keyframes mock-ol-drift {
+  0%,
+  100% {
+    transform: translateY(-1.5%);
+  }
+  50% {
+    transform: translateY(1.5%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mock-ol-shot {
+    opacity: 1;
+    transition: none;
+  }
+
+  .mock-ol-gauge {
+    animation: none;
+  }
+}

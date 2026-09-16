@@ -1,0 +1,194 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Inter:wght@200;300&family=IBM+Plex+Mono:wght@300;400&display=swap");
+
+.mock-closing-credits {
+  --mock-cc-ink: #e2ddd4;
+  --mock-cc-accent: #b8856a;
+  margin: 0;
+  min-height: 100vh;
+  padding: 14vh 1.5rem 16vh;
+  background: #0a0b0c;
+  color: var(--mock-cc-ink);
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ---- letterbox ---- */
+.mock-cc-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  height: 7vh;
+  min-height: 46px;
+  padding: 0 1.5rem;
+  background: #060707;
+  font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  font-size: 0.54rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(226, 221, 212, 0.5);
+}
+
+.mock-cc-bar--top {
+  top: 0;
+  border-bottom: 1px solid rgba(226, 221, 212, 0.12);
+}
+
+.mock-cc-bar--bottom {
+  bottom: 0;
+  border-top: 1px solid rgba(226, 221, 212, 0.12);
+}
+
+/* ---- credit column ---- */
+.mock-cc-crawl {
+  width: min(360px, 100%);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mock-cc-kicker {
+  margin: 0 0 1.6rem;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.54rem;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: rgba(226, 221, 212, 0.46);
+}
+
+.mock-cc-title {
+  margin: 0 0 3.4rem;
+  font-family: "Cormorant Garamond", "Times New Roman", serif;
+  font-size: clamp(1.9rem, 6vw, 2.6rem);
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+}
+
+.mock-cc-credits {
+  margin: 0;
+}
+
+.mock-cc-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(226, 221, 212, 0.09);
+}
+
+.mock-cc-row dt {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(226, 221, 212, 0.44);
+}
+
+.mock-cc-row dd {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 200;
+  letter-spacing: 0.1em;
+}
+
+.mock-cc-accent {
+  color: var(--mock-cc-accent);
+}
+
+/* ---- dwelling frame ---- */
+.mock-cc-frame {
+  position: relative;
+  margin: 22vh 0;
+  height: 92vh;
+  overflow: hidden;
+  border-top: 1px solid rgba(226, 221, 212, 0.1);
+  border-bottom: 1px solid rgba(226, 221, 212, 0.1);
+}
+
+.mock-cc-still {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(46vw 34vh at 34% 72%, rgba(184, 133, 106, 0.34), rgba(0, 0, 0, 0) 72%),
+    linear-gradient(168deg, #12161a 0%, #2b3138 46%, #5b5f60 74%, #8a8377 100%);
+}
+
+.mock-cc-still::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0 38px,
+    rgba(0, 0, 0, 0.05) 38px 76px
+  );
+}
+
+.mock-cc-titlecard {
+  position: absolute;
+  bottom: 2.4rem;
+  left: 2rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  padding: 0.55rem 0.95rem;
+  border: 1px solid rgba(226, 221, 212, 0.4);
+  background: rgba(6, 7, 7, 0.42);
+  backdrop-filter: blur(3px);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.56rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(226, 221, 212, 0.82);
+}
+
+.mock-cc-titlecard b {
+  font-weight: 400;
+  letter-spacing: 0.16em;
+}
+
+/* ---- fin ---- */
+.mock-cc-fine {
+  margin: 3.4rem 0 2.6rem;
+  font-family: "Cormorant Garamond", "Times New Roman", serif;
+  font-style: italic;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  color: rgba(226, 221, 212, 0.6);
+}
+
+.mock-cc-fin {
+  display: inline-block;
+  padding: 0.75rem 2.4rem;
+  border: 1px solid rgba(226, 221, 212, 0.4);
+  color: var(--mock-cc-ink);
+  text-decoration: none;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  transition:
+    background 0.4s ease,
+    color 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.mock-cc-fin:hover,
+.mock-cc-fin:focus-visible {
+  background: var(--mock-cc-ink);
+  border-color: var(--mock-cc-ink);
+  color: #0a0b0c;
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mock-cc-fin {
+    transition: none;
+  }
+}

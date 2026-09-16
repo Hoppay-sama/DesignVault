@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+.mock-duotone {
+  min-height: 100dvh;
+  background: #0a0a0a;
+  color: #e8e8e8;
+  padding: clamp(2.5rem, 6vw, 5.5rem);
+  overflow-x: hidden;
+}
+
+.mock-duotone-hero {
+  max-width: 60ch;
+  margin-bottom: clamp(2.5rem, 6vh, 4.5rem);
+}
+
+.mock-duotone-label {
+  margin: 0;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #666;
+}
+
+.mock-duotone-hero h1 {
+  margin: 0.8rem 0 0;
+  font-family: "Space Grotesk", ui-sans-serif, sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.5rem, 9vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.mock-duotone-instrument {
+  max-width: 1200px;
+  padding-top: clamp(1.5rem, 4vh, 3rem);
+  border-top: 1px solid #1d1d1d;
+}
+
+.mock-duotone-strip {
+  position: relative;
+  touch-action: pan-y;
+}
+
+.mock-duotone-layer {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.mock-duotone-proof {
+  position: absolute;
+  inset: 0;
+}
+
+/* The hairline: 1px visible, ~29px grab target. Accent only here + run button. */
+.mock-duotone-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: #b85c38;
+  transform: translateX(-50%);
+  cursor: ew-resize;
+  touch-action: none;
+}
+
+.mock-duotone-handle::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -14px;
+  right: -14px;
+}
+
+.mock-duotone-handle:focus-visible {
+  outline: 2px solid #b85c38;
+  outline-offset: 4px;
+}
+
+.mock-duotone-readout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem clamp(1rem, 3vw, 2.5rem);
+  margin-top: 1rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #a0a0a0;
+}
+
+.mock-duotone-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.6rem;
+}
+
+.mock-duotone-controls button {
+  padding: 0.5rem 0.9rem;
+  border: 1px solid #2a2a2a;
+  background: transparent;
+  color: #a0a0a0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.mock-duotone-controls button:hover,
+.mock-duotone-controls button:focus-visible {
+  border-color: #777;
+  color: #e8e8e8;
+}
+
+.mock-duotone-controls .mock-duotone-run {
+  margin-left: auto;
+  border-color: #b85c38;
+  color: #b85c38;
+}
+
+.mock-duotone-controls .mock-duotone-run:hover,
+.mock-duotone-controls .mock-duotone-run:focus-visible {
+  background: #b85c38;
+  color: #0a0a0a;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .mock-duotone-instrument {
+    animation: mock-duotone-wipe 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes mock-duotone-wipe {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
