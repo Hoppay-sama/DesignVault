@@ -1,196 +1,124 @@
 # Exact Replica Prompt — Cinematic Scroll Story
 
-> Copy this entire prompt and paste it into your AI coding assistant.
+> Copy this entire prompt and paste it into your AI coding assistant (Cursor, Claude Code, v0.dev, etc.) to generate a Cinematic Scroll Story page.
 
 ---
 
 ```
-Build a cinematic scroll story for "MOSTAR" — a city scroll story showcasing the historic bridge, bazaar, and sights of Mostar. Stack: vanilla HTML/CSS/JS (no frameworks). Page title: `Mostar — A City Between Worlds`.
+Build a cinematic scroll story for "KOVRA" — a field-document river descent from glacial source to night delta. Stack: React + Vite + TypeScript + Tailwind CSS v4. Page title: `Kovra — A River Descent`.
 
-Vibe: A film you control with your scroll wheel. 7+ transparent-edge PNG layers stack like theater flats. Each scene has its own color world. The scroll wheel is the camera dolly.
-
----
-
-## ANTI-SLOP CONSTRAINTS
-
-- NO timer-based auto-scroll (user controls the pace)
-- NO single-layer photography (need 7+ parallax layers)
-- NO raw scroll linking (use lerp smoothing at 0.14)
-- NO rectangular images with hard edges (transparent-edge PNGs only)
-- NO uniform fade transitions (use blur/brightness/saturation shifts)
-- NO visible carousel rewind (3-set clone with instant-jump normalize)
-- NO spring or bounce easing
-- NO CSS-only parallax (background-attachment: fixed)
-- NO card grids as primary layout
-- NO more than minimal text (title, story panels, nav)
+Vibe: A recovered field instrument playing back four hard-cut territories of real footage. One unbroken thread line draws itself through all four scenes while a fixed HUD counts kilometers. The scroll wheel is the playback head.
 
 ---
 
-## STRUCTURE
+## CONCEPT REGISTER
 
-### Cinema Scroll Container
-```html
-<div class="cinema-scroll" style="height: calc(100vh + 3700px); position: relative;">
-  <div class="cinema-stage" style="position: sticky; top: 0; height: 100vh; overflow: hidden;">
-    <!-- 7+ parallax layers -->
-    <div class="layer" data-depth="0.3" id="sky"></div>
-    <div class="layer" data-depth="0.5" id="back-four"></div>
-    <div class="layer" data-depth="0.7" id="bazaar"></div>
-    <div class="layer" data-depth="0.85" id="splitframe-L"></div>
-    <div class="layer" data-depth="0.85" id="splitframe-R"></div>
-    <div class="layer" data-depth="0.9" id="bridge"></div>
-    <div class="layer" data-depth="1.0" id="frame-two"></div>
-    <!-- Story panel -->
-    <div class="story-panel" id="story-1"></div>
-    <!-- Sight slider -->
-    <div class="sights-slider" id="sights"></div>
-    <!-- Nav -->
-    <div class="cinema-nav" id="nav"></div>
-  </div>
-</div>
-```
+- Four scenes, one descent: 01 GLACIER (high aerial, pale ice) → 02 PINE (dark forest corridor) → 03 MILL TOWN (warm dusk, human scale) → 04 DELTA (near-black tidal flats).
+- One continuous thread line (mint signal stroke) enters from the top edge and draws downward with scroll progress. It never re-routes, never blurs, and never breaks at scene cuts.
+- Copy voice is field-document: terse place-names in expanded caps, one poetic field note per scene in light sentence case, mono micro-labels (`FIELD NOTE 118`, `KM 147 / 412`). No marketing headlines, no serif nostalgia.
+- Scene windows on scroll progress p (0→1): 01 at 0–0.25, 02 at 0.25–0.5, 03 at 0.5–0.75, 04 at 0.75–1.0. Cut lines at 0.25 / 0.5 / 0.75. km counter maps linearly: km = round(p × 412).
 
 ---
 
-## SCROLL CHOREOGRAPHY (JS)
+## REAL-MEDIA MANIFEST (hard policy)
 
-```javascript
-// Lerp smoothing
-let current = 0, target = 0;
-const lerpFactor = 0.14;
-
-function segmentInOut(scroll, start, end) {
-  const t = (scroll - start) / (end - start);
-  if (t < 0 || t > 1) return 0;
-  if (t < 0.3) return t / 0.3;
-  if (t > 0.7) return (1 - t) / 0.3;
-  return 1;
-}
-
-function update() {
-  current += (target - current) * lerpFactor;
-  const scroll = current;
-
-  // Layer 1: Sky — slow drift
-  setTransform('sky', { ty: -scroll * 0.3 * 0.08, scale: 1 + scroll * 0.00002 });
-
-  // Layer 2: Back architecture
-  setTransform('back-four', { ty: -scroll * 0.5 * 0.12, scale: 1 + scroll * 0.00003 });
-
-  // Layer 3: Bazaar — saturation ramp
-  const bazaarSat = 60 + segmentInOut(scroll, 1760, 2700) * 40;
-  document.getElementById('bazaar').style.filter = `saturate(${bazaarSat}%)`;
-
-  // Layer 5: Bridge — blur ramp on exit
-  const bridgeBlur = segmentInOut(scroll, 1200, 1620) * 14;
-  const bridgeBright = 1 - segmentInOut(scroll, 1200, 1620) * 0.15;
-  document.getElementById('bridge').style.filter = `blur(${bridgeBlur}px) brightness(${bridgeBright})`;
-
-  // Title — rise and fade
-  const titleProgress = segmentInOut(scroll, 0, 650);
-  document.getElementById('title').style.transform = `translateY(${-210 * titleProgress}px)`;
-  document.getElementById('title').style.opacity = 1 - titleProgress;
-
-  // Story panel — fade in
-  const storyProgress = segmentInOut(scroll, 1760, 2700);
-  document.getElementById('story-1').style.opacity = storyProgress;
-  document.getElementById('story-1').style.transform = `translateY(${40 - storyProgress * 40}px)`;
-
-  // Sights slider — fly in from 420vw
-  const sliderProgress = segmentInOut(scroll, 2760, 3560);
-  const sliderX = 420 - Math.pow(sliderProgress, 1.55) * 420;
-  document.getElementById('sights').style.transform = `translateX(${sliderX}vw)`;
-
-  // Nav buttons — fade in
-  const navProgress = Math.max(0, Math.min(1, (scroll - 3360) / 140));
-  document.getElementById('nav').style.opacity = navProgress;
-
-  requestAnimationFrame(update);
-}
-
-window.addEventListener('scroll', () => { target = window.scrollY; });
-update();
-```
+- Every scene's base layer is photographic: free-license footage or stills (Pexels, Pixabay, Coverr — no attribution-required sources unless licensed). Minimum: 1 video layer + stills across the page; stills-only scenes are allowed if motion comes from thread draw + parallax + arriving cards.
+- Every video ships a poster still (representative frame) — posters are the mobile media and the preload face, rendered under the same grade stack.
+- No baked-in grading: grade with CSS only — a filter chain on the media, a scene-tint layer (`mix-blend-mode: color`), and an atmospheric veil gradient. Raw library color never ships; every asset sits under its veil.
+- Optional: one static monochrome noise layer at opacity ≤0.035 over media only (never over HUD or text) to bind heterogeneous stock into one developed stock. If it reads as visible speckle, delete it — never animate it.
+- Reject any clip that cannot hit its scene's luminance step after grading; substitute with fallback search terms.
 
 ---
 
-## SCENES (scroll ranges)
+## PER-SCENE COMPOSITION
 
-- **0-650px:** Title "MOSTAR" rises -210px, fades out. Sky and back layers drift slowly.
-- **560-1620px:** Bridge widens, splits, launches upward. Blur ramps to 14px. Brightness drops to 0.85.
-- **1760-2700px:** Bazaar gains saturation (60% → 100%). Story panel fades in at 45% vertical.
-- **2760-3560px:** Sights slider flies in from 420vw with power(1.55) easing. Cards show city landmarks.
-- **3360-3660px:** Nav buttons (PREV / NEXT) fade in, become clickable.
+Layer stack (bottom → top): base media → far still (optional horizon band) → grade filter → scene tint → atmospheric veil → text scrim → thread → POI markers + sight cards → text block → HUD (fixed, topmost).
 
----
+- 01 GLACIER (km 000–103): glacial river aerial video + ice-peak far still. Ground #0B2436, veil pale-top #D7F0F2 → deep #07161F, tint #8FCBD8. Brightest scene. Hero wordmark over footage at p=0, drifting out by p≈0.06.
+- 02 PINE (km 103–206): forest-river drone video + misty-valley far still. Ground #0A1F1A, veil #4E7A6E → #04110D, tint #2E6B5C. First hard luminance drop — walking under the tree line.
+- 03 MILL TOWN (km 206–309): old-bridge-at-dusk still (stills-only is fine). Ground #1A0F08, veil #8A5A2E → #0E0804, tint #B07A3A. Warmest scene; the thread dims across the bridge band (scene-scoped mask) to read as passing behind it.
+- 04 DELTA (km 309–412): night-water video + estuary far still. Ground #060913, veil #1B2350 → #03050C, tint #2A3A8C. Darkest scene; the thread glow rises so the line is the brightest element in frame. Ends on km 412/412 — no footer, no rewind.
 
-## INFINITE SLIDER (3-SET CLONE)
-
-```javascript
-const cards = [...document.querySelectorAll('.sight-card')];
-const setWidth = cards.length * 320; // card width
-// Clone cards 2x (3 sets total)
-// On scroll offset > setWidth: offset -= setWidth (instant normalize)
-```
+Text placement: place-name lower-left with char-by-char reveal on scene entry; field note below it (max-width ~16–20ch); mono micro-label above. Every text block sits over the veil's dark zone plus a local scrim so light text holds AA.
 
 ---
 
-## FONTS
+## FONTS (open-license only)
 
-Load via Google Fonts:
-```
-https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400;500&display=swap
-```
-
-- **Playfair Display 400-500**: Display title — `clamp(4rem, 14vw, 14rem)`
-- **Inter 400**: Body and story panels — 16-18px
-- **Inter 300**: Story panel text — `clamp(1rem, 1.5vw, 1.5rem)`
-- **Inter 500 UPPERCASE**: Nav buttons — 12-14px, tracking 0.1em
+Load via Google Fonts or fontsource:
+- Display + UI: Archivo variable (expanded width axis, weights 300–800). Hero wordmark expanded 800 at ~16vw caps; place-names expanded 700 at ~8.5vw caps; field notes Archivo Light ~2.2vw (clamp 18–34px) sentence case.
+- Instrument: IBM Plex Mono 400/500 for all HUD, labels, counters (12–14px, uppercase, tracking 0.1–0.18em, tabular-nums on the km readout).
+- Two families total. Casing: display and mono always caps; field notes always sentence case, never tracked.
 
 ---
 
-## COLOR
+## MOTION + SCROLL MODEL
 
-```css
-:root {
-  --text-cream: #FDF1E1;
-  --text-ink: #111411;
-  --accent-amber: #C4956A;
-  --accent-blue: #5B8BA6;
-  --story-overlay: rgba(0, 0, 0, 0.6);
-  --card-bg: #FDF1E1;
-}
-```
+- Sticky 100vh stage inside a tall track (`calc(100vh + 3600px)` desktop; `calc(100dvh + 2000px)` below 768px). One rAF loop with lerp 0.14 driving progress p; optional Lenis underneath for wheel smoothing (Lenis 0.12 + the 0.14 scrub layered, one shared loop).
+- Thread draw: single SVG path, `stroke-dashoffset` tied to p — the same value triggers sight cards (marker at km K fires when p ≥ K/412). Thread drifts globally with p so it stays pixel-continuous across cuts.
+- Hard cuts at 0.25/0.5/0.75: per-scene stacks toggle `visibility` in the same frame as the scene-attribute swap — no transition, no blend frame. Thread + HUD are outside the swapped stacks and never animate opacity at a boundary (one glow pulse per stitch excepted: ≤+40% opacity, ≤300ms).
+- Char reveals (40ms stagger, strong decel, no overshoot) apply to the opening wordmark + four place-names only — nothing else splits.
+- Sight cards: fly in from their marker (~450ms, strong decel, no overshoot), dismiss on reverse scroll (~250ms), cut instantly with their scene. Hover does nothing but a 2px nudge. Markers latch lit once passed.
+- Loader: ink field, corner brackets draw (≤600ms), three mono status lines in sequence, then a hard cut to scene 01 (cut by ~1.8s or a 6s timeout — never hold the viewer). No spinner, no ring.
+- Only the active scene's video plays; pause the rest. Pause everything off-screen and on tab blur. Animate transform/opacity/thread-draw/HUD-text only — never tween filters, shadows, or backgrounds.
 
 ---
 
-## ANTI-SLOP (LOCKED)
+## HUD SYSTEM
 
-- Lerp smoothing at 0.14 (not raw scroll)
-- 7+ transparent-edge PNG parallax layers
-- Segment-based choreography (segmentInOut per scene)
-- Blur ramp 0px → 14px between scenes
-- Infinite slider with 3-set clone + instant-jump normalize
-- Sight card fly-in from 420vw with power(1.55) easing
-- Reduced motion: snap values, disable transitions
-- All images from remote URLs (transparent-edge PNGs)
-- No timer-based auto-scroll
-- No spring or bounce easing
+Fixed, topmost, never unmounts, constant bone tone #F2EDE4 in every scene with one mint signal accent #BCF2DC (thread + progress fill only):
+- Four L-corner brackets (1px bone/70%, ~28px arms, ~20px inset).
+- Top-left: wordmark + `FIELD RECORD / RIVER DESCENT` micro. Top-right: `SCENE 01/04 — GLACIER` index (hard-swaps at cuts) + live `KM n / 412` counter (tabular, change-only writes, forced 412/412 at terminal).
+- Bottom-left: flavor telemetry (mock coordinates — mark as mock in code). Bottom-center: three-state line — `SCROLL TO DESCEND` cue (p<0.03) / field-note mirror / `THE RIVER LEAVES EVIDENCE.` at terminal.
+- Bottom edge: 1px progress track with mint fill = p and tick marks at 25/50/75%.
 
 ---
 
-## REDUCED MOTION
+## REDUCED MOTION + RESPONSIVE
 
-```css
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    transition-duration: 0.01ms !important;
-  }
-}
-/* JS: if reduced motion, snap current = target, disable lerp */
-```
+- Reduced motion: full collapse — no loader, no sticky stage; four stacked full-bleed graded stills (video posters) in document order; thread fully drawn and static; all sight cards visible inline; HUD static with km 412/412 and no scene index; no cursor dot. All copy readable, focus order = document order.
+- 768px and below: videos swap to poster stills (no video element), parallax factors halve, flavor telemetry drops.
+- 360px: far stills drop; text block docks lower-third full-width; sight cards become bottom-anchored full-width strips sliding up; stage uses `100dvh`, never `h-screen`; zero horizontal overflow.
 
 ---
 
-Recreate this page with the exact scroll choreography, layer architecture, lerp smoothing, and scene transitions above.
+## COPY (field-document voice — use verbatim)
+
+- 01 GLACIER: place-name `GLACIAL SOURCE` · field note *"Nobody owns the first kilometer. The ice keeps it."* · micro `KOVRA / FIELD NOTE 001` · detail `Blue hour under permanent weather`.
+- 02 PINE: place-name `THE NARROWS` · field note *"The river narrows until the mountain has to listen."* · micro `KOVRA / FIELD NOTE 118` · detail `Split pine, black water, and a hard white current`.
+- 03 MILL TOWN: place-name `MILL TOWN` · field note *"Every wheel in town remembers the shape of the water."* · micro `KOVRA / FIELD NOTE 224` · detail `A working river, measured in timber and light`.
+- 04 DELTA: place-name `DELTA AT NIGHT` · field note *"At the edge, KOVRA forgets its name and becomes everything."* · micro `KOVRA / FIELD NOTE 412` · detail `Tidal flats, lanterns, and the last clear reflection`.
+- Sights: `SIGHT 01 / KM 118 Gorge Gate` · `SIGHT 02 / KM 224 Bell Bridge` · `SIGHT 03 / KM 271 Mill Wheel` · `SIGHT 04 / KM 412 Lantern Quay` — one-line notes each, kept terse.
+- HUD microcopy: `FIELD RECORD / RIVER DESCENT` · `SCENE 01/04 — GLACIER` · `KM 000 / 412` · terminal line `THE RIVER LEAVES EVIDENCE.` · loader lines `KOVRA / FIELD RECORD`, `CALIBRATING THREAD`, `LOADING FOOTAGE 07/07` (count = final asset total).
+
+---
+
+## ANTI-PATTERNS (automatic fail)
+
+- NO procedural terrain (SVG ridges, gradient mountains, drawn bridges) — footage or nothing
+- NO ungraded or unveiled media
+- NO cross-fades, uniform fades, or blend frames between scenes
+- NO glass / `backdrop-filter` on cards or HUD — sight cards are solid ink (~92%) with a 1px bone/15% border
+- NO card grids or bento mosaics as primary layout
+- NO carousel rewind, looping sight rail, or back-to-start button
+- NO bounce or spring easing
+- NO timer-based auto-scroll
+- NO serif display type; NO third font family
+- NO decoration without instrument function (blobs, orbs, mesh gradients, extra glows, animated grain, replacement cursors, autoplay audio)
+
+---
+
+## ACCEPTANCE CRITERIA
+
+- Luminance arc strictly descending with the final scene darkest; v2 reference measured 101 → 71 → 27 → 19 (cite as example, not mandate — the descent plus darkest-final are the contract).
+- HUD persistent: bone brackets sample-correct in all four scenes; scene index matches the visible scene; km monotonic, exactly 412/412 at the end; progress fill matches p.
+- Cut integrity: frame-stepping each boundary shows media/veil/text swapping within ~2 frames, zero blend frames, thread + HUD identical before/after.
+- Thread continuous across all scenes in signal mint; brightest linear element in the final scene.
+- Typography: two families only, wordmark ~16vw, place-names ~8.5vw, mono HUD 12–14px, no serif glyphs.
+- Text zones: AA contrast behind every text block and corner bracket, including the brightest scene.
+- Responsive: posters-only at ≤768px; lower-third text + bottom-strip cards at 360px; full reduced-motion collapse as specced.
+
+---
+
+Recreate this page faithfully with the exact register, media policy, scene composition, motion model, HUD system, and acceptance criteria above.
 ```

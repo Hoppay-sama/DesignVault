@@ -1,28 +1,23 @@
 # Anti-Slop Checklist
 
-- [ ] Sticky viewport (`position: sticky`, `top: 0`, `100vh`, `overflow: hidden`)
-- [ ] Scroll container height `calc(100vh + 3700px)` (or equivalent scene depth)
-- [ ] 7+ parallax layers with independent transforms
-- [ ] Transparent-edge PNG layers (alpha-channel feathered, not rectangular)
-- [ ] Lerp smoothing at 0.14 (not raw scroll linking)
-- [ ] Segment-based scroll choreography (segmentInOut per scene)
-- [ ] Blur ramp between scenes (0px → 14px on exiting layer)
-- [ ] Brightness/saturation shifts between scenes
-- [ ] Shade gradient at scene boundaries (opacity 0.25 max)
-- [ ] Infinite slider with 3-set clone + instant-jump normalization
-- [ ] Sight card fly-in from 420vw with power(1.55) easing
-- [ ] Monumental serif display type `clamp(4rem, 14vw, 14rem)`
-- [ ] Clean sans body type 14-18px
-- [ ] Story panels at 45% vertical, max-width 480px
-- [ ] Nav buttons fade in at scroll position 3360-3660px
-- [ ] Film grain overlay at 0.03-0.05 opacity
-- [ ] Scene-specific color palettes (not one static palette)
-- [ ] Cream text (#FDF1E1) on dark scenes, ink (#111411) on light scenes
-- [ ] Mouse parallax at 0.12 factor (optional, subtle)
-- [ ] `prefers-reduced-motion` honored (snap values, disable transitions)
-- [ ] No timer-based auto-scroll (user controls the pace)
-- [ ] No spring or bounce easing
-- [ ] No CSS-only parallax (`background-attachment: fixed`)
-- [ ] No rectangular images with hard edges
-- [ ] No card grids as primary layout
-- [ ] No single-layer photography (need 7+ layers for depth)
+Every Cinematic Scroll Story page must pass ALL of these checks before shipping:
+
+- [ ] Real media carries the world — every scene has photographic footage or stills; procedural gradients never stand in for scenery
+- [ ] Every media layer is graded (CSS filter chain) and veiled (atmospheric gradient) — no raw ungraded stock ships
+- [ ] One invariant element survives every scene transition (thread line + instrument HUD stay pixel-continuous across cuts)
+- [ ] Scenes cut hard — media, veil, palette, and text swap within one frame; no cross-fades or blend frames
+- [ ] Luminance descends across scenes — earliest scene brightest, final scene darkest, strictly descending (v2 measured 101 → 71 → 27 → 19; the descent is the contract, not those numbers)
+- [ ] Instrument HUD holds one constant tone across all scenes — scene identity lives in media + veil only, never in re-colored UI
+- [ ] Text and HUD zones sit over locally darkened veil or scrim (AA contrast for light instrument text, including bright scenes)
+- [ ] Sight cards arrive from thread markers, not from a detached rail — markers persist once passed, cards cut with their scene
+- [ ] Sight cards are solid instrument cards — no glass, no `backdrop-filter`, no frosted surfaces anywhere
+- [ ] Char reveals rationed to the opening wordmark + scene place-names only — body copy and HUD never split
+- [ ] Only the active scene's media plays; everything pauses off-screen, on tab blur, and under reduced motion
+- [ ] Entrance is a hard cut from the loader field to scene 01 — no fade-in of the page itself
+- [ ] No bounce or spring easing (strong decel curves only, e.g. `cubic-bezier(0.22, 1, 0.36, 1)`)
+- [ ] No timer-based auto-scroll (the reader controls the pace)
+- [ ] No card grids or bento mosaics as primary layout (one field of evidence at a time)
+- [ ] No carousel rewind — no looping sight rail, no back-to-start button; the descent goes one way
+- [ ] No uniform fades as scene transitions
+- [ ] No decoration without instrument function — no blobs, orbs, mesh gradients, neon glow beyond the thread signal, animated grain, replacement cursors, or autoplay audio
+- [ ] `prefers-reduced-motion` collapses fully — stacked graded stills in document order, thread fully drawn and static, no loader, all copy readable
