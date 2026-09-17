@@ -35,8 +35,8 @@ Specs for each proof live next to its code (`src/proofs/<style>/SPEC.md`).
 
 - Per-proof CSS namespacing - aesthetics must not contaminate each other.
 - One strong mechanic per page; no feature lists.
-- Specific fictional content, real copy; **real media first** (free-license stock, licensed + recorded in `public/kovra/LICENSES.md`), procedural imagery only when it genuinely serves the register.
-- Quality bar: reference board first (`references/kovra-v2.md`) — proofs are judged against SOTD-level captures, not against their own mocks.
+- Specific fictional content, real copy; **intentional production-grade layers** — medium is the style's choice (real media with `LICENSES.md` records, generated comps, or authored illustration / type-as-image); the ban is on placeholder stand-ins, not on medium.
+- Quality bar: reference board first (`references/kovra-v2.md`) — proofs are judged against SOTD-level captures in their own register, not against their own mocks.
 - Deployment: local-first; Vercel deploy happens after proofs earn it (P5), then the
   platform embeds the live pages.
 
