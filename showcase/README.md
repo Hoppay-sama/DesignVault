@@ -8,7 +8,7 @@ crafted pages - not descriptions of pages. One mechanic per proof.
 | Route | Style | Build |
 |---|---|---|
 | `/proofs/dither-mono` | Dither Mono | single build |
-| `/proofs/cinematic-scroll-story` | Cinematic Scroll Story | two variants (A/B) |
+| `/proofs/cinematic-scroll-story` | Cinematic Scroll Story — **KOVRA v2 flagship** (rebuilt 2026-09-16) | two variants (A/B); A uses real footage (3 videos + 4 stills, free-license) |
 | `/proofs/vast-quiet-cinematic` | Vast Quiet Cinematic | single build |
 
 ## Commands
@@ -35,7 +35,8 @@ Specs for each proof live next to its code (`src/proofs/<style>/SPEC.md`).
 
 - Per-proof CSS namespacing - aesthetics must not contaminate each other.
 - One strong mechanic per page; no feature lists.
-- Specific fictional content, real copy; procedural SVG/CSS imagery first.
+- Specific fictional content, real copy; **real media first** (free-license stock, licensed + recorded in `public/kovra/LICENSES.md`), procedural imagery only when it genuinely serves the register.
+- Quality bar: reference board first (`references/kovra-v2.md`) — proofs are judged against SOTD-level captures, not against their own mocks.
 - Deployment: local-first; Vercel deploy happens after proofs earn it (P5), then the
   platform embeds the live pages.
 
