@@ -196,13 +196,16 @@ function useKovraRuntime(ref: RefObject<HTMLElement | null>) {
         lastScene = sceneIndex;
         element.dataset.scene = scenes[sceneIndex].id;
         if (element.dataset.state !== "loading") element.dataset.state = "playing";
-        element.dataset[`entered${scenes[sceneIndex].id}` as "entered01"] = "true";
+        if (sceneIndex > 0) element.dataset[`entered${scenes[sceneIndex].id}` as "entered02"] = "true";
         if (hudScene) hudScene.textContent = `${scenes[sceneIndex].id}/04`;
         if (hudName) hudName.textContent = scenes[sceneIndex].index;
         if (hudNote) hudNote.textContent = scenes[sceneIndex].note.replace(/\D/g, "");
         element.dataset.stitch = "true";
         window.setTimeout(() => { if (active) delete element.dataset.stitch; }, 300);
         playScene(sceneIndex);
+      }
+      if (sceneIndex === 0 && current >= 0.07 && element.dataset.entered01 !== "true") {
+        element.dataset.entered01 = "true";
       }
       if (current >= 0.995) {
         element.dataset.state = "terminal";
